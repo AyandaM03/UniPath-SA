@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_header"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <!-- Logo box -->
+    <View
+        android:id="@+id/logoBox"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:background="@drawable/logo_box_bg" />
+
+    <!-- App name -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="UniPath"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <!-- Tagline -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="South Africa"
+        android:textColor="#CCFFFFFF"
+        android:textSize="13sp"
+        android:letterSpacing="0.1" />
+
+    <!-- Loading spinner -->
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:indeterminateTint="#FFFFFF" />
+
+</LinearLayout>
