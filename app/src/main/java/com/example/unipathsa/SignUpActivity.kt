@@ -116,7 +116,8 @@ class SignUpActivity : AppCompatActivity() {
 
                     Toast.makeText(this, "Account created successfully", Toast.LENGTH_SHORT).show()
                     // TODO: save "grade" somewhere useful (e.g. Firestore) if needed later
-                    // TODO: navigate to your Dashboard/Home activity here
+                    startActivity(Intent(this, HomeActivity::class.java))
+                    finish()
                 }
                 .addOnFailureListener { e ->
                     // Runs if account creation failed (email already used, weak password, etc.)

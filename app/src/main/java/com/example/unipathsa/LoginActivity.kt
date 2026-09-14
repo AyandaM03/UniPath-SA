@@ -126,7 +126,8 @@ class LoginActivity : AppCompatActivity() {
                 .addOnSuccessListener {
                     // Runs if login succeeded
                     Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
-                    // TODO: navigate to your Dashboard/Home activity here
+                    startActivity(Intent(this, HomeActivity::class.java))
+                    finish()
                 }
                 .addOnFailureListener { e ->
                     // Runs if login failed (wrong password, no such user, etc.)
@@ -178,7 +179,8 @@ class LoginActivity : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnSuccessListener {
                 Toast.makeText(this, "Google sign-in successful", Toast.LENGTH_SHORT).show()
-                // TODO: navigate to your Dashboard/Home activity here
+                startActivity(Intent(this, HomeActivity::class.java))
+                finish()
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Firebase auth failed: ${e.message}", Toast.LENGTH_LONG).show()
