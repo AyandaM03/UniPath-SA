@@ -1,43 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_header"
-    android:orientation="vertical"
-    android:gravity="center">
+    android:background="@drawable/gradient_header">
 
-    <!-- Logo box -->
     <View
         android:id="@+id/logoBox"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:background="@drawable/logo_box_bg" />
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/logo_box_bg"
+        android:elevation="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvAppName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
-    <!-- App name -->
+    <ImageView
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@drawable/unipath_logo"
+        android:elevation="9dp"
+        app:layout_constraintBottom_toBottomOf="@+id/logoBox"
+        app:layout_constraintEnd_toEndOf="@+id/logoBox"
+        app:layout_constraintStart_toStartOf="@+id/logoBox"
+        app:layout_constraintTop_toTopOf="@+id/logoBox"
+        tools:ignore="ContentDescription" />
+
     <TextView
+        android:id="@+id/tvAppName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="UniPath"
-        android:textColor="#FFFFFF"
-        android:textSize="28sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="@dimen/spacing_l"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/unipath"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_h1"
+        app:layout_constraintBottom_toTopOf="@+id/tvTagline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoBox" />
 
-    <!-- Tagline -->
     <TextView
+        android:id="@+id/tvTagline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:text="South Africa"
+        android:layout_marginTop="@dimen/spacing_xs"
+        android:letterSpacing="0.2"
+        android:text="@string/south_africa"
         android:textColor="#CCFFFFFF"
-        android:textSize="13sp"
-        android:letterSpacing="0.1" />
+        android:textSize="@dimen/text_caption"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAppName" />
 
-    <!-- Loading spinner -->
     <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:indeterminateTint="#FFFFFF" />
+        android:layout_marginTop="@dimen/spacing_xxl"
+        android:indeterminateTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTagline" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

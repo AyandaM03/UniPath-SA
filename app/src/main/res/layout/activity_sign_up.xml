@@ -1,210 +1,252 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_cream">
+    android:fillViewport="true"
+    android:background="@color/background">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <!-- Header -->
-        <LinearLayout
+        <!-- Header Background -->
+        <View
+            android:id="@+id/headerBackground"
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:background="@drawable/gradient_header"
-            android:orientation="vertical"
-            android:gravity="bottom"
-            android:padding="24dp">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="24dp">
+        <!-- Logo and Branding -->
+        <LinearLayout
+            android:id="@+id/brandingLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xl"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-                <View
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:background="#FFFFFF" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="UniPath"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold" />
-            </LinearLayout>
+            <View
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/logo_box_bg" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Create your account"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Start your university journey today."
-                android:textColor="#CCFFFFFF"
-                android:textSize="13sp" />
+                android:layout_marginStart="@dimen/spacing_s"
+                android:fontFamily="sans-serif-black"
+                android:text="@string/unipath"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_h3" />
         </LinearLayout>
 
-        <!-- Form -->
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvSignUpTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_m"
+            android:text="@string/create_account_title"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_h2"
+            android:fontFamily="sans-serif-medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/brandingLayout" />
+
+        <!-- Sign Up Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/signUpCard"
+            style="@style/Widget.UniPathSA.Card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="24dp">
+            android:layout_marginHorizontal="@dimen/spacing_l"
+            android:layout_marginTop="@dimen/spacing_m"
+            app:layout_constraintTop_toBottomOf="@id/tvSignUpTitle">
 
-            <!-- Full Name field -->
-            <EditText
-                android:id="@+id/etFullName"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="@drawable/rounded_edittext"
-                android:hint="Full Name"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:drawableStart="@android:drawable/ic_menu_myplaces"
-                android:drawablePadding="12dp"
-                android:inputType="textPersonName"
-                android:layout_marginBottom="12dp" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_l">
 
-            <!-- Email field -->
-            <EditText
-                android:id="@+id/etEmail"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="@drawable/rounded_edittext"
-                android:hint="Email Address"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:drawableStart="@android:drawable/ic_dialog_email"
-                android:drawablePadding="12dp"
-                android:inputType="textEmailAddress"
-                android:layout_marginBottom="12dp" />
-
-            <!-- Password field -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="@drawable/rounded_edittext"
-                android:layout_marginBottom="12dp">
-
-                <EditText
-                    android:id="@+id/etPassword"
+                <!-- Full Name field -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.UniPathSA.TextInputLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@null"
-                    android:hint="Password"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="48dp"
-                    android:inputType="textPassword" />
+                    android:layout_height="wrap_content"
+                    android:hint="@string/full_name_hint"
+                    app:startIconDrawable="@android:drawable/ic_menu_myplaces">
 
-                <ImageView
-                    android:id="@+id/ivTogglePassword"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="16dp"
-                    android:src="@android:drawable/ic_menu_view"
-                    android:contentDescription="Toggle password visibility" />
-            </RelativeLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etFullName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Grade dropdown -->
-            <Spinner
-                android:id="@+id/spinnerGrade"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="@drawable/rounded_edittext"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:layout_marginBottom="20dp" />
+                <!-- Email field -->
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.UniPathSA.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_m"
+                    android:hint="@string/email_hint"
+                    app:startIconDrawable="@android:drawable/ic_dialog_email">
 
-            <!-- Create Account button -->
-            <Button
-                android:id="@+id/btnCreateAccount"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/rounded_button"
-                android:text="Create Account"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:textAllCaps="false"
-                android:elevation="0dp"
-                android:layout_marginBottom="20dp" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Divider text -->
+                <!-- Password field -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_m">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilPassword"
+                        style="@style/Widget.UniPathSA.TextInputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/password_hint"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:startIconDrawable="@android:drawable/ic_lock_idle_lock">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:paddingEnd="48dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageView
+                        android:id="@+id/ivTogglePassword"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="@dimen/spacing_m"
+                        android:src="@android:drawable/ic_menu_view"
+                        android:contentDescription="@string/toggle_visibility"
+                        app:layout_constraintBottom_toBottomOf="@id/tilPassword"
+                        app:layout_constraintEnd_toEndOf="@id/tilPassword"
+                        app:layout_constraintTop_toTopOf="@id/tilPassword"
+                        app:layout_constraintVertical_bias="0.5" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Grade Selection -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_m"
+                    android:layout_marginStart="@dimen/spacing_s"
+                    android:text="@string/current_level_label"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="@dimen/text_caption" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/input_height"
+                    android:layout_marginTop="@dimen/spacing_xs"
+                    android:background="@drawable/rounded_edittext">
+
+                    <Spinner
+                        android:id="@+id/spinnerGrade"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:paddingStart="@dimen/spacing_m"
+                        android:paddingEnd="@dimen/spacing_m" />
+                </FrameLayout>
+
+                <!-- Create Account Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCreateAccount"
+                    style="@style/Widget.UniPathSA.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginTop="@dimen/spacing_l"
+                    android:text="@string/create_account_button"
+                    android:textSize="@dimen/text_body_m" />
+
+                <!-- Social Login Section -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_m"
+                    android:text="@string/or_sign_up_with"
+                    android:textAlignment="center"
+                    android:textColor="@color/text_tertiary"
+                    android:textSize="@dimen/text_caption" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_m"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnGoogle"
+                        style="@style/Widget.UniPathSA.Button.Secondary"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/button_height"
+                        android:layout_marginEnd="@dimen/spacing_s"
+                        android:layout_weight="1"
+                        android:text="@string/google"
+                        app:icon="@android:drawable/btn_star"
+                        app:iconGravity="textStart" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnFacebook"
+                        style="@style/Widget.UniPathSA.Button.Secondary"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/button_height"
+                        android:layout_marginStart="@dimen/spacing_s"
+                        android:layout_weight="1"
+                        android:text="@string/facebook"
+                        app:icon="@android:drawable/ic_menu_share"
+                        app:iconGravity="textStart" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Footer -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xl"
+            android:layout_marginBottom="@dimen/spacing_xl"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/signUpCard">
+
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="or continue with"
-                android:textAlignment="center"
-                android:textColor="@color/text_gray"
-                android:textSize="12sp"
-                android:layout_marginBottom="12dp" />
+                android:text="@string/already_have_account"
+                android:textColor="@color/text_secondary"
+                android:textSize="@dimen/text_body_s" />
 
-            <!-- Social buttons -->
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tvLogIn"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btnGoogle"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="6dp"
-                    android:text="G"
-                    android:textStyle="bold"
-                    android:textAllCaps="false"
-                    android:background="@drawable/rounded_edittext" />
-
-                <Button
-                    android:id="@+id/btnFacebook"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="6dp"
-                    android:text="f"
-                    android:textStyle="bold"
-                    android:textAllCaps="false"
-                    android:background="@drawable/rounded_edittext" />
-            </LinearLayout>
-
-            <!-- Log In link -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:layout_marginTop="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Already have an account? "
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/tvLogIn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Log In"
-                    android:textColor="@color/header_blue_light"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
+                android:text="@string/login_button"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/text_body_s"
+                android:textStyle="bold" />
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
