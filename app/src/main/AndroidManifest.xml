@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UniPathSA">
         <activity
+            android:name=".ApsCalculatorActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>

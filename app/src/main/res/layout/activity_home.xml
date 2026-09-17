@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- ScrollView lets the whole screen scroll if content is taller than the phone -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,10 +8,26 @@
     android:background="@color/background_cream"
     android:fillViewport="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Top row: greeting on the left, notification bell pinned top-right -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="top">
+
+            <!-- Greeting takes up all remaining space, pushing the bell to the right -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
 
         <!-- Header Section -->
         <TextView
@@ -19,30 +36,28 @@
             android:layout_height="wrap_content"
             android:text="Welcome back,"
             android:textColor="@color/text_gray"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tvStudentName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="John Doe"
+            android:text="Student"
             android:textColor="@color/header_blue_dark"
             android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvWelcome" />
+            android:textStyle="bold" />
 
+        </LinearLayout>
+
+            <!-- Notification bell, fixed to the top-right corner -->
         <ImageButton
             android:id="@+id/btnNotifications"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Notifications"
-            android:src="@android:drawable/ic_popup_reminder"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:src="@android:drawable/ic_popup_reminder" />
+    </LinearLayout>
 
         <!-- Search Bar -->
         <com.google.android.material.textfield.TextInputLayout
@@ -61,6 +76,44 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
+
+        <!-- "No universities matched yet" card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_edittext"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No universities matched yet"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Add your marks to see which universities you qualify for"
+                android:textSize="13sp"
+                android:textColor="@color/text_gray" />
+
+            <!-- Add Marks button -->
+            <Button
+                android:id="@+id/btnAddMarksCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="end"
+                android:background="@drawable/rounded_button"
+                android:text="Add Marks"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
         <!-- Quick Actions -->
         <TextView
             android:id="@+id/tvQuickActions"
@@ -71,16 +124,14 @@
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/searchLayout" />
+            />
 
         <LinearLayout
             android:id="@+id/layoutQuickActions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/tvQuickActions">
+            android:orientation="horizontal">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardSearch"
@@ -226,5 +277,5 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </ScrollView>
