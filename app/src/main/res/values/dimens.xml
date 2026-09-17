@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="radius_m">12dp</dimen>
+    <dimen name="radius_l">16dp</dimen>
+    <dimen name="button_height">50dp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
+    <dimen name="spacing_s">8dp</dimen>
+
+    <dimen name="text_h1">28sp</dimen>
+    <dimen name="spacing_l">24dp</dimen>
+    <dimen name="text_caption">12sp</dimen>
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_xxl">40dp</dimen>
+</resources>
