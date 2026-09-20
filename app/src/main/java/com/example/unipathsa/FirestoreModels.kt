@@ -30,16 +30,6 @@ data class FirestoreListResponse(
 
 // Clean models your app actually uses
 
-data class Institution(
-    val name: String,
-    val province: String,
-    val type: String,
-    val freeToApply: Boolean
-)
 
-data class Course(
-    val name: String,
-    val university: String,
-    val apsRequired: Int,
-    val faculty: String
-)
+
+

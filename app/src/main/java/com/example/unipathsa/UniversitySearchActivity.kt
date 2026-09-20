@@ -14,7 +14,7 @@ class UniversitySearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_university_search)
-
+        BottomNavHelper.setup(this, R.id.nav_institutions)
         rvUniversities = findViewById(R.id.rvUniversities)
         rvUniversities.layoutManager = LinearLayoutManager(this)
 

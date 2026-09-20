@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UniPathSA">
         <activity
+            android:name=".InstitutionDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".InstitutionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ExploreActivity"
+            android:exported="false" />
+        <activity
             android:name=".ApsCalculatorActivity"
             android:exported="false" />
         <activity

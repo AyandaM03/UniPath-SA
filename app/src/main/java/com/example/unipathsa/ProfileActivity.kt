@@ -10,6 +10,7 @@ class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+        BottomNavHelper.setup(this, R.id.nav_profile)
 
         val btnEditProfile = findViewById<Button>(R.id.btnEditProfile)
         val btnSettings = findViewById<Button>(R.id.btnSettings)

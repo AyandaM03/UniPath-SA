@@ -24,7 +24,7 @@ class ApsCalculatorActivity : AppCompatActivity() {
     // The list of subject names available in each row's dropdown
     private val subjectOptions = arrayOf(
         "Mathematics", "Mathematical Literacy", "Physical Sciences",
-        "Life Sciences", "English Home Language", "Afrikaans Home Language",
+        "Life Sciences", "English", "Afrikaans",
         "Accounting", "Geography", "History", "Business Studies",
         "Economics", "Life Orientation", "Information Technology"
     )
@@ -63,6 +63,12 @@ class ApsCalculatorActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnCalculate).setOnClickListener {
             calculateAps()
         }
+
+        findViewById<ImageButton>(R.id.btnBack).setOnClickListener {
+            finish()
+        }
+
+        BottomNavHelper.setup(this, R.id.nav_home)
 
         // Start with two empty rows so the screen isn't blank
         addSubjectRow()
@@ -155,7 +161,7 @@ class ApsCalculatorActivity : AppCompatActivity() {
                             name = doc.fields.name?.stringValue ?: "",
                             university = doc.fields.university?.stringValue ?: "",
                             apsRequired = doc.fields.apsRequired?.integerValue?.toIntOrNull() ?: 0,
-                            faculty = doc.fields.faculty?.stringValue ?: ""
+                            category = doc.fields.faculty?.stringValue ?: ""
                         )
                     }
 
@@ -163,7 +169,8 @@ class ApsCalculatorActivity : AppCompatActivity() {
                     val matchingCourses = allCourses.filter { it.apsRequired <= apsScore }
 
                     if (matchingCourses.isEmpty()) {
-                        tvNoMatches.text = "No matching courses for a score of $apsScore yet — try adding more subjects."
+                        tvNoMatches.text =
+                            "No matching courses for a score of $apsScore yet — try adding more subjects."
                         tvNoMatches.visibility = View.VISIBLE
                         recyclerMatches.visibility = View.GONE
                     } else {
@@ -171,13 +178,21 @@ class ApsCalculatorActivity : AppCompatActivity() {
                         recyclerMatches.adapter = CourseMatchAdapter(matchingCourses)
                     }
                 } else {
-                    Toast.makeText(this@ApsCalculatorActivity, "Failed to load courses", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@ApsCalculatorActivity,
+                        "Failed to load courses",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 
             override fun onFailure(call: Call<FirestoreListResponse>, t: Throwable) {
                 progressResults.visibility = View.GONE
-                Toast.makeText(this@ApsCalculatorActivity, "Network error: ${t.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this@ApsCalculatorActivity,
+                    "Network error: ${t.message}",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         })
     }

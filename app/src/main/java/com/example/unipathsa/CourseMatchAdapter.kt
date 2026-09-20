@@ -25,7 +25,7 @@ class CourseMatchAdapter(private val courses: List<Course>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val course = courses[position]
         holder.tvCourseName.text = course.name
-        holder.tvUniversity.text = "${course.university} • ${course.faculty}"
+        holder.tvUniversity.text = "${course.university} • ${course.category}"
         holder.tvApsRequired.text = "APS required: ${course.apsRequired}"
     }
 

@@ -24,7 +24,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
+        BottomNavHelper.setup(this, R.id.nav_home)
         bindViews()
         setupListeners()
         setupGreeting()
@@ -37,6 +37,7 @@ class HomeActivity : AppCompatActivity() {
         tvStudentName = findViewById(R.id.tvStudentName)
         btnNotifications = findViewById(R.id.btnNotifications)
         btnAddMarksCard = findViewById(R.id.btnAddMarksCard)
+
     }
 
     private fun setupListeners() {

@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:orientation="vertical">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:background="@color/background_cream"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,6 +23,21 @@
             android:orientation="vertical"
             android:padding="20dp">
 
+            <!-- Back arrow + title row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@android:drawable/ic_menu_revert"
+                    android:contentDescription="Back" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -24,6 +45,8 @@
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -84,8 +107,8 @@
                 android:layout_marginTop="6dp"
                 android:background="@drawable/rounded_edittext"
                 android:text="+ Add Subject"
+                android:textColor="#FFFFFF"
                 android:textAllCaps="false"
-                android:textColor="@color/header_blue_dark"
                 android:textStyle="bold" />
 
             <!-- Calculate button -->
@@ -136,4 +159,8 @@
 
         </LinearLayout>
     </LinearLayout>
+
 </ScrollView>
+    <!-- Bottom nav bar, pinned to the bottom -->
+<include layout="@layout/bottom_nav_bar" />
+    </LinearLayout>
