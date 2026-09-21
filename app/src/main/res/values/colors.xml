@@ -33,4 +33,5 @@
     <color name="button_blue">#1A237E</color>
     <color name="background_cream">#F8F9FE</color>
     <color name="text_gray">#49454F</color>
+    <color name="nav_bar_background">#FFFFFF</color>
 </resources>

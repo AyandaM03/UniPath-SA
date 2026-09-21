@@ -4,115 +4,126 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-<ScrollView
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background_cream"
-    android:fillViewport="true">
-
-    <LinearLayout
+    <ScrollView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:padding="24dp">
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            app:cardCornerRadius="60dp"
-            app:cardElevation="4dp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@android:drawable/ic_menu_myplaces" />
-        </com.google.android.material.card.MaterialCardView>
-
-        <TextView
-            android:id="@+id/tvProfileName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="John Doe"
-            android:textColor="@color/black"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvProfileEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="john.doe@example.com"
-            android:textColor="@color/text_gray"
-            android:textSize="14sp" />
-
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/background_cream"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                app:cardCornerRadius="60dp"
+                app:cardElevation="4dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@android:drawable/ic_menu_myplaces" />
+            </com.google.android.material.card.MaterialCardView>
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Student Information"
-                android:textColor="@color/header_blue_dark"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Phone: +27 12 345 6789"
-                android:textSize="14sp" />
-
-            <TextView
+                android:id="@+id/tvProfileName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Education Information"
-                android:textColor="@color/header_blue_dark"
-                android:textSize="18sp"
+                android:text="John Doe"
+                android:textColor="@color/black"
+                android:textSize="22sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvEducation"
+                android:id="@+id/tvProfileEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="john.doe@example.com"
+                android:textColor="@color/text_gray"
+                android:textSize="14sp" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Student Information"
+                    android:textColor="@color/header_blue_dark"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Phone: +27 12 345 6789"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Education Information"
+                    android:textColor="@color/header_blue_dark"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvEducation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Grade 12 - High School of Excellence"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnEditProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="@color/header_blue_dark"
+                android:text="Edit Profile" />
+
+            <Button
+                android:id="@+id/btnSettings"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Grade 12 - High School of Excellence"
-                android:textSize="14sp" />
+                android:text="Settings" />
+
+            <Button
+                android:id="@+id/btnSaved"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Saved Institutions" />
 
         </LinearLayout>
+    </ScrollView>
 
-        <Button
-            android:id="@+id/btnEditProfile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:backgroundTint="@color/header_blue_dark"
-            android:text="Edit Profile" />
-
-        <Button
-            android:id="@+id/btnSettings"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Settings" />
-
-    </LinearLayout>
-</ScrollView>
     <!-- Bottom nav bar, pinned to the bottom -->
-<include layout="@layout/bottom_nav_bar" />
+    <include layout="@layout/bottom_nav_bar" />
+
 </LinearLayout>
