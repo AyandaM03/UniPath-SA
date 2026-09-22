@@ -66,6 +66,8 @@ Users can also sign in with an existing **Google account**.
 Authentication is handled using **Firebase Authentication**. The application does not store user passwords directly — authentication credentials are managed entirely through Firebase Authentication.
 
 Users can also request a password reset email from the login screen.
+<img width="1200" height="2600" alt="3880" src="https://github.com/user-attachments/assets/6857eb7f-3908-4e7d-af58-61ad746faf7d" />
+<img width="1200" height="2600" alt="3883" src="https://github.com/user-attachments/assets/4c8af974-c018-4764-991f-ac8cd2ce408a" />
 
 ---
 
@@ -79,6 +81,7 @@ Learners can also enter and edit:
 * School / grade information
 
 This information is saved to Firestore under the authenticated user's unique Firebase UID, and reloads automatically the next time the profile is opened.
+<img width="1200" height="2600" alt="3884" src="https://github.com/user-attachments/assets/302eae0a-8523-40e2-a0db-5fb04c05c5db" />
 
 ---
 
@@ -90,6 +93,7 @@ UniPathSA includes an APS calculation feature designed to help learners understa
 * Each subject's percentage mark is converted into APS points using the standard South African Achievement Level Guide (7 points for 80–100%, down to 1 point for 0–29%).
 * The calculator validates input, rejecting marks outside the 0–100 range.
 * Once calculated, the app calls a **REST API** (Firestore's REST endpoint, accessed via Retrofit — not the Firestore SDK) to fetch all available courses, and filters them to show only the courses the learner's score qualifies them for.
+<img width="1200" height="2600" alt="3885" src="https://github.com/user-attachments/assets/9b5ef445-9a19-42fb-babc-60e59c2e6a02" />
 
 ---
 
@@ -102,6 +106,10 @@ The Explore screen lets learners browse two categories of opportunities:
 **Bursaries** — funding opportunities, filterable by the same categories, showing the provider, amount covered and closing date.
 
 Course and bursary information is stored in Firestore rather than hard-coded into the app. Tapping any course or bursary opens a details screen with a full description and a button linking to the provider's official website.
+<img width="1200" height="2600" alt="3888" src="https://github.com/user-attachments/assets/65b565cd-a7d0-48d6-97e6-61d906e14128" />
+<img width="1200" height="2600" alt="3887" src="https://github.com/user-attachments/assets/89c47b73-6ee8-4ae7-94e7-6ead8cb94ed4" />
+<img width="1200" height="2600" alt="3892" src="https://github.com/user-attachments/assets/cd4e2d91-2e1a-447f-9177-9fc1aa272e00" />
+<img width="1200" height="2600" alt="3893" src="https://github.com/user-attachments/assets/fcd45f02-77a0-4521-8249-c901dd9730d2" />
 
 ---
 
@@ -113,6 +121,8 @@ Learners can explore Universities and Colleges (public and private) across South
 * Filter between "Universities" and "Colleges".
 * Tap any institution to view a full details screen, including a description and a link to the institution's official website.
 * Save institutions as favourites (tap the star icon) — favourites are stored per-user in Firestore and viewable from the Profile screen.
+<img width="1200" height="2600" alt="3889" src="https://github.com/user-attachments/assets/81931e2e-7add-4ec9-978c-1926317a784a" />
+<img width="1200" height="2600" alt="3890" src="https://github.com/user-attachments/assets/9f33f234-542c-4a36-b4d4-652690cb176b" />
 
 ---
 
@@ -120,13 +130,15 @@ Learners can explore Universities and Colleges (public and private) across South
 
 * **Dark Mode** — toggles the app's theme between light and dark, and the preference persists between sessions.
 * **Notifications** — a preference toggle (the underlying notification-sending feature is a placeholder for now).
-* **Log Out** — signs the user out and returns to the login screen.
+<img width="1200" height="2600" alt="3891" src="https://github.com/user-attachments/assets/edf1147c-e3dc-49af-8392-dda9ed838853" />
 
 ---
 
 ## User Interface and Design Considerations
 
 The UniPathSA interface was designed around the needs of high-school learners, aiming for a balance between a modern appearance and ease of use.
+
+<img width="1200" height="2600" alt="3882" src="https://github.com/user-attachments/assets/03934d31-c62d-4a38-995a-71b1b7d65811" />
 
 **Design principles include:**
 
