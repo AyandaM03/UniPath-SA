@@ -27,10 +27,12 @@
                 android:gravity="center_vertical"
                 android:layout_marginBottom="24dp">
 
-                <View
+                <ImageView
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:background="#FFFFFF" />
+                    android:src="@drawable/unpathlogo"
+                    android:scaleType="fitCenter"
+                    android:contentDescription="UniPath SA logo" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -76,7 +78,9 @@
                 android:drawableStart="@android:drawable/ic_dialog_email"
                 android:drawablePadding="12dp"
                 android:inputType="textEmailAddress"
-                android:layout_marginBottom="12dp" />
+                android:layout_marginBottom="12dp"
+                android:textColor="@color/input_text"
+                android:textColorHint="@color/text_gray"/>
 
             <!-- Password field -->
             <RelativeLayout
@@ -93,7 +97,9 @@
                     android:hint="Password"
                     android:paddingStart="16dp"
                     android:paddingEnd="48dp"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:textColor="@color/input_text"
+                    android:textColorHint="@color/text_gray"/>
 
                 <ImageView
                     android:id="@+id/ivTogglePassword"

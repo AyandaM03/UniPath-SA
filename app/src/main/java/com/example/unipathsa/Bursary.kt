@@ -6,5 +6,7 @@ data class Bursary(
     var provider: String = "",
     var amount: String = "",
     var closingDate: String = "",
-    var category: String = "" // e.g. "IT", "Commerce", "Engineering", "Law"
+    var category: String = "", // e.g. "IT", "Commerce", "Engineering", "Law"
+    var website: String = "",
+    var description: String = ""
 )

@@ -69,13 +69,17 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tvPhone"
+                <EditText
+                    android:id="@+id/etPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Phone: +27 12 345 6789"
-                    android:textSize="14sp" />
+                    android:hint="e.g. +27 12 345 6789"
+                    android:inputType="phone"
+                    android:background="@drawable/rounded_edittext"
+                    android:padding="12dp"
+                    android:textColor="@color/input_text"
+                    android:textColorHint="@color/text_gray" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -86,13 +90,17 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tvEducation"
+                <EditText
+                    android:id="@+id/etSchool"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Grade 12 - High School of Excellence"
-                    android:textSize="14sp" />
+                    android:hint="e.g. Grade 12 - Sunrise High School"
+                    android:inputType="text"
+                    android:background="@drawable/rounded_edittext"
+                    android:padding="12dp"
+                    android:textColor="@color/input_text"
+                    android:textColorHint="@color/text_gray" />
 
             </LinearLayout>
 

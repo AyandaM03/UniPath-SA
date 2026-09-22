@@ -36,8 +36,29 @@ class ExploreActivity : AppCompatActivity() {
         btnBursariesTab = findViewById(R.id.btnBursariesTab)
         val chipGroup = findViewById<ChipGroup>(R.id.chipGroupCategory)
 
-        courseAdapter = ExploreCourseAdapter(emptyList())
-        bursaryAdapter = BursaryAdapter(emptyList())
+        courseAdapter = ExploreCourseAdapter(emptyList()) { course ->
+            val intent = android.content.Intent(this, CourseDetailsActivity::class.java)
+            intent.putExtra("name", course.name)
+            intent.putExtra("university", course.university)
+            intent.putExtra("category", course.category)
+            intent.putExtra("duration", course.duration)
+            intent.putExtra("apsRequired", course.apsRequired)
+            intent.putExtra("website", course.website)
+            intent.putExtra("description", course.description)
+            startActivity(intent)
+        }
+
+        bursaryAdapter = BursaryAdapter(emptyList()) { bursary ->
+            val intent = android.content.Intent(this, BursaryDetailsActivity::class.java)
+            intent.putExtra("name", bursary.name)
+            intent.putExtra("provider", bursary.provider)
+            intent.putExtra("amount", bursary.amount)
+            intent.putExtra("closingDate", bursary.closingDate)
+            intent.putExtra("category", bursary.category)
+            intent.putExtra("website", bursary.website)
+            intent.putExtra("description", bursary.description)
+            startActivity(intent)
+        }
 
         recyclerCourses.layoutManager = LinearLayoutManager(this)
         recyclerCourses.adapter = courseAdapter

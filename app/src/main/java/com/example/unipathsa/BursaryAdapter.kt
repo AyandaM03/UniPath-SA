@@ -6,7 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class BursaryAdapter(private var bursaries: List<Bursary>) :
+class BursaryAdapter(private var bursaries: List<Bursary>,
+                     private val onBursaryClick: (Bursary) -> Unit
+    ) :
     RecyclerView.Adapter<BursaryAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -30,6 +32,8 @@ class BursaryAdapter(private var bursaries: List<Bursary>) :
         holder.amount.text = bursary.amount
         holder.category.text = bursary.category
         holder.closing.text = "Closes: ${bursary.closingDate}"
+
+        holder.itemView.setOnClickListener { onBursaryClick(bursary) }
     }
 
     override fun getItemCount(): Int = bursaries.size
