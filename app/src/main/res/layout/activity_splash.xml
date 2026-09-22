@@ -19,9 +19,9 @@
         app:layout_constraintVertical_chainStyle="packed" />
 
     <ImageView
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:src="@drawable/unipath_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="102dp"
+        android:src="@drawable/unpathlogo"
         android:elevation="9dp"
         app:layout_constraintBottom_toBottomOf="@+id/logoBox"
         app:layout_constraintEnd_toEndOf="@+id/logoBox"

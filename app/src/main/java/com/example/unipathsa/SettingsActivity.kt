@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
 import com.google.firebase.auth.FirebaseAuth
+import android.widget.Toast
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -38,6 +39,11 @@ class SettingsActivity : AppCompatActivity() {
 
         switchNotifications.setOnCheckedChangeListener { _, isChecked ->
             prefs.edit().putBoolean("notifications", isChecked).apply()
+            Toast.makeText(
+                this,
+                if (isChecked) "Notifications enabled — feature coming soon" else "Notifications disabled",
+                Toast.LENGTH_SHORT
+            ).show()
         }
 
         btnLogout.setOnClickListener {

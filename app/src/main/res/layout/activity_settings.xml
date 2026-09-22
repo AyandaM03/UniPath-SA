@@ -27,9 +27,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="Settings"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/black"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            />
 
     </LinearLayout>
 

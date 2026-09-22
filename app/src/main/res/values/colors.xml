@@ -34,4 +34,7 @@
     <color name="background_cream">#F8F9FE</color>
     <color name="text_gray">#49454F</color>
     <color name="nav_bar_background">#FFFFFF</color>
+
+    <color name="input_background">#FFFFFF</color>
+    <color name="input_text">#000000</color>
 </resources>

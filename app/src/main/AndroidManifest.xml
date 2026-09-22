@@ -12,12 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UniPathSA">
         <activity
+            android:name=".BursaryDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CourseDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".SavedActivity"
             android:exported="false" />
         <activity
             android:name=".SettingsActivity"
             android:exported="false" />
-
         <activity
             android:name=".InstitutionDetailsActivity"
             android:exported="false" />

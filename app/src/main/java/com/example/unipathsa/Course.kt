@@ -6,5 +6,7 @@ data class Course(
     var university: String = "",
     var apsRequired: Int = 0,
     var duration: String = "",
-    var category: String = "" // e.g. "IT", "Commerce", "Engineering", "Law"
+    var category: String = "" ,// e.g. "IT", "Commerce", "Engineering", "Law"
+    var website: String = "",
+    var description: String = ""
 )

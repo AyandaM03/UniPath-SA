@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import android.widget.Toast
 
 class HomeActivity : AppCompatActivity() {
 
@@ -38,7 +39,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         findViewById<ImageButton>(R.id.btnNotifications).setOnClickListener {
-            // TODO: open notifications
+            Toast.makeText(this, "Notifications — coming soon!", Toast.LENGTH_SHORT).show()
         }
 
         loadFeaturedInstitutions()
