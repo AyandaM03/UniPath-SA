@@ -2,19 +2,19 @@
 
 ### Your Path. Your Future. Your Choice.
 
-UniPathSA is an Android application designed to assist South African high-school learners with the transition from secondary school to higher education. The application provides learners with tools and information to help them explore study opportunities, understand their academic performance, discover institutions and courses, and keep track of their higher-education applications.
+UniPathSA is an Android application designed to assist South African high-school learners with the transition from secondary school to higher education. The application provides learners with tools and information to help them calculate their academic points, explore institutions, courses and bursaries, and manage their personal profile — all in one place.
 
-The application was developed as part of a software development project with a focus on mobile application development, cloud services, database integration, user experience, version control and automated software testing.
+The application was developed as part of a software development project with a focus on mobile application development, cloud services, database integration, REST API integration, user experience and version control.
 
 ---
 
 ## Project Overview
 
-Choosing what to study after high school can be challenging for learners. There are many universities, colleges, courses, admission requirements and application deadlines to consider.
+Choosing what to study after high school can be challenging for learners. There are many universities, colleges, courses, admission requirements, bursaries and deadlines to consider.
 
-UniPathSA brings several of these functions together within a single Android application. Instead of requiring learners to manage information across multiple platforms, the application provides a centralised environment where they can manage their academic information and explore potential study opportunities.
+UniPathSA brings several of these functions together within a single Android application. Instead of requiring learners to manage information across multiple platforms, the application provides a centralised environment where they can calculate their APS, explore study opportunities and manage their profile.
 
-The application makes use of cloud-based services to securely manage user accounts and store application data.
+The application makes use of cloud-based services (Firebase) to securely manage user accounts and store application data, and communicates directly with a REST API to retrieve course-matching data.
 
 ---
 
@@ -25,39 +25,34 @@ The main purpose of UniPathSA is to provide South African high-school learners w
 The application aims to help learners:
 
 * Create and manage a personal account.
-* Maintain their learner profile.
-* Record their subjects and marks.
-* Calculate their Admission Point Score (APS).
-* Explore courses and programmes.
-* Explore higher-education institutions.
-* Save courses and institutions for later.
-* Manage applications.
-* Keep track of important application information.
-* Manage relevant documents.
-* Receive useful notifications and reminders.
-* Track progress towards their higher-education goals.
+* Maintain their learner profile (phone number, school).
+* Enter their subject marks and calculate their Admission Point Score (APS).
+* See which courses they qualify for, based on their calculated APS.
+* Explore courses and programmes across categories (IT, Commerce, Engineering, Law).
+* Explore higher-education institutions (universities and colleges, public and private).
+* Explore available bursaries.
+* Save institutions to a personal favourites list.
+* Customise their experience with Dark Mode.
 
 ---
 
-#  Target Users
+## Target Users
 
 The primary target users of UniPathSA are **South African high-school learners**, particularly learners in Grades 10–12 and matriculants preparing for further education.
 
 The application is designed with learners in mind by providing:
 
-* Simple navigation.
-* Clear information.
+* Simple navigation via a bottom navigation bar.
+* Clear information, presented in cards and lists.
 * Easy-to-understand interfaces.
-* Form validation.
-* Accessible actions.
-* Organised information.
-* A mobile-friendly design.
+* Form validation on sign up, login and the APS calculator.
+* A mobile-friendly, consistent design across light and dark mode.
 
 ---
 
-# Main Features
+## Main Features
 
-## User Registration and Login
+### User Registration and Login
 
 Users can create an account using their:
 
@@ -66,531 +61,300 @@ Users can create an account using their:
 * Password
 * Grade
 
-Authentication is handled using **Firebase Authentication**.
+Users can also sign in with an existing **Google account**.
 
-The application does not store user passwords directly in the Firestore database. Authentication credentials are managed through Firebase Authentication.
+Authentication is handled using **Firebase Authentication**. The application does not store user passwords directly — authentication credentials are managed entirely through Firebase Authentication.
 
----
-
-## Learner Profile
-
-Each registered learner has a personal profile associated with their Firebase Authentication account.
-
-Profile information can include:
-
-* Full name
-* Email address
-* Grade
-* School information
-* Province
-* Account information
-
-User-specific information is associated with the authenticated user's unique Firebase UID.
+Users can also request a password reset email from the login screen.
 
 ---
 
-##  Subjects and Marks
+### Learner Profile
 
-Learners can manage information about their school subjects and academic marks.
+Each registered learner has a personal profile associated with their Firebase Authentication account, displaying their name and email automatically.
 
-The subject functionality allows the application to store information such as:
+Learners can also enter and edit:
 
-* Subject name
-* Percentage/mark
-* Date of update
+* Phone number
+* School / grade information
 
-This information can be used by the application when calculating the learner's APS.
+This information is saved to Firestore under the authenticated user's unique Firebase UID, and reloads automatically the next time the profile is opened.
 
 ---
 
-## APS Calculator
+### APS Calculator
 
 UniPathSA includes an APS calculation feature designed to help learners understand their academic points.
 
-The calculator uses the learner's subject marks to calculate their APS according to the application's configured APS conversion logic.
-
-The calculator also validates user input to prevent invalid values from causing errors.
-
-For example, marks outside the expected range can be rejected rather than being processed incorrectly.
-
----
-
-## Course Explorer
-
-The Course Explorer allows learners to explore available study programmes.
-
-Course information is stored in the Firestore database and may include information such as:
-
-* Course name
-* Institution
-* Category
-* Duration
-* APS requirement
-
-Examples of study areas include:
-
-* Information Technology
-* Engineering
-* Commerce
-* Law
-* Business
-* Other higher-education fields
-
-The application retrieves course information from the online database rather than relying entirely on hard-coded information within the Android application.
+* Learners can dynamically add or remove any number of subjects.
+* Each subject's percentage mark is converted into APS points using the standard South African Achievement Level Guide (7 points for 80–100%, down to 1 point for 0–29%).
+* The calculator validates input, rejecting marks outside the 0–100 range.
+* Once calculated, the app calls a **REST API** (Firestore's REST endpoint, accessed via Retrofit — not the Firestore SDK) to fetch all available courses, and filters them to show only the courses the learner's score qualifies them for.
 
 ---
 
-## Institution Explorer
+### Explore — Courses & Bursaries
 
-Learners can explore information about higher-education institutions.
+The Explore screen lets learners browse two categories of opportunities:
 
-Institution information stored in Firestore can include:
+**Courses** — university and college programmes, filterable by category (IT, Commerce, Engineering, Law), each showing the offering institution, APS requirement and duration.
 
-* Institution name
-* Description
-* Province
-* Institution type
-* Website
-* Application information
+**Bursaries** — funding opportunities, filterable by the same categories, showing the provider, amount covered and closing date.
 
-This allows learners to investigate institutions from within the application.
+Course and bursary information is stored in Firestore rather than hard-coded into the app. Tapping any course or bursary opens a details screen with a full description and a button linking to the provider's official website.
 
 ---
 
-## Saved Items
+### Institutions
 
-Learners can save useful courses or institutions for easier access later.
+Learners can explore Universities and Colleges (public and private) across South Africa.
 
-Saved information is associated with the individual learner's account so that different users can maintain their own saved items.
-
----
-
-## Application Tracking
-
-The application includes functionality for learners to keep track of their higher-education applications.
-
-Application information can include:
-
-* Institution
-* Course
-* Application status
-* Deadline
-* Notes
-
-This allows learners to organise their application process within one application.
+* Search by name or province.
+* Filter between "Universities" and "Colleges".
+* Tap any institution to view a full details screen, including a description and a link to the institution's official website.
+* Save institutions as favourites (tap the star icon) — favourites are stored per-user in Firestore and viewable from the Profile screen.
 
 ---
 
-## Document Management
+### Settings
 
-UniPathSA is designed to support the management of documents that may be required during the application process.
-
-Examples can include:
-
-* Identification documents
-* School results
-* Certificates
-* Other application-related documents
-
-Actual files can be stored using Firebase Storage, while information about the files can be maintained in Firestore.
+* **Dark Mode** — toggles the app's theme between light and dark, and the preference persists between sessions.
+* **Notifications** — a preference toggle (the underlying notification-sending feature is a placeholder for now).
+* **Log Out** — signs the user out and returns to the login screen.
 
 ---
 
-## Notifications
+## User Interface and Design Considerations
 
-The application includes notification functionality for information that may be relevant to the learner.
+The UniPathSA interface was designed around the needs of high-school learners, aiming for a balance between a modern appearance and ease of use.
 
-Notifications can be associated with information such as:
+**Design principles include:**
 
-* Application updates
-* Deadlines
-* Reminders
-* Other important events
+**Simplicity** — the interface avoids unnecessary complexity and presents important information clearly.
 
-Where configured, cloud notification services can be used to support notifications.
+**Consistency** — buttons, cards, text styles, navigation and spacing follow consistent design patterns throughout the application, including a defined light/dark colour palette.
 
----
+**Readability** — text and information are presented using clear typography and appropriate spacing, with colours chosen to remain legible in both light and dark mode.
 
-# User Interface and Design Considerations
+**Visual hierarchy** — important actions (such as "Add Marks" and "Calculate APS") are visually prioritised so that users understand what to do next.
 
-The UniPathSA interface was designed around the needs of high-school learners.
-
-The design aims to provide a balance between a modern appearance and ease of use.
-
-### Design principles include:
-
-**Simplicity**
-
-The interface avoids unnecessary complexity and presents important information in a clear way.
-
-**Consistency**
-
-Buttons, cards, text styles, navigation and spacing follow consistent design patterns throughout the application.
-
-**Readability**
-
-Text and information are presented using clear typography and appropriate spacing.
-
-**Visual hierarchy**
-
-Important actions and information are visually prioritised so that users can understand what to do next.
-
-**Accessibility**
-
-Forms and navigation are designed to be straightforward for users who may not have extensive technical experience.
-
-**Responsive interaction**
-
-The application provides feedback when users perform actions such as logging in, registering, saving information or entering invalid data.
+**Responsive interaction** — the application provides feedback when users perform actions such as logging in, registering, saving information or entering invalid data.
 
 ---
 
-# Technologies Used
+## Technologies Used
 
-| Technology              | Purpose                                     |
-| ----------------------- | ------------------------------------------- |
-| Kotlin                  | Primary programming language                |
-| Android Studio          | Android application development             |
-| XML                     | Android user-interface layouts              |
-| Firebase Authentication | User authentication                         |
-| Firebase Firestore      | Cloud database                              |
-| Firebase Storage        | File/document storage                       |
-| Git                     | Version control                             |
-| GitHub                  | Source-code hosting                         |
-| GitHub Actions          | Continuous integration and automated builds |
-| Gradle                  | Project build and dependency management     |
+| Technology | Purpose |
+| --- | --- |
+| Kotlin | Primary programming language |
+| Android Studio | Android application development |
+| XML | Android user-interface layouts |
+| Firebase Authentication | User authentication (Email/Password + Google Sign-In) |
+| Firebase Firestore | Cloud database |
+| Retrofit + Firestore REST API | Direct REST API integration for course matching |
+| Glide | Image loading |
+| Material Components | UI widgets (cards, chips, switches, bottom navigation) |
+| Git | Version control |
+| GitHub | Source-code hosting |
+| Gradle | Project build and dependency management |
 
 ---
 
-# Firebase Architecture
+## Firebase Architecture
 
 UniPathSA uses Firebase as its cloud backend.
-
-The main Firebase services used by the application are:
 
 ```text
                     UniPathSA
                        |
-        ┌──────────────┼──────────────┐
-        │              │              │
-        ▼              ▼              ▼
-   Firebase        Firestore       Firebase
- Authentication    Database        Storage
-        │              │              │
-        ▼              ▼              ▼
-    User Login      App Data       Documents
-    & Accounts
+        ┌──────────────┴──────────────┐
+        │                             │
+        ▼                             ▼
+   Firebase                       Firestore
+ Authentication                   Database
+        │                             │
+        ▼                             ▼
+    User Login                   App Data
+    & Accounts          (institutions, courses,
+                          bursaries, user profiles
+                          and favourites)
 ```
 
 ---
 
-# Firebase Authentication
+## Firebase Authentication
 
 Firebase Authentication is responsible for managing user authentication.
 
-When a learner creates an account, Firebase Authentication manages the authentication credentials.
+When a learner creates an account, Firebase Authentication manages the authentication credentials. The application obtains the authenticated user's unique ID (UID) and uses this ID when associating user-specific information (profile details, favourites) with Firestore.
 
-The application obtains the authenticated user's unique ID and uses this ID when associating user-specific information with Firestore.
-
-This creates a separation between authentication credentials and application profile information.
-
-### Authentication data
-
-Firebase Authentication manages information such as:
-
-* User UID
-* Email address
-* Authentication provider
-* Account creation information
-* Sign-in information
-
-Passwords are not stored directly in the application's Firestore documents.
+This creates a separation between authentication credentials and application profile information — passwords are never stored directly in the application's Firestore documents.
 
 ---
 
-# Firestore Database
+## Firestore Database
 
-Cloud Firestore is used to store application data.
-
-The database contains shared information as well as user-specific information.
-
-The main collections include:
+Cloud Firestore is used to store application data. The database contains shared information as well as user-specific information.
 
 ```text
 Firestore
 │
+├── institutions
+│
 ├── courses
 │
-├── institutions
+├── bursaries
 │
 └── users
       │
       └── {userId}
             │
-            ├── subjects
-            ├── applications
-            ├── savedItems
-            ├── documents
-            ├── notifications
-            └── achievements
+            ├── phone, school       (profile fields)
+            │
+            └── favourites
+                  │
+                  └── {institutionId}
 ```
 
-### Courses
+### institutions
+```text
+name
+province
+type            ("University" or "College")
+description
+imageUrl
+website
+freeToApply
+```
 
-The `courses` collection stores course information used by the Course Explorer.
-
-Example fields include:
-
+### courses
 ```text
 name
 university
-category
-duration
 apsRequired
+duration
+category
+website
+description
 ```
 
-### Institutions
-
-The `institutions` collection stores information about higher-education institutions.
-
-Example fields include:
-
+### bursaries
 ```text
 name
-description
-province
-type
+provider
+amount
+closingDate
+category
 website
-freeToApply
-imageUrl
+description
 ```
 
-### Users
-
-The `users` collection stores learner profile information.
-
-Example fields include:
-
+### users
 ```text
-fullName
-email
-grade
-createdAt
+phone
+school
 ```
-
-Additional learner-specific information can be organised using subcollections.
-
----
-
-# API and Cloud Services
-
-The application communicates with cloud-based services to retrieve and store information.
-
-Firebase provides cloud-based APIs that allow the Android application to interact with authentication, Firestore and storage services.
-
-The application therefore does not rely solely on locally stored information. Data can be retrieved from the online backend when required.
-
-Where external API services are configured, they should be documented here together with their purpose and the type of data returned.
+with a `favourites` subcollection containing the full institution documents the user has saved.
 
 ---
 
-# Input Validation and Error Handling
+## REST API Integration
+
+In addition to using the Firebase Firestore SDK for most of the app's data (Institutions, Explore, user profile), the **APS Calculator screen communicates directly with Firestore's REST API** using Retrofit, rather than the SDK.
+
+**Endpoint used:**
+
+The response (Firestore's structured JSON format) is parsed into the app's `Course` model, and the results are filtered client-side to show only courses matching the student's calculated APS score. This satisfies the project requirement of creating/using a REST API and integrating it meaningfully into the app, separate from the Firebase SDK usage elsewhere.
+
+---
+
+## Input Validation and Error Handling
 
 A major consideration during development was ensuring that invalid user input does not cause the application to crash.
 
-The application validates information before processing it.
+**Registration validation** — the application checks that full name, email and password have been entered, that the password meets the minimum length, and that a grade has been selected.
 
-Examples include:
+**APS validation** — the calculator only accepts marks between 0 and 100; anything outside this range, or non-numeric input, is ignored rather than crashing the calculation.
 
-### Registration validation
+**Authentication errors** — login/sign-up failures (wrong password, existing email, weak password, etc.) are caught and shown to the user as a message rather than crashing the app.
 
-The application checks that:
-
-* Full name has been entered.
-* Email has been entered.
-* Password has been entered.
-* Password meets the minimum length.
-* A grade has been selected.
-
-### APS validation
-
-The application checks that marks are valid before calculating the APS.
-
-For example, invalid values such as:
-
-```text
--10
-150
-ABC
-```
-
-should not be accepted as valid marks.
-
-### Authentication errors
-
-The application handles authentication failures and displays an appropriate message instead of terminating unexpectedly.
-
-### Database errors
-
-If a Firestore operation fails, the application provides feedback to the user rather than silently failing or crashing.
+**Network/database errors** — if a Firestore or REST API call fails (e.g. no internet), the application shows a message to the user instead of failing silently or crashing.
 
 ---
 
-#  Testing
+## Testing
 
-Testing was conducted to ensure that the main functionality of the application operates correctly.
+Testing was conducted to ensure that the main functionality of the application operates correctly, covering both successful and unsuccessful user interactions.
 
-Testing focuses on both successful and unsuccessful user interactions.
-
-## Functional testing
-
-Examples include:
-
-| Feature      | Test                                 |
-| ------------ | ------------------------------------ |
-| Registration | Create a valid account               |
-| Registration | Submit empty fields                  |
-| Registration | Enter an invalid password            |
-| Login        | Login using valid credentials        |
-| Login        | Login using invalid credentials      |
-| APS          | Calculate APS using valid marks      |
-| APS          | Enter invalid marks                  |
-| Courses      | Retrieve courses from Firestore      |
-| Institutions | Retrieve institutions from Firestore |
-| Applications | Create an application                |
-| Saved Items  | Save an item                         |
-| Profile      | Retrieve user information            |
+| Feature | Test |
+| --- | --- |
+| Registration | Create a valid account |
+| Registration | Submit empty fields |
+| Registration | Enter a password under 6 characters |
+| Login | Login using valid credentials |
+| Login | Login using invalid credentials |
+| Login | Google Sign-In flow |
+| APS Calculator | Calculate APS using valid marks |
+| APS Calculator | Enter invalid marks (out of range / non-numeric) |
+| APS Calculator | Confirm matching courses load via REST API |
+| Institutions | Retrieve and filter institutions from Firestore |
+| Institutions | Save and remove a favourite |
+| Explore | Filter courses/bursaries by category |
+| Profile | Save and reload phone/school details |
+| Settings | Toggle Dark Mode and confirm it persists |
 
 ---
 
-# Automated Testing
+## Version Control with GitHub
 
-Automated tests are used to test important application functionality.
+GitHub was used as the version-control and source-code hosting platform for UniPathSA throughout development, with changes committed regularly by both team members using feature branches merged into `main` (e.g. `nav`, `bursaries`, `course-and-bursary-details`).
 
-The purpose of automated testing is to identify errors early and ensure that changes made to the project do not unintentionally break existing functionality.
-
-Tests are executed using Gradle and can also be executed through GitHub Actions.
-
----
-
-# Version Control with GitHub
-
-GitHub is used as the version-control and source-code hosting platform for UniPathSA.
-
-The repository contains the Android Studio project and supporting documentation.
-
-Git was used throughout development to track changes to the application.
-
-Development changes were committed regularly rather than only creating a single commit at the end of the project.
-
-Examples of development commits include:
+Examples of development milestones tracked through commits include:
 
 ```text
 Initial Android project setup
-Add Firebase Authentication
-Implement user registration
-Connect Firestore user profiles
-Add course explorer
-Connect institutions to Firestore
-Implement APS calculator
-Add application tracking
-Improve input validation
-Improve application interface
-Add automated tests
-Configure GitHub Actions
-Update project documentation
+Add Firebase Authentication (Email/Password + Google Sign-In)
+Implement Splash, Login and Sign Up screens
+Add bottom navigation
+Connect Institutions screen to Firestore
+Implement APS Calculator with REST API course matching
+Add Explore screen (Courses and Bursaries tabs)
+Add Course and Bursary details screens
+Add Settings screen with Dark Mode
+Add editable Profile fields and Saved Institutions
+Improve input validation and dark mode styling
 ```
 
-This provides a development history and makes it possible to identify changes made throughout the project.
-
 ---
 
-# GitHub Actions
-
-GitHub Actions is used to automate testing and building of the Android application.
-
-
-# Continuous Integration
-
-Continuous Integration allows changes to be automatically tested after being pushed to GitHub.
-
-For UniPathSA, the GitHub Actions workflow is intended to:
-
-1. Retrieve the latest project files.
-2. Configure the required development environment.
-3. Run automated tests.
-4. Build the Android application.
-5. Report whether the workflow succeeded or failed.
-
-This helps identify problems earlier during development.
-
----
-
-# Application Screenshots
-
-Screenshots of the completed application are included below to demonstrate the user interface and main functionality.
-
-## Login
-
-here
-
-## Registration
-
-here
-
-## Dashboard
-
-here
-
-## Profile
-
-here
-
-## Subjects and Marks
-
-here
-
-## APS Calculator
-
-here
-
-## Course Explorer
-
-here
-
-## Institutions
-
-here
-
-## Application Tracking
-
-here
-
-
----
-
-# Project Structure
-
-The project follows the standard Android Studio project structure.
+## Project Structure
 
 ```text
 UniPathSA
-│
-├── .github
-│   └── workflows
-│       └── build.yml
 │
 ├── app
 │   └── src
 │       └── main
 │           ├── java
 │           │   └── com.example.unipathsa
+│           │       ├── LoginActivity.kt / SignUpActivity.kt / SplashActivity.kt
+│           │       ├── HomeActivity.kt
+│           │       ├── InstitutionsActivity.kt / InstitutionDetailsActivity.kt
+│           │       ├── ExploreActivity.kt / CourseDetailsActivity.kt / BursaryDetailsActivity.kt
+│           │       ├── ApsCalculatorActivity.kt
+│           │       ├── ProfileActivity.kt / SettingsActivity.kt / SavedActivity.kt
+│           │       ├── BottomNavHelper.kt
+│           │       ├── RetrofitClient.kt / FirestoreApi.kt / FirestoreModels.kt
+│           │       ├── Institution.kt / Course.kt / Bursary.kt
+│           │       └── *Adapter.kt
 │           │
 │           └── res
 │               ├── drawable
 │               ├── layout
+│               ├── menu
 │               ├── mipmap
-│               └── values
+│               ├── values
+│               └── values-night
 │
 ├── gradle
 ├── .gitignore
@@ -603,88 +367,82 @@ UniPathSA
 
 ---
 
-#  Data and Security Considerations
+## Data and Security Considerations
 
 Security was considered when designing the application's cloud architecture.
 
-User passwords are handled through Firebase Authentication rather than being stored directly in Firestore.
-
-User-specific application information is associated with the authenticated user's UID.
-
-Firestore security rules should be configured so that users can only access information that they are authorised to access.
-
-Sensitive information should not be hard-coded into the Android application or committed to the GitHub repository.
+* User passwords are handled entirely through Firebase Authentication rather than being stored in Firestore.
+* User-specific information (profile details, favourites) is associated with the authenticated user's UID.
+* Firestore is currently running in test mode for development; production security rules restricting access to a user's own data would be a required next step before any real deployment.
+* `google-services.json` (containing Firebase API keys) is excluded from the repository via `.gitignore`.
 
 ---
 
+## Setup
 
+1. Clone the repository:
+```bash
+   git clone https://github.com/AyandaM03/UniPath-SA.git
+```
+2. Open the project in **Android Studio**.
+3. Add your own `google-services.json` file to the `app/` directory (not included in this repo — request it from a project member, or set up your own Firebase project).
+4. Sync Gradle and run.
 
+### Firebase Setup (if starting fresh)
+1. Create a Firebase project.
+2. Enable **Authentication** → Email/Password and Google sign-in providers.
+3. Enable **Cloud Firestore** (test mode for development).
+4. Create three collections: `institutions`, `courses`, `bursaries` (see data model above).
 
-# Future Improvements
+---
+
+## Future Improvements
 
 Possible future improvements to UniPathSA include:
 
-* More comprehensive course information.
-* Additional institution information.
-* Improved application deadline tracking.
-* More advanced course recommendations.
-* Additional bursary information.
-* Push notifications for important deadlines.
-* Expanded document management.
-* Additional automated tests.
-* Improved accessibility features.
-* More detailed learner progress tracking.
-* Integration with additional verified external services.
+* Application/deadline tracking for institutions a learner has applied to.
+* Document upload and management (e.g. via Firebase Storage) for ID and results.
+* Push notifications for bursary and application deadlines.
+* More comprehensive course and institution data.
+* Automated UI testing.
+* Production-ready Firestore security rules.
 
 ---
 
-# Educational Value
+## Educational Value
 
 The development of UniPathSA provided practical experience in several areas of software development, including:
 
-* Android application development.
-* Kotlin programming.
-* XML interface development.
-* Cloud database development.
-* Authentication.
-* API and cloud-service integration.
-* Input validation.
-* Software testing.
-* Git version control.
-* GitHub repository management.
-* Continuous Integration.
-* GitHub Actions.
+* Android application development and Kotlin programming.
+* XML interface development and Material Design.
+* Cloud database development with Firebase Firestore.
+* Authentication (Firebase Auth + Google Sign-In).
+* REST API integration alongside SDK usage.
+* Input validation and error handling.
+* Git version control and collaborative branching/merging.
 * Technical documentation.
-
-The project also provided experience in considering the needs of a specific user group when designing a software solution.
 
 ---
 
-# Project Status
+## Project Status
 
 **Project:** UniPathSA
 **Platform:** Android
 **Language:** Kotlin
 **Database:** Firebase Cloud Firestore
 **Authentication:** Firebase Authentication
-**Cloud Storage:** Firebase Storage
 **Version Control:** Git / GitHub
-**CI/CD:** GitHub Actions
 
 ---
 
+## Contributors
 
-# Conclusion
-
-UniPathSA provides a centralised mobile platform designed to support South African high-school learners as they prepare for higher education. The application combines learner information, academic results, APS calculation, course exploration, institution information and application management into one platform.
-
-The project also demonstrates the use of cloud-based authentication and database services, input validation, automated testing, GitHub version control and GitHub Actions.
-
-Through the development of UniPathSA, the project demonstrates how mobile application development, cloud computing, database management, software testing and version control can be combined to create a functional software solution.
-
+- Alexis Maphosa
+- Ayanda MMagocoba
 ---
 
+## Conclusion
 
+UniPathSA provides a centralised mobile platform designed to support South African high-school learners as they prepare for higher education. The application combines learner profile information, APS calculation, course and institution exploration, bursary discovery and a favourites system into one platform.
 
-If you want, I can next give you the **exact GitHub-ready version with badges, a professional UniPathSA header, table of contents, screenshots section, Firebase architecture diagram, and GitHub Actions badge** so it looks like a polished real software project rather than a plain assignment README.
-
+The project also demonstrates the use of cloud-based authentication and database services, direct REST API integration, input validation and GitHub version control.
