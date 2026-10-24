@@ -1,7 +1,6 @@
 package com.example.unipathsa
 
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.util.Log
@@ -64,6 +63,8 @@ object NavigationHelper {
     private fun loadDrawerHeaderData(activity: AppCompatActivity) {
         val tvName = activity.findViewById<TextView>(R.id.tvDrawerUserName) ?: return
         val tvGrade = activity.findViewById<TextView>(R.id.tvDrawerUserGrade)
+        val tvAvatar = activity.findViewById<TextView>(R.id.tvDrawerAvatar)
+        val tvNotifBadge = activity.findViewById<TextView>(R.id.tvDrawerNotifBadge)
 
         val auth = FirebaseAuth.getInstance()
         val user = auth.currentUser
@@ -71,11 +72,13 @@ object NavigationHelper {
         if (user == null) {
             tvName.text = "Student"
             tvGrade?.text = "Matriculant / High School"
+            tvAvatar?.text = "S"
             return
         }
 
-        val displayName = if (!user.displayName.isNullOrBlank()) user.displayName else "Student"
+        val displayName = if (!user.displayName.isNullOrBlank()) user.displayName!! else "Student"
         tvName.text = displayName
+        tvAvatar?.text = displayName.trim().take(1).uppercase()
 
         val db = FirebaseFirestore.getInstance()
         db.collection("users").document(user.uid)
@@ -87,11 +90,28 @@ object NavigationHelper {
 
                     tvName.text = fullName
                     tvGrade?.text = grade
+                    if (fullName.isNotBlank()) {
+                        tvAvatar?.text = fullName.trim().take(1).uppercase()
+                    }
                     Log.d(TAG, "Loaded drawer profile for $fullName ($grade)")
                 }
             }
             .addOnFailureListener { e ->
                 Log.e(TAG, "Failed to load drawer profile from Firestore", e)
+            }
+
+        // Unread notifications badge
+        db.collection("users").document(user.uid).collection("notifications")
+            .whereEqualTo("isRead", false)
+            .get()
+            .addOnSuccessListener { snapshot ->
+                val count = snapshot?.size() ?: 0
+                if (count > 0 && tvNotifBadge != null) {
+                    tvNotifBadge.visibility = View.VISIBLE
+                    tvNotifBadge.text = if (count > 9) "9+" else count.toString()
+                } else {
+                    tvNotifBadge?.visibility = View.GONE
+                }
             }
     }
 
@@ -105,20 +125,25 @@ object NavigationHelper {
             R.id.navProfile, R.id.navSettings
         )
 
-        val primaryColor = ContextCompat.getColor(activity, R.color.primary)
-        val defaultColor = ContextCompat.getColor(activity, R.color.text_primary)
+        val whiteColor = ContextCompat.getColor(activity, R.color.white)
+
         val highlightBg = GradientDrawable().apply {
-            setColor(Color.parseColor("#1F1A237E"))
+            setColor(Color.parseColor("#33FFFFFF")) // translucent white
             cornerRadius = 16f
+            setStroke(2, Color.parseColor("#4C8DFF")) // bright blue border indicator
         }
 
         for (id in navIds) {
-            val item = activity.findViewById<TextView>(id) ?: continue
+            val item = activity.findViewById<View>(id) ?: continue
             if (id == activeNavItemId) {
-                item.setTextColor(primaryColor)
+                if (item is TextView) {
+                    item.setTextColor(whiteColor)
+                }
                 item.background = highlightBg
             } else {
-                item.setTextColor(defaultColor)
+                if (item is TextView) {
+                    item.setTextColor(Color.parseColor("#E2E8F0"))
+                }
                 item.background = null
             }
         }
@@ -140,12 +165,13 @@ object NavigationHelper {
         )
 
         for ((viewId, targetClass) in clickMap) {
-            activity.findViewById<TextView>(viewId)?.setOnClickListener {
+            activity.findViewById<View>(viewId)?.setOnClickListener {
                 Log.d(TAG, "Drawer item clicked: ${targetClass.simpleName}")
                 drawerLayout.closeDrawer(GravityCompat.START)
                 if (activity::class.java != targetClass) {
                     val intent = Intent(activity, targetClass)
                     activity.startActivity(intent)
+                    activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                     if (targetClass != HomeActivity::class.java && activity !is HomeActivity) {
                         activity.finish()
                     }
@@ -161,6 +187,7 @@ object NavigationHelper {
             val intent = Intent(activity, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             activity.startActivity(intent)
+            activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             activity.finish()
         }
     }

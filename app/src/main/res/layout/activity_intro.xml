@@ -4,243 +4,103 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_cream"
-    android:padding="@dimen/spacing_l">
+    android:background="@drawable/gradient_header">
 
-    <!-- Top Section -->
+    <!-- Top Header Branding -->
     <LinearLayout
         android:id="@+id/llHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:padding="24dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:src="@drawable/app_logo"
-            app:tint="@color/black"
+            app:tint="@color/white"
             tools:ignore="ContentDescription" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginStart="@dimen/spacing_s"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-black"
-                android:text="UniPath"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:lineSpacingExtra="-4sp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
-                android:text="SOUTH AFRICA"
-                android:textColor="@color/text_secondary"
-                android:textSize="10sp"
-                android:letterSpacing="0.05"
-                tools:ignore="SmallSp"/>
-        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_badge"
-            android:paddingHorizontal="12dp"
-            android:paddingVertical="6dp"
-            android:text="2027 Intake"
-            android:textColor="@color/primary"
-            android:textSize="12sp"
-            android:fontFamily="sans-serif-medium"/>
+            android:layout_marginStart="10dp"
+            android:fontFamily="sans-serif-black"
+            android:text="UniPath SA"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
     </LinearLayout>
 
-    <!-- Visual Card -->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cvIllustration"
+    <!-- Swipeable ViewPager2 -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vpIntroPages"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginVertical="@dimen/spacing_xl"
-        app:cardCornerRadius="28dp"
-        app:cardElevation="2dp"
-        app:cardBackgroundColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/tvMainHeading"
-        app:layout_constraintTop_toBottomOf="@id/llHeader">
+        app:layout_constraintBottom_toTopOf="@+id/llIntroDots"
+        app:layout_constraintTop_toBottomOf="@id/llHeader" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/light_blue"
-            android:padding="24dp">
-
-            <ImageView
-                android:id="@+id/ivSmallLogo"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/logo_box_bg"
-                android:padding="8dp"
-                android:src="@drawable/app_logo"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/white"
-                tools:ignore="ContentDescription"/>
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:gravity="center"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="APS Score"
-                        android:textSize="10sp"
-                        android:textColor="@color/text_secondary"
-                        tools:ignore="SmallSp"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="32"
-                        android:textSize="24sp"
-                        android:fontFamily="sans-serif-black"
-                        android:textColor="@color/black"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="✔ Qualifying"
-                        android:textSize="10sp"
-                        android:textColor="@color/success"
-                        android:fontFamily="sans-serif-medium"
-                        tools:ignore="SmallSp"/>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Bar Chart Representation -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:gravity="bottom|center_horizontal"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/cvInfoBadge"
-                app:layout_constraintTop_toBottomOf="@id/ivSmallLogo"
-                android:layout_marginBottom="24dp">
-                <View android:layout_width="12dp" android:layout_height="30dp" android:background="#60FFFFFF" android:layout_marginHorizontal="4dp"/>
-                <View android:layout_width="12dp" android:layout_height="50dp" android:background="#80FFFFFF" android:layout_marginHorizontal="4dp"/>
-                <View android:layout_width="12dp" android:layout_height="70dp" android:background="#A0FFFFFF" android:layout_marginHorizontal="4dp"/>
-                <View android:layout_width="12dp" android:layout_height="40dp" android:background="#60FFFFFF" android:layout_marginHorizontal="4dp"/>
-                <View android:layout_width="12dp" android:layout_height="60dp" android:background="#80FFFFFF" android:layout_marginHorizontal="4dp"/>
-            </LinearLayout>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cvInfoBadge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp"
-                app:layout_constraintBottom_toBottomOf="parent">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="12dp"
-                    android:gravity="center_vertical">
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@android:drawable/ic_dialog_info"
-                        app:tint="@color/primary"
-                        tools:ignore="ContentDescription"/>
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:orientation="vertical">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Your next chapter starts here!"
-                            android:textSize="12sp"
-                            android:fontFamily="sans-serif-black"
-                            android:textColor="@color/black"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Discover your path to success"
-                            android:textSize="10sp"
-                            android:textColor="@color/text_secondary"
-                            tools:ignore="SmallSp"/>
-                    </LinearLayout>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <!-- Text Content -->
-    <TextView
-        android:id="@+id/tvMainHeading"
-        android:layout_width="0dp"
+    <!-- Dot Indicators -->
+    <LinearLayout
+        android:id="@+id/llIntroDots"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-black"
-        android:text="Your path to\nhigher education."
-        android:textColor="@color/primary_dark"
-        android:textSize="32sp"
-        android:lineHeight="38sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvSubtitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/tvSubtitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_m"
-        android:layout_marginBottom="32dp"
-        android:fontFamily="sans-serif"
-        android:text="Discover courses, calculate your APS, find funding and manage your university applications — all in one place."
-        android:textColor="@color/text_secondary"
-        android:textSize="15sp"
-        android:lineHeight="22sp"
+        android:layout_marginBottom="24dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/btnGetStarted"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
 
-    <!-- Buttons Section -->
+        <View
+            android:id="@+id/dot1"
+            android:layout_width="24dp"
+            android:layout_height="8dp"
+            android:layout_marginHorizontal="4dp"
+            android:background="@drawable/bg_badge"
+            android:backgroundTint="@color/white" />
+
+        <View
+            android:id="@+id/dot2"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginHorizontal="4dp"
+            android:background="@drawable/bg_badge"
+            android:backgroundTint="#66FFFFFF" />
+
+        <View
+            android:id="@+id/dot3"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginHorizontal="4dp"
+            android:background="@drawable/bg_badge"
+            android:backgroundTint="#66FFFFFF" />
+
+    </LinearLayout>
+
+    <!-- White Pill "Get Started" Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnGetStarted"
+        style="@style/Widget.UniPathSA.Button"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginBottom="@dimen/spacing_l"
-        android:backgroundTint="@color/primary"
-        android:fontFamily="sans-serif-medium"
+        android:layout_height="52dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="sans-serif-black"
         android:text="Get Started"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
+        android:textColor="@color/navy_dark"
         android:textSize="16sp"
-        app:cornerRadius="16dp"
+        app:cornerRadius="26dp"
         app:layout_constraintBottom_toTopOf="@+id/llFooter" />
 
+    <!-- Log In Footer Link -->
     <LinearLayout
         android:id="@+id/llFooter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing_m"
+        android:layout_marginBottom="32dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -250,7 +110,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Already have an account? "
-            android:textColor="@color/text_secondary"
+            android:textColor="#CCFFFFFF"
             android:textSize="14sp" />
 
         <TextView
@@ -259,9 +119,9 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="true"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="sans-serif-bold"
             android:text="Log In"
-            android:textColor="@color/primary"
+            android:textColor="@color/white"
             android:textSize="14sp" />
     </LinearLayout>
 

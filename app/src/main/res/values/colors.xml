@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Brand Main Colors -->
+    <!-- Main Brand Colors -->
     <color name="navy_dark">#0B1F4D</color>
     <color name="primary">#1A237E</color>
     <color name="primary_light">#3949AB</color>

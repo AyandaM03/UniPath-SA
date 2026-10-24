@@ -3,54 +3,85 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navView"
-    android:layout_width="280dp"
+    android:layout_width="290dp"
     android:layout_height="match_parent"
     android:layout_gravity="start"
     android:fitsSystemWindows="true"
-    android:background="@color/surface">
+    android:background="@drawable/gradient_header">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Header -->
-        <LinearLayout
+        <!-- Translucent Header Card -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="190dp"
-            android:background="@color/navy_dark"
-            android:gravity="bottom"
-            android:orientation="vertical"
-            android:padding="20dp">
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cardBackgroundColor="#22FFFFFF"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="0dp"
+            app:strokeColor="#33FFFFFF"
+            app:strokeWidth="1dp">
 
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/app_logo"
-                app:tint="@color/white"
-                tools:ignore="ContentDescription" />
-
-            <TextView
-                android:id="@+id/tvDrawerUserName"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:fontFamily="sans-serif-black"
-                android:text="UniPath Student"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
 
-            <TextView
-                android:id="@+id/tvDrawerUserGrade"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="Matriculant / High School"
-                android:textColor="#CCFFFFFF"
-                android:textSize="12sp" />
-        </LinearLayout>
+                <!-- User Initial Avatar Circle -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="2dp">
 
-        <!-- Menu Items -->
+                    <TextView
+                        android:id="@+id/tvDrawerAvatar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="sans-serif-black"
+                        android:gravity="center"
+                        android:text="U"
+                        android:textColor="@color/navy_dark"
+                        android:textSize="22sp" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvDrawerUserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-black"
+                        android:text="UniPath Student"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tvDrawerUserGrade"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="sans-serif"
+                        android:text="Grade 12 / Matriculant"
+                        android:textColor="#CCFFFFFF"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Menu Items List -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -61,7 +92,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingVertical="8dp">
+                android:paddingHorizontal="12dp"
+                android:paddingBottom="16dp">
+
+                <!-- Section: EXPLORE -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="sans-serif-bold"
+                    android:letterSpacing="0.1"
+                    android:text="EXPLORE"
+                    android:textColor="#99FFFFFF"
+                    android:textSize="11sp"
+                    tools:ignore="SmallSp" />
 
                 <TextView
                     android:id="@+id/navHome"
@@ -71,9 +117,9 @@
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="20dp"
+                    android:paddingHorizontal="16dp"
                     android:text="Home"
-                    android:textColor="@color/text_primary"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-medium" />
 
@@ -85,9 +131,9 @@
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="20dp"
+                    android:paddingHorizontal="16dp"
                     android:text="Institutions"
-                    android:textColor="@color/text_primary"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-medium" />
 
@@ -99,11 +145,25 @@
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="20dp"
-                    android:text="Explore &amp; Bursaries"
-                    android:textColor="@color/text_primary"
+                    android:paddingHorizontal="16dp"
+                    android:text="Explore Courses &amp; Bursaries"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-medium" />
+
+                <!-- Section: MY JOURNEY -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="sans-serif-bold"
+                    android:letterSpacing="0.1"
+                    android:text="MY JOURNEY"
+                    android:textColor="#99FFFFFF"
+                    android:textSize="11sp"
+                    tools:ignore="SmallSp" />
 
                 <TextView
                     android:id="@+id/navApsCalc"
@@ -113,9 +173,9 @@
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="20dp"
+                    android:paddingHorizontal="16dp"
                     android:text="APS Calculator"
-                    android:textColor="@color/text_primary"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-medium" />
 
@@ -127,9 +187,9 @@
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="20dp"
+                    android:paddingHorizontal="16dp"
                     android:text="Applications Tracker"
-                    android:textColor="@color/text_primary"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-medium" />
 
@@ -141,9 +201,9 @@
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="20dp"
+                    android:paddingHorizontal="16dp"
                     android:text="Saved Items"
-                    android:textColor="@color/text_primary"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-medium" />
 
@@ -155,31 +215,61 @@
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="20dp"
+                    android:paddingHorizontal="16dp"
                     android:text="My Documents"
-                    android:textColor="@color/text_primary"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-medium" />
 
+                <!-- Section: ACCOUNT -->
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="sans-serif-bold"
+                    android:letterSpacing="0.1"
+                    android:text="ACCOUNT"
+                    android:textColor="#99FFFFFF"
+                    android:textSize="11sp"
+                    tools:ignore="SmallSp" />
+
+                <RelativeLayout
                     android:id="@+id/navNotifications"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    android:gravity="center_vertical"
-                    android:paddingHorizontal="20dp"
-                    android:text="Notifications"
-                    android:textColor="@color/text_primary"
-                    android:textSize="14sp"
-                    android:fontFamily="sans-serif-medium" />
+                    android:paddingHorizontal="16dp">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginVertical="6dp"
-                    android:background="@color/divider" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Notifications"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/tvDrawerNotifBadge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/bg_badge"
+                        android:backgroundTint="@color/error"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="2dp"
+                        android:fontFamily="sans-serif-black"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        android:visibility="gone"
+                        tools:ignore="SmallSp" />
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/navProfile"
@@ -189,9 +279,9 @@
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="20dp"
+                    android:paddingHorizontal="16dp"
                     android:text="Profile"
-                    android:textColor="@color/text_primary"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-medium" />
 
@@ -203,9 +293,9 @@
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="20dp"
+                    android:paddingHorizontal="16dp"
                     android:text="Settings"
-                    android:textColor="@color/text_primary"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-medium" />
 
@@ -217,8 +307,8 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginVertical="6dp"
-                    android:background="@color/divider" />
+                    android:layout_marginVertical="12dp"
+                    android:background="#33FFFFFF" />
 
                 <TextView
                     android:id="@+id/navLogout"
@@ -228,9 +318,9 @@
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="20dp"
+                    android:paddingHorizontal="16dp"
                     android:text="Log Out"
-                    android:textColor="@color/error"
+                    android:textColor="#F87171"
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-bold" />
 
