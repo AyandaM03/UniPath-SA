@@ -1,5 +1,7 @@
 # 🎓 UniPathSA
 
+# YouTube Link: https://youtube.com/shorts/2fFexSMggRc?si=NagNT32Wt2uSNeNo
+
 ### Your Path. Your Future. Your Choice.
 
 UniPathSA is an Android application designed to assist South African high-school learners with the transition from secondary school to higher education. The application provides learners with tools and information to help them calculate their academic points, explore institutions, courses and bursaries, and manage their personal profile — all in one place.
@@ -458,3 +460,10 @@ The development of UniPathSA provided practical experience in several areas of s
 UniPathSA provides a centralised mobile platform designed to support South African high-school learners as they prepare for higher education. The application combines learner profile information, APS calculation, course and institution exploration, bursary discovery and a favourites system into one platform.
 
 The project also demonstrates the use of cloud-based authentication and database services, direct REST API integration, input validation and GitHub version control.
+
+# AI Used
+
+**https://www.anthropic.com/**
+**https://claude.ai/login**
+**https://narrateai.app/app/demo**
+
