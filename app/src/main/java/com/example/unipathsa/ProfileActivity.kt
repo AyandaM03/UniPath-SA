@@ -2,97 +2,113 @@ package com.example.unipathsa
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
+import android.util.Log
+import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ProfileActivity : AppCompatActivity() {
 
-    private val db = FirebaseFirestore.getInstance()
-    private var isEditing = false
+    private companion object {
+        private const val TAG = "ProfileActivity"
+    }
 
-    private lateinit var etPhone: EditText
-    private lateinit var etSchool: EditText
-    private lateinit var btnEditProfile: Button
+    private lateinit var tvProfileName: TextView
+    private lateinit var tvProfileEmail: TextView
+    private lateinit var btnLogout: MaterialButton
+
+    private val auth = FirebaseAuth.getInstance()
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
-        BottomNavHelper.setup(this, R.id.nav_profile)
+        Log.d(TAG, "onCreate initialized")
 
-        btnEditProfile = findViewById(R.id.btnEditProfile)
-        val btnSettings = findViewById<Button>(R.id.btnSettings)
-        etPhone = findViewById(R.id.etPhone)
-        etSchool = findViewById(R.id.etSchool)
+        NavigationHelper.setupDrawer(this, R.id.navProfile)
 
-        val user = FirebaseAuth.getInstance().currentUser
-        findViewById<TextView>(R.id.tvProfileName).text = user?.displayName ?: "Student"
-        findViewById<TextView>(R.id.tvProfileEmail).text = user?.email ?: ""
+        bindViews()
+        setupListeners()
+        loadUserProfile()
+    }
 
-        // Start with fields locked (read-only) until the user taps Edit
-        setFieldsEditable(false)
+    // Connect XML views
+    private fun bindViews() {
+        tvProfileName = findViewById(R.id.tvProfileName)
+        tvProfileEmail = findViewById(R.id.tvProfileEmail)
+        btnLogout = findViewById(R.id.btnLogoutProfile)
+    }
 
-        // Load any previously saved phone/school from Firestore
-        loadProfileDetails()
-
-        btnEditProfile.setOnClickListener {
-            if (isEditing) {
-                saveProfileDetails()
-            } else {
-                setFieldsEditable(true)
-            }
+    // Attach click listeners to "My Tools" rows and actions
+    private fun setupListeners() {
+        findViewById<LinearLayout>(R.id.btnNavApplications)?.setOnClickListener {
+            startActivity(Intent(this, ApplicationsActivity::class.java))
         }
 
-        btnSettings.setOnClickListener {
+        findViewById<LinearLayout>(R.id.btnNavDocuments)?.setOnClickListener {
+            startActivity(Intent(this, DocumentsActivity::class.java))
+        }
+
+        findViewById<LinearLayout>(R.id.btnNavNotifications)?.setOnClickListener {
+            startActivity(Intent(this, NotificationsActivity::class.java))
+        }
+
+        findViewById<LinearLayout>(R.id.btnNavSaved)?.setOnClickListener {
+            startActivity(Intent(this, SavedActivity::class.java))
+        }
+
+        findViewById<LinearLayout>(R.id.btnNavSettings)?.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
         }
 
-        findViewById<Button>(R.id.btnSaved).setOnClickListener {
-            startActivity(Intent(this, SavedActivity::class.java))
+        btnLogout.setOnClickListener {
+            confirmLogout()
         }
     }
 
-    // Toggles whether the phone/school fields can be typed into, and updates the button label
-    private fun setFieldsEditable(editable: Boolean) {
-        isEditing = editable
-        etPhone.isEnabled = editable
-        etSchool.isEnabled = editable
-        btnEditProfile.text = if (editable) "Save Profile" else "Edit Profile"
+    // Load user display name and email
+    private fun loadUserProfile() {
+        val user = auth.currentUser
+        if (user != null) {
+            tvProfileName.text = if (!user.displayName.isNullOrBlank()) user.displayName else "Student Name"
+            tvProfileEmail.text = user.email ?: ""
+
+            db.collection("users").document(user.uid)
+                .get()
+                .addOnSuccessListener { doc ->
+                    if (doc.exists()) {
+                        val fullName = doc.getString("fullName") ?: doc.getString("name")
+                        if (!fullName.isNullOrBlank()) {
+                            tvProfileName.text = fullName
+                        }
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Log.e(TAG, "Failed to load user profile from Firestore", e)
+                }
+        } else {
+            Log.w(TAG, "User not authenticated in ProfileActivity")
+        }
     }
 
-    // Pulls the user's saved phone/school from Firestore, if they've saved it before
-    private fun loadProfileDetails() {
-        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
-
-        db.collection("users").document(userId)
-            .get()
-            .addOnSuccessListener { doc ->
-                etPhone.setText(doc.getString("phone") ?: "")
-                etSchool.setText(doc.getString("school") ?: "")
+    // Confirm Log Out
+    private fun confirmLogout() {
+        AlertDialog.Builder(this)
+            .setTitle("Log Out")
+            .setMessage("Are you sure you want to log out of UniPath SA?")
+            .setPositiveButton("Log Out") { _, _ ->
+                Log.d(TAG, "User logging out from ProfileActivity")
+                auth.signOut()
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                finish()
             }
-    }
-
-    // Saves the phone/school fields to Firestore under this user's document
-    private fun saveProfileDetails() {
-        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
-
-        val details = mapOf(
-            "phone" to etPhone.text.toString().trim(),
-            "school" to etSchool.text.toString().trim()
-        )
-
-        db.collection("users").document(userId)
-            .set(details, com.google.firebase.firestore.SetOptions.merge())
-            .addOnSuccessListener {
-                Toast.makeText(this, "Profile updated", Toast.LENGTH_SHORT).show()
-                setFieldsEditable(false)
-            }
-            .addOnFailureListener {
-                Toast.makeText(this, "Failed to save profile", Toast.LENGTH_SHORT).show()
-            }
+            .setNegativeButton("Cancel", null)
+            .show()
     }
 }

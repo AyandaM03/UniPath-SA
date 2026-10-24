@@ -1,5 +1,6 @@
 package com.example.unipathsa
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
@@ -19,12 +20,13 @@ class SavedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_saved)
 
+        NavigationHelper.setupDrawer(this, R.id.navSaved)
+
         recyclerSaved = findViewById(R.id.recyclerSaved)
         tvEmpty = findViewById(R.id.tvEmptySaved)
         recyclerSaved.layoutManager = LinearLayoutManager(this)
 
         loadFavourites()
-        BottomNavHelper.setup(this, R.id.nav_profile) // no dedicated tab, opened from Profile
     }
 
     private fun loadFavourites() {
@@ -41,14 +43,8 @@ class SavedActivity : AppCompatActivity() {
                 } else {
                     tvEmpty.visibility = android.view.View.GONE
                     recyclerSaved.adapter = InstitutionAdapter(savedList) { institution ->
-                        val intent = android.content.Intent(this, InstitutionDetailsActivity::class.java)
-                        intent.putExtra("name", institution.name)
-                        intent.putExtra("province", institution.province)
-                        intent.putExtra("type", institution.type)
-                        intent.putExtra("description", institution.description)
-                        intent.putExtra("imageUrl", institution.imageUrl)
-                        intent.putExtra("website", institution.website)
-                        intent.putExtra("freeToApply", institution.freeToApply)
+                        val intent = Intent(this, UniversityDetailActivity::class.java)
+                        intent.putExtra("UNIVERSITY_DATA", institution.toUniversity())
                         startActivity(intent)
                     }
                 }

@@ -1,17 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- These swap automatically in dark mode -->
+    <!-- Dark Mode Color Palette -->
+    <color name="navy_dark">#0B1F4D</color>
+    <color name="primary">#5C6BC0</color>
+    <color name="primary_light">#7986CB</color>
+    <color name="primary_dark">#0B1F4D</color>
+    <color name="primary_blue">#64B5F6</color>
+    <color name="secondary">#7986CB</color>
+
+    <color name="background">#121212</color>
     <color name="background_cream">#121212</color>
-    <color name="text_gray">#B0B0B0</color>
+    <color name="bg_cream">#121212</color>
+    <color name="light_background">#121212</color>
+    <color name="surface">#1E1E1E</color>
+
+    <color name="text_primary">#E2E8F0</color>
+    <color name="text_secondary">#94A3B8</color>
+    <color name="text_tertiary">#64748B</color>
+    <color name="dark_text">#E2E8F0</color>
+    <color name="secondary_text">#94A3B8</color>
+    <color name="text_gray">#94A3B8</color>
+
     <color name="black">#FFFFFF</color>
     <color name="white">#1E1E1E</color>
+    <color name="divider">#2D3748</color>
+    <color name="outline">#4A5568</color>
 
-    <!-- Keep the blue exactly the same in dark mode — don't change these -->
-    <color name="header_blue_dark">#3B4A9C</color>
-    <color name="header_blue_light">#5B6FCF</color>
-    <color name="button_blue">#8C9AE8</color>
+    <color name="header_blue_dark">#0B1F4D</color>
+    <color name="header_blue_light">#1A237E</color>
+    <color name="button_blue">#3949AB</color>
     <color name="nav_bar_background">#1E1E1E</color>
 
     <color name="input_background">#2A2A2A</color>
-    <color name="input_text">#FFFFFF</color>
+    <color name="input_text">#E2E8F0</color>
+
+    <!-- Status Chip Colors in Dark Mode -->
+    <color name="status_submitted_fg">#64B5F6</color>
+    <color name="status_submitted_bg">#1A237E</color>
+    <color name="status_review_fg">#FFB74D</color>
+    <color name="status_review_bg">#3E2723</color>
+    <color name="status_accepted_fg">#81C784</color>
+    <color name="status_accepted_bg">#1B5E20</color>
+    <color name="status_rejected_fg">#E57373</color>
+    <color name="status_rejected_bg">#B71C1C</color>
 </resources>

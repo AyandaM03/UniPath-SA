@@ -4,70 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_header">
+    android:background="#FFFFFF">
 
-    <View
-        android:id="@+id/logoBox"
+    <!-- App Logo Box -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvSplashLogo"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/logo_box_bg"
-        android:elevation="8dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="6dp"
+        app:strokeColor="#E2E8F0"
+        app:strokeWidth="1dp"
         app:layout_constraintBottom_toTopOf="@+id/tvAppName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="102dp"
-        android:src="@drawable/unpathlogo"
-        android:elevation="9dp"
-        app:layout_constraintBottom_toBottomOf="@+id/logoBox"
-        app:layout_constraintEnd_toEndOf="@+id/logoBox"
-        app:layout_constraintStart_toStartOf="@+id/logoBox"
-        app:layout_constraintTop_toTopOf="@+id/logoBox"
-        tools:ignore="ContentDescription" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            android:src="@drawable/app_logo"
+            tools:ignore="ContentDescription" />
 
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- App Name -->
     <TextView
         android:id="@+id/tvAppName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_l"
+        android:layout_marginTop="20dp"
         android:fontFamily="sans-serif-black"
-        android:text="@string/unipath"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_h1"
+        android:text="UniPath SA"
+        android:textColor="#0B1F4D"
+        android:textSize="28sp"
         app:layout_constraintBottom_toTopOf="@+id/tvTagline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logoBox" />
+        app:layout_constraintTop_toBottomOf="@+id/cvSplashLogo" />
 
+    <!-- Slogan -->
     <TextView
         android:id="@+id/tvTagline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_xs"
-        android:letterSpacing="0.2"
-        android:text="@string/south_africa"
-        android:textColor="#CCFFFFFF"
-        android:textSize="@dimen/text_caption"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/progressBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvAppName" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_xxl"
-        android:indeterminateTint="@color/white"
+        android:layout_marginTop="6dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Find your path. Build your future."
+        android:textColor="#64748B"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTagline" />
+        app:layout_constraintTop_toBottomOf="@+id/tvAppName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

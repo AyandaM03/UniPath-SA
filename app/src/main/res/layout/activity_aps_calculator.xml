@@ -1,166 +1,259 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1"
-    android:background="@color/background_cream"
-    android:fillViewport="true">
+    android:fitsSystemWindows="true">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:background="@color/light_background"
+        android:fillViewport="true">
 
-        <!-- Blue header -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/gradient_header"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:paddingBottom="@dimen/spacing_xl">
 
-            <!-- Back arrow + title row -->
-            <LinearLayout
+            <!-- Top Header Bar -->
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:layout_height="64dp"
+                android:background="@color/navy_dark"
+                android:paddingHorizontal="@dimen/spacing_m">
 
-                <ImageButton
-                    android:id="@+id/btnBack"
+                <ImageView
+                    android:id="@+id/btnMenu"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    android:layout_centerVertical="true"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@android:drawable/ic_menu_revert"
-                    android:contentDescription="Back" />
+                    android:padding="8dp"
+                    android:src="@android:drawable/ic_menu_sort_by_size"
+                    app:tint="@color/white"
+                    tools:ignore="ContentDescription" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="APS Calculator"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="sans-serif-bold"
+                    android:text="APS Calculator"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
-            </LinearLayout>
+                <ImageView
+                    android:id="@+id/btnInfo"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="8dp"
+                    android:src="@android:drawable/ic_menu_info_details"
+                    app:tint="@color/white"
+                    tools:ignore="ContentDescription" />
+            </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="YOUR APS SCORE"
-                android:textColor="#CCFFFFFF"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tvTotalScore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="0"
-                android:textColor="#FFFFFF"
-                android:textSize="48sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvSubjectsEntered"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="0 subjects added"
-                android:textColor="#CCFFFFFF"
-                android:textSize="13sp" />
-
-        </LinearLayout>
-
-        <!-- White body -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Your Subjects"
-                android:textStyle="bold"
-                android:textSize="16sp" />
-
-            <!-- Dynamically added subject rows go here -->
             <LinearLayout
-                android:id="@+id/subjectRowsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="10dp" />
+                android:padding="@dimen/spacing_m">
 
-            <!-- + Add Subject -->
-            <Button
-                android:id="@+id/btnAddSubject"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:background="@drawable/rounded_edittext"
-                android:text="+ Add Subject"
-                android:textColor="#FFFFFF"
-                android:textAllCaps="false"
-                android:textStyle="bold" />
+                <!-- Score Hero Card -->
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/Widget.UniPathSA.Card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_m"
+                    app:cardBackgroundColor="@color/white">
 
-            <!-- Calculate button -->
-            <Button
-                android:id="@+id/btnCalculate"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/rounded_button"
-                android:text="Calculate APS"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="20dp">
 
-            <!-- Results section -->
-            <TextView
-                android:id="@+id/tvResultsTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:text="Matching Courses"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:visibility="gone" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-bold"
+                            android:letterSpacing="0.1"
+                            android:text="YOUR APS SCORE"
+                            android:textColor="@color/primary_blue"
+                            android:textSize="12sp" />
 
-            <ProgressBar
-                android:id="@+id/progressResults"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:visibility="gone" />
+                        <TextView
+                            android:id="@+id/tvScore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="sans-serif-black"
+                            android:text="32"
+                            android:textColor="@color/primary_blue"
+                            android:textSize="48sp" />
 
-            <TextView
-                android:id="@+id/tvNoMatches"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="No matching courses yet — calculate your score first."
-                android:textColor="@color/text_gray"
-                android:textSize="13sp"
-                android:visibility="gone" />
+                        <TextView
+                            android:id="@+id/tvSubjectsCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="6 of 8 subjects entered"
+                            android:textColor="@color/secondary_text"
+                            android:textSize="13sp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerMatches"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
+                        <ProgressBar
+                            android:id="@+id/pbSubjects"
+                            style="@android:style/Widget.ProgressBar.Horizontal"
+                            android:layout_width="180dp"
+                            android:layout_height="6dp"
+                            android:layout_marginTop="12dp"
+                            android:max="8"
+                            android:progress="6"
+                            android:progressTint="@color/primary_blue" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Achievement Level Guide Card -->
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/Widget.UniPathSA.Card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_m"
+                    app:cardBackgroundColor="@color/white">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing_m">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-bold"
+                            android:text="NSC ACHIEVEMENT LEVEL GUIDE"
+                            android:textColor="@color/primary_blue"
+                            android:textSize="12sp" />
+
+                        <GridLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:columnCount="2"
+                            android:rowCount="4">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_columnWeight="1"
+                                android:paddingVertical="2dp"
+                                android:text="80–100% = Level 7 (7 pts)"
+                                android:textColor="@color/dark_text"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_columnWeight="1"
+                                android:paddingVertical="2dp"
+                                android:text="70–79% = Level 6 (6 pts)"
+                                android:textColor="@color/dark_text"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_columnWeight="1"
+                                android:paddingVertical="2dp"
+                                android:text="60–69% = Level 5 (5 pts)"
+                                android:textColor="@color/dark_text"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_columnWeight="1"
+                                android:paddingVertical="2dp"
+                                android:text="50–59% = Level 4 (4 pts)"
+                                android:textColor="@color/dark_text"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_columnWeight="1"
+                                android:paddingVertical="2dp"
+                                android:text="40–49% = Level 3 (3 pts)"
+                                android:textColor="@color/dark_text"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_columnWeight="1"
+                                android:paddingVertical="2dp"
+                                android:text="30–39% = Level 2 (2 pts)"
+                                android:textColor="@color/dark_text"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_columnWeight="1"
+                                android:paddingVertical="2dp"
+                                android:text="0–29% = Level 1 (1 pt)"
+                                android:textColor="@color/dark_text"
+                                android:textSize="12sp" />
+                        </GridLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="sans-serif-bold"
+                    android:text="ENTER YOUR MARKS (%)"
+                    android:textColor="@color/dark_text"
+                    android:textSize="14sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvSubjects"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    tools:listitem="@layout/item_aps_input" />
+
+                <!-- Add Subject Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAddSubject"
+                    style="@style/Widget.UniPathSA.Button.Secondary"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginTop="12dp"
+                    android:text="+ Add Another Subject" />
+
+                <!-- Calculate APS Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCalculateAps"
+                    style="@style/Widget.UniPathSA.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginTop="12dp"
+                    android:text="Calculate APS" />
+
+            </LinearLayout>
 
         </LinearLayout>
-    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
-</ScrollView>
-    <!-- Bottom nav bar, pinned to the bottom -->
-<include layout="@layout/bottom_nav_bar" />
-    </LinearLayout>
+    <include layout="@layout/nav_drawer_menu" />
+
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -20,8 +20,8 @@ class UniversitySearchActivity : AppCompatActivity() {
 
         val uniList = getMockUniversities()
         adapter = UniversityAdapter(uniList) { university ->
-            val intent = Intent(this, UniversityDetailsActivity::class.java)
-            intent.putExtra("university", university)
+            val intent = Intent(this, UniversityDetailActivity::class.java)
+            intent.putExtra("UNIVERSITY_DATA", university)
             startActivity(intent)
         }
         rvUniversities.adapter = adapter
@@ -38,7 +38,7 @@ class UniversitySearchActivity : AppCompatActivity() {
                 "NSC with Bachelor pass, specific subject requirements per faculty.",
                 "Applications open in April and close in September.",
                 "Ranked as the top university in Africa.",
-                android.R.drawable.ic_menu_gallery
+                R.drawable.unipath_logo
             ),
             University(
                 "University of the Witwatersrand",
@@ -49,7 +49,7 @@ class UniversitySearchActivity : AppCompatActivity() {
                 "High APS scores required, English HL/FAL, Mathematics.",
                 "Apply online through the Wits student portal.",
                 "Known for its strong research output and urban campus.",
-                android.R.drawable.ic_menu_gallery
+                R.drawable.unipath_logo
             ),
             University(
                 "University of Pretoria",
@@ -60,7 +60,7 @@ class UniversitySearchActivity : AppCompatActivity() {
                 "NSC Bachelor pass, minimum APS varies by programme.",
                 "Apply before 30 September for most courses.",
                 "Features the only Faculty of Veterinary Science in South Africa.",
-                android.R.drawable.ic_menu_gallery
+                R.drawable.unipath_logo
             ),
             University(
                 "Stellenbosch University",
@@ -71,7 +71,7 @@ class UniversitySearchActivity : AppCompatActivity() {
                 "Strong academic record, NBTs often required.",
                 "Online applications via the university website.",
                 "Located in the heart of the Winelands.",
-                android.R.drawable.ic_menu_gallery
+                R.drawable.unipath_logo
             )
         )
     }

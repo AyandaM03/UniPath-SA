@@ -1,5 +1,6 @@
 package com.example.unipathsa
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -30,6 +31,8 @@ class ExploreActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_explore)
 
+        NavigationHelper.setupDrawer(this, R.id.navExplore)
+
         recyclerCourses = findViewById(R.id.recyclerCourses)
         tvNoCourses = findViewById(R.id.tvNoCourses)
         btnCoursesTab = findViewById(R.id.btnCoursesTab)
@@ -37,19 +40,13 @@ class ExploreActivity : AppCompatActivity() {
         val chipGroup = findViewById<ChipGroup>(R.id.chipGroupCategory)
 
         courseAdapter = ExploreCourseAdapter(emptyList()) { course ->
-            val intent = android.content.Intent(this, CourseDetailsActivity::class.java)
-            intent.putExtra("name", course.name)
-            intent.putExtra("university", course.university)
-            intent.putExtra("category", course.category)
-            intent.putExtra("duration", course.duration)
-            intent.putExtra("apsRequired", course.apsRequired)
-            intent.putExtra("website", course.website)
-            intent.putExtra("description", course.description)
+            val intent = Intent(this, CourseDetailActivity::class.java)
+            intent.putExtra("COURSE_DATA", course)
             startActivity(intent)
         }
 
         bursaryAdapter = BursaryAdapter(emptyList()) { bursary ->
-            val intent = android.content.Intent(this, BursaryDetailsActivity::class.java)
+            val intent = Intent(this, BursaryDetailsActivity::class.java)
             intent.putExtra("name", bursary.name)
             intent.putExtra("provider", bursary.provider)
             intent.putExtra("amount", bursary.amount)
@@ -92,8 +89,6 @@ class ExploreActivity : AppCompatActivity() {
             }
             applyFilter()
         }
-
-        BottomNavHelper.setup(this, R.id.nav_explore)
     }
 
     private fun highlightActiveTab() {

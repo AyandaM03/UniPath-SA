@@ -1,6 +1,6 @@
 package com.example.unipathsa
 
-
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +27,13 @@ class CourseMatchAdapter(private val courses: List<Course>) :
         holder.tvCourseName.text = course.name
         holder.tvUniversity.text = "${course.university} • ${course.category}"
         holder.tvApsRequired.text = "APS required: ${course.apsRequired}"
+
+        holder.itemView.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, CourseDetailActivity::class.java)
+            intent.putExtra("COURSE_DATA", course)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int = courses.size

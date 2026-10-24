@@ -1,5 +1,6 @@
 package com.example.unipathsa
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
@@ -7,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
-import android.content.Intent
 import com.google.firebase.firestore.FirebaseFirestore
 
 class InstitutionsActivity : AppCompatActivity() {
@@ -23,32 +23,25 @@ class InstitutionsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_institutions)
 
+        NavigationHelper.setupDrawer(this, R.id.navInstitutions)
+
         recyclerInstitutions = findViewById(R.id.recyclerInstitutions)
         searchEditText = findViewById(R.id.etSearchInstitution)
         val universitiesButton = findViewById<Button>(R.id.btnUniversities)
         val collegesButton = findViewById<Button>(R.id.btnColleges)
         val filterButton = findViewById<Button>(R.id.btnFilter)
 
-        // RecyclerView setup
         adapter = InstitutionAdapter(institutionList) { institution ->
-            val intent = Intent(this, InstitutionDetailsActivity::class.java)
-            intent.putExtra("name", institution.name)
-            intent.putExtra("province", institution.province)
-            intent.putExtra("type", institution.type)
-            intent.putExtra("description", institution.description)
-            intent.putExtra("imageUrl", institution.imageUrl)
-            intent.putExtra("website", institution.website)
-            intent.putExtra("freeToApply", institution.freeToApply)
+            val intent = Intent(this, UniversityDetailActivity::class.java)
+            intent.putExtra("UNIVERSITY_DATA", institution.toUniversity())
             startActivity(intent)
         }
 
         recyclerInstitutions.layoutManager = LinearLayoutManager(this)
         recyclerInstitutions.adapter = adapter
 
-        // Load universities when page opens
         loadInstitutions("University")
 
-        // Universities button
         universitiesButton.setOnClickListener {
             universitiesButton.setBackgroundColor(android.graphics.Color.rgb(21, 101, 192))
             universitiesButton.setTextColor(android.graphics.Color.WHITE)
@@ -57,7 +50,6 @@ class InstitutionsActivity : AppCompatActivity() {
             loadInstitutions("University")
         }
 
-        // Colleges button
         collegesButton.setOnClickListener {
             collegesButton.setBackgroundColor(android.graphics.Color.rgb(21, 101, 192))
             collegesButton.setTextColor(android.graphics.Color.WHITE)
@@ -66,19 +58,14 @@ class InstitutionsActivity : AppCompatActivity() {
             loadInstitutions("College")
         }
 
-        // Search
         searchEditText.setOnEditorActionListener { _, _, _ ->
             searchInstitutions(searchEditText.text.toString())
             true
         }
 
-        // Filter
         filterButton.setOnClickListener {
             searchInstitutions(searchEditText.text.toString())
         }
-
-        // Bottom nav
-        BottomNavHelper.setup(this, R.id.nav_institutions)
     }
 
     private fun loadInstitutions(type: String) {
