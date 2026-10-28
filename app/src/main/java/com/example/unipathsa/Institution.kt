@@ -9,7 +9,12 @@ data class Institution(
     var imageUrl: String = "",
     var website: String = "",
     var freeToApply: Boolean = false,
-    var heroImageUrl: String = ""
+    var heroImageUrl: String = "",
+    var applicationFee: Int? = null,
+    var applicationFeeNote: String = "",
+    var applicationFeeUrl: String = "",
+    var applicationFeeYear: String = "",
+    var feeLastChecked: String = ""
 ) {
     fun toUniversity(): University {
         return University(
@@ -24,7 +29,12 @@ data class Institution(
             websiteUrl = website,
             imageUrl = imageUrl,
             logoUrl = imageUrl,
-            heroImageUrl = heroImageUrl
+            heroImageUrl = heroImageUrl,
+            applicationFee = applicationFee,
+            applicationFeeNote = applicationFeeNote,
+            applicationFeeUrl = applicationFeeUrl,
+            applicationFeeYear = applicationFeeYear,
+            feeLastChecked = feeLastChecked
         )
     }
 }

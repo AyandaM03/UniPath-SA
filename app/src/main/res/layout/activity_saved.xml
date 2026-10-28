@@ -13,7 +13,7 @@
         android:orientation="vertical"
         android:background="@color/background">
 
-        <!-- Top Header with Hamburger Icon -->
+        <!-- Vibrant Header Bar -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
@@ -39,19 +39,82 @@
                 android:text="Saved Items"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
+
+            <RelativeLayout
+                android:id="@+id/btnNotifications"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_centerInParent="true"
+                    android:src="@android:drawable/ic_popup_reminder"
+                    app:tint="@color/white"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/tvNotifBadge"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:background="@drawable/bg_badge"
+                    android:backgroundTint="@color/error"
+                    android:fontFamily="sans-serif-black"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:visibility="gone"
+                    tools:ignore="SmallSp" />
+            </RelativeLayout>
+
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tvEmptySaved"
-            android:layout_width="wrap_content"
+        <!-- Empty State Container -->
+        <LinearLayout
+            android:id="@+id/llEmptySavedContainer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="40dp"
             android:gravity="center"
-            android:padding="20dp"
-            android:text="No saved items yet — tap the star on any institution or course to save it here."
-            android:textColor="@color/text_secondary"
-            android:visibility="gone" />
+            android:orientation="vertical"
+            android:padding="32dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:src="@drawable/ic_bookmark_outline"
+                app:tint="@color/text_tertiary"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tvEmptySaved"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:text="No saved items yet — tap the bookmark icon on any course or institution to save it here."
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnExploreSavedPrompt"
+                style="@style/Widget.UniPathSA.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:text="Explore Courses &amp; Institutions" />
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerSaved"

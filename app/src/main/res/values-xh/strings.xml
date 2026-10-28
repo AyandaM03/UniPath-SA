@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">UniPath SA</string>
+    <string name="slogan">Fumana indlela yakho. Yakha ikamva lakho.</string>
+    <string name="unipath">UniPath</string>
+    <string name="south_africa">UMZANTSI AFRIKA</string>
+
+    <!-- Facebook SDK Configuration Placeholders -->
+    <string name="facebook_app_id">1234567890</string>
+    <string name="fb_login_protocol_scheme">fb1234567890</string>
+    <string name="facebook_client_token">abcdef1234567890</string>
+
+    <!-- Navigation & Titles -->
+    <string name="nav_home">Ekhaya</string>
+    <string name="nav_institutions">Amaziko</string>
+    <string name="nav_explore">Phanda Izifundo neemali zoFundo</string>
+    <string name="nav_aps_calc">Isibali se-APS</string>
+    <string name="nav_applications">Umkhondo weeCelo</string>
+    <string name="nav_saved">Izinto Ezilondoloziweyo</string>
+    <string name="nav_documents">Amaxwebhu Am</string>
+    <string name="nav_notifications">Izaziso</string>
+    <string name="nav_profile">Iphrofayili</string>
+    <string name="nav_settings">Izicwangciso</string>
+    <string name="nav_logout">Phuma</string>
+
+    <!-- Drawer Section Headers -->
+    <string name="header_explore">PHANDA</string>
+    <string name="header_my_journey">UHLELO LWAM</string>
+    <string name="header_account">IAKHAWUNTI</string>
+
+    <!-- General & Buttons -->
+    <string name="get_started">Qala Ngoku</string>
+    <string name="log_in">Ngena</string>
+    <string name="sign_up">Bhalisa</string>
+    <string name="cancel">Rhoxisa</string>
+    <string name="ok">KULUNGILE</string>
+    <string name="save">Gcina</string>
+    <string name="saved">Kugciniwe</string>
+    <string name="view_all">Bona konke</string>
+    <string name="explore_all">Phanda konke</string>
+    <string name="calculate">Bala</string>
+    <string name="search">Khangela</string>
+    <string name="search_hint">Khangela iiyunivesithi, izifundo...</string>
+
+    <!-- Login & Sign Up -->
+    <string name="welcome_title">Ukwamkelwa Okumnandi</string>
+    <string name="login_subtitle">Ngena ukuze uqhubeke nohambo lwakho lwefundo.</string>
+    <string name="email_hint">Idilesi ye-Imeleyi</string>
+    <string name="password_hint">Ighaswedi</string>
+    <string name="remember_me">Ndigcine ndingene</string>
+    <string name="forgot_password">Ulibale ighaswedi?</string>
+    <string name="login_button">Ngena</string>
+    <string name="sign_in_google">Ngena nge-Google</string>
+    <string name="sign_in_facebook">Ngena nge-Facebook</string>
+    <string name="dont_have_account">Aunayo i-akhawunti? </string>
+    <string name="create_account_title">Dala I-Akhawunti</string>
+    <string name="create_account_subtitle">Qala indlela yakho eya emfundo emathileni.</string>
+    <string name="full_name_hint">Igama elipheleleyo</string>
+    <string name="select_grade_title">Khetha Ibanga / Isimo</string>
+    <string name="already_have_account">Uneyi-akhawunti ekhoyo? </string>
+    <string name="or_continue_with">okanye qhubeka nge</string>
+
+    <!-- Home & Dashboard -->
+    <string name="greeting_format">Molo, %1$s 👋</string>
+    <string name="your_preparation">UKULUNGISELELA KWAKHO</string>
+    <string name="tasks_completed_format">%1$d kwimithambo esi-7 igqityiwe</string>
+    <string name="next_step_format">Kudlule: %1$s →</string>
+    <string name="your_aps">I-APS YAKHO</string>
+    <string name="eligible_courses">IZIFUNDO EZELEKILEYO</string>
+    <string name="applications">IZICELO</string>
+    <string name="saved_items">IZINTO EZILONDOLOZIWEYO</string>
+    <string name="explore_institutions">🏫 PHANDA AMAZIKO</string>
+    <string name="upcoming_deadlines">📅 IMINSUKU YEEMIKHAWULO</string>
+    <string name="recommended_for_you">⭐ PHAKAMISELWE WENA</string>
+    <string name="calculate_aps_prompt">Bala i-APS yakho ukuze uvule izindululo zezifundo.</string>
+
+    <!-- Settings & Language -->
+    <string name="settings_title">Izicwangciso</string>
+    <string name="language_setting_title">Ululwimi</string>
+    <string name="language_setting_desc">Ulwimi lokubonisa kwi-app</string>
+    <string name="select_language_dialog_title">Khetha Ulwimi lwe-App</string>
+    <string name="account_details_section">IINKCUKACHA ZE-AKHAWUNTI</string>
+    <string name="high_school_hint">Isikolo Sezifundo Eziphakamileyo</string>
+    <string name="save_profile_changes">Gcina Iinguqulelo Zephrofayili</string>
+    <string name="preferences_security_section">IZICWANGCISO NEZOKUKHUSELEKA</string>
+    <string name="dark_mode_label">Imo Emnyama</string>
+    <string name="send_password_reset">Thumela Imeleyi Yokuseta Kabutsha Ighaswedi</string>
+    <string name="support_about_section">UNYANGO NANGATHI</string>
+    <string name="help_support">Uncedo Nenkxaso</string>
+    <string name="about_unipath">Mahluko nge-UniPath SA</string>
+    <string name="image_credits">Iimvume Zezithombe</string>
+    <string name="disclaimer_fees">Izimali ziyatshintsha minyaka yonke. Khangela njalo kwiwebhusayithi esemthethweni.</string>
+
+    <!-- Accessibility -->
+    <string name="toggle_visibility">Guqula ukubonakala</string>
+</resources>

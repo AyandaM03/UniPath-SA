@@ -1,7 +1,11 @@
 package com.example.unipathsa
 
+import android.util.Log
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentSnapshot
 import java.io.Serializable
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 data class University(
     val name: String = "",
@@ -20,11 +24,27 @@ data class University(
     val freeToApply: Boolean = false,
     val imageUrl: String = "",
     val logoUrl: String = "",
-    val heroImageUrl: String = ""
+    val heroImageUrl: String = "",
+    val minAps: Int = 0,
+    val applicationFee: Int? = null,
+    val applicationFeeNote: String = "",
+    val applicationFeeUrl: String = "",
+    val applicationFeeYear: String = "",
+    val feeLastChecked: String = ""
 ) : Serializable {
 
     val importantDates: String get() = importantInfo
     val website: String get() = websiteUrl
+
+    // Returns display text for application fee (e.g. "Free to apply", "R100", "Fee not listed yet")
+    fun getFormattedFeeText(): String {
+        return when {
+            freeToApply || applicationFee == 0 -> "Free to apply"
+            applicationFee != null && applicationFee > 0 -> "R$applicationFee"
+            applicationFeeNote.isNotBlank() -> applicationFeeNote
+            else -> "Fee not listed yet"
+        }
+    }
 
     // Returns logo URL (HTTPS only)
     fun getBestLogoUrl(): String {
@@ -60,6 +80,8 @@ data class University(
     }
 
     companion object {
+        private const val TAG = "UniversityParser"
+
         fun fromFirestore(doc: DocumentSnapshot): University {
             val docId = doc.id
             val name = doc.getString("name")
@@ -121,6 +143,36 @@ data class University(
                 ?: doc.getString("campusImage")
                 ?: if (imageUrl.isNotBlank() && imageUrl.contains("campus", ignoreCase = true)) imageUrl else ""
 
+            val minAps = when (val rawAps = doc.get("minAps") ?: doc.get("aps") ?: doc.get("minApsRequirement") ?: doc.get("apsRequirement")) {
+                is Number -> rawAps.toInt()
+                is String -> rawAps.toIntOrNull() ?: 0
+                else -> 0
+            }
+
+            // Application Fee Fields
+            val rawFee = doc.get("applicationFee") ?: doc.get("fee") ?: doc.get("appFee")
+            val applicationFee: Int? = when (rawFee) {
+                is Number -> rawFee.toInt()
+                is String -> rawFee.replace("[^0-9]".toRegex(), "").toIntOrNull()
+                else -> if (freeToApply) 0 else null
+            }
+
+            val applicationFeeNote = doc.getString("applicationFeeNote") ?: doc.getString("feeNote") ?: ""
+            val applicationFeeUrl = doc.getString("applicationFeeUrl") ?: doc.getString("feeUrl") ?: ""
+            val applicationFeeYear = when (val y = doc.get("applicationFeeYear") ?: doc.get("feeYear")) {
+                is Number -> y.toInt().toString()
+                is String -> y
+                else -> ""
+            }
+
+            val feeLastChecked = when (val fc = doc.get("feeLastChecked") ?: doc.get("lastChecked")) {
+                is Timestamp -> SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(fc.toDate())
+                is String -> fc
+                else -> ""
+            }
+
+            Log.d(TAG, "Parsed University: $name | Fee: $applicationFee | FeeNote: $applicationFeeNote | FeeYear: $applicationFeeYear")
+
             return University(
                 id = docId,
                 name = name,
@@ -138,7 +190,13 @@ data class University(
                 freeToApply = freeToApply,
                 imageUrl = imageUrl,
                 logoUrl = logoUrl,
-                heroImageUrl = heroImageUrl
+                heroImageUrl = heroImageUrl,
+                minAps = minAps,
+                applicationFee = applicationFee,
+                applicationFeeNote = applicationFeeNote,
+                applicationFeeUrl = applicationFeeUrl,
+                applicationFeeYear = applicationFeeYear,
+                feeLastChecked = feeLastChecked
             )
         }
     }

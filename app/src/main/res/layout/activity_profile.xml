@@ -13,7 +13,7 @@
         android:orientation="vertical"
         android:background="@color/background">
 
-        <!-- Top Header Bar with Hamburger Menu -->
+        <!-- Top Header Bar with Hamburger Menu & Notification Bell -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
@@ -36,9 +36,47 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="sans-serif-black"
-                android:text="Learner Profile"
+                android:text="@string/nav_profile"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
+
+            <RelativeLayout
+                android:id="@+id/btnNotifications"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_bell_outline"
+                    app:tint="@color/white"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/tvNotifBadge"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:background="@drawable/bg_badge"
+                    android:backgroundTint="@color/error"
+                    android:fontFamily="sans-serif-black"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:visibility="gone"
+                    tools:ignore="SmallSp" />
+            </RelativeLayout>
+
         </RelativeLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -142,7 +180,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Your APS"
+                                android:text="@string/your_aps"
                                 android:textColor="@color/text_secondary"
                                 android:textSize="11sp"
                                 tools:ignore="SmallSp" />
@@ -173,7 +211,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Applications"
+                                android:text="@string/applications"
                                 android:textColor="@color/text_secondary"
                                 android:textSize="11sp"
                                 tools:ignore="SmallSp" />
@@ -204,7 +242,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Saved Items"
+                                android:text="@string/saved_items"
                                 android:textColor="@color/text_secondary"
                                 android:textSize="11sp"
                                 tools:ignore="SmallSp" />
@@ -321,7 +359,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:nestedScrollingEnabled="false"
-                            tools:listitem="@layout/item_aps_input" />
+                            tools:listitem="@layout/item_profile_subject" />
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -400,19 +438,12 @@
                             android:foreground="?attr/selectableItemBackground"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:src="@android:drawable/ic_menu_edit"
-                                app:tint="@color/primary"
-                                tools:ignore="ContentDescription" />
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/spacing_m"
                                 android:layout_weight="1"
                                 android:fontFamily="sans-serif-medium"
-                                android:text="Applications Tracker"
+                                android:text="@string/nav_applications"
                                 android:textColor="@color/text_primary"
                                 android:textSize="14sp" />
                             <TextView
@@ -435,19 +466,12 @@
                             android:foreground="?attr/selectableItemBackground"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:src="@android:drawable/ic_menu_agenda"
-                                app:tint="@color/primary"
-                                tools:ignore="ContentDescription" />
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/spacing_m"
                                 android:layout_weight="1"
                                 android:fontFamily="sans-serif-medium"
-                                android:text="My Documents"
+                                android:text="@string/nav_documents"
                                 android:textColor="@color/text_primary"
                                 android:textSize="14sp" />
                             <TextView
@@ -470,19 +494,12 @@
                             android:foreground="?attr/selectableItemBackground"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:src="@android:drawable/ic_popup_reminder"
-                                app:tint="@color/primary"
-                                tools:ignore="ContentDescription" />
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/spacing_m"
                                 android:layout_weight="1"
                                 android:fontFamily="sans-serif-medium"
-                                android:text="Notifications"
+                                android:text="@string/nav_notifications"
                                 android:textColor="@color/text_primary"
                                 android:textSize="14sp" />
                             <TextView
@@ -505,19 +522,12 @@
                             android:foreground="?attr/selectableItemBackground"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:src="@android:drawable/btn_star_big_on"
-                                app:tint="@color/primary"
-                                tools:ignore="ContentDescription" />
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/spacing_m"
                                 android:layout_weight="1"
                                 android:fontFamily="sans-serif-medium"
-                                android:text="Saved Items"
+                                android:text="@string/nav_saved"
                                 android:textColor="@color/text_primary"
                                 android:textSize="14sp" />
                             <TextView
@@ -540,19 +550,12 @@
                             android:foreground="?attr/selectableItemBackground"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
-                            <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:src="@android:drawable/ic_menu_manage"
-                                app:tint="@color/primary"
-                                tools:ignore="ContentDescription" />
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/spacing_m"
                                 android:layout_weight="1"
                                 android:fontFamily="sans-serif-medium"
-                                android:text="Settings &amp; Preferences"
+                                android:text="@string/nav_settings"
                                 android:textColor="@color/text_primary"
                                 android:textSize="14sp" />
                             <TextView

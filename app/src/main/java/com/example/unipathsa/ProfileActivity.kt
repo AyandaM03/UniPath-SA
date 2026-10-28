@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ProgressBar
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,6 +41,9 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var rvSubjects: RecyclerView
     private lateinit var cgAchievements: ChipGroup
 
+    private lateinit var btnNotif: RelativeLayout
+    private lateinit var tvNotifBadge: TextView
+
     private val auth = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
     private val prepCalculator = PreparationCalculator()
@@ -55,6 +59,7 @@ class ProfileActivity : AppCompatActivity() {
 
         bindViews()
         setupListeners()
+        loadUnreadNotifications()
         loadProfileData()
     }
 
@@ -63,7 +68,6 @@ class ProfileActivity : AppCompatActivity() {
         loadProfileData()
     }
 
-    // Connect XML views
     private fun bindViews() {
         tvAvatar = findViewById(R.id.tvProfileLargeAvatar)
         tvName = findViewById(R.id.tvProfileName)
@@ -81,13 +85,19 @@ class ProfileActivity : AppCompatActivity() {
         rvSubjects = findViewById(R.id.rvProfileSubjects)
         cgAchievements = findViewById(R.id.cgAchievementBadges)
 
+        btnNotif = findViewById(R.id.btnNotifications)
+        tvNotifBadge = findViewById(R.id.tvNotifBadge)
+
         subjectAdapter = ProfileSubjectAdapter(subjectsList)
         rvSubjects.layoutManager = LinearLayoutManager(this)
         rvSubjects.adapter = subjectAdapter
     }
 
-    // Attach click listeners to "My Tools" rows and actions
     private fun setupListeners() {
+        btnNotif.setOnClickListener {
+            startActivity(Intent(this, NotificationsActivity::class.java))
+        }
+
         findViewById<View>(R.id.btnEditProfile)?.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
         }
@@ -117,7 +127,22 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
-    // Loads user profile, stats, subjects and achievements from Firestore
+    private fun loadUnreadNotifications() {
+        val uid = auth.currentUser?.uid ?: return
+        db.collection("users").document(uid).collection("notifications")
+            .whereEqualTo("isRead", false)
+            .get()
+            .addOnSuccessListener { snap ->
+                val count = snap?.size() ?: 0
+                if (count > 0) {
+                    tvNotifBadge.visibility = View.VISIBLE
+                    tvNotifBadge.text = if (count > 9) "9+" else count.toString()
+                } else {
+                    tvNotifBadge.visibility = View.GONE
+                }
+            }
+    }
+
     private fun loadProfileData() {
         val user = auth.currentUser
         if (user == null) {
@@ -127,7 +152,6 @@ class ProfileActivity : AppCompatActivity() {
 
         tvEmail.text = user.email ?: ""
 
-        // Fetch User Record
         db.collection("users").document(user.uid).get()
             .addOnSuccessListener { doc ->
                 if (doc.exists()) {
@@ -142,7 +166,6 @@ class ProfileActivity : AppCompatActivity() {
 
                     tvApsStat.text = if (apsScore > 0) apsScore.toString() else "Not calculated"
 
-                    // Fetch Subcollections for stats, subjects, and achievements
                     fetchSubcollectionsAndCalculateCompletion(user.uid, fullName.isNotBlank(), school.isNotBlank(), apsScore > 0)
                 }
             }
@@ -151,7 +174,6 @@ class ProfileActivity : AppCompatActivity() {
             }
     }
 
-    // Fetches subcollections (applications, savedItems, subjects, documents) to compute stats & achievements
     private fun fetchSubcollectionsAndCalculateCompletion(
         uid: String,
         isProfileSaved: Boolean,
@@ -191,7 +213,6 @@ class ProfileActivity : AppCompatActivity() {
                                     .addOnSuccessListener { docSnap ->
                                         val hasDocs = docSnap != null && !docSnap.isEmpty
 
-                                        // Calculate completion via PreparationCalculator
                                         val taskState = PreparationTaskState(
                                             isProfileSaved = isProfileSaved,
                                             isSchoolAdded = isSchoolAdded,
@@ -213,7 +234,6 @@ class ProfileActivity : AppCompatActivity() {
             }
     }
 
-    // Populate achievement badges (unlocked vs locked)
     private fun populateAchievementBadges(state: PreparationTaskState) {
         cgAchievements.removeAllViews()
 
@@ -242,37 +262,25 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
-    // RecyclerView Adapter for subject results on Profile
     private inner class ProfileSubjectAdapter(
         private val list: List<ApsCalculatorActivity.SubjectInput>
     ) : RecyclerView.Adapter<ProfileSubjectAdapter.ViewHolder>() {
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val tvName: TextView = view.findViewById(R.id.tvSubjectName)
-            val pbMark: ProgressBar = view.findViewById(R.id.pbDocsProgress)
-            val tvMark: TextView = view.findViewById(R.id.tvDocsCount)
+            val tvMark: TextView = view.findViewById(R.id.tvSubjectMark)
+            val pbMark: ProgressBar = view.findViewById(R.id.pbSubjectProgress)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_application, parent, false)
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_profile_subject, parent, false)
             return ViewHolder(view)
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val item = list[position]
             holder.tvName.text = item.name
-
-            // Hide unused views from item_application layout
-            holder.itemView.findViewById<View>(R.id.tvUniversity)?.visibility = View.GONE
-            holder.itemView.findViewById<View>(R.id.tvCourse)?.visibility = View.GONE
-            holder.itemView.findViewById<View>(R.id.tvStatusChip)?.visibility = View.GONE
-            holder.itemView.findViewById<View>(R.id.tvSubmittedAt)?.visibility = View.GONE
-            holder.itemView.findViewById<View>(R.id.tvDeadline)?.visibility = View.GONE
-
-            holder.tvMark.visibility = View.VISIBLE
-            holder.pbMark.visibility = View.VISIBLE
-
-            holder.tvMark.text = "${item.mark}% (${percentToPoints(item.mark)} pts)"
+            holder.tvMark.text = "${item.mark}% (Level ${percentToPoints(item.mark)})"
             holder.pbMark.max = 100
             holder.pbMark.progress = item.mark
         }

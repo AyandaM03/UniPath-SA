@@ -1,7 +1,9 @@
 package com.example.unipathsa
 
+import android.util.Log
 import com.google.firebase.firestore.DocumentSnapshot
 import java.io.Serializable
+import java.util.Locale
 
 data class Course(
     var id: String = "",
@@ -16,51 +18,123 @@ data class Course(
     val websiteUrl: String = ""
 ) : Serializable {
 
-    // Backward-compatibility properties for legacy adapters and activities
+    // Backward-compatibility properties
     val university: String get() = this.institution
     val category: String get() = this.field
     val apsRequired: Int get() = this.apsRequirement
     val website: String get() = this.websiteUrl
 
     companion object {
+        private const val TAG = "CourseParser"
+
         fun fromFirestore(doc: DocumentSnapshot): Course {
             val docId = doc.id
-            val name = doc.getString("name")
-                ?: doc.getString("courseName")
-                ?: doc.getString("title")
-                ?: docId
-            val institution = doc.getString("institution")
-                ?: doc.getString("university")
-                ?: doc.getString("institutionName")
-                ?: ""
-            val field = doc.getString("field")
-                ?: doc.getString("category")
-                ?: doc.getString("faculty")
-                ?: "General"
-            val description = doc.getString("description")
-                ?: doc.getString("overview")
-                ?: ""
-            val duration = doc.getString("duration")
-                ?: doc.getString("period")
-                ?: "3 Years"
+            val rawData = doc.data ?: emptyMap()
 
-            val aps = when (val rawAps = doc.get("apsRequirement") ?: doc.get("minAps") ?: doc.get("aps") ?: doc.get("apsRequired")) {
-                is Number -> rawAps.toInt()
-                is String -> rawAps.toIntOrNull() ?: 0
+            // Build lowercase key lookup map
+            val lowerMap = HashMap<String, Any?>()
+            for ((key, value) in rawData) {
+                lowerMap[key.lowercase(Locale.ROOT).trim()] = value
+            }
+
+            // Known name keys in order
+            val nameKeys = listOf("name", "coursename", "title", "programmename", "degreename", "course", "programme")
+            var resolvedName = ""
+
+            for (k in nameKeys) {
+                val valStr = lowerMap[k]?.toString()?.trim()
+                if (!valStr.isNullOrBlank()) {
+                    resolvedName = valStr
+                    break
+                }
+            }
+
+            // Fallback: search any key containing "name" or "title"
+            if (resolvedName.isBlank()) {
+                for ((key, value) in lowerMap) {
+                    if ((key.contains("name") || key.contains("title")) && value != null) {
+                        val valStr = value.toString().trim()
+                        if (valStr.isNotBlank()) {
+                            resolvedName = valStr
+                            break
+                        }
+                    }
+                }
+            }
+
+            val finalName = if (resolvedName.isBlank()) {
+                Log.w(TAG, "Course document missing name key! Doc ID: $docId, Keys: ${rawData.keys}")
+                "Untitled course"
+            } else {
+                resolvedName
+            }
+
+            // Institution lookup
+            val instKeys = listOf("institution", "university", "institutionname", "school", "provider")
+            var resolvedInst = ""
+            for (k in instKeys) {
+                val valStr = lowerMap[k]?.toString()?.trim()
+                if (!valStr.isNullOrBlank()) {
+                    resolvedInst = valStr
+                    break
+                }
+            }
+
+            // Field / Faculty lookup
+            val fieldKeys = listOf("field", "category", "faculty", "department")
+            var resolvedField = "General"
+            for (k in fieldKeys) {
+                val valStr = lowerMap[k]?.toString()?.trim()
+                if (!valStr.isNullOrBlank()) {
+                    resolvedField = valStr
+                    break
+                }
+            }
+
+            // Description lookup
+            val descKeys = listOf("description", "overview", "details", "summary")
+            var resolvedDesc = ""
+            for (k in descKeys) {
+                val valStr = lowerMap[k]?.toString()?.trim()
+                if (!valStr.isNullOrBlank()) {
+                    resolvedDesc = valStr
+                    break
+                }
+            }
+
+            // Duration lookup
+            val durKeys = listOf("duration", "period", "years")
+            var resolvedDur = "3 Years"
+            for (k in durKeys) {
+                val valStr = lowerMap[k]?.toString()?.trim()
+                if (!valStr.isNullOrBlank()) {
+                    resolvedDur = valStr
+                    break
+                }
+            }
+
+            // APS requirement lookup
+            val apsVal = lowerMap["apsrequirement"] ?: lowerMap["minaps"] ?: lowerMap["aps"] ?: lowerMap["apsrequired"]
+            val aps = when (apsVal) {
+                is Number -> apsVal.toInt()
+                is String -> apsVal.toIntOrNull() ?: 0
                 else -> 0
             }
 
-            val appInfo = doc.getString("applicationInfo")
-                ?: doc.getString("howToApply")
-                ?: doc.getString("requirements")
-                ?: ""
-            val website = doc.getString("websiteUrl")
-                ?: doc.getString("website")
-                ?: doc.getString("url")
-                ?: ""
+            // Website URL lookup
+            val webKeys = listOf("websiteurl", "website", "url", "link")
+            var resolvedWeb = ""
+            for (k in webKeys) {
+                val valStr = lowerMap[k]?.toString()?.trim()
+                if (!valStr.isNullOrBlank()) {
+                    resolvedWeb = valStr
+                    break
+                }
+            }
 
+            // Required subjects list
             val subjectsList = mutableListOf<SubjectRequirement>()
-            val rawSubjects = doc.get("requiredSubjects") ?: doc.get("subjects")
+            val rawSubjects = lowerMap["requiredsubjects"] ?: lowerMap["subjects"]
             if (rawSubjects is List<*>) {
                 for (item in rawSubjects) {
                     when (item) {
@@ -86,15 +160,15 @@ data class Course(
 
             return Course(
                 id = docId,
-                name = name,
-                institution = institution,
-                field = field,
-                description = description,
-                duration = duration,
+                name = finalName,
+                institution = resolvedInst,
+                field = resolvedField,
+                description = resolvedDesc,
+                duration = resolvedDur,
                 apsRequirement = aps,
                 requiredSubjects = subjectsList,
-                applicationInfo = appInfo,
-                websiteUrl = website
+                applicationInfo = lowerMap["applicationinfo"]?.toString() ?: "",
+                websiteUrl = resolvedWeb
             )
         }
     }

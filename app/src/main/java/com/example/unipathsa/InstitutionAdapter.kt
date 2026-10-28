@@ -54,8 +54,15 @@ class InstitutionAdapter(
         holder.province.text = if (institution.province.isNotEmpty()) institution.province else "South Africa"
         holder.type.text = if (institution.type.isNotEmpty()) institution.type else "University"
 
-        // Show/hide Free to Apply badge
-        holder.tvFreeBadge.visibility = if (institution.freeToApply) View.VISIBLE else View.GONE
+        // Show/hide Application Fee chip
+        val uniObj = institution.toUniversity()
+        val feeText = uniObj.getFormattedFeeText()
+        if (feeText != "Fee not listed yet") {
+            holder.tvFreeBadge.visibility = View.VISIBLE
+            holder.tvFreeBadge.text = feeText
+        } else {
+            holder.tvFreeBadge.visibility = View.GONE
+        }
 
         // Prepare fallback initial letter
         val initial = if (institution.name.isNotBlank()) institution.name.trim().take(1).uppercase() else "U"
@@ -108,15 +115,9 @@ class InstitutionAdapter(
 
         // Check whether institution is saved in user favourites
         if (userId != null) {
-            db.collection("users").document(userId)
-                .collection("favourites").document(institution.id)
-                .get()
-                .addOnSuccessListener { doc ->
-                    holder.favouriteButton.setImageResource(
-                        if (doc.exists()) android.R.drawable.btn_star_big_on
-                        else android.R.drawable.btn_star_big_off
-                    )
-                }
+            BookmarkHelper.isSaved(institution.id) { saved ->
+                BookmarkHelper.updateBookmarkIcon(holder.favouriteButton, saved)
+            }
         }
 
         // Click listeners on logo, button and card
@@ -127,20 +128,22 @@ class InstitutionAdapter(
 
         // Bookmark button click listener
         holder.favouriteButton.setOnClickListener {
-            if (userId == null) return@setOnClickListener
+            val itemDataMap = mapOf<String, Any>(
+                "id" to institution.id,
+                "title" to institution.name,
+                "name" to institution.name,
+                "subtitle" to institution.province,
+                "type" to "institution"
+            )
 
-            val favRef = db.collection("users").document(userId)
-                .collection("favourites").document(institution.id)
-
-            favRef.get().addOnSuccessListener { doc ->
-                if (doc.exists()) {
-                    favRef.delete()
-                    holder.favouriteButton.setImageResource(android.R.drawable.btn_star_big_off)
-                } else {
-                    favRef.set(institution)
-                    holder.favouriteButton.setImageResource(android.R.drawable.btn_star_big_on)
-                }
-            }
+            BookmarkHelper.toggleBookmark(
+                activity = holder.itemView.context as android.app.Activity,
+                anchorView = holder.itemView,
+                bookmarkImageView = holder.favouriteButton,
+                itemId = institution.id,
+                itemType = "institution",
+                itemData = itemDataMap
+            )
         }
     }
 

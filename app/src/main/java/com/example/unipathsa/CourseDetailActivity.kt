@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 
 class CourseDetailActivity : AppCompatActivity() {
 
@@ -99,14 +98,10 @@ class CourseDetailActivity : AppCompatActivity() {
     }
 
     private fun checkSavedStatus(course: Course) {
-        val uid = auth.currentUser?.uid ?: return
-        db.collection("users").document(uid).collection("savedItems").document(course.id).get()
-            .addOnSuccessListener { doc ->
-                if (doc.exists()) {
-                    isSaved = true
-                    updateSaveButtonUI()
-                }
-            }
+        BookmarkHelper.isSaved(course.id) { saved ->
+            isSaved = saved
+            updateSaveButtonUI()
+        }
     }
 
     private fun updateSaveButtonUI() {
@@ -212,34 +207,25 @@ class CourseDetailActivity : AppCompatActivity() {
         btnBack.setOnClickListener { finish() }
 
         btnSave.setOnClickListener {
-            val uid = auth.currentUser?.uid
-            if (uid == null) {
-                Toast.makeText(this, "Please log in to save courses", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
+            val itemDataMap = mapOf<String, Any>(
+                "id" to course.id,
+                "title" to course.name,
+                "name" to course.name,
+                "subtitle" to course.institution,
+                "category" to course.field,
+                "type" to "course"
+            )
 
-            val itemRef = db.collection("users").document(uid).collection("savedItems").document(course.id)
-
-            if (isSaved) {
-                itemRef.delete().addOnSuccessListener {
-                    isSaved = false
-                    updateSaveButtonUI()
-                    Toast.makeText(this, "Course removed from saved items.", Toast.LENGTH_SHORT).show()
-                }
-            } else {
-                val savedData = hashMapOf(
-                    "id" to course.id,
-                    "itemType" to "course",
-                    "title" to course.name,
-                    "subtitle" to course.institution,
-                    "details" to "APS: ${course.apsRequirement} • ${course.field}",
-                    "savedAt" to com.google.firebase.firestore.FieldValue.serverTimestamp()
-                )
-                itemRef.set(savedData, SetOptions.merge()).addOnSuccessListener {
-                    isSaved = true
-                    updateSaveButtonUI()
-                    Toast.makeText(this, "Course saved to your items!", Toast.LENGTH_SHORT).show()
-                }
+            BookmarkHelper.toggleBookmark(
+                activity = this,
+                anchorView = btnSave,
+                bookmarkImageView = null,
+                itemId = course.id,
+                itemType = "course",
+                itemData = itemDataMap
+            ) { newSavedState ->
+                isSaved = newSavedState
+                updateSaveButtonUI()
             }
         }
 

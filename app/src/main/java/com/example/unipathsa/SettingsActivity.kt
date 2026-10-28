@@ -3,12 +3,17 @@ package com.example.unipathsa
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
+import com.facebook.login.LoginManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.firebase.auth.FirebaseAuth
@@ -22,6 +27,7 @@ class SettingsActivity : AppCompatActivity() {
         private const val TAG = "SettingsActivity"
         private const val PREFS_NAME = "settings"
         private const val KEY_DARK_MODE = "dark_mode"
+        private const val KEY_LANGUAGE = "app_language"
     }
 
     private lateinit var etFullName: EditText
@@ -30,6 +36,12 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var switchDarkMode: SwitchMaterial
     private lateinit var btnResetPassword: MaterialButton
     private lateinit var btnLogout: MaterialButton
+
+    private lateinit var llLanguageRow: LinearLayout
+    private lateinit var tvCurrentLanguage: TextView
+
+    private lateinit var btnNotif: RelativeLayout
+    private lateinit var tvNotifBadge: TextView
 
     private val auth = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
@@ -43,10 +55,11 @@ class SettingsActivity : AppCompatActivity() {
 
         bindViews()
         setupListeners()
+        updateLanguageDisplay()
+        loadUnreadNotifications()
         loadUserSettingsFromFirestore()
     }
 
-    // Connect XML views
     private fun bindViews() {
         etFullName = findViewById(R.id.etSettingsFullName)
         etHighSchool = findViewById(R.id.etSettingsHighSchool)
@@ -55,13 +68,25 @@ class SettingsActivity : AppCompatActivity() {
         btnResetPassword = findViewById(R.id.btnResetPasswordSettings)
         btnLogout = findViewById(R.id.btnLogoutSettings)
 
-        // Initialize dark mode switch state from SharedPreferences
+        llLanguageRow = findViewById(R.id.llLanguageRow)
+        tvCurrentLanguage = findViewById(R.id.tvCurrentLanguage)
+
+        btnNotif = findViewById(R.id.btnNotifications)
+        tvNotifBadge = findViewById(R.id.tvNotifBadge)
+
         val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
         switchDarkMode.isChecked = prefs.getBoolean(KEY_DARK_MODE, false)
     }
 
-    // Attach click listeners to settings UI elements
     private fun setupListeners() {
+        btnNotif.setOnClickListener {
+            startActivity(Intent(this, NotificationsActivity::class.java))
+        }
+
+        llLanguageRow.setOnClickListener {
+            showLanguageSelectionDialog()
+        }
+
         btnSaveProfile.setOnClickListener {
             saveUserSettingsToFirestore()
         }
@@ -87,7 +112,73 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    // Load full name and high school from Firestore users/{uid}
+    // Updates the current displayed language name in Settings
+    private fun updateLanguageDisplay() {
+        val currentLocales = AppCompatDelegate.getApplicationLocales()
+        val currentTag = if (!currentLocales.isEmpty) currentLocales.get(0)?.language ?: "en" else "en"
+
+        tvCurrentLanguage.text = when (currentTag) {
+            "zu" -> "isiZulu"
+            "xh" -> "isiXhosa"
+            "st" -> "Sesotho"
+            else -> "English"
+        }
+    }
+
+    // Displays in-app language picker dialog
+    private fun showLanguageSelectionDialog() {
+        val languages = arrayOf("English", "isiZulu", "isiXhosa", "Sesotho")
+        val tags = arrayOf("en", "zu", "xh", "st")
+
+        val currentLocales = AppCompatDelegate.getApplicationLocales()
+        val currentTag = if (!currentLocales.isEmpty) currentLocales.get(0)?.language ?: "en" else "en"
+        var selectedIndex = tags.indexOf(currentTag)
+        if (selectedIndex == -1) selectedIndex = 0
+
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.select_language_dialog_title))
+            .setSingleChoiceItems(languages, selectedIndex) { dialog, which ->
+                val chosenTag = tags[which]
+                Log.d(TAG, "Selected language tag: $chosenTag")
+
+                // Apply locale instantly across the app
+                val appLocales = LocaleListCompat.forLanguageTags(chosenTag)
+                AppCompatDelegate.setApplicationLocales(appLocales)
+
+                // Save to SharedPreferences and Firestore users/{uid}.language
+                getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                    .edit()
+                    .putString(KEY_LANGUAGE, chosenTag)
+                    .apply()
+
+                val uid = auth.currentUser?.uid
+                if (uid != null) {
+                    db.collection("users").document(uid)
+                        .set(mapOf("language" to chosenTag), SetOptions.merge())
+                }
+
+                dialog.dismiss()
+            }
+            .setNegativeButton(getString(R.string.cancel), null)
+            .show()
+    }
+
+    private fun loadUnreadNotifications() {
+        val uid = auth.currentUser?.uid ?: return
+        db.collection("users").document(uid).collection("notifications")
+            .whereEqualTo("isRead", false)
+            .get()
+            .addOnSuccessListener { snap ->
+                val count = snap?.size() ?: 0
+                if (count > 0) {
+                    tvNotifBadge.visibility = View.VISIBLE
+                    tvNotifBadge.text = if (count > 9) "9+" else count.toString()
+                } else {
+                    tvNotifBadge.visibility = View.GONE
+                }
+            }
+    }
+
     private fun loadUserSettingsFromFirestore() {
         val user = auth.currentUser
         if (user == null) {
@@ -103,7 +194,15 @@ class SettingsActivity : AppCompatActivity() {
                 if (doc.exists()) {
                     val school = doc.getString("school") ?: doc.getString("highSchool") ?: ""
                     etHighSchool.setText(school)
-                    Log.d(TAG, "Loaded user profile details from Firestore")
+
+                    val savedLang = doc.getString("language")
+                    if (!savedLang.isNullOrBlank()) {
+                        val currentLocales = AppCompatDelegate.getApplicationLocales()
+                        val currentTag = if (!currentLocales.isEmpty) currentLocales.get(0)?.language ?: "en" else "en"
+                        if (currentTag != savedLang) {
+                            AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(savedLang))
+                        }
+                    }
                 }
             }
             .addOnFailureListener { e ->
@@ -111,7 +210,6 @@ class SettingsActivity : AppCompatActivity() {
             }
     }
 
-    // Save full name and high school to Firestore
     private fun saveUserSettingsToFirestore() {
         val user = auth.currentUser
         if (user == null) {
@@ -127,7 +225,6 @@ class SettingsActivity : AppCompatActivity() {
             return
         }
 
-        // Update Firebase Auth display name
         val profileUpdates = UserProfileChangeRequest.Builder()
             .setDisplayName(newName)
             .build()
@@ -138,7 +235,6 @@ class SettingsActivity : AppCompatActivity() {
             }
         }
 
-        // Update Firestore user document
         val updateMap = hashMapOf(
             "fullName" to newName,
             "school" to newSchool,
@@ -157,7 +253,6 @@ class SettingsActivity : AppCompatActivity() {
             }
     }
 
-    // Sends password reset email via Firebase Auth
     private fun sendPasswordResetEmail() {
         val email = auth.currentUser?.email
         if (email.isNullOrEmpty()) {
@@ -176,7 +271,6 @@ class SettingsActivity : AppCompatActivity() {
             }
     }
 
-    // Toggles dark mode immediately and saves to SharedPreferences
     private fun toggleDarkModePreference(enabled: Boolean) {
         Log.d(TAG, "Toggling dark mode preference: $enabled")
         getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
@@ -190,7 +284,6 @@ class SettingsActivity : AppCompatActivity() {
         )
     }
 
-    // Display Help Dialog
     private fun showHelpDialog() {
         AlertDialog.Builder(this)
             .setTitle("Help & Support")
@@ -199,7 +292,6 @@ class SettingsActivity : AppCompatActivity() {
             .show()
     }
 
-    // Display About Dialog
     private fun showAboutDialog() {
         AlertDialog.Builder(this)
             .setTitle("About UniPath SA")
@@ -208,13 +300,18 @@ class SettingsActivity : AppCompatActivity() {
             .show()
     }
 
-    // Confirm Log Out
     private fun confirmLogout() {
         AlertDialog.Builder(this)
             .setTitle("Log Out")
             .setMessage("Are you sure you want to log out of UniPath SA?")
             .setPositiveButton("Log Out") { _, _ ->
                 Log.d(TAG, "User logging out")
+                try {
+                    LoginManager.getInstance().logOut()
+                } catch (e: Exception) {
+                    Log.w(TAG, "Error logging out of Facebook SDK", e)
+                }
+
                 auth.signOut()
                 val intent = Intent(this, LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

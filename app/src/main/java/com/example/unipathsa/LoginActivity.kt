@@ -1,38 +1,50 @@
 package com.example.unipathsa
 
-
-
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 
 class LoginActivity : AppCompatActivity() {
 
-    // Tracks whether the password is currently shown as plain text or masked with dots
+    private companion object {
+        private const val TAG = "LoginActivity"
+    }
+
     private var isPasswordVisible = false
-
-    // FirebaseAuth handles all sign-in/sign-up requests to Firebase's servers
     private lateinit var auth: FirebaseAuth
-
-    // Handles the Google Sign-In flow (opens Google's account picker, etc.)
+    private lateinit var db: FirebaseFirestore
     private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var callbackManager: CallbackManager
 
-    // View references — declared here so any function in this class can use them,
-    // instead of calling findViewById() over and over
     private lateinit var etEmail: EditText
     private lateinit var etPassword: EditText
     private lateinit var ivTogglePassword: ImageView
@@ -40,48 +52,65 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var tvForgotPassword: TextView
     private lateinit var btnLogin: Button
     private lateinit var btnGoogle: Button
+    private lateinit var btnFacebook: Button
     private lateinit var tvSignUp: TextView
 
-    // This is the modern replacement for the old startActivityForResult().
-    // It "launches" the Google sign-in screen and waits for a result to come back,
-    // then runs the code inside { } once the user picks an account (or cancels).
     private val googleSignInLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
-        // Try to pull the signed-in Google account out of the result
         val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
         try {
-            // getResult() throws an exception if something went wrong (e.g. user cancelled)
             val account = task.getResult(ApiException::class.java)
-            // Pass the account's ID token on to Firebase to finish logging in
             firebaseAuthWithGoogle(account.idToken)
         } catch (e: ApiException) {
+            Log.e(TAG, "Google sign-in failed", e)
             Toast.makeText(this, "Google sign-in failed: ${e.message}", Toast.LENGTH_LONG).show()
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Loads and displays the activity_login.xml layout
         setContentView(R.layout.activity_login)
+        Log.d(TAG, "onCreate started")
 
-        // Get a reference to Firebase's authentication system
         auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
 
-        // Set up what info we want back from Google when a user signs in
+        // Configure Google Sign-In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            // default_web_client_id is auto-generated from google-services.json —
-            // it identifies THIS Firebase project to Google's servers
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        bindViews()       // grab all the view references
-        setupListeners()  // attach all the click/tap behavior
+        // Configure Facebook Login CallbackManager
+        callbackManager = CallbackManager.Factory.create()
+        LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+            override fun onSuccess(result: LoginResult) {
+                Log.d(TAG, "Facebook login success with token")
+                handleFacebookAccessToken(result.accessToken.token)
+            }
+
+            override fun onCancel() {
+                Log.d(TAG, "Facebook login cancelled by user")
+                Toast.makeText(this@LoginActivity, "Facebook login cancelled", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onError(error: FacebookException) {
+                Log.e(TAG, "Facebook login error", error)
+                Toast.makeText(this@LoginActivity, "Facebook sign-in failed: ${error.localizedMessage}", Toast.LENGTH_LONG).show()
+            }
+        })
+
+        bindViews()
+        setupListeners()
     }
 
-    // Connects each XML view (by its android:id) to a Kotlin variable
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
     private fun bindViews() {
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
@@ -90,76 +119,64 @@ class LoginActivity : AppCompatActivity() {
         tvForgotPassword = findViewById(R.id.tvForgotPassword)
         btnLogin = findViewById(R.id.btnLogin)
         btnGoogle = findViewById(R.id.btnGoogle)
+        btnFacebook = findViewById(R.id.btnFacebook)
         tvSignUp = findViewById(R.id.tvSignUp)
     }
 
-    // All click listeners live here, so onCreate() stays short and readable
     private fun setupListeners() {
-
-        // --- Password show/hide toggle ---
         ivTogglePassword.setOnClickListener {
-            isPasswordVisible = !isPasswordVisible // flip the current state
-
-            // Change how the EditText displays its text based on the new state
+            isPasswordVisible = !isPasswordVisible
             etPassword.inputType = if (isPasswordVisible) {
                 InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD or InputType.TYPE_CLASS_TEXT
             } else {
                 InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT
             }
-            // Without this, the cursor can jump to the start of the text after switching modes
             etPassword.setSelection(etPassword.text.length)
         }
 
-        // --- Email/Password login button ---
         btnLogin.setOnClickListener {
             val email = etEmail.text.toString().trim()
             val password = etPassword.text.toString().trim()
 
-            // Basic validation before even contacting Firebase
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener // stop here, don't call Firebase
+                return@setOnClickListener
             }
 
-            // Ask Firebase to check these credentials against its user database
             auth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
-                    // Runs if login succeeded
+                    Log.d(TAG, "Email/password login successful")
                     Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, HomeActivity::class.java))
                     finish()
                 }
                 .addOnFailureListener { e ->
-                    // Runs if login failed (wrong password, no such user, etc.)
+                    Log.e(TAG, "Email/password login failed", e)
                     Toast.makeText(this, "Login failed: ${e.message}", Toast.LENGTH_LONG).show()
                 }
         }
 
-        // --- Google Sign-In button ---
         btnGoogle.setOnClickListener {
-            // Builds the intent (request) that opens Google's account picker screen
             val signInIntent = googleSignInClient.signInIntent
-            // Launches it and waits for the result via googleSignInLauncher above
             googleSignInLauncher.launch(signInIntent)
         }
 
-        // --- "Sign Up" link at the bottom ---
+        btnFacebook.setOnClickListener {
+            Log.d(TAG, "Facebook button clicked: requesting permissions")
+            LoginManager.getInstance().logInWithReadPermissions(this, listOf("public_profile", "email"))
+        }
+
         tvSignUp.setOnClickListener {
-            // Moves to the Sign Up screen
             startActivity(Intent(this, SignUpActivity::class.java))
         }
 
-        // --- "Forgot password?" link ---
         tvForgotPassword.setOnClickListener {
             val email = etEmail.text.toString().trim()
-
-            // Need an email address before we can send a reset link
             if (email.isEmpty()) {
                 Toast.makeText(this, "Enter your email first", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // Firebase handles sending the actual reset email — no backend code needed
             auth.sendPasswordResetEmail(email)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Password reset email sent", Toast.LENGTH_SHORT).show()
@@ -170,20 +187,113 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    // Takes the token we got from Google and hands it to Firebase to finish signing in
     private fun firebaseAuthWithGoogle(idToken: String?) {
-        // Wraps the Google token into a format Firebase understands
         val credential = GoogleAuthProvider.getCredential(idToken, null)
-
-        // Ask Firebase to sign the user in (or create an account) using that Google identity
         auth.signInWithCredential(credential)
+            .addOnSuccessListener { result ->
+                Log.d(TAG, "Google Firebase auth successful")
+                checkFirstTimeUserProfile(result.user)
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Google Firebase auth failed", e)
+                handleAuthError(e)
+            }
+    }
+
+    private fun handleFacebookAccessToken(token: String) {
+        val credential = FacebookAuthProvider.getCredential(token)
+        auth.signInWithCredential(credential)
+            .addOnSuccessListener { result ->
+                Log.d(TAG, "Facebook Firebase auth successful")
+                checkFirstTimeUserProfile(result.user)
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Facebook Firebase auth failed", e)
+                handleAuthError(e)
+            }
+    }
+
+    // Handles user account collisions and auth errors
+    private fun handleAuthError(e: Exception) {
+        if (e is FirebaseAuthUserCollisionException) {
+            AlertDialog.Builder(this)
+                .setTitle("Account Exists")
+                .setMessage("An account with this email already exists using a different sign-in method (e.g. Email/Password or Google). Please sign in using your existing method.")
+                .setPositiveButton("OK", null)
+                .show()
+        } else {
+            Toast.makeText(this, "Authentication failed: ${e.localizedMessage}", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    // On first sign-in, creates users/{uid} document and asks for learner's grade
+    private fun checkFirstTimeUserProfile(user: FirebaseUser?) {
+        if (user == null) {
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
+            return
+        }
+
+        db.collection("users").document(user.uid).get()
+            .addOnSuccessListener { doc ->
+                if (!doc.exists()) {
+                    Log.d(TAG, "First time social sign-in for ${user.uid}: asking for grade")
+                    promptGradeSelectionAndSaveUser(user)
+                } else {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                    finish()
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Error checking user profile existence", e)
+                startActivity(Intent(this, HomeActivity::class.java))
+                finish()
+            }
+    }
+
+    // Prompt dialog for grade selection on social first-time sign in
+    private fun promptGradeSelectionAndSaveUser(user: FirebaseUser) {
+        val spinner = Spinner(this)
+        val grades = arrayOf("Grade 10", "Grade 11", "Grade 12", "Matriculant")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, grades)
+        spinner.adapter = adapter
+
+        val container = android.widget.FrameLayout(this).apply {
+            setPadding(48, 24, 48, 16)
+            addView(spinner)
+        }
+
+        AlertDialog.Builder(this)
+            .setTitle("Welcome to UniPath SA!")
+            .setMessage("Please select your current grade to personalize your experience:")
+            .setView(container)
+            .setCancelable(false)
+            .setPositiveButton("Continue") { _, _ ->
+                val selectedGrade = spinner.selectedItem.toString()
+                saveSocialUserToFirestore(user, selectedGrade)
+            }
+            .show()
+    }
+
+    private fun saveSocialUserToFirestore(user: FirebaseUser, grade: String) {
+        val userMap = hashMapOf(
+            "fullName" to (user.displayName ?: "Student"),
+            "email" to (user.email ?: ""),
+            "grade" to grade,
+            "createdAt" to FieldValue.serverTimestamp()
+        )
+
+        db.collection("users").document(user.uid)
+            .set(userMap, SetOptions.merge())
             .addOnSuccessListener {
-                Toast.makeText(this, "Google sign-in successful", Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "Created user document in Firestore for ${user.uid}")
                 startActivity(Intent(this, HomeActivity::class.java))
                 finish()
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Firebase auth failed: ${e.message}", Toast.LENGTH_LONG).show()
+                Log.e(TAG, "Failed to save user document in Firestore", e)
+                startActivity(Intent(this, HomeActivity::class.java))
+                finish()
             }
     }
 }

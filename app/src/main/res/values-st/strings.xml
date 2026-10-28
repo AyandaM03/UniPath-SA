@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">UniPath SA</string>
+    <string name="slogan">Fumana tsela ea hao. Haha bokamoso ba hao.</string>
+    <string name="unipath">UniPath</string>
+    <string name="south_africa">AFRIKA BORA</string>
+
+    <!-- Facebook SDK Configuration Placeholders -->
+    <string name="facebook_app_id">1234567890</string>
+    <string name="fb_login_protocol_scheme">fb1234567890</string>
+    <string name="facebook_client_token">abcdef1234567890</string>
+
+    <!-- Navigation & Titles -->
+    <string name="nav_home">Gae</string>
+    <string name="nav_institutions">Mekhatlo</string>
+    <string name="nav_explore">Bala Dithuto le Lits\'ehetso tsa Chelete</string>
+    <string name="nav_aps_calc">Se-Bala APS</string>
+    <string name="nav_applications">Mosebeletsi oa Likopo</string>
+    <string name="nav_saved">Izinto Tse Bolokiloeng</string>
+    <string name="nav_documents">Litokomane tsa Ka</string>
+    <string name="nav_notifications">Litemoso</string>
+    <string name="nav_profile">Profayile</string>
+    <string name="nav_settings">Lisebelisoa</string>
+    <string name="nav_logout">Tsoa</string>
+
+    <!-- Drawer Section Headers -->
+    <string name="header_explore">BALA</string>
+    <string name="header_my_journey">LEETONG LA KA</string>
+    <string name="header_account">AKHAONTE</string>
+
+    <!-- General & Buttons -->
+    <string name="get_started">Qala Hona Joale</string>
+    <string name="log_in">Kena</string>
+    <string name="sign_up">Ingolise</string>
+    <string name="cancel">Hlakola</string>
+    <string name="ok">HO LUNGILE</string>
+    <string name="save">Boloka</string>
+    <string name="saved">E bolokiloe</string>
+    <string name="view_all">Bona tsohle</string>
+    <string name="explore_all">Bala tsohle</string>
+    <string name="calculate">Bala</string>
+    <string name="search">Batla</string>
+    <string name="search_hint">Batla diunivesithi, dithuto...</string>
+
+    <!-- Login & Sign Up -->
+    <string name="welcome_title">Amohela Hape</string>
+    <string name="login_subtitle">Kena ho tsoela pele le leeto la hao la thuto.</string>
+    <string name="email_hint">Aterese ea Imeile</string>
+    <string name="password_hint">Phatlalatso ea Sephiri</string>
+    <string name="remember_me">Nkhopole</string>
+    <string name="forgot_password">U lebetse phatlalatso?</string>
+    <string name="login_button">Kena</string>
+    <string name="sign_in_google">Kena ka Google</string>
+    <string name="sign_in_facebook">Kena ka Facebook</string>
+    <string name="dont_have_account">Ha u na akhaonte? </string>
+    <string name="create_account_title">Etsa Akhaonte</string>
+    <string name="create_account_subtitle">Qala tsela ea hao ho ea thutong e phahameng.</string>
+    <string name="full_name_hint">Lebitso le Tletseng</string>
+    <string name="select_grade_title">Kgetha Mphato / Boemo</string>
+    <string name="already_have_account">U se u na le akhaonte? </string>
+    <string name="or_continue_with">kapa tsoela pele ka</string>
+
+    <!-- Home & Dashboard -->
+    <string name="greeting_format">Dumela, %1$s 👋</string>
+    <string name="your_preparation">IThUTETSO EA HAO</string>
+    <string name="tasks_completed_format">%1$d ea mesebetsi e 7 e phethilwe</string>
+    <string name="next_step_format">E latelang: %1$s →</string>
+    <string name="your_aps">APS EA HAO</string>
+    <string name="eligible_courses">DITHUTO TSE TSHOANETSENG</string>
+    <string name="applications">LIKOPO</string>
+    <string name="saved_items">TSE BOLOKILOENG</string>
+    <string name="explore_institutions">🏫 BALA MEKHATLO</string>
+    <string name="upcoming_deadlines">📅 LATSATSI TSA HO QETELA</string>
+    <string name="recommended_for_you">⭐ TSE KHOTSOFATSANG UENA</string>
+    <string name="calculate_aps_prompt">Bala APS ea hao ho bula litlhahiso tsa dithuto.</string>
+
+    <!-- Settings & Language -->
+    <string name="settings_title">Lisebelisoa</string>
+    <string name="language_setting_title">Puo</string>
+    <string name="language_setting_desc">Puo ea pontsho ea app</string>
+    <string name="select_language_dialog_title">Kgetha Puo ea App</string>
+    <string name="account_details_section">LITABA TSA AKHAONTE</string>
+    <string name="high_school_hint">Sekolo se Phahameng</string>
+    <string name="save_profile_changes">Boloka Liphetoho tsa Profayile</string>
+    <string name="preferences_security_section">LIPHETOHO LE TŠOANELO</string>
+    <string name="dark_mode_label">Mokhoa o Monyenyane</string>
+    <string name="send_password_reset">Rometsa Imeile ea Ho Etsa Pyatlalatso Hape</string>
+    <string name="support_about_section">THUSO LE MABAPI LE RONA</string>
+    <string name="help_support">Thuso le Tšehetso</string>
+    <string name="about_unipath">Mabapi le UniPath SA</string>
+    <string name="image_credits">Maikutlo a Litšoantšo</string>
+    <string name="disclaimer_fees">Ditefello di fetoha selemo le selemo. Netefatsa ka mehla ho webosaete ea semmuso.</string>
+
+    <!-- Accessibility -->
+    <string name="toggle_visibility">Fetola ponahalo</string>
+</resources>

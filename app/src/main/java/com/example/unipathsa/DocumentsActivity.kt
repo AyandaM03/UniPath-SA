@@ -8,8 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -37,6 +37,8 @@ class DocumentsActivity : AppCompatActivity() {
     }
 
     private lateinit var rvDocuments: RecyclerView
+    private lateinit var btnNotif: RelativeLayout
+    private lateinit var tvNotifBadge: TextView
     private lateinit var adapter: DocumentAdapter
 
     private val db = FirebaseFirestore.getInstance()
@@ -69,16 +71,24 @@ class DocumentsActivity : AppCompatActivity() {
         NavigationHelper.setupDrawer(this, R.id.navDocuments)
 
         bindViews()
+        setupListeners()
         setupRecyclerView()
+        loadUnreadNotifications()
         loadDocumentMetadataFromFirestore()
     }
 
-    // Connect XML views
     private fun bindViews() {
         rvDocuments = findViewById(R.id.rvDocuments)
+        btnNotif = findViewById(R.id.btnNotifications)
+        tvNotifBadge = findViewById(R.id.tvNotifBadge)
     }
 
-    // Initialize RecyclerView
+    private fun setupListeners() {
+        btnNotif.setOnClickListener {
+            startActivity(Intent(this, NotificationsActivity::class.java))
+        }
+    }
+
     private fun setupRecyclerView() {
         adapter = DocumentAdapter(
             docTypes = DEFAULT_DOC_TYPES,
@@ -98,7 +108,22 @@ class DocumentsActivity : AppCompatActivity() {
         rvDocuments.adapter = adapter
     }
 
-    // Reads user's document metadata from Firestore path users/{uid}/documents
+    private fun loadUnreadNotifications() {
+        val uid = auth.currentUser?.uid ?: return
+        db.collection("users").document(uid).collection("notifications")
+            .whereEqualTo("isRead", false)
+            .get()
+            .addOnSuccessListener { snap ->
+                val count = snap?.size() ?: 0
+                if (count > 0) {
+                    tvNotifBadge.visibility = View.VISIBLE
+                    tvNotifBadge.text = if (count > 9) "9+" else count.toString()
+                } else {
+                    tvNotifBadge.visibility = View.GONE
+                }
+            }
+    }
+
     private fun loadDocumentMetadataFromFirestore() {
         val uid = auth.currentUser?.uid
         if (uid == null) {
@@ -116,8 +141,6 @@ class DocumentsActivity : AppCompatActivity() {
                         documentsMap[model.docType] = model
                     }
                     Log.d(TAG, "Loaded ${documentsMap.size} document records from Firestore")
-                } else {
-                    Log.d(TAG, "No document metadata found in Firestore")
                 }
                 adapter.notifyDataSetChanged()
             }
@@ -127,7 +150,6 @@ class DocumentsActivity : AppCompatActivity() {
             }
     }
 
-    // Uploads file to Firebase Storage user_documents/{uid}/{docType}
     private fun uploadFileToFirebaseStorage(docType: String, fileUri: Uri) {
         val uid = auth.currentUser?.uid
         if (uid == null) {
@@ -139,12 +161,9 @@ class DocumentsActivity : AppCompatActivity() {
         val storageRef = storage.reference.child("user_documents/$uid/$safeDocName")
 
         Toast.makeText(this, "Uploading $docType...", Toast.LENGTH_SHORT).show()
-        Log.d(TAG, "Uploading file to storage path: ${storageRef.path}")
-
         storageRef.putFile(fileUri)
             .addOnSuccessListener { taskSnapshot ->
                 storageRef.downloadUrl.addOnSuccessListener { downloadUri ->
-                    Log.d(TAG, "File upload successful. Download URL: $downloadUri")
                     val fileSize = taskSnapshot.metadata?.sizeBytes ?: 0L
                     saveDocumentMetadataToFirestore(uid, docType, safeDocName, downloadUri.toString(), fileSize)
                 }
@@ -155,7 +174,6 @@ class DocumentsActivity : AppCompatActivity() {
             }
     }
 
-    // Saves metadata record to Firestore path users/{uid}/documents/{safeDocName}
     private fun saveDocumentMetadataToFirestore(
         uid: String,
         docType: String,
@@ -174,7 +192,6 @@ class DocumentsActivity : AppCompatActivity() {
         db.collection("users").document(uid).collection("documents").document(safeDocName)
             .set(metadata)
             .addOnSuccessListener {
-                Log.d(TAG, "Saved document metadata to Firestore for $safeDocName")
                 Toast.makeText(this, "$docType uploaded successfully!", Toast.LENGTH_SHORT).show()
                 loadDocumentMetadataFromFirestore()
             }
@@ -184,31 +201,25 @@ class DocumentsActivity : AppCompatActivity() {
             }
     }
 
-    // Opens document URL in external viewer / browser
     private fun openDocumentUrl(url: String) {
         if (url.isBlank()) return
         try {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
         } catch (e: Exception) {
-            Log.e(TAG, "Cannot open document URL", e)
             Toast.makeText(this, "Unable to open document", Toast.LENGTH_SHORT).show()
         }
     }
 
-    // Confirmation dialog for deleting a document
     private fun confirmDeleteDocument(doc: DocumentModel) {
         AlertDialog.Builder(this)
             .setTitle("Delete Document")
-            .setMessage("Are you sure you want to delete ${doc.docType}? This will remove it from your profile.")
-            .setPositiveButton("Delete") { _, _ ->
-                deleteDocumentFromStorageAndFirestore(doc)
-            }
+            .setMessage("Are you sure you want to delete ${doc.docType}?")
+            .setPositiveButton("Delete") { _, _ -> deleteDocumentFromStorageAndFirestore(doc) }
             .setNegativeButton("Cancel", null)
             .show()
     }
 
-    // Deletes file from Firebase Storage and metadata from Firestore
     private fun deleteDocumentFromStorageAndFirestore(doc: DocumentModel) {
         val uid = auth.currentUser?.uid ?: return
         val safeDocName = doc.docType.lowercase(Locale.ROOT).replace("[^a-z0-9]".toRegex(), "_")
@@ -218,18 +229,12 @@ class DocumentsActivity : AppCompatActivity() {
             db.collection("users").document(uid).collection("documents").document(safeDocName)
                 .delete()
                 .addOnSuccessListener {
-                    Log.d(TAG, "Document $safeDocName deleted successfully")
                     Toast.makeText(this, "${doc.docType} deleted", Toast.LENGTH_SHORT).show()
                     loadDocumentMetadataFromFirestore()
-                }
-                .addOnFailureListener { e ->
-                    Log.e(TAG, "Failed to delete document metadata", e)
-                    Toast.makeText(this, "Failed to delete record", Toast.LENGTH_SHORT).show()
                 }
         }
     }
 
-    // RecyclerView Adapter for document items
     private inner class DocumentAdapter(
         private val docTypes: List<String>,
         private val docsMap: Map<String, DocumentModel>,

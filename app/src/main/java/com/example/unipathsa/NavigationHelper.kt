@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.facebook.login.LoginManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -183,6 +184,13 @@ object NavigationHelper {
         activity.findViewById<TextView>(R.id.navLogout)?.setOnClickListener {
             Log.d(TAG, "Log Out clicked in drawer")
             drawerLayout.closeDrawer(GravityCompat.START)
+
+            try {
+                LoginManager.getInstance().logOut()
+            } catch (e: Exception) {
+                Log.w(TAG, "Error logging out of Facebook SDK", e)
+            }
+
             FirebaseAuth.getInstance().signOut()
             val intent = Intent(activity, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

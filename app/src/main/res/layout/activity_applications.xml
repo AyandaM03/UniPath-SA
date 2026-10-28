@@ -147,35 +147,66 @@
                     </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
 
-                <!-- Tip Card -->
+                <!-- Estimated Application Fees Summary Card -->
                 <com.google.android.material.card.MaterialCardView
                     style="@style/Widget.UniPathSA.Card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/spacing_m"
                     android:layout_marginTop="@dimen/spacing_s"
-                    app:cardBackgroundColor="#E8EAF6">
+                    app:cardBackgroundColor="@color/surface">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:padding="@dimen/spacing_m"
-                        android:gravity="center_vertical">
-                        <ImageView
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
-                            android:src="@android:drawable/ic_dialog_info"
-                            app:tint="@color/primary"
-                            tools:ignore="ContentDescription" />
-                        <TextView
-                            android:layout_width="0dp"
+                        android:orientation="vertical"
+                        android:padding="@dimen/spacing_m">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_marginStart="@dimen/spacing_s"
-                            android:fontFamily="sans-serif-medium"
-                            android:text="Tip: Apply to at least 3 universities to increase your chances of securing admission!"
-                            android:textColor="@color/primary_dark"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="sans-serif-bold"
+                                android:text="ESTIMATED APPLICATION FEES"
+                                android:textColor="@color/primary"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/tvEstimatedFeesTotal"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-black"
+                                android:text="R0"
+                                android:textColor="@color/status_accepted_fg"
+                                android:textSize="18sp" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvEstimatedFeesBreakdown"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:fontFamily="sans-serif"
+                            android:text="0 applications tracked • 0 unknown fees"
+                            android:textColor="@color/text_secondary"
                             android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="sans-serif"
+                            android:text="Fees change each year. Always confirm on the official website."
+                            android:textColor="@color/text_tertiary"
+                            android:textSize="11sp"
+                            tools:ignore="SmallSp" />
+
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 

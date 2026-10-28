@@ -12,13 +12,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="24dp">
 
-        <!-- Translucent Header Card -->
+        <!-- Fixed Top Translucent User Header Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="12dp"
             app:cardBackgroundColor="#22FFFFFF"
             app:cardCornerRadius="20dp"
             app:cardElevation="0dp"
@@ -30,14 +32,14 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="14dp">
 
                 <!-- User Initial Avatar Circle -->
                 <com.google.android.material.card.MaterialCardView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
                     app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="24dp"
+                    app:cardCornerRadius="22dp"
                     app:cardElevation="2dp">
 
                     <TextView
@@ -46,9 +48,9 @@
                         android:layout_height="match_parent"
                         android:fontFamily="sans-serif-black"
                         android:gravity="center"
-                        android:text="U"
+                        android:text="S"
                         android:textColor="@color/navy_dark"
-                        android:textSize="22sp" />
+                        android:textSize="20sp" />
                 </com.google.android.material.card.MaterialCardView>
 
                 <LinearLayout
@@ -65,7 +67,7 @@
                         android:fontFamily="sans-serif-black"
                         android:text="UniPath Student"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tvDrawerUserGrade"
@@ -81,25 +83,26 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Menu Items List -->
+        <!-- Scrollable Middle List of Words-Only Menu Items -->
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:fillViewport="true">
+            android:fillViewport="true"
+            android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingHorizontal="12dp"
-                android:paddingBottom="16dp">
+                android:paddingBottom="12dp">
 
                 <!-- Section: EXPLORE -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="4dp"
                     android:fontFamily="sans-serif-bold"
@@ -117,7 +120,8 @@
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="16dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="16dp"
                     android:text="Home"
                     android:textColor="@color/white"
                     android:textSize="14sp"
@@ -131,7 +135,8 @@
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="16dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="16dp"
                     android:text="Institutions"
                     android:textColor="@color/white"
                     android:textSize="14sp"
@@ -145,7 +150,8 @@
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="16dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="16dp"
                     android:text="Explore Courses &amp; Bursaries"
                     android:textColor="@color/white"
                     android:textSize="14sp"
@@ -155,7 +161,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="4dp"
                     android:fontFamily="sans-serif-bold"
@@ -173,7 +179,8 @@
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="16dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="16dp"
                     android:text="APS Calculator"
                     android:textColor="@color/white"
                     android:textSize="14sp"
@@ -187,7 +194,8 @@
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="16dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="16dp"
                     android:text="Applications Tracker"
                     android:textColor="@color/white"
                     android:textSize="14sp"
@@ -201,7 +209,8 @@
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="16dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="16dp"
                     android:text="Saved Items"
                     android:textColor="@color/white"
                     android:textSize="14sp"
@@ -215,7 +224,8 @@
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="16dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="16dp"
                     android:text="My Documents"
                     android:textColor="@color/white"
                     android:textSize="14sp"
@@ -225,7 +235,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="4dp"
                     android:fontFamily="sans-serif-bold"
@@ -242,7 +252,8 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
-                    android:paddingHorizontal="16dp">
+                    android:paddingStart="20dp"
+                    android:paddingEnd="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -279,7 +290,8 @@
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="16dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="16dp"
                     android:text="Profile"
                     android:textColor="@color/white"
                     android:textSize="14sp"
@@ -293,38 +305,45 @@
                     android:focusable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:gravity="center_vertical"
-                    android:paddingHorizontal="16dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="16dp"
                     android:text="Settings"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-medium" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginVertical="12dp"
-                    android:background="#33FFFFFF" />
-
-                <TextView
-                    android:id="@+id/navLogout"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:gravity="center_vertical"
-                    android:paddingHorizontal="16dp"
-                    android:text="Log Out"
-                    android:textColor="#F87171"
-                    android:textSize="14sp"
-                    android:fontFamily="sans-serif-bold" />
-
             </LinearLayout>
         </ScrollView>
+
+        <!-- Fixed Bottom Log Out Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="12dp"
+            android:paddingBottom="16dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="8dp"
+                android:background="#33FFFFFF" />
+
+            <TextView
+                android:id="@+id/navLogout"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:paddingStart="20dp"
+                android:paddingEnd="16dp"
+                android:text="Log Out"
+                android:textColor="#F87171"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif-bold" />
+        </LinearLayout>
+
     </LinearLayout>
 </com.google.android.material.navigation.NavigationView>

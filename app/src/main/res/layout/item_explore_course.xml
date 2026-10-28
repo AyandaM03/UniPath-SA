@@ -1,35 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.UniPathSA.Card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginBottom="12dp"
-    app:cardCornerRadius="14dp"
-    app:cardElevation="3dp">
+    android:layout_marginHorizontal="@dimen/spacing_m"
+    android:layout_marginVertical="6dp"
+    app:cardBackgroundColor="@color/surface"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="@dimen/spacing_m">
 
+        <!-- Top Row: Course Title & Bookmark -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@+id/btnBookmarkCourse"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvExploreCourseName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-black"
+                    android:maxLines="2"
+                    android:text="BSc Computer Science"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvExploreUniversity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif"
+                    android:maxLines="1"
+                    android:text="University of Cape Town"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/btnBookmarkCourse"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="6dp"
+                android:src="@android:drawable/btn_star_big_off"
+                app:tint="@color/text_tertiary"
+                tools:ignore="ContentDescription" />
+        </RelativeLayout>
+
+        <!-- Eligibility Badge -->
         <TextView
-            android:id="@+id/tvExploreCourseName"
+            android:id="@+id/tvEligibilityBadge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="16sp" />
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_badge"
+            android:backgroundTint="@color/status_accepted_bg"
+            android:fontFamily="sans-serif-bold"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:text="✔ You qualify"
+            android:textColor="@color/status_accepted_fg"
+            android:textSize="11sp"
+            android:visibility="gone"
+            tools:ignore="SmallSp" />
 
-        <TextView
-            android:id="@+id/tvExploreUniversity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textColor="@color/text_gray"
-            android:textSize="13sp" />
-
+        <!-- Chips Row -->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
@@ -38,39 +95,45 @@
                 android:id="@+id/tvExploreAps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_edittext"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:textSize="12sp"
-                android:textColor="@color/header_blue_dark" />
+                android:background="@drawable/bg_badge"
+                android:backgroundTint="@color/status_submitted_bg"
+                android:fontFamily="sans-serif-bold"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:text="APS 30"
+                android:textColor="@color/primary"
+                android:textSize="11sp"
+                tools:ignore="SmallSp" />
 
             <TextView
                 android:id="@+id/tvExploreDuration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:background="@drawable/rounded_edittext"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:textSize="12sp"
-                android:textColor="@color/header_blue_dark" />
+                android:background="@drawable/bg_badge"
+                android:backgroundTint="@color/background"
+                android:fontFamily="sans-serif-medium"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:text="3 Years"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                tools:ignore="SmallSp" />
 
             <TextView
                 android:id="@+id/tvExploreCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:background="@drawable/rounded_edittext"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:textSize="12sp"
-                android:textColor="@color/header_blue_dark" />
+                android:background="@drawable/bg_badge"
+                android:backgroundTint="@color/background"
+                android:fontFamily="sans-serif-medium"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:text="Science"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                tools:ignore="SmallSp" />
 
         </LinearLayout>
 

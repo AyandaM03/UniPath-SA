@@ -1,5 +1,7 @@
 package com.example.unipathsa
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -10,11 +12,11 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -36,10 +38,12 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var tvSlogan: TextView
 
     // Preparation Hero Card views
+    private lateinit var cvPrepCard: MaterialCardView
     private lateinit var tvPrepPercent: TextView
     private lateinit var tvPrepSummary: TextView
     private lateinit var pbPrepProgress: ProgressBar
     private lateinit var cgPrepChips: ChipGroup
+    private lateinit var btnNextStep: MaterialButton
 
     // 2x2 Stat Cards views
     private lateinit var cvStatAps: MaterialCardView
@@ -73,6 +77,7 @@ class HomeActivity : AppCompatActivity() {
     private var userApsScore = 0
     private val allCoursesList = mutableListOf<Course>()
     private val allInstitutionsList = mutableListOf<Institution>()
+    private var firstPendingTask: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,7 +97,7 @@ class HomeActivity : AppCompatActivity() {
         loadDashboardData()
     }
 
-    // Connect XML views to activity properties
+    // Connect XML views
     private fun bindViews() {
         swipeRefresh = findViewById(R.id.swipeRefreshHome)
         btnNotifications = findViewById(R.id.btnNotifications)
@@ -101,10 +106,12 @@ class HomeActivity : AppCompatActivity() {
         tvGreeting = findViewById(R.id.tvHomeGreeting)
         tvSlogan = findViewById(R.id.tvHomeSlogan)
 
+        cvPrepCard = findViewById(R.id.cvPreparationCard)
         tvPrepPercent = findViewById(R.id.tvPreparationPercentage)
         tvPrepSummary = findViewById(R.id.tvPreparationSummary)
         pbPrepProgress = findViewById(R.id.pbPreparation)
         cgPrepChips = findViewById(R.id.cgPreparationChips)
+        btnNextStep = findViewById(R.id.btnNextStep)
 
         cvStatAps = findViewById(R.id.cvStatAps)
         tvStatApsValue = findViewById(R.id.tvStatApsValue)
@@ -158,6 +165,10 @@ class HomeActivity : AppCompatActivity() {
             startActivity(Intent(this, SavedActivity::class.java))
         }
 
+        btnNextStep.setOnClickListener {
+            openTaskDestination(firstPendingTask ?: "save profile")
+        }
+
         findViewById<View>(R.id.btnAddDeadlineApp)?.setOnClickListener {
             startActivity(Intent(this, ApplicationsActivity::class.java))
         }
@@ -195,7 +206,7 @@ class HomeActivity : AppCompatActivity() {
         fetchFeaturedInstitutions()
     }
 
-    // Updates greeting text with user's first name (NO time-based greeting)
+    // Updates greeting text with user's first name
     private fun updateGreetingHeader() {
         val user = auth.currentUser
         val fullName = if (!user?.displayName.isNullOrBlank()) user?.displayName!! else "Student"
@@ -205,17 +216,16 @@ class HomeActivity : AppCompatActivity() {
         tvSlogan.text = "Find your path. Build your future."
     }
 
-    // Reads unread notifications count from users/{uid}/notifications
+    // Reads unread notifications count
     private fun fetchUnreadNotificationsCount(uid: String) {
         db.collection("users").document(uid).collection("notifications")
             .whereEqualTo("isRead", false)
             .get()
             .addOnSuccessListener { snapshot ->
                 val unreadCount = snapshot?.size() ?: 0
-                Log.d(TAG, "Fetched $unreadCount unread notifications")
                 if (unreadCount > 0) {
                     tvNotifBadge.visibility = View.VISIBLE
-                    tvNotifBadge.text = unreadCount.toString()
+                    tvNotifBadge.text = if (unreadCount > 9) "9+" else unreadCount.toString()
                 } else {
                     tvNotifBadge.visibility = View.GONE
                 }
@@ -225,7 +235,7 @@ class HomeActivity : AppCompatActivity() {
             }
     }
 
-    // Reads user profile, APS score and task completions to calculate preparation percentage
+    // Reads user profile, APS score and task completions
     private fun fetchUserProfileAndPreparation(uid: String) {
         db.collection("users").document(uid)
             .get()
@@ -240,8 +250,6 @@ class HomeActivity : AppCompatActivity() {
                     userApsScore = (doc.getLong("aps") ?: 0L).toInt()
 
                     updateApsStatCard(userApsScore)
-
-                    // Fetch subcollections to determine task states
                     fetchTaskStatesAndCalculatePreparation(uid, fullName.isNotBlank() || phone.isNotBlank(), school.isNotBlank(), userApsScore > 0)
                 } else {
                     updateApsStatCard(0)
@@ -254,7 +262,6 @@ class HomeActivity : AppCompatActivity() {
             }
     }
 
-    // Helper to update Your APS stat card
     private fun updateApsStatCard(aps: Int) {
         if (aps > 0) {
             tvStatApsValue.text = aps.toString()
@@ -265,7 +272,6 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    // Checks task completion across user subcollections and calls PreparationCalculator
     private fun fetchTaskStatesAndCalculatePreparation(
         uid: String,
         isProfileSaved: Boolean,
@@ -291,11 +297,9 @@ class HomeActivity : AppCompatActivity() {
                                 db.collection("users").document(uid).collection("documents").get()
                                     .addOnSuccessListener { docsSnap ->
                                         val hasDocuments = docsSnap != null && !docsSnap.isEmpty
-
                                         val savedCount = (savedSnap?.size() ?: 0)
                                         tvStatSavedValue.text = savedCount.toString()
 
-                                        // Compute preparation state
                                         val state = PreparationTaskState(
                                             isProfileSaved = isProfileSaved,
                                             isSchoolAdded = isSchoolAdded,
@@ -307,11 +311,21 @@ class HomeActivity : AppCompatActivity() {
                                         )
 
                                         val result = prepCalculator.calculate(state)
-                                        Log.d(TAG, "Preparation calculated: ${result.percentage}% (${result.completedCount}/7 tasks)")
+                                        Log.d(TAG, "Preparation score: ${result.percentage}% (${result.completedCount}/7)")
 
                                         tvPrepPercent.text = "${result.percentage}%"
-                                        tvPrepSummary.text = "${result.completedCount} of 7 tasks completed"
                                         pbPrepProgress.progress = result.percentage
+
+                                        if (result.percentage == 100) {
+                                            tvPrepSummary.text = "All 7 steps completed! You're ready 🎉"
+                                            btnNextStep.visibility = View.GONE
+                                            runCelebrationAnimation()
+                                        } else {
+                                            tvPrepSummary.text = "You're ${result.completedCount} steps in, keep going!"
+                                            btnNextStep.visibility = View.VISIBLE
+                                            firstPendingTask = result.pendingTasks.firstOrNull()
+                                            btnNextStep.text = "Next: ${firstPendingTask ?: "Complete Setup"} →"
+                                        }
 
                                         populatePreparationChips(result)
                                         swipeRefresh.isRefreshing = false
@@ -321,11 +335,20 @@ class HomeActivity : AppCompatActivity() {
             }
     }
 
-    // Populates task status chips in Preparation card
+    // Runs a small scale-pulse celebratory animation when preparation reaches 100%
+    private fun runCelebrationAnimation() {
+        val scaleX = ObjectAnimator.ofFloat(cvPrepCard, View.SCALE_X, 1.0f, 1.04f, 1.0f)
+        val scaleY = ObjectAnimator.ofFloat(cvPrepCard, View.SCALE_Y, 1.0f, 1.04f, 1.0f)
+        AnimatorSet().apply {
+            playTogether(scaleX, scaleY)
+            duration = 450
+            start()
+        }
+    }
+
     private fun populatePreparationChips(result: PreparationResult) {
         cgPrepChips.removeAllViews()
 
-        // Completed chips
         for (task in result.completedTasks) {
             val chip = Chip(this).apply {
                 text = "✔ $task"
@@ -336,28 +359,29 @@ class HomeActivity : AppCompatActivity() {
             cgPrepChips.addView(chip)
         }
 
-        // Pending chips (clickable to open relevant tool)
         for (task in result.pendingTasks) {
             val chip = Chip(this).apply {
                 text = "+ $task"
                 chipBackgroundColor = ColorStateList.valueOf(getColor(R.color.surface))
                 setTextColor(getColor(R.color.primary))
                 isClickable = true
-                setOnClickListener {
-                    when (task.lowercase(Locale.ROOT)) {
-                        "save profile", "add school" -> startActivity(Intent(this@HomeActivity, SettingsActivity::class.java))
-                        "add marks", "calculate aps" -> startActivity(Intent(this@HomeActivity, ApsCalculatorActivity::class.java))
-                        "save courses" -> startActivity(Intent(this@HomeActivity, ExploreActivity::class.java))
-                        "add applications" -> startActivity(Intent(this@HomeActivity, ApplicationsActivity::class.java))
-                        "upload documents" -> startActivity(Intent(this@HomeActivity, DocumentsActivity::class.java))
-                    }
-                }
+                setOnClickListener { openTaskDestination(task) }
             }
             cgPrepChips.addView(chip)
         }
     }
 
-    // Updates Upcoming Deadlines section
+    private fun openTaskDestination(taskName: String) {
+        when (taskName.lowercase(Locale.ROOT)) {
+            "save profile", "add school" -> startActivity(Intent(this, SettingsActivity::class.java))
+            "add marks", "calculate aps", "subject marks", "aps calculated" -> startActivity(Intent(this, ApsCalculatorActivity::class.java))
+            "save courses", "saved items" -> startActivity(Intent(this, ExploreActivity::class.java))
+            "add applications", "applications" -> startActivity(Intent(this, ApplicationsActivity::class.java))
+            "upload documents", "documents" -> startActivity(Intent(this, DocumentsActivity::class.java))
+            else -> startActivity(Intent(this, SettingsActivity::class.java))
+        }
+    }
+
     private fun updateUpcomingDeadlines(apps: List<ApplicationModel>) {
         if (apps.isEmpty()) {
             cvEmptyDeadlines.visibility = View.VISIBLE
@@ -374,7 +398,6 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    // Reads Firestore courses and calculates eligible courses
     private fun fetchCoursesAndRecommendations() {
         db.collection("courses")
             .get()
@@ -410,7 +433,6 @@ class HomeActivity : AppCompatActivity() {
             }
     }
 
-    // Reads featured institutions from Firestore
     private fun fetchFeaturedInstitutions() {
         db.collection("institutions")
             .limit(8)
@@ -438,7 +460,6 @@ class HomeActivity : AppCompatActivity() {
             }
     }
 
-    // RecyclerView Adapter for upcoming deadlines
     private inner class DeadlineAdapter(
         private val list: List<ApplicationModel>,
         private val onItemClick: (ApplicationModel) -> Unit

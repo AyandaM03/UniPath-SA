@@ -14,8 +14,10 @@ class HomeInstitutionAdapter(
 ) : RecyclerView.Adapter<HomeInstitutionAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val image: ImageView = view.findViewById(R.id.imgHomeInstitution)
+        val logo: ImageView = view.findViewById(R.id.ivHomeInstLogo)
+        val fallback: TextView = view.findViewById(R.id.tvHomeInstFallback)
         val name: TextView = view.findViewById(R.id.tvHomeInstitutionName)
+        val province: TextView = view.findViewById(R.id.tvHomeInstProvince)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,12 +28,29 @@ class HomeInstitutionAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val institution = institutions[position]
-        holder.name.text = institution.name
-        Glide.with(holder.itemView.context)
-            .load(institution.imageUrl)
-            .centerCrop()
-            .placeholder(R.drawable.ic_launcher_background)
-            .into(holder.image)
+        holder.name.text = institution.name.ifBlank { "Untitled Institution" }
+
+        val locationText = when {
+            institution.province.isNotBlank() && institution.type.isNotBlank() -> "${institution.province} • ${institution.type}"
+            institution.province.isNotBlank() -> institution.province
+            institution.type.isNotBlank() -> institution.type
+            else -> "Public University"
+        }
+        holder.province.text = locationText
+
+        val initial = institution.name.trim().take(1).uppercase().ifBlank { "U" }
+        holder.fallback.text = initial
+
+        if (institution.imageUrl.isNotBlank()) {
+            holder.logo.visibility = View.VISIBLE
+            Glide.with(holder.itemView.context)
+                .load(institution.imageUrl)
+                .centerInside()
+                .into(holder.logo)
+        } else {
+            holder.logo.visibility = View.GONE
+        }
+
         holder.itemView.setOnClickListener { onClick(institution) }
     }
 

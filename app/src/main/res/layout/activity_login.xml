@@ -177,6 +177,15 @@
                     android:layout_marginTop="@dimen/spacing_s"
                     android:text="Sign in with Google" />
 
+                <!-- Facebook Sign In button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnFacebook"
+                    style="@style/Widget.UniPathSA.Button.Secondary"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginTop="@dimen/spacing_s"
+                    android:text="Sign in with Facebook" />
+
                 <!-- Sign up link -->
                 <LinearLayout
                     android:layout_width="match_parent"

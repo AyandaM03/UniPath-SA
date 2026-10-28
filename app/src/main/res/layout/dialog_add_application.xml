@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:text="Add Application Track"
+        android:textColor="@color/text_primary"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:fontFamily="sans-serif"
+        android:text="Search institutions and courses or type custom text."
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp" />
+
+    <!-- University AutoComplete -->
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.UniPathSA.TextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="University / Institution (e.g. Wits, UCT, UJ)..."
+        app:startIconDrawable="@android:drawable/ic_menu_search">
+
+        <AutoCompleteTextView
+            android:id="@+id/actvAddUni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:completionThreshold="1"
+            android:inputType="text"
+            android:textColor="@color/text_primary" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Course AutoComplete -->
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.UniPathSA.TextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="Course Name (e.g. Computer Science, BSc)..."
+        app:startIconDrawable="@android:drawable/ic_menu_edit">
+
+        <AutoCompleteTextView
+            android:id="@+id/actvAddCourse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:completionThreshold="1"
+            android:inputType="text"
+            android:textColor="@color/text_primary" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Deadline Input -->
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.UniPathSA.TextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="Closing Deadline (e.g. 30 Sep 2025)"
+        app:startIconDrawable="@android:drawable/ic_menu_today">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etAddDeadline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="30 Sep 2025"
+            android:textColor="@color/text_primary" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tvSearchStatusHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif"
+        android:text="Tip: Type nicknames like Wits, UCT, Tuks or BSc to find matches."
+        android:textColor="@color/primary"
+        android:textSize="11sp"
+        tools:ignore="SmallSp" />
+
+</LinearLayout>

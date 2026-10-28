@@ -7,149 +7,186 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <LinearLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshExplore"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/background">
+        android:layout_height="match_parent">
 
-        <!-- Top Header with Hamburger Menu -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:background="@drawable/gradient_header"
-            android:paddingHorizontal="@dimen/spacing_m">
-
-            <ImageView
-                android:id="@+id/btnMenu"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_centerVertical="true"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:padding="8dp"
-                android:src="@android:drawable/ic_menu_sort_by_size"
-                app:tint="@color/white"
-                tools:ignore="ContentDescription" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="sans-serif-black"
-                android:text="Explore Courses &amp; Bursaries"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
-        </RelativeLayout>
-
-        <!-- Courses / Bursaries tabs -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/spacing_m"
-            android:paddingVertical="@dimen/spacing_s"
-            android:background="@color/navy_dark"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/background">
 
-            <Button
-                android:id="@+id/btnCoursesTab"
-                android:layout_width="0dp"
+            <!-- Top Header with Hamburger Menu -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@drawable/gradient_header"
+                android:paddingHorizontal="@dimen/spacing_m">
+
+                <ImageView
+                    android:id="@+id/btnMenu"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="8dp"
+                    android:src="@android:drawable/ic_menu_sort_by_size"
+                    app:tint="@color/white"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="sans-serif-black"
+                    android:text="Explore Courses &amp; Bursaries"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <!-- Search Bar Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.UniPathSA.TextInputLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Courses"
-                android:textAllCaps="false"
-                android:textStyle="bold"
-                android:textColor="@color/header_blue_dark"
-                android:backgroundTint="#FFFFFF" />
+                android:layout_marginHorizontal="@dimen/spacing_m"
+                android:layout_marginTop="@dimen/spacing_s"
+                android:hint="Search courses or bursaries..."
+                app:startIconDrawable="@android:drawable/ic_menu_search">
 
-            <Button
-                android:id="@+id/btnBursariesTab"
-                android:layout_width="0dp"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etSearchExplore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/text_primary" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Courses / Bursaries tabs -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="8dp"
-                android:text="Bursaries"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:backgroundTint="#3B4A9C" />
+                android:layout_marginHorizontal="@dimen/spacing_m"
+                android:layout_marginTop="@dimen/spacing_s"
+                android:orientation="horizontal">
 
-        </LinearLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCoursesTab"
+                    style="@style/Widget.UniPathSA.Button"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_weight="1"
+                    android:text="Courses"
+                    android:textSize="13sp" />
 
-        <!-- Category filter chips -->
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:scrollbars="none">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnBursariesTab"
+                    style="@style/Widget.UniPathSA.Button.Secondary"
+                    android:layout_width="0dp"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="Bursaries"
+                    android:textSize="13sp" />
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroupCategory"
+            </LinearLayout>
+
+            <!-- Category filter chips -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:scrollbars="none">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/spacing_m"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipAll"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="All" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipScience"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Science / IT" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCommerce"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Commerce" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipEngineering"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Engineering" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipHealth"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Health Sciences" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipArts"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Humanities &amp; Arts" />
+
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
+
+            <ProgressBar
+                android:id="@+id/pbExploreLoading"
+                style="?android:attr/progressBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                app:singleSelection="true"
-                app:selectionRequired="true">
+                android:layout_gravity="center"
+                android:layout_marginVertical="16dp"
+                android:visibility="gone" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipAll"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="All"
-                    android:checked="true" />
+            <!-- Course / Bursary list -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerCourses"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:clipToPadding="false"
+                android:paddingBottom="@dimen/spacing_xl" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipIT"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="IT" />
+            <!-- Empty state -->
+            <TextView
+                android:id="@+id/tvNoCourses"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="24dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="No matching courses or bursaries found."
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp"
+                android:visibility="gone" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipCommerce"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Commerce" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipEngineering"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Engineering" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipLaw"
-                    style="@style/Widget.MaterialComponents.Chip.Choice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Law" />
-
-            </com.google.android.material.chip.ChipGroup>
-        </HorizontalScrollView>
-
-        <!-- Course list -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerCourses"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:clipToPadding="false" />
-
-        <!-- Empty state -->
-        <TextView
-            android:id="@+id/tvNoCourses"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="No courses found"
-            android:textColor="@color/text_secondary"
-            android:visibility="gone" />
-
-    </LinearLayout>
+        </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <include layout="@layout/nav_drawer_menu" />
 

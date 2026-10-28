@@ -1,157 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_cream"
+    android:background="@color/background"
     android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/spacing_xl">
 
-        <LinearLayout
+        <!-- Top Header Bar -->
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="20dp"
-            android:background="@color/header_blue_dark">
+            android:layout_height="70dp"
+            android:background="@drawable/gradient_header"
+            android:paddingHorizontal="@dimen/spacing_m">
 
             <ImageButton
                 android:id="@+id/btnBursaryDetailsBack"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_centerVertical="true"
                 android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="8dp"
                 android:src="@android:drawable/ic_menu_revert"
-                android:contentDescription="Back" />
+                app:tint="@color/white"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_centerInParent="true"
+                android:fontFamily="sans-serif-black"
                 android:text="Bursary Details"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </RelativeLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
+        <!-- Main Details Card -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.UniPathSA.Card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
+            android:layout_marginHorizontal="@dimen/spacing_m"
+            android:layout_marginTop="@dimen/spacing_m"
+            app:cardBackgroundColor="@color/surface"
+            app:cardCornerRadius="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/rounded_edittext"
-                android:padding="14dp">
+                android:padding="@dimen/spacing_m">
 
+                <!-- Sponsor Name -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SPONSOR"
+                    android:fontFamily="sans-serif-bold"
+                    android:text="SPONSOR / PROVIDER"
+                    android:textColor="@color/primary"
                     android:textSize="11sp"
-                    android:textColor="@color/text_gray" />
+                    tools:ignore="SmallSp" />
 
                 <TextView
                     android:id="@+id/tvBursaryDetailsProvider"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:textStyle="bold"
-                    android:textSize="15sp" />
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Department of Higher Education"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp" />
 
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tvBursaryDetailsName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:textColor="@color/header_blue_dark" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                android:background="#FFEBEE"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp">
-
+                <!-- Bursary Name -->
                 <TextView
-                    android:id="@+id/tvBursaryDetailsClosing"
+                    android:id="@+id/tvBursaryDetailsName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="13sp"
-                    android:textColor="#D32F2F"
-                    android:textStyle="bold" />
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="NSFAS Financial Aid"
+                    android:textColor="@color/text_primary"
+                    android:textSize="22sp" />
+
+                <!-- Badges Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvBursaryDetailsClosing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_badge"
+                        android:backgroundTint="@color/status_review_bg"
+                        android:fontFamily="sans-serif-bold"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="6dp"
+                        android:text="Closes 31 Oct"
+                        android:textColor="@color/status_review_fg"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvBursaryDetailsCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/bg_badge"
+                        android:backgroundTint="@color/background"
+                        android:fontFamily="sans-serif-medium"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="6dp"
+                        android:text="General"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="16dp"
+                    android:background="@color/divider" />
+
+                <!-- Amount Covered -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-bold"
+                    android:text="AMOUNT COVERED"
+                    android:textColor="@color/primary"
+                    android:textSize="11sp"
+                    tools:ignore="SmallSp" />
+
+                <TextView
+                    android:id="@+id/tvBursaryDetailsAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="Full Tuition &amp; Allowance"
+                    android:textColor="@color/status_accepted_fg"
+                    android:textSize="16sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="16dp"
+                    android:background="@color/divider" />
+
+                <!-- Description -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-bold"
+                    android:text="OVERVIEW &amp; ELIGIBILITY"
+                    android:textColor="@color/primary"
+                    android:textSize="11sp"
+                    tools:ignore="SmallSp" />
+
+                <TextView
+                    android:id="@+id/tvBursaryDetailsDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif"
+                    android:lineSpacingExtra="4dp"
+                    android:text="Full bursary coverage details and application criteria..."
+                    android:textColor="@color/text_primary"
+                    android:textSize="13sp" />
+
+                <!-- Apply Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnBursaryApply"
+                    style="@style/Widget.UniPathSA.Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginTop="24dp"
+                    android:text="Open Official Application Page ↗" />
 
             </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-            <TextView
-                android:id="@+id/tvBursaryDetailsCategory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/rounded_edittext"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:textSize="12sp"
-                android:textColor="@color/header_blue_dark" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="AMOUNT COVERED"
-                android:textSize="12sp"
-                android:textColor="@color/text_gray" />
-
-            <TextView
-                android:id="@+id/tvBursaryDetailsAmount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="OVERVIEW"
-                android:textSize="12sp"
-                android:textColor="@color/text_gray" />
-
-            <TextView
-                android:id="@+id/tvBursaryDetailsDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:textSize="14sp"
-                android:lineSpacingExtra="4dp" />
-
-            <Button
-                android:id="@+id/btnBursaryApply"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="28dp"
-                android:background="@drawable/rounded_button"
-                android:text="Apply Now"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF" />
-
-        </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

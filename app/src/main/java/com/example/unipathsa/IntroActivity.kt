@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -42,7 +43,6 @@ class IntroActivity : AppCompatActivity() {
         setupListeners()
     }
 
-    // Connect views
     private fun bindViews() {
         vpIntroPages = findViewById(R.id.vpIntroPages)
         dot1 = findViewById(R.id.dot1)
@@ -52,22 +52,24 @@ class IntroActivity : AppCompatActivity() {
         tvLoginLink = findViewById(R.id.tvLoginLink)
     }
 
-    // Setup ViewPager2 pages and dot indicators
     private fun setupViewPager() {
         val pages = listOf(
             IntroPageData(
+                imageResName = "intro_student",
                 title = "Automatic APS Calculator",
                 subtitle = "Calculate your NSC APS score instantly and see which degree programmes you qualify for.",
                 topBadge = "APS 32",
                 bottomBadge = "✔ Qualifying Score"
             ),
             IntroPageData(
+                imageResName = "intro_campus",
                 title = "Explore Courses & Bursaries",
                 subtitle = "Discover higher education programmes across South Africa and apply for bursaries.",
                 topBadge = "8 Eligible",
                 bottomBadge = "BSc Computer Science"
             ),
             IntroPageData(
+                imageResName = "intro_graduates",
                 title = "Track Your Applications",
                 subtitle = "Manage all your university applications, document uploads and progress steps in one place.",
                 topBadge = "In Progress",
@@ -107,7 +109,6 @@ class IntroActivity : AppCompatActivity() {
         }
     }
 
-    // Setup button click listeners
     private fun setupListeners() {
         btnGetStarted.setOnClickListener {
             markIntroSeenAndNavigate(
@@ -122,7 +123,6 @@ class IntroActivity : AppCompatActivity() {
         }
     }
 
-    // Stores hasSeenIntro flag in SharedPreferences and navigates to target activity
     private fun markIntroSeenAndNavigate(targetClass: Class<*>) {
         Log.d(TAG, "Setting hasSeenIntro = true and navigating to ${targetClass.simpleName}")
         getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
@@ -136,6 +136,7 @@ class IntroActivity : AppCompatActivity() {
     }
 
     data class IntroPageData(
+        val imageResName: String,
         val title: String,
         val subtitle: String,
         val topBadge: String,
@@ -147,6 +148,7 @@ class IntroActivity : AppCompatActivity() {
     ) : RecyclerView.Adapter<IntroPagerAdapter.ViewHolder>() {
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+            val ivPhoto: ImageView = view.findViewById(R.id.ivIntroPhoto)
             val tvTitle: TextView = view.findViewById(R.id.tvIntroTitle)
             val tvSubtitle: TextView = view.findViewById(R.id.tvIntroSubtitle)
             val tvTopBadge: TextView = view.findViewById(R.id.tvIntroTopBadgeText)
@@ -164,6 +166,13 @@ class IntroActivity : AppCompatActivity() {
             holder.tvSubtitle.text = item.subtitle
             holder.tvTopBadge.text = item.topBadge
             holder.tvBottomBadge.text = item.bottomBadge
+
+            val resId = resources.getIdentifier(item.imageResName, "drawable", packageName)
+            if (resId != 0) {
+                holder.ivPhoto.setImageResource(resId)
+            } else {
+                holder.ivPhoto.setImageResource(R.drawable.app_logo)
+            }
         }
 
         override fun getItemCount(): Int = list.size

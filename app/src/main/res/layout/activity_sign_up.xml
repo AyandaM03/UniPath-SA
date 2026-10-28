@@ -173,6 +173,41 @@
                     android:layout_marginTop="@dimen/spacing_m"
                     android:text="Create Account" />
 
+                <!-- Social Sign Up Options -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_m"
+                    android:gravity="center"
+                    android:text="or continue with"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_s"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnGoogle"
+                        style="@style/Widget.UniPathSA.Button.Secondary"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/button_height"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        android:text="Google" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnFacebook"
+                        style="@style/Widget.UniPathSA.Button.Secondary"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/button_height"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        android:text="Facebook" />
+                </LinearLayout>
+
                 <!-- Log In link -->
                 <LinearLayout
                     android:layout_width="match_parent"

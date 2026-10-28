@@ -54,10 +54,10 @@
                         android:focusable="true">
 
                         <ImageView
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
                             android:layout_centerInParent="true"
-                            android:src="@android:drawable/ic_popup_reminder"
+                            android:src="@drawable/ic_bell_outline"
                             app:tint="@color/white"
                             tools:ignore="ContentDescription" />
 
@@ -71,8 +71,8 @@
                             android:layout_marginEnd="2dp"
                             android:background="@drawable/bg_badge"
                             android:backgroundTint="@color/error"
-                            android:gravity="center"
                             android:fontFamily="sans-serif-black"
+                            android:gravity="center"
                             android:text="0"
                             android:textColor="@color/white"
                             android:textSize="10sp"
@@ -82,51 +82,70 @@
 
                 </RelativeLayout>
 
-                <!-- 2. Greeting Section -->
-                <LinearLayout
+                <!-- 2. Vibrant Greeting Section -->
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/gradient_header"
-                    android:orientation="vertical"
                     android:paddingHorizontal="@dimen/spacing_m"
                     android:paddingBottom="@dimen/spacing_l">
 
-                    <TextView
-                        android:id="@+id/tvHomeGreeting"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-black"
-                        android:text="Hey, Student 👋"
-                        android:textColor="@color/white"
-                        android:textSize="24sp" />
+                        android:layout_toStartOf="@+id/ivHeaderCapIllustration"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tvHomeSlogan"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:fontFamily="sans-serif"
-                        android:text="Find your path. Build your future."
-                        android:textColor="#CCFFFFFF"
-                        android:textSize="14sp" />
+                        <TextView
+                            android:id="@+id/tvHomeGreeting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-black"
+                            android:text="Hey, Student 👋"
+                            android:textColor="@color/white"
+                            android:textSize="24sp" />
 
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/tvHomeSlogan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="Find your path. Build your future."
+                            android:textColor="#E0E0E0"
+                            android:textSize="14sp" />
+                    </LinearLayout>
 
-                <!-- 3. Your Preparation Hero Card -->
+                    <!-- Vector Illustration Right -->
+                    <ImageView
+                        android:id="@+id/ivHeaderCapIllustration"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:alpha="0.8"
+                        android:src="@drawable/app_logo"
+                        app:tint="@color/white"
+                        tools:ignore="ContentDescription" />
+
+                </RelativeLayout>
+
+                <!-- 3. Your Preparation Hero Card (Vivid Gradient in both Light & Dark mode) -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cvPreparationCard"
                     style="@style/Widget.UniPathSA.Card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/spacing_m"
-                    android:layout_marginTop="-16dp"
+                    android:layout_marginTop="-18dp"
                     app:cardBackgroundColor="@color/navy_dark"
-                    app:cardCornerRadius="16dp"
-                    app:cardElevation="4dp">
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="6dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/gradient_header"
                         android:orientation="vertical"
                         android:padding="@dimen/spacing_m">
 
@@ -136,44 +155,74 @@
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
 
-                            <TextView
+                            <!-- Left: Circular Percentage Ring -->
+                            <RelativeLayout
+                                android:layout_width="64dp"
+                                android:layout_height="64dp">
+
+                                <ProgressBar
+                                    android:id="@+id/pbPreparation"
+                                    style="@android:style/Widget.ProgressBar.Horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:indeterminate="false"
+                                    android:max="100"
+                                    android:progress="42"
+                                    android:progressDrawable="@drawable/bg_badge"
+                                    android:progressTint="@color/white" />
+
+                                <TextView
+                                    android:id="@+id/tvPreparationPercentage"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:fontFamily="sans-serif-black"
+                                    android:text="0%"
+                                    android:textColor="@color/white"
+                                    android:textSize="18sp" />
+                            </RelativeLayout>
+
+                            <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="14dp"
                                 android:layout_weight="1"
-                                android:fontFamily="sans-serif-bold"
-                                android:letterSpacing="0.05"
-                                android:text="YOUR PREPARATION"
-                                android:textColor="@color/secondary_light"
-                                android:textSize="12sp" />
+                                android:orientation="vertical">
 
-                            <TextView
-                                android:id="@+id/tvPreparationPercentage"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="sans-serif-black"
-                                android:text="0%"
-                                android:textColor="@color/white"
-                                android:textSize="24sp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="sans-serif-bold"
+                                    android:letterSpacing="0.05"
+                                    android:text="YOUR PREPARATION"
+                                    android:textColor="#E3F2FD"
+                                    android:textSize="11sp"
+                                    tools:ignore="SmallSp" />
+
+                                <TextView
+                                    android:id="@+id/tvPreparationSummary"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:text="You're 0 steps in, keep going!"
+                                    android:textColor="@color/white"
+                                    android:textSize="14sp" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/btnNextStep"
+                                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="-4dp"
+                                    android:fontFamily="sans-serif-bold"
+                                    android:padding="0dp"
+                                    android:text="Next Step →"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
                         </LinearLayout>
-
-                        <TextView
-                            android:id="@+id/tvPreparationSummary"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:text="0 of 7 tasks completed"
-                            android:textColor="#CCFFFFFF"
-                            android:textSize="12sp" />
-
-                        <ProgressBar
-                            android:id="@+id/pbPreparation"
-                            style="@android:style/Widget.ProgressBar.Horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="8dp"
-                            android:layout_marginTop="10dp"
-                            android:max="100"
-                            android:progress="0"
-                            android:progressTint="@color/secondary_light" />
 
                         <!-- Status chips for tasks -->
                         <HorizontalScrollView
@@ -192,7 +241,7 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- 4. 2x2 Grid of Stat Cards -->
+                <!-- 4. 2x2 Grid of Stat Cards (Readable text contrast in Light & Dark Mode) -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -206,14 +255,15 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <!-- Stat 1: Your APS -->
+                        <!-- Stat 1: Your APS (Blue Tile) -->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/cvStatAps"
                             style="@style/Widget.UniPathSA.Card"
                             android:layout_width="0dp"
-                            android:layout_height="110dp"
+                            android:layout_height="115dp"
                             android:layout_weight="1"
-                            app:cardBackgroundColor="@color/surface">
+                            app:cardBackgroundColor="@color/surface"
+                            app:cardCornerRadius="18dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -240,7 +290,7 @@
                                     android:gravity="center"
                                     android:text="Not calculated"
                                     android:textColor="@color/text_primary"
-                                    android:textSize="18sp" />
+                                    android:textSize="20sp" />
 
                                 <TextView
                                     android:id="@+id/btnStatApsAction"
@@ -255,14 +305,15 @@
                             </LinearLayout>
                         </com.google.android.material.card.MaterialCardView>
 
-                        <!-- Stat 2: Eligible Courses -->
+                        <!-- Stat 2: Eligible Courses (Green Tile) -->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/cvStatEligible"
                             style="@style/Widget.UniPathSA.Card"
                             android:layout_width="0dp"
-                            android:layout_height="110dp"
+                            android:layout_height="115dp"
                             android:layout_weight="1"
-                            app:cardBackgroundColor="@color/surface">
+                            app:cardBackgroundColor="@color/surface"
+                            app:cardCornerRadius="18dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -276,7 +327,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="sans-serif-bold"
                                     android:text="ELIGIBLE COURSES"
-                                    android:textColor="@color/primary"
+                                    android:textColor="@color/status_accepted_fg"
                                     android:textSize="11sp"
                                     tools:ignore="SmallSp" />
 
@@ -288,7 +339,7 @@
                                     android:fontFamily="sans-serif-black"
                                     android:text="0"
                                     android:textColor="@color/status_accepted_fg"
-                                    android:textSize="26sp" />
+                                    android:textSize="28sp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -308,14 +359,15 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <!-- Stat 3: Applications -->
+                        <!-- Stat 3: Applications (Orange Tile) -->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/cvStatApplications"
                             style="@style/Widget.UniPathSA.Card"
                             android:layout_width="0dp"
-                            android:layout_height="110dp"
+                            android:layout_height="115dp"
                             android:layout_weight="1"
-                            app:cardBackgroundColor="@color/surface">
+                            app:cardBackgroundColor="@color/surface"
+                            app:cardCornerRadius="18dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -329,7 +381,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="sans-serif-bold"
                                     android:text="APPLICATIONS"
-                                    android:textColor="@color/primary"
+                                    android:textColor="@color/status_review_fg"
                                     android:textSize="11sp"
                                     tools:ignore="SmallSp" />
 
@@ -341,7 +393,7 @@
                                     android:fontFamily="sans-serif-black"
                                     android:text="0"
                                     android:textColor="@color/status_review_fg"
-                                    android:textSize="26sp" />
+                                    android:textSize="28sp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -354,14 +406,15 @@
                             </LinearLayout>
                         </com.google.android.material.card.MaterialCardView>
 
-                        <!-- Stat 4: Saved Items -->
+                        <!-- Stat 4: Saved Items (Pink Tile) -->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/cvStatSaved"
                             style="@style/Widget.UniPathSA.Card"
                             android:layout_width="0dp"
-                            android:layout_height="110dp"
+                            android:layout_height="115dp"
                             android:layout_weight="1"
-                            app:cardBackgroundColor="@color/surface">
+                            app:cardBackgroundColor="@color/surface"
+                            app:cardCornerRadius="18dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -375,7 +428,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="sans-serif-bold"
                                     android:text="SAVED ITEMS"
-                                    android:textColor="@color/primary"
+                                    android:textColor="@color/purple_accent"
                                     android:textSize="11sp"
                                     tools:ignore="SmallSp" />
 
@@ -386,8 +439,8 @@
                                     android:layout_marginTop="2dp"
                                     android:fontFamily="sans-serif-black"
                                     android:text="0"
-                                    android:textColor="@color/primary"
-                                    android:textSize="26sp" />
+                                    android:textColor="@color/purple_accent"
+                                    android:textSize="28sp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -403,7 +456,7 @@
 
                 </LinearLayout>
 
-                <!-- 5. Explore Institutions Section (MOVED ABOVE UPCOMING DEADLINES) -->
+                <!-- 5. Explore Institutions Section -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -417,7 +470,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="sans-serif-black"
-                        android:text="EXPLORE INSTITUTIONS"
+                        android:text="🏫 EXPLORE INSTITUTIONS"
                         android:textColor="@color/text_primary"
                         android:textSize="14sp" />
 
@@ -431,7 +484,6 @@
                         android:textSize="12sp" />
                 </LinearLayout>
 
-                <!-- Horizontally Scrolling Institutions -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvHomeInstitutions"
                     android:layout_width="match_parent"
@@ -455,7 +507,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="sans-serif-black"
-                        android:text="UPCOMING DEADLINES"
+                        android:text="📅 UPCOMING DEADLINES"
                         android:textColor="@color/text_primary"
                         android:textSize="14sp" />
 
@@ -527,7 +579,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="sans-serif-black"
-                        android:text="RECOMMENDED FOR YOU"
+                        android:text="⭐ RECOMMENDED FOR YOU"
                         android:textColor="@color/text_primary"
                         android:textSize="14sp" />
 
@@ -549,7 +601,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/spacing_m"
                     android:layout_marginTop="@dimen/spacing_s"
-                    app:cardBackgroundColor="#E3F2FD">
+                    app:cardBackgroundColor="@color/surface">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -577,7 +629,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif-bold"
                                 android:text="Find courses you qualify for"
-                                android:textColor="@color/primary_dark"
+                                android:textColor="@color/primary"
                                 android:textSize="13sp" />
 
                             <TextView

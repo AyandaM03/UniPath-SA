@@ -142,7 +142,7 @@
                 android:elevation="12dp"
                 android:text="Save"
                 app:elevation="8dp"
-                app:icon="@android:drawable/btn_star_big_off" />
+                app:icon="@drawable/ic_bookmark_outline" />
 
             <!-- Title & Info Group below Logo Card with sufficient margin -->
             <LinearLayout
@@ -210,11 +210,13 @@
             android:orientation="horizontal">
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvMinApsTile"
                 style="@style/Widget.UniPathSA.Card"
                 android:layout_width="0dp"
                 android:layout_height="72dp"
                 android:layout_marginEnd="4dp"
                 android:layout_weight="1"
+                android:visibility="gone"
                 app:cardBackgroundColor="@color/surface">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -222,6 +224,7 @@
                     android:gravity="center"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/tvMinApsValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-black"
@@ -255,9 +258,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-black"
-                        android:text="35"
+                        android:text="Not calculated yet"
                         android:textColor="@color/status_accepted_fg"
-                        android:textSize="18sp" />
+                        android:textSize="14sp" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -298,6 +301,83 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
+
+        <!-- Application Fee Card -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.UniPathSA.Card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_m"
+            android:layout_marginTop="@dimen/spacing_s"
+            app:cardBackgroundColor="@color/surface">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_m">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-bold"
+                    android:text="APPLICATION FEE"
+                    android:textColor="@color/primary"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvFeeAmountDisplay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="Fee not listed yet"
+                    android:textColor="@color/text_primary"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tvFeeNoteDisplay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Online rate"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tvFeeMetaDisplay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Applies to: 2025 • Last checked: 15 Jan"
+                    android:textColor="@color/text_tertiary"
+                    android:textSize="11sp"
+                    android:visibility="gone"
+                    tools:ignore="SmallSp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnConfirmFeeSite"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Confirm fee on official site ↗"
+                    android:textColor="@color/primary"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Fees change each year. Always confirm on the official website."
+                    android:textColor="@color/text_tertiary"
+                    android:textSize="11sp"
+                    tools:ignore="SmallSp" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- About Section Card -->
         <com.google.android.material.card.MaterialCardView

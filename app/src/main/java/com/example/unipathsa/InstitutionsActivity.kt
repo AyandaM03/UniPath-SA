@@ -2,36 +2,65 @@ package com.example.unipathsa
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
+import android.view.View
+import android.widget.RelativeLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class InstitutionsActivity : AppCompatActivity() {
 
+    private companion object {
+        private const val TAG = "InstitutionsActivity"
+    }
+
     private lateinit var recyclerInstitutions: RecyclerView
     private lateinit var searchEditText: TextInputEditText
+    private lateinit var btnUniversities: MaterialButton
+    private lateinit var btnColleges: MaterialButton
+    private lateinit var btnNotif: RelativeLayout
+    private lateinit var tvNotifBadge: TextView
     private lateinit var adapter: InstitutionAdapter
 
-    private val institutionList = mutableListOf<Institution>()
+    private val allInstitutions = mutableListOf<Institution>()
+    private val displayedList = mutableListOf<Institution>()
     private val db = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
+
+    private var currentType = "University"
+    private var searchQuery = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_institutions)
+        Log.d(TAG, "onCreate initialized")
 
         NavigationHelper.setupDrawer(this, R.id.navInstitutions)
 
+        bindViews()
+        setupListeners()
+        loadUnreadNotifications()
+        loadInstitutions()
+    }
+
+    private fun bindViews() {
         recyclerInstitutions = findViewById(R.id.recyclerInstitutions)
         searchEditText = findViewById(R.id.etSearchInstitution)
-        val universitiesButton = findViewById<Button>(R.id.btnUniversities)
-        val collegesButton = findViewById<Button>(R.id.btnColleges)
-        val filterButton = findViewById<Button>(R.id.btnFilter)
+        btnUniversities = findViewById(R.id.btnUniversities)
+        btnColleges = findViewById(R.id.btnColleges)
+        btnNotif = findViewById(R.id.btnNotifications)
+        tvNotifBadge = findViewById(R.id.tvNotifBadge)
 
-        adapter = InstitutionAdapter(institutionList) { institution ->
+        adapter = InstitutionAdapter(displayedList) { institution ->
             val intent = Intent(this, UniversityDetailActivity::class.java)
             intent.putExtra("UNIVERSITY_DATA", institution.toUniversity())
             startActivity(intent)
@@ -39,62 +68,106 @@ class InstitutionsActivity : AppCompatActivity() {
 
         recyclerInstitutions.layoutManager = LinearLayoutManager(this)
         recyclerInstitutions.adapter = adapter
+    }
 
-        loadInstitutions("University")
-
-        universitiesButton.setOnClickListener {
-            universitiesButton.setBackgroundColor(android.graphics.Color.rgb(21, 101, 192))
-            universitiesButton.setTextColor(android.graphics.Color.WHITE)
-            collegesButton.setBackgroundColor(android.graphics.Color.rgb(227, 242, 253))
-            collegesButton.setTextColor(android.graphics.Color.rgb(21, 101, 192))
-            loadInstitutions("University")
+    private fun setupListeners() {
+        btnNotif.setOnClickListener {
+            startActivity(Intent(this, NotificationsActivity::class.java))
         }
 
-        collegesButton.setOnClickListener {
-            collegesButton.setBackgroundColor(android.graphics.Color.rgb(21, 101, 192))
-            collegesButton.setTextColor(android.graphics.Color.WHITE)
-            universitiesButton.setBackgroundColor(android.graphics.Color.rgb(227, 242, 253))
-            universitiesButton.setTextColor(android.graphics.Color.rgb(21, 101, 192))
-            loadInstitutions("College")
+        btnUniversities.setOnClickListener {
+            currentType = "University"
+            highlightActiveTab()
+            filterAndDisplay()
         }
 
-        searchEditText.setOnEditorActionListener { _, _, _ ->
-            searchInstitutions(searchEditText.text.toString())
-            true
+        btnColleges.setOnClickListener {
+            currentType = "College"
+            highlightActiveTab()
+            filterAndDisplay()
         }
 
-        filterButton.setOnClickListener {
-            searchInstitutions(searchEditText.text.toString())
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                searchQuery = s?.toString()?.trim() ?: ""
+                filterAndDisplay()
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+    }
+
+    private fun highlightActiveTab() {
+        if (currentType == "University") {
+            btnUniversities.setBackgroundColor(getColor(R.color.primary))
+            btnUniversities.setTextColor(getColor(R.color.white))
+            btnColleges.setBackgroundColor(getColor(R.color.surface))
+            btnColleges.setTextColor(getColor(R.color.primary))
+        } else {
+            btnColleges.setBackgroundColor(getColor(R.color.primary))
+            btnColleges.setTextColor(getColor(R.color.white))
+            btnUniversities.setBackgroundColor(getColor(R.color.surface))
+            btnUniversities.setTextColor(getColor(R.color.primary))
         }
     }
 
-    private fun loadInstitutions(type: String) {
+    private fun loadUnreadNotifications() {
+        val uid = auth.currentUser?.uid ?: return
+        db.collection("users").document(uid).collection("notifications")
+            .whereEqualTo("isRead", false)
+            .get()
+            .addOnSuccessListener { snap ->
+                val count = snap?.size() ?: 0
+                if (count > 0) {
+                    tvNotifBadge.visibility = View.VISIBLE
+                    tvNotifBadge.text = if (count > 9) "9+" else count.toString()
+                } else {
+                    tvNotifBadge.visibility = View.GONE
+                }
+            }
+    }
+
+    private fun loadInstitutions() {
         db.collection("institutions")
-            .whereEqualTo("type", type)
             .get()
             .addOnSuccessListener { documents ->
-                institutionList.clear()
-                for (document in documents) {
-                    val institution = document.toObject(Institution::class.java)
-                    institution.id = document.id
-                    institutionList.add(institution)
+                allInstitutions.clear()
+                if (documents != null) {
+                    for (doc in documents) {
+                        val inst = doc.toObject(Institution::class.java)
+                        inst.id = doc.id
+                        if (inst.name.isBlank()) {
+                            inst.name = doc.getString("title") ?: doc.getString("name") ?: "Institution"
+                        }
+                        allInstitutions.add(inst)
+                    }
                 }
-                adapter.updateList(institutionList)
+                Log.d(TAG, "Loaded ${allInstitutions.size} institutions from Firestore")
+                filterAndDisplay()
             }
-            .addOnFailureListener {
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Failed to load institutions", e)
                 Toast.makeText(this, "Unable to load institutions", Toast.LENGTH_SHORT).show()
             }
     }
 
-    private fun searchInstitutions(searchText: String) {
-        if (searchText.isBlank()) {
-            adapter.updateList(institutionList)
-            return
+    private fun filterAndDisplay() {
+        val filtered = allInstitutions.filter { inst ->
+            val isCollegeOrTvet = inst.type.contains("College", ignoreCase = true) || inst.type.contains("TVET", ignoreCase = true)
+            val matchesType = if (currentType.equals("University", ignoreCase = true)) {
+                !isCollegeOrTvet // Strictly Universities only
+            } else {
+                isCollegeOrTvet // Colleges & TVETs only
+            }
+
+            val matchesSearch = searchQuery.isEmpty() ||
+                    inst.name.contains(searchQuery, ignoreCase = true) ||
+                    inst.province.contains(searchQuery, ignoreCase = true)
+            matchesType && matchesSearch
         }
-        val results = institutionList.filter {
-            it.name.contains(searchText, ignoreCase = true) ||
-                    it.province.contains(searchText, ignoreCase = true)
-        }
-        adapter.updateList(results)
+
+        displayedList.clear()
+        displayedList.addAll(filtered)
+        adapter.notifyDataSetChanged()
     }
 }

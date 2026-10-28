@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +27,8 @@ class NotificationsActivity : AppCompatActivity() {
 
     private lateinit var rvNotifications: RecyclerView
     private lateinit var llEmptyState: LinearLayout
+    private lateinit var btnNotif: RelativeLayout
+    private lateinit var tvNotifBadge: TextView
     private lateinit var adapter: NotificationAdapter
 
     private val db = FirebaseFirestore.getInstance()
@@ -40,17 +43,25 @@ class NotificationsActivity : AppCompatActivity() {
         NavigationHelper.setupDrawer(this, R.id.navNotifications)
 
         bindViews()
+        setupListeners()
         setupRecyclerView()
         loadNotificationsFromFirestore()
     }
 
-    // Connect XML views to activity variables
     private fun bindViews() {
         rvNotifications = findViewById(R.id.rvNotifications)
         llEmptyState = findViewById(R.id.llEmptyNotifications)
+        btnNotif = findViewById(R.id.btnNotifications)
+        tvNotifBadge = findViewById(R.id.tvNotifBadge)
     }
 
-    // Setup RecyclerView with LayoutManager and Adapter
+    private fun setupListeners() {
+        btnNotif.setOnClickListener {
+            // Already on Notifications screen
+            Toast.makeText(this, "You are on Notifications", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun setupRecyclerView() {
         adapter = NotificationAdapter(notificationList) { notification ->
             if (!notification.isRead) {
@@ -61,7 +72,6 @@ class NotificationsActivity : AppCompatActivity() {
         rvNotifications.adapter = adapter
     }
 
-    // Reads user notifications from Firestore users/{uid}/notifications ordered newest first
     private fun loadNotificationsFromFirestore() {
         val uid = auth.currentUser?.uid
         if (uid == null) {
@@ -75,16 +85,26 @@ class NotificationsActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { snapshot ->
                 notificationList.clear()
+                var unreadCount = 0
+
                 if (snapshot != null && !snapshot.isEmpty) {
                     for (doc in snapshot.documents) {
-                        notificationList.add(NotificationModel.fromFirestore(doc))
+                        val notif = NotificationModel.fromFirestore(doc)
+                        notificationList.add(notif)
+                        if (!notif.isRead) unreadCount++
                     }
-                    Log.d(TAG, "Loaded ${notificationList.size} notifications from Firestore")
                     showEmptyState(false)
                 } else {
-                    Log.d(TAG, "No notifications found in Firestore")
                     showEmptyState(true)
                 }
+
+                if (unreadCount > 0) {
+                    tvNotifBadge.visibility = View.VISIBLE
+                    tvNotifBadge.text = if (unreadCount > 9) "9+" else unreadCount.toString()
+                } else {
+                    tvNotifBadge.visibility = View.GONE
+                }
+
                 adapter.notifyDataSetChanged()
             }
             .addOnFailureListener { e ->
@@ -94,7 +114,6 @@ class NotificationsActivity : AppCompatActivity() {
             }
     }
 
-    // Marks a notification as read (isRead = true) in Firestore
     private fun markNotificationAsRead(notification: NotificationModel) {
         val uid = auth.currentUser?.uid ?: return
 
@@ -109,7 +128,6 @@ class NotificationsActivity : AppCompatActivity() {
             }
     }
 
-    // Toggle empty state visibility
     private fun showEmptyState(isEmpty: Boolean) {
         if (isEmpty) {
             llEmptyState.visibility = View.VISIBLE
@@ -120,7 +138,6 @@ class NotificationsActivity : AppCompatActivity() {
         }
     }
 
-    // RecyclerView Adapter for Notification items
     private inner class NotificationAdapter(
         private val list: List<NotificationModel>,
         private val onItemClick: (NotificationModel) -> Unit
@@ -144,7 +161,6 @@ class NotificationsActivity : AppCompatActivity() {
             holder.tvNotifTitle.text = item.title
             holder.tvNotifMessage.text = item.message
 
-            // Date formatting
             if (item.createdAt != null) {
                 val sdf = SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault())
                 holder.tvNotifTime.text = sdf.format(item.createdAt.toDate())
@@ -152,7 +168,6 @@ class NotificationsActivity : AppCompatActivity() {
                 holder.tvNotifTime.text = "Recent"
             }
 
-            // Unread state styling
             if (item.isRead) {
                 holder.vUnreadDot.visibility = View.GONE
                 holder.ivNotifIcon.imageTintList = getColorStateList(R.color.text_tertiary)
