@@ -10,7 +10,7 @@
     <string name="fb_login_protocol_scheme">fb1234567890</string>
     <string name="facebook_client_token">abcdef1234567890</string>
 
-    <!-- Navigation & Titles -->
+    <!-- Navigation & Drawer -->
     <string name="nav_home">Ekhaya</string>
     <string name="nav_institutions">Izikhungo</string>
     <string name="nav_explore">Hlola Izifundo neZimfundiso</string>
@@ -27,6 +27,8 @@
     <string name="header_explore">HLOLA</string>
     <string name="header_my_journey">IHUBO LAMI</string>
     <string name="header_account">IKHENTSHI</string>
+    <string name="drawer_default_user">Umfundi</string>
+    <string name="drawer_default_grade">Ibanga 12 / Umfundi kaMatriki</string>
 
     <!-- General & Buttons -->
     <string name="get_started">Qala Manje</string>
@@ -40,7 +42,13 @@
     <string name="explore_all">Hlola konke</string>
     <string name="calculate">Bala</string>
     <string name="search">Cinga</string>
-    <string name="search_hint">Cinga amayunivesithi, izifundo...</string>
+    <string name="search_hint">Cinga amayunivesithi, izifundo&#8230;</string>
+    <string name="add_new">+ Engeza Okusha</string>
+    <string name="add_application">+ Engeza Isicelo</string>
+    <string name="add_marks">+ Engeza Amamaki</string>
+    <string name="edit_profile">Hlela Iphrofayili</string>
+    <string name="apply_now">Faka Isicelo Manje</string>
+    <string name="visit_website">Vakashela Iwebhusayithi Esemthethweni</string>
 
     <!-- Login & Sign Up -->
     <string name="welcome_title">Siyakwamukela Futhi</string>
@@ -59,11 +67,21 @@
     <string name="select_grade_title">Khetha Ibanga / Isimo</string>
     <string name="already_have_account">Unalo kakade akhawunti? </string>
     <string name="or_continue_with">noma qhubeka nge</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+
+    <!-- Grades Options -->
+    <string name="grade_prompt">Khetha ibanga lwakho</string>
+    <string name="grade_10">Ibanga 10</string>
+    <string name="grade_11">Ibanga 11</string>
+    <string name="grade_12">Ibanga 12</string>
+    <string name="grade_matriculant">Umfundi kaMatriki</string>
 
     <!-- Home & Dashboard -->
     <string name="greeting_format">Sawubona, %1$s 👋</string>
     <string name="your_preparation">UKULUNGISELELA KWAKHO</string>
     <string name="tasks_completed_format">%1$d yemisebenzi eynqunyiwe kweyisi-7</string>
+    <string name="all_tasks_completed">Yemisebenzi yonke eynqunyiwe! Ulungele 🎉</string>
     <string name="next_step_format">Iskhiphe: %1$s →</string>
     <string name="your_aps">I-APS YAKHO</string>
     <string name="eligible_courses">IZIFUNDO EZIFANELEKILE</string>
@@ -73,6 +91,27 @@
     <string name="upcoming_deadlines">📅 IZINSUKU ZEMIKHAWULO</string>
     <string name="recommended_for_you">⭐ PHAKAMISELWE WEWE</string>
     <string name="calculate_aps_prompt">Bala i-APS yakho ukuvula izincomo zezifundo.</string>
+
+    <!-- Statuses (UI Display Labels) -->
+    <string name="status_draft">Ikhophi</string>
+    <string name="status_submitted">Kuthunyelwe</string>
+    <string name="status_under_review">Kuyabukezwa</string>
+    <string name="status_accepted">Kwamukelwe</string>
+    <string name="status_rejected">Kwaliwe</string>
+
+    <!-- Qualification Badges -->
+    <string name="you_qualify">✔ Uyakufanelekela</string>
+    <string name="points_short_format">⚠️ Ushoda ngamaphuzu %1$d</string>
+    <string name="qualifying_score">✔ Amaphuzu Afanelekile</string>
+    <string name="free_to_apply">Mahhala ukufaka isicelo</string>
+
+    <!-- Intro Pages -->
+    <string name="intro_title_1">Isibali se-APS Esihlezi Solungile</string>
+    <string name="intro_subtitle_1">Bala amaphuzu akho e-NSC APS ngokushesha ubone iziqu ozifanelekelayo.</string>
+    <string name="intro_title_2">Hlola Izifundo neZimfundiso</string>
+    <string name="intro_subtitle_2">Thola izinhlelo zemfundo ephakeme eNingizimu Afrika ucele nezimali zokufunda.</string>
+    <string name="intro_title_3">Landela Izicelo Zakho</string>
+    <string name="intro_subtitle_3">Phatha zonke izicelo zakho zasenyunivesithi namadokhumenti endaweni eyodwa.</string>
 
     <!-- Settings & Language -->
     <string name="settings_title">Izilungiselelo</string>
@@ -90,6 +129,19 @@
     <string name="about_unipath">Mayelana ne-UniPath SA</string>
     <string name="image_credits">Izikweletu Zezezithombe</string>
     <string name="disclaimer_fees">Izimali ziyatshintsha minyaka yonke. Hlola njalo kuwebhusayithi esemthethweni.</string>
+
+    <!-- Empty States -->
+    <string name="no_saved_items_msg">Awekho amagugu alondoloziwe okwamanje — thinta isithombe sebhukhimakhi ukulondoloza.</string>
+    <string name="no_applications_msg">Awekho izicelo ezengezwe okwamanje</string>
+    <string name="no_notifications_msg">Awekho izaziso okwamanje</string>
+    <string name="no_results_msg">Awekho amamaki ezifundo awo-engeziwe okwamanje.</string>
+    <string name="no_courses_found">Awekho izifundo ezitholakele ezihambisana nocwaningo lwakho.</string>
+
+    <!-- Profile & Tools -->
+    <string name="profile_completed_format">%1$d%% Iphrofayili Igcwalisiwe</string>
+    <string name="my_subject_results">AMAMAKI AMI EZIFUNDO</string>
+    <string name="achievements_badges">IMPUMELELO NEZBAMBE</string>
+    <string name="my_tools">IZITULUSI ZAMI</string>
 
     <!-- Accessibility -->
     <string name="toggle_visibility">Guqula ukubonakala</string>

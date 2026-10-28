@@ -134,11 +134,7 @@ class InstitutionsActivity : AppCompatActivity() {
                 allInstitutions.clear()
                 if (documents != null) {
                     for (doc in documents) {
-                        val inst = doc.toObject(Institution::class.java)
-                        inst.id = doc.id
-                        if (inst.name.isBlank()) {
-                            inst.name = doc.getString("title") ?: doc.getString("name") ?: "Institution"
-                        }
+                        val inst = Institution.fromFirestore(doc)
                         allInstitutions.add(inst)
                     }
                 }

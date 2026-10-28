@@ -9,7 +9,7 @@
     <string name="fb_login_protocol_scheme">fb1234567890</string>
     <string name="facebook_client_token">abcdef1234567890</string>
 
-    <!-- Navigation & Titles -->
+    <!-- Navigation & Drawer -->
     <string name="nav_home">Home</string>
     <string name="nav_institutions">Institutions</string>
     <string name="nav_explore">Explore Courses &amp; Bursaries</string>
@@ -26,6 +26,8 @@
     <string name="header_explore">EXPLORE</string>
     <string name="header_my_journey">MY JOURNEY</string>
     <string name="header_account">ACCOUNT</string>
+    <string name="drawer_default_user">Student</string>
+    <string name="drawer_default_grade">Grade 12 / Matriculant</string>
 
     <!-- General & Buttons -->
     <string name="get_started">Get Started</string>
@@ -40,9 +42,15 @@
     <string name="calculate">Calculate</string>
     <string name="search">Search</string>
     <string name="search_hint">Search universities, courses...</string>
+    <string name="add_new">+ Add New</string>
+    <string name="add_application">+ Add Application</string>
+    <string name="add_marks">+ Add Marks</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="apply_now">Apply Now / Add Application</string>
+    <string name="visit_website">Visit Official Website</string>
 
     <!-- Login & Sign Up -->
-    <string name="welcome_title">Welcome Back</string>
+    <string name="welcome_title">Welcome back</string>
     <string name="login_subtitle">Sign in to continue your education journey.</string>
     <string name="email_hint">Email Address</string>
     <string name="password_hint">Password</string>
@@ -58,11 +66,21 @@
     <string name="select_grade_title">Select Grade / Status</string>
     <string name="already_have_account">Already have an account? </string>
     <string name="or_continue_with">or continue with</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+
+    <!-- Grades Options -->
+    <string name="grade_prompt">Select your grade</string>
+    <string name="grade_10">Grade 10</string>
+    <string name="grade_11">Grade 11</string>
+    <string name="grade_12">Grade 12</string>
+    <string name="grade_matriculant">Matriculant</string>
 
     <!-- Home & Dashboard -->
     <string name="greeting_format">Hey, %1$s 👋</string>
     <string name="your_preparation">YOUR PREPARATION</string>
     <string name="tasks_completed_format">%1$d of 7 tasks completed</string>
+    <string name="all_tasks_completed">All 7 steps completed! You\'re ready 🎉</string>
     <string name="next_step_format">Next: %1$s →</string>
     <string name="your_aps">YOUR APS</string>
     <string name="eligible_courses">ELIGIBLE COURSES</string>
@@ -72,6 +90,27 @@
     <string name="upcoming_deadlines">📅 UPCOMING DEADLINES</string>
     <string name="recommended_for_you">⭐ RECOMMENDED FOR YOU</string>
     <string name="calculate_aps_prompt">Calculate your APS to unlock course recommendations.</string>
+
+    <!-- Statuses (UI Display Labels) -->
+    <string name="status_draft">Draft</string>
+    <string name="status_submitted">Submitted</string>
+    <string name="status_under_review">Under Review</string>
+    <string name="status_accepted">Accepted</string>
+    <string name="status_rejected">Rejected</string>
+
+    <!-- Qualification Badges -->
+    <string name="you_qualify">✔ You qualify</string>
+    <string name="points_short_format">⚠️ %1$d points short</string>
+    <string name="qualifying_score">✔ Qualifying Score</string>
+    <string name="free_to_apply">Free to apply</string>
+
+    <!-- Intro Pages -->
+    <string name="intro_title_1">Automatic APS Calculator</string>
+    <string name="intro_subtitle_1">Calculate your NSC APS score instantly and see which degree programmes you qualify for.</string>
+    <string name="intro_title_2">Explore Courses &amp; Bursaries</string>
+    <string name="intro_subtitle_2">Discover higher education programmes across South Africa and apply for bursaries.</string>
+    <string name="intro_title_3">Track Your Applications</string>
+    <string name="intro_subtitle_3">Manage all your university applications, document uploads and progress steps in one place.</string>
 
     <!-- Settings & Language -->
     <string name="settings_title">Settings</string>
@@ -89,6 +128,19 @@
     <string name="about_unipath">About UniPath SA</string>
     <string name="image_credits">Image Credits</string>
     <string name="disclaimer_fees">Fees change each year. Always confirm on the official website.</string>
+
+    <!-- Empty States -->
+    <string name="no_saved_items_msg">No saved items yet — tap the bookmark icon on any course or institution to save it here.</string>
+    <string name="no_applications_msg">No applications added yet</string>
+    <string name="no_notifications_msg">No notifications yet</string>
+    <string name="no_results_msg">No subject results added yet.</string>
+    <string name="no_courses_found">No courses found matching your filter.</string>
+
+    <!-- Profile & Tools -->
+    <string name="profile_completed_format">%1$d%% Profile Completed</string>
+    <string name="my_subject_results">MY SUBJECT RESULTS</string>
+    <string name="achievements_badges">ACHIEVEMENTS &amp; BADGES</string>
+    <string name="my_tools">MY TOOLS</string>
 
     <!-- Accessibility -->
     <string name="toggle_visibility">Toggle visibility</string>

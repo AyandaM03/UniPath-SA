@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="sans-serif-black"
-                android:text="Saved Items"
+                android:text="@string/nav_saved"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
@@ -51,10 +51,10 @@
                 android:focusable="true">
 
                 <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_centerInParent="true"
-                    android:src="@android:drawable/ic_popup_reminder"
+                    android:src="@drawable/ic_bell_outline"
                     app:tint="@color/white"
                     tools:ignore="ContentDescription" />
 
@@ -79,6 +79,55 @@
 
         </RelativeLayout>
 
+        <!-- Category Filter Tabs (Institutions, Courses, Bursaries) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_m"
+            android:layout_marginTop="@dimen/spacing_s"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSavedInstitutions"
+                style="@style/Widget.UniPathSA.Button"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="@string/nav_institutions"
+                android:textSize="12sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSavedCourses"
+                style="@style/Widget.UniPathSA.Button.Secondary"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:text="Courses"
+                android:textSize="12sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSavedBursaries"
+                style="@style/Widget.UniPathSA.Button.Secondary"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:text="Bursaries"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <!-- Progress Loading Spinner -->
+        <ProgressBar
+            android:id="@+id/pbSavedLoading"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:visibility="gone" />
+
         <!-- Empty State Container -->
         <LinearLayout
             android:id="@+id/llEmptySavedContainer"
@@ -90,8 +139,8 @@
             android:visibility="gone">
 
             <ImageView
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:src="@drawable/ic_bookmark_outline"
                 app:tint="@color/text_tertiary"
                 tools:ignore="ContentDescription" />
@@ -103,7 +152,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="sans-serif-medium"
                 android:gravity="center"
-                android:text="No saved items yet — tap the bookmark icon on any course or institution to save it here."
+                android:text="@string/no_saved_items_msg"
                 android:textColor="@color/text_secondary"
                 android:textSize="14sp" />
 
@@ -113,16 +162,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginTop="16dp"
-                android:text="Explore Courses &amp; Institutions" />
+                android:text="Explore Items" />
         </LinearLayout>
 
+        <!-- Reused Source Adapter RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerSaved"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:clipToPadding="false"
-            android:paddingTop="12dp" />
+            android:paddingTop="8dp"
+            android:paddingBottom="@dimen/spacing_xl" />
 
     </LinearLayout>
 

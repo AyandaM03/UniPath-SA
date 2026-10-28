@@ -97,7 +97,6 @@ class HomeActivity : AppCompatActivity() {
         loadDashboardData()
     }
 
-    // Connect XML views
     private fun bindViews() {
         swipeRefresh = findViewById(R.id.swipeRefreshHome)
         btnNotifications = findViewById(R.id.btnNotifications)
@@ -138,7 +137,6 @@ class HomeActivity : AppCompatActivity() {
         rvHomeInstitutions.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     }
 
-    // Setup pull-to-refresh and button click listeners
     private fun setupListeners() {
         swipeRefresh.setOnRefreshListener {
             Log.d(TAG, "SwipeRefresh triggered")
@@ -190,7 +188,6 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    // Loads all dashboard sections from Firestore
     private fun loadDashboardData() {
         val uid = auth.currentUser?.uid
         if (uid == null) {
@@ -206,17 +203,15 @@ class HomeActivity : AppCompatActivity() {
         fetchFeaturedInstitutions()
     }
 
-    // Updates greeting text with user's first name
     private fun updateGreetingHeader() {
         val user = auth.currentUser
-        val fullName = if (!user?.displayName.isNullOrBlank()) user?.displayName!! else "Student"
-        val firstName = fullName.trim().split(" ").firstOrNull() ?: "Student"
+        val fullName = if (!user?.displayName.isNullOrBlank()) user?.displayName!! else getString(R.string.drawer_default_user)
+        val firstName = fullName.trim().split(" ").firstOrNull() ?: getString(R.string.drawer_default_user)
 
-        tvGreeting.text = "Hey, $firstName 👋"
-        tvSlogan.text = "Find your path. Build your future."
+        tvGreeting.text = getString(R.string.greeting_format, firstName)
+        tvSlogan.text = getString(R.string.slogan)
     }
 
-    // Reads unread notifications count
     private fun fetchUnreadNotificationsCount(uid: String) {
         db.collection("users").document(uid).collection("notifications")
             .whereEqualTo("isRead", false)
@@ -235,15 +230,14 @@ class HomeActivity : AppCompatActivity() {
             }
     }
 
-    // Reads user profile, APS score and task completions
     private fun fetchUserProfileAndPreparation(uid: String) {
         db.collection("users").document(uid)
             .get()
             .addOnSuccessListener { doc ->
                 if (doc.exists()) {
-                    val fullName = doc.getString("fullName") ?: doc.getString("name") ?: auth.currentUser?.displayName ?: ""
-                    val firstName = if (fullName.isNotBlank()) fullName.trim().split(" ").first() else "Student"
-                    tvGreeting.text = "Hey, $firstName 👋"
+                    val fullName = doc.getString("fullName") ?: doc.getString("name") ?: auth.currentUser?.displayName ?: getString(R.string.drawer_default_user)
+                    val firstName = if (fullName.isNotBlank()) fullName.trim().split(" ").first() else getString(R.string.drawer_default_user)
+                    tvGreeting.text = getString(R.string.greeting_format, firstName)
 
                     val phone = doc.getString("phone") ?: ""
                     val school = doc.getString("school") ?: doc.getString("highSchool") ?: ""
@@ -305,8 +299,8 @@ class HomeActivity : AppCompatActivity() {
                                             isSchoolAdded = isSchoolAdded,
                                             hasSubjects = hasSubjects,
                                             hasAps = hasAps,
-                                            hasSavedItems = hasSavedItems,
-                                            hasApplications = hasApplications,
+                                            hasSavedItems = savedCount > 0,
+                                            hasApplications = appsCount > 0,
                                             hasDocuments = hasDocuments
                                         )
 
@@ -317,14 +311,14 @@ class HomeActivity : AppCompatActivity() {
                                         pbPrepProgress.progress = result.percentage
 
                                         if (result.percentage == 100) {
-                                            tvPrepSummary.text = "All 7 steps completed! You're ready 🎉"
+                                            tvPrepSummary.text = getString(R.string.all_tasks_completed)
                                             btnNextStep.visibility = View.GONE
                                             runCelebrationAnimation()
                                         } else {
-                                            tvPrepSummary.text = "You're ${result.completedCount} steps in, keep going!"
+                                            tvPrepSummary.text = getString(R.string.tasks_completed_format, result.completedCount)
                                             btnNextStep.visibility = View.VISIBLE
                                             firstPendingTask = result.pendingTasks.firstOrNull()
-                                            btnNextStep.text = "Next: ${firstPendingTask ?: "Complete Setup"} →"
+                                            btnNextStep.text = getString(R.string.next_step_format, firstPendingTask ?: "Complete Setup")
                                         }
 
                                         populatePreparationChips(result)
@@ -335,7 +329,6 @@ class HomeActivity : AppCompatActivity() {
             }
     }
 
-    // Runs a small scale-pulse celebratory animation when preparation reaches 100%
     private fun runCelebrationAnimation() {
         val scaleX = ObjectAnimator.ofFloat(cvPrepCard, View.SCALE_X, 1.0f, 1.04f, 1.0f)
         val scaleY = ObjectAnimator.ofFloat(cvPrepCard, View.SCALE_Y, 1.0f, 1.04f, 1.0f)
@@ -441,11 +434,8 @@ class HomeActivity : AppCompatActivity() {
                 allInstitutionsList.clear()
                 if (snapshot != null && !snapshot.isEmpty) {
                     for (doc in snapshot.documents) {
-                        val inst = doc.toObject(Institution::class.java)
-                        if (inst != null) {
-                            inst.id = doc.id
-                            allInstitutionsList.add(inst)
-                        }
+                        val inst = Institution.fromFirestore(doc)
+                        allInstitutionsList.add(inst)
                     }
                 }
 
@@ -482,7 +472,16 @@ class HomeActivity : AppCompatActivity() {
             holder.tvUni.text = item.university
             holder.tvCourse.text = item.course
             holder.tvDate.text = "Closes: ${item.deadline.ifBlank { "30 Sep 2025" }}"
-            holder.tvStatus.text = item.status
+
+            // Map English status string from Firestore to localized display string
+            holder.tvStatus.text = when (item.status.lowercase(Locale.ROOT)) {
+                "draft" -> getString(R.string.status_draft)
+                "submitted" -> getString(R.string.status_submitted)
+                "under review", "in review" -> getString(R.string.status_under_review)
+                "accepted" -> getString(R.string.status_accepted)
+                "rejected" -> getString(R.string.status_rejected)
+                else -> item.status
+            }
 
             holder.itemView.setOnClickListener { onItemClick(item) }
         }

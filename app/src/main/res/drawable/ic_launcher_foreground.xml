@@ -4,7 +4,94 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <path
-        android:fillColor="#1A237E"
-        android:pathData="M54,28.5L22.5,45L54,61.5L80.25,48.91V68.62H85.5V45M33.88,57.03V69.37L54,80.08L74.12,69.37V57.03L54,67.74L33.88,57.03Z" />
+
+    <!-- Inset Group for Safe Zone Padding on Adaptive Icon -->
+    <group
+        android:scaleX="0.7"
+        android:scaleY="0.7"
+        android:pivotX="54"
+        android:pivotY="54">
+
+        <!-- Navy Laurel Wreath (Left Side) -->
+        <path
+            android:fillColor="#0B1F4D"
+            android:pathData="M 26,29 C 20,39 20,59 28,72 C 34,82 44,88 52,90 C 49,88 42,84 36,76 C 28,66 27,49 32,37 Z" />
+        <path
+            android:fillColor="#0B1F4D"
+            android:pathData="M 22,36 C 18,39 16,46 19,52 C 22,50 24,44 26,39 Z" />
+        <path
+            android:fillColor="#0B1F4D"
+            android:pathData="M 20,46 C 16,52 16,60 20,65 C 23,62 25,54 25,48 Z" />
+
+        <!-- Navy Laurel Wreath (Right Side) -->
+        <path
+            android:fillColor="#0B1F4D"
+            android:pathData="M 82,29 C 88,39 88,59 80,72 C 74,82 64,88 56,90 C 59,88 66,84 72,76 C 80,66 81,49 76,37 Z" />
+        <path
+            android:fillColor="#0B1F4D"
+            android:pathData="M 86,36 C 90,39 92,46 89,52 C 86,50 84,44 82,39 Z" />
+        <path
+            android:fillColor="#0B1F4D"
+            android:pathData="M 88,46 C 92,52 92,60 88,65 C 85,62 83,54 83,48 Z" />
+
+        <!-- Red Graduation Cap / Mortarboard -->
+        <path
+            android:fillColor="#D32F2F"
+            android:pathData="M 54,19 L 30,28 L 54,37 L 78,28 Z" />
+        <path
+            android:fillColor="#B71C1C"
+            android:pathData="M 41,33.5 L 41,38 C 41,41.5 47,44 54,44 C 61,44 67,41.5 67,38 L 67,33.5 L 54,38.5 Z" />
+        <!-- Tassel -->
+        <path
+            android:fillColor="#D32F2F"
+            android:pathData="M 75,29 L 75,40 L 77,40 L 77,29 Z" />
+        <path
+            android:fillColor="#D32F2F"
+            android:pathData="M 76,41 A 1.5,1.5 0 1,0 76,44 A 1.5,1.5 0 1,0 76,41 Z" />
+
+        <!-- Green Fountain Pen Nib -->
+        <path
+            android:fillColor="#2E7D32"
+            android:pathData="M 48,42 L 60,42 L 58,58 L 54,66 L 50,58 Z" />
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M 54,50 A 1.5,1.5 0 1,0 54,53 A 1.5,1.5 0 1,0 54,50 Z" />
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M 53.5,52.5 L 54.5,52.5 L 54.5,64 L 53.5,64 Z" />
+
+        <!-- Black Open Book -->
+        <path
+            android:fillColor="#111111"
+            android:pathData="M 54,60 L 32,49 L 32,54 L 54,65 L 76,54 L 76,49 Z" />
+        <path
+            android:fillColor="#222222"
+            android:pathData="M 54,65 L 32,54 L 32,59 L 54,70 L 76,59 L 76,54 Z" />
+        <path
+            android:fillColor="#000000"
+            android:pathData="M 54,70 L 32,59 L 32,64 L 54,75 L 76,64 L 76,59 Z" />
+
+        <!-- Three Gold Stars -->
+        <path
+            android:fillColor="#FFC107"
+            android:pathData="M 42,71 L 43.5,74.5 L 47,75 L 44.5,77.5 L 45,81 L 42,79 L 39,81 L 39.5,77.5 L 37,75 L 40.5,74.5 Z" />
+        <path
+            android:fillColor="#FFC107"
+            android:pathData="M 54,75 L 55.8,79.2 L 60,79.8 L 57,82.8 L 57.8,87 L 54,84.5 L 50.2,87 L 51,82.8 L 48,79.8 L 52.2,79.2 Z" />
+        <path
+            android:fillColor="#FFC107"
+            android:pathData="M 66,71 L 67.5,74.5 L 71,75 L 68.5,77.5 L 69,81 L 66,79 L 63,81 L 63.5,77.5 L 61,75 L 64.5,74.5 Z" />
+
+        <!-- Navy Ribbon Banner -->
+        <path
+            android:fillColor="#0B1F4D"
+            android:pathData="M 16,90 L 26,85 L 26,95 Z" />
+        <path
+            android:fillColor="#0B1F4D"
+            android:pathData="M 92,90 L 82,85 L 82,95 Z" />
+        <path
+            android:fillColor="#0B1F4D"
+            android:pathData="M 22,88 Q 54,100 86,88 L 88,96 Q 54,108 20,96 Z" />
+
+    </group>
 </vector>

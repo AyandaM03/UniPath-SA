@@ -45,12 +45,12 @@ class ExploreCourseAdapter(
         if (userAps > 0 && course.apsRequirement > 0) {
             holder.badge.visibility = View.VISIBLE
             if (userAps >= course.apsRequirement) {
-                holder.badge.text = "✔ You qualify"
+                holder.badge.text = activity.getString(R.string.you_qualify)
                 holder.badge.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(activity, R.color.status_accepted_bg))
                 holder.badge.setTextColor(ContextCompat.getColor(activity, R.color.status_accepted_fg))
             } else {
                 val diff = course.apsRequirement - userAps
-                holder.badge.text = "⚠ $diff pts short"
+                holder.badge.text = activity.getString(R.string.points_short_format, diff)
                 holder.badge.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(activity, R.color.status_review_bg))
                 holder.badge.setTextColor(ContextCompat.getColor(activity, R.color.status_review_fg))
             }

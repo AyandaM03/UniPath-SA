@@ -70,14 +70,17 @@ object NavigationHelper {
         val auth = FirebaseAuth.getInstance()
         val user = auth.currentUser
 
+        val defaultUser = activity.getString(R.string.drawer_default_user)
+        val defaultGrade = activity.getString(R.string.drawer_default_grade)
+
         if (user == null) {
-            tvName.text = "Student"
-            tvGrade?.text = "Matriculant / High School"
+            tvName.text = defaultUser
+            tvGrade?.text = defaultGrade
             tvAvatar?.text = "S"
             return
         }
 
-        val displayName = if (!user.displayName.isNullOrBlank()) user.displayName!! else "Student"
+        val displayName = if (!user.displayName.isNullOrBlank()) user.displayName!! else defaultUser
         tvName.text = displayName
         tvAvatar?.text = displayName.trim().take(1).uppercase()
 
@@ -87,7 +90,7 @@ object NavigationHelper {
             .addOnSuccessListener { doc ->
                 if (doc.exists()) {
                     val fullName = doc.getString("fullName") ?: doc.getString("name") ?: displayName
-                    val grade = doc.getString("grade") ?: doc.getString("school") ?: "Matriculant"
+                    val grade = doc.getString("grade") ?: doc.getString("school") ?: defaultGrade
 
                     tvName.text = fullName
                     tvGrade?.text = grade

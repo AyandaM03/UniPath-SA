@@ -65,7 +65,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-black"
-                        android:text="UniPath Student"
+                        android:text="@string/drawer_default_user"
                         android:textColor="@color/white"
                         android:textSize="15sp" />
 
@@ -75,7 +75,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:fontFamily="sans-serif"
-                        android:text="Grade 12 / Matriculant"
+                        android:text="@string/drawer_default_grade"
                         android:textColor="#CCFFFFFF"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -107,7 +107,7 @@
                     android:layout_marginBottom="4dp"
                     android:fontFamily="sans-serif-bold"
                     android:letterSpacing="0.1"
-                    android:text="EXPLORE"
+                    android:text="@string/header_explore"
                     android:textColor="#99FFFFFF"
                     android:textSize="11sp"
                     tools:ignore="SmallSp" />
@@ -122,7 +122,7 @@
                     android:gravity="center_vertical"
                     android:paddingStart="20dp"
                     android:paddingEnd="16dp"
-                    android:text="Home"
+                    android:text="@string/nav_home"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-medium" />
@@ -137,7 +137,7 @@
                     android:gravity="center_vertical"
                     android:paddingStart="20dp"
                     android:paddingEnd="16dp"
-                    android:text="Institutions"
+                    android:text="@string/nav_institutions"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-medium" />
@@ -152,7 +152,7 @@
                     android:gravity="center_vertical"
                     android:paddingStart="20dp"
                     android:paddingEnd="16dp"
-                    android:text="Explore Courses &amp; Bursaries"
+                    android:text="@string/nav_explore"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-medium" />
@@ -166,7 +166,7 @@
                     android:layout_marginBottom="4dp"
                     android:fontFamily="sans-serif-bold"
                     android:letterSpacing="0.1"
-                    android:text="MY JOURNEY"
+                    android:text="@string/header_my_journey"
                     android:textColor="#99FFFFFF"
                     android:textSize="11sp"
                     tools:ignore="SmallSp" />
@@ -181,7 +181,7 @@
                     android:gravity="center_vertical"
                     android:paddingStart="20dp"
                     android:paddingEnd="16dp"
-                    android:text="APS Calculator"
+                    android:text="@string/nav_aps_calc"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-medium" />
@@ -196,7 +196,7 @@
                     android:gravity="center_vertical"
                     android:paddingStart="20dp"
                     android:paddingEnd="16dp"
-                    android:text="Applications Tracker"
+                    android:text="@string/nav_applications"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-medium" />
@@ -211,7 +211,7 @@
                     android:gravity="center_vertical"
                     android:paddingStart="20dp"
                     android:paddingEnd="16dp"
-                    android:text="Saved Items"
+                    android:text="@string/nav_saved"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-medium" />
@@ -226,7 +226,7 @@
                     android:gravity="center_vertical"
                     android:paddingStart="20dp"
                     android:paddingEnd="16dp"
-                    android:text="My Documents"
+                    android:text="@string/nav_documents"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-medium" />
@@ -240,7 +240,7 @@
                     android:layout_marginBottom="4dp"
                     android:fontFamily="sans-serif-bold"
                     android:letterSpacing="0.1"
-                    android:text="ACCOUNT"
+                    android:text="@string/header_account"
                     android:textColor="#99FFFFFF"
                     android:textSize="11sp"
                     tools:ignore="SmallSp" />
@@ -260,7 +260,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:fontFamily="sans-serif-medium"
-                        android:text="Notifications"
+                        android:text="@string/nav_notifications"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
 
@@ -292,7 +292,7 @@
                     android:gravity="center_vertical"
                     android:paddingStart="20dp"
                     android:paddingEnd="16dp"
-                    android:text="Profile"
+                    android:text="@string/nav_profile"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-medium" />
@@ -307,7 +307,7 @@
                     android:gravity="center_vertical"
                     android:paddingStart="20dp"
                     android:paddingEnd="16dp"
-                    android:text="Settings"
+                    android:text="@string/nav_settings"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:fontFamily="sans-serif-medium" />
@@ -339,7 +339,7 @@
                 android:gravity="center_vertical"
                 android:paddingStart="20dp"
                 android:paddingEnd="16dp"
-                android:text="Log Out"
+                android:text="@string/nav_logout"
                 android:textColor="#F87171"
                 android:textSize="14sp"
                 android:fontFamily="sans-serif-bold" />
