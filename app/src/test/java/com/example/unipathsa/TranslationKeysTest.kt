@@ -43,6 +43,11 @@ class TranslationKeysTest {
 
         for (i in 0 until stringNodes.length) {
             val node = stringNodes.item(i)
+
+            // Skip strings that are not meant to be translated (e.g. Facebook IDs)
+            val translatable = node.attributes?.getNamedItem("translatable")?.nodeValue
+            if (translatable == "false") continue
+
             val nameAttr = node.attributes?.getNamedItem("name")?.nodeValue
             if (!nameAttr.isNullOrBlank()) {
                 keys.add(nameAttr)
