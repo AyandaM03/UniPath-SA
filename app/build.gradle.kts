@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
 
     id("com.google.gms.google-services")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -36,6 +37,18 @@ android {
 }
 
 dependencies {
+    // Room (offline database)
+    implementation("androidx.room:room-runtime:2.8.4")
+    implementation("androidx.room:room-ktx:2.8.4")
+    ksp("androidx.room:room-compiler:2.8.4")
+
+    // WorkManager (runs the sync when internet returns)
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
+
+    // Lets you use .await() on Firebase tasks
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.1")
+    implementation("com.google.firebase:firebase-messaging")
+
     implementation(platform("com.google.firebase:firebase-bom:34.19.0"))
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")

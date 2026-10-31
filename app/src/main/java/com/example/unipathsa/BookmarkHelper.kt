@@ -111,6 +111,14 @@ object BookmarkHelper {
 
                 docRef.set(payload).addOnSuccessListener {
                     Log.d(TAG, "Saved item $itemId to savedItems")
+
+                    // NEW: notify when a bursary or institution is saved
+                    if (itemType == "bursary" || itemType == "institution") {
+                        val itemName = (itemData["name"] as? String) ?: "Item"
+                        val label = if (itemType == "bursary") "Bursary" else "Institution"
+                        NotificationHelper.show(activity, "$label saved", "$itemName was added to your saved list")
+                    }
+
                     Snackbar.make(anchorView, "Saved to Saved Items", Snackbar.LENGTH_LONG)
                         .setAction("UNDO") {
                             // Delete on Undo

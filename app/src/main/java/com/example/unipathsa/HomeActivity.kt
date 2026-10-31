@@ -487,5 +487,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         override fun getItemCount(): Int = list.size
+
+
     }
 }

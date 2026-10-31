@@ -5,9 +5,10 @@
     <string name="south_africa">SOUTH AFRICA</string>
 
     <!-- Facebook SDK Configuration Placeholders -->
-    <string name="facebook_app_id">1234567890</string>
-    <string name="fb_login_protocol_scheme">fb1234567890</string>
-    <string name="facebook_client_token">abcdef1234567890</string>
+    <string name="facebook_app_id" translatable="false">1234567890</string>
+  <!--  <string name="fb_login_protocol_scheme">fb1234567890</string>-->
+    <string name="fb_login_protocol_scheme" translatable="false">fb1234567890</string>
+    <string name="facebook_client_token" translatable="false">abcdef1234567890</string>
 
     <!-- Navigation & Drawer -->
     <string name="nav_home">Home</string>
