@@ -16,6 +16,9 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 class InstitutionsActivity : AppCompatActivity() {
 
@@ -128,23 +131,19 @@ class InstitutionsActivity : AppCompatActivity() {
     }
 
     private fun loadInstitutions() {
-        db.collection("institutions")
-            .get()
-            .addOnSuccessListener { documents ->
-                allInstitutions.clear()
-                if (documents != null) {
-                    for (doc in documents) {
-                        val inst = Institution.fromFirestore(doc)
-                        allInstitutions.add(inst)
-                    }
+        // 1. Show the saved copy from Room (works offline)
+        lifecycleScope.launch {
+            AppDatabase.get(this@InstitutionsActivity).institutionDao().getAll()
+                .collect { rows ->
+                    allInstitutions.clear()
+                    allInstitutions.addAll(rows.map { it.toInstitution() })
+                    Log.d(TAG, "Showing ${allInstitutions.size} institutions from Room")
+                    filterAndDisplay()
                 }
-                Log.d(TAG, "Loaded ${allInstitutions.size} institutions from Firestore")
-                filterAndDisplay()
-            }
-            .addOnFailureListener { e ->
-                Log.e(TAG, "Failed to load institutions", e)
-                Toast.makeText(this, "Unable to load institutions", Toast.LENGTH_SHORT).show()
-            }
+        }
+
+        // 2. When there is internet, download fresh data in the background
+        SyncScheduler.schedule(this)
     }
 
     private fun filterAndDisplay() {
