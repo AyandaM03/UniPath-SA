@@ -114,9 +114,16 @@ object BookmarkHelper {
                     Log.d(TAG, "Saved item $itemId to savedItems")
 
                     // Notify when a bursary or institution is saved
-                    if (itemType == "bursary" || itemType == "institution") {
-                        val itemName = (itemData["name"] as? String) ?: "Item"
-                        val label = if (itemType == "bursary") "Bursary" else "Institution"
+                    val isBursary = itemType.equals("bursary", ignoreCase = true)
+                    val isInstitution = itemType.equals("institution", ignoreCase = true) ||
+                            itemType.equals("university", ignoreCase = true) ||
+                            itemType.equals("college", ignoreCase = true)
+
+                    if (isBursary || isInstitution) {
+                        val itemName = (itemData["name"] as? String)
+                            ?: (itemData["title"] as? String)
+                            ?: "Item"
+                        val label = if (isBursary) "Bursary" else "Institution"
                         val title = "$label saved"
                         val message = "$itemName was added to your saved list"
 
