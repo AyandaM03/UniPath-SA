@@ -102,7 +102,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         // TEMPORARY test: delete this line once you've seen the notification
-        NotificationHelper.show(this, "Test", "If you see this, notifications work")
+        //NotificationHelper.show(this, "Test", "If you see this, notifications work")
     }
 
 
