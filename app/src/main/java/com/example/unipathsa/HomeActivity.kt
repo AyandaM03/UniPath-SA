@@ -23,6 +23,9 @@ import com.google.android.material.chip.ChipGroup
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Locale
+import android.Manifest
+import android.os.Build
+import androidx.core.app.ActivityCompat
 
 class HomeActivity : AppCompatActivity() {
 
@@ -89,7 +92,20 @@ class HomeActivity : AppCompatActivity() {
         bindViews()
         setupListeners()
         loadDashboardData()
+        // Ask for notification permission (Android 13+)
+        if (Build.VERSION.SDK_INT >= 33) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                100
+            )
+        }
+
+        // TEMPORARY test: delete this line once you've seen the notification
+        NotificationHelper.show(this, "Test", "If you see this, notifications work")
     }
+
+
 
     override fun onResume() {
         super.onResume()

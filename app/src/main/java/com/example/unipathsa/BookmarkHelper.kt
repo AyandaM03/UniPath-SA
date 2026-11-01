@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -112,11 +113,28 @@ object BookmarkHelper {
                 docRef.set(payload).addOnSuccessListener {
                     Log.d(TAG, "Saved item $itemId to savedItems")
 
-                    // NEW: notify when a bursary or institution is saved
+                    // Notify when a bursary or institution is saved
                     if (itemType == "bursary" || itemType == "institution") {
                         val itemName = (itemData["name"] as? String) ?: "Item"
                         val label = if (itemType == "bursary") "Bursary" else "Institution"
-                        NotificationHelper.show(activity, "$label saved", "$itemName was added to your saved list")
+                        val title = "$label saved"
+                        val message = "$itemName was added to your saved list"
+
+                        // 1. Pop-up in the phone's status bar
+                        NotificationHelper.show(activity, title, message)
+
+                        // 2. Entry on the in-app Notifications page
+                        val notif = hashMapOf(
+                            "title" to title,
+                            "message" to message,
+                            "createdAt" to Timestamp.now(),
+                            "isRead" to false
+                        )
+                        db.collection("users").document(uid).collection("notifications")
+                            .add(notif)
+                            .addOnFailureListener { e ->
+                                Log.e(TAG, "Failed to write notification", e)
+                            }
                     }
 
                     Snackbar.make(anchorView, "Saved to Saved Items", Snackbar.LENGTH_LONG)
