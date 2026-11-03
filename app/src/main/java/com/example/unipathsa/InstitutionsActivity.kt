@@ -20,6 +20,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 
+
 class InstitutionsActivity : AppCompatActivity() {
 
     private companion object {
@@ -41,6 +42,7 @@ class InstitutionsActivity : AppCompatActivity() {
 
     private var currentType = "University"
     private var searchQuery = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
