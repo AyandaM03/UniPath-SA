@@ -6,8 +6,8 @@
     <string name="south_africa">UMZANTSI AFRIKA</string>
 
     <!-- Facebook SDK Configuration Placeholders -->
-   <!-- <string name="facebook_app_id">1234567890</string>-->
-   <!-- <string name="fb_login_protocol_scheme">fb1234567890</string>-->
+    <string name="facebook_app_id">1234567890</string>
+    <string name="fb_login_protocol_scheme">fb1234567890</string>
     <string name="facebook_client_token">abcdef1234567890</string>
 
     <!-- Navigation & Drawer -->
@@ -30,7 +30,7 @@
     <string name="drawer_default_user">Umfundi</string>
     <string name="drawer_default_grade">Ibanga 12 / Umfundi weMatriki</string>
 
-    <!-- General & Buttons -->
+    <!-- General Actions & Buttons -->
     <string name="get_started">Qala Ngoku</string>
     <string name="log_in">Ngena</string>
     <string name="sign_up">Bhalisa</string>
@@ -42,16 +42,199 @@
     <string name="explore_all">Phanda konke</string>
     <string name="calculate">Bala</string>
     <string name="search">Khangela</string>
-    <string name="search_hint">Khangela iiyunivesithi, izifundo&#8230;</string>
+    <string name="search_hint">Khangela izifundo okanye iimali zofundo&#8230;</string>
+    <string name="search_institutions_hint">Khangela iiyunivesithi neekholeji&#8230;</string>
     <string name="add_new">+ Faka Enye</string>
     <string name="add_application">+ Faka Isicelo</string>
     <string name="add_marks">+ Faka Amamaki</string>
     <string name="edit_profile">Hlela Iphrofayili</string>
     <string name="apply_now">Faka Isicelo Ngoku</string>
     <string name="visit_website">Tyelela Iwebhusayithi Esemthethweni</string>
+    <string name="recalculate">Phinda ubale →</string>
+    <string name="recalculate_action">Phinda ubale →</string>
+    <string name="calculate_aps_action">Bala i-APS →</string>
+    <string name="copy">Khuphela 📋</string>
+    <string name="continue_btn">Qhubeka</string>
+    <string name="btn_view_institution">Bona Iziko</string>
+    <string name="btn_explore_items">Phanda Izinto</string>
+    <string name="confirm_fee_action">Bheka imali kwiwebhusayithi esemthethweni ↗</string>
+    <string name="undo_action">RHOXISA</string>
+    <string name="add_btn">Faka</string>
+    <string name="remove_btn">Susa</string>
 
-    <!-- Login & Sign Up -->
-    <string name="welcome_title">Ukwamkelwa Okumnandi</string>
+    <!-- Notifications Screen -->
+    <string name="no_notifications_sub">Iimpendulo malunga neezicelo zakho zeeyunivesithi neemikhawulo zizavela apha.</string>
+    <string name="msg_you_are_on_notifications">UkwiKhasini leZaziso</string>
+    <string name="msg_failed_load_notifications">Iphazamisekile ekulayisheni izaziso: %1$s</string>
+    <string name="notif_time_recent">Kutshanje</string>
+
+    <!-- Settings & Dialog Messages -->
+    <string name="msg_not_authenticated">Khange ugunyaziswe</string>
+    <string name="msg_enter_full_name">Nceda ufaka igama lakho elipheleleyo</string>
+    <string name="msg_profile_settings_saved">Izicwangciso zephrofayili zigciniwe!</string>
+    <string name="msg_failed_save_settings">Iphazamisekile ekugcineni izicwangciso: %1$s</string>
+    <string name="msg_user_email_not_found">Imeleyi yomsebenzisi khange ifumaneke</string>
+    <string name="msg_reset_email_sent_to">Imeleyi yokuseta kabutsha ighaswedi ithunyelwe ku-%1$s</string>
+    <string name="msg_error_sending_email">Impazamo ekuthumeleni imeleyi: %1$s</string>
+    <string name="help_dialog_msg">Ukuze ufumane uncedo ngeezicelo zeeyunivesithi, iinkcukacha zeeimali zofundo okanye iingxaki zobuchwepheshe, thumela imeleyi ku-support@unipathsa.co.za okanye utyelele ku-www.unipathsa.co.za.</string>
+    <string name="about_dialog_msg">UniPath SA v1.0\nIqonga lakho elililo lokukhokela emfundo emathileni eMzantsi Afrika.</string>
+    <string name="logout_dialog_msg">Uqinisekile ufuna ukuphuma e-UniPath SA?</string>
+
+    <!-- Applications Tracker & Details -->
+    <string name="stat_total">Zonke</string>
+    <string name="stat_in_progress">Ziyaqhubeka</string>
+    <string name="estimated_fees_header">IIMALO ZECELE EZIQELEKILEYO</string>
+    <string name="your_applications_header">IZICELO ZAKHO</string>
+    <string name="no_applications_sub">Phozisa inkinobho ye-+ ufake kwaye ulandele izicelo zakho zeeyunivesithi.</string>
+    <string name="dialog_add_app_title">Faka Umkhondo weCelo</string>
+    <string name="dialog_add_app_sub">Khangela amaziko nezifundo okanye ufakese amagama akho.</string>
+    <string name="hint_search_university">IYunivesithi / Iziko (i.s. Wits, UCT, UJ)&#8230;</string>
+    <string name="hint_search_course">Igama Lesifundo (i.s. Computer Science, BSc)&#8230;</string>
+    <string name="hint_closing_deadline">Umkhawulo (i.s. 30 Sep 2025)</string>
+    <string name="hint_search_status_default">Iphondo: Faka amagama afushane afana na-Wits, UCT okanye BSc ukufumana ezifanelekileyo.</string>
+    <string name="hint_search_status_matches">Zifunyenwe izifundo. Khetha kwi-list okanye uqhubeke ufaka.</string>
+    <string name="hint_search_status_no_match">Khange kufumaneke ezihambelanayo. Ungafaka amagama akho.</string>
+    <string name="msg_enter_uni_course">Nceda ufaka iyunivesithi nesifundo</string>
+    <string name="msg_app_added_tracker">Isicelo sifakiwe kwi-tracker!</string>
+    <string name="docs_uploaded_count_format">Amaxwebhu %1$d/%2$d</string>
+
+    <string name="app_progress_steps_header">INQANABA LOKUHAMBA KWECELO</string>
+    <string name="step_1_submitted">1. Isicelo Kuthunyelwe</string>
+    <string name="step_2_docs_verified">2. Amaxwebhu Abhekiwe</string>
+    <string name="step_3_under_review">3. Isicelo Siyaphandwa</string>
+    <string name="step_4_decision_made">4. Isigqibo Senziwe</string>
+    <string name="important_dates_header">IMINSUKU EBALULEKILEYO NOLWAZI</string>
+    <string name="update_app_status_btn">Buyekeza Isimo seCelo</string>
+    <string name="manage_docs_btn">Lawula Amaxwebhu</string>
+    <string name="delete_app_btn">Cima Isicelo</string>
+    <string name="msg_app_error">Impazamo yeCelo</string>
+    <string name="msg_app_not_found">Isicelo khange sifumaneke</string>
+    <string name="dialog_select_new_status">Khetha Isimo Esitsha</string>
+    <string name="msg_status_updated">Isimo sibuyekezwe sahlalela ku-%1$s</string>
+    <string name="dialog_delete_app_title">Cima Isicelo</string>
+    <string name="dialog_delete_app_msg">Uqinisekile ufuna ukucima esi sicelo? Esi senzo asinakuhlaziywa.</string>
+
+    <!-- Apply Flow Screen -->
+    <string name="apply_guided_header">Isicelo Esikhokelwayo</string>
+    <string name="apply_header_format">Faka Isicelo: %1$s</string>
+    <string name="apply_guidance_banner">I-UniPath ikunceda ukuba ulungiselele kwaye ulandele. Ufaka isicelo sakho kwi-website esemthethweni yeziko.</string>
+    <string name="apply_step1_header">1. KHETHA INKQUBO / ISIFUNDO</string>
+    <string name="hint_select_search_course">Khetha okanye khangela isifundo&#8230;</string>
+    <string name="apply_step2_header">2. ISISHWANKATHELO SECELE</string>
+    <string name="personal_details_header">Iinkcukacha Zakho</string>
+    <string name="subject_results_aps_header">Amamaki Ezifundo ne-APS</string>
+    <string name="documents_checklist_header">Uludwe Lwamaxwebhu</string>
+    <string name="apply_step3_header">3. QINISEKISA UNDLELE</string>
+    <string name="switch_already_submitted">Sendiyithumele kwi-website esemthethweni</string>
+    <string name="btn_export_pdf_pack">📄 Thumela Iphakethe leCelo (PDF)</string>
+    <string name="btn_share_docs">📎 Yabelana Ngamaxwebhu Alayishiweyo</string>
+    <string name="btn_view_in_tracker">Bona kwi-Application Tracker</string>
+    <string name="msg_inst_details_not_found">Iinkcukacha zeziko khange zifumaneke</string>
+
+    <!-- Documents Screen -->
+    <string name="required_docs_header">AMAXWEBHU AFUNEKAYO</string>
+    <string name="docs_tip_banner">Layisha iikhophi ezicacileyo ze-PDF okanye zeemfonomfono zamaxwebhu akho. Iiyunivesithi zidinga la mamphetshana xa zihlola isicelo.</string>
+    <string name="doc_type_id">I-ID / Ipaspoti</string>
+    <string name="doc_type_matric">Isiqinisekiso seMatriki / Imiphumela</string>
+    <string name="doc_type_transcript">Irekodi yeZifundo</string>
+    <string name="doc_type_motivation">Ileta Yenkuthazo</string>
+    <string name="doc_status_uploaded">Ilayishiwe</string>
+    <string name="doc_status_pending">Iyalinda</string>
+    <string name="dialog_file_too_large_title">Ifayile Inkulu Kakhulu</string>
+    <string name="dialog_file_too_large_msg">Ifayile oyikhethileyo ingaphezulu komkhawulo wobukhulu we-%1$d MB. Nceda ukhethe ifayile encinci.</string>
+    <string name="dialog_unsupported_file_title">Uhlobo lweFayile Alukho kwiinkonzo</string>
+    <string name="dialog_unsupported_file_msg">Lolu hlobo lwefayile alukho kwiinkonzo. Nceda ulayishe amaphepha e-PDF, JPG, PNG okanye DOC/DOCX.</string>
+    <string name="dialog_confirm_upload_title">Qinisekisa Ukulayisha</string>
+    <string name="dialog_confirm_upload_msg">Layisha \'%1$s\' (%2$s) ye-%3$s?</string>
+
+    <!-- APS Calculator Screen -->
+    <string name="aps_score_header">AMANQAKU AKHO E-APS</string>
+    <string name="nsc_level_guide_header">UMKHONDO WENQANABA LE-NSC</string>
+    <string name="enter_marks_header">FAKA AMAMAKI AKHO (%)</string>
+    <string name="add_another_subject_btn">+ Faka Isifundo Esinye</string>
+    <string name="calculate_aps_btn">Bala i-APS</string>
+    <string name="subjects_entered_format">%1$d ku-%2$d ezifundweni ezifakiweyo</string>
+    <string name="aps_calc_info_toast">I-APS ibalwa ngeephesenti ezifakiweyo zezifundo ze-NSC (amanqaku 1–7 ngokunye).</string>
+
+    <string name="dialog_add_subject_title">Faka Isifundo</string>
+    <string name="dialog_remove_subject_title">Susa Isifundo</string>
+    <string name="dialog_remove_subject_msg">Susa i-%1$s kuludwe lwakho?</string>
+    <string name="hint_subject_name">Igama Lesifundo (i.s. Geography)</string>
+    <string name="hint_mark_pct">Iphesenti Lamamaki (%)</string>
+    <string name="msg_valid_subject_pct">Faka igama lesifundo nephesenti elililo (0-100)</string>
+    <string name="msg_aps_saved">I-APS iphinde yabalthwa (%1$d pts) yagcinwa kwi-phrofayili!</string>
+
+    <!-- Default Subject Names -->
+    <string name="sub_maths">Izibalo</string>
+    <string name="sub_physics">Isayensi Yemvelo</string>
+    <string name="sub_english">IsiNgesi Ulwimi Lwasekhaya</string>
+    <string name="sub_biology">Isayensi Yobomi</string>
+    <string name="sub_accounting">I-Accounting</string>
+    <string name="sub_lo">Izifundo Zobomi</string>
+
+    <!-- Profile Achievement Badges -->
+    <string name="badge_profile_created">Iphrofayili Idaliwe</string>
+    <string name="badge_aps_calculated">I-APS Ibalwe</string>
+    <string name="badge_subjects_added">Izifundo Zifakiwe</string>
+    <string name="badge_app_tracked">Isicelo Silandwe</string>
+    <string name="badge_docs_uploaded">Amaxwebhu Alayishiweyo</string>
+    <string name="badge_items_saved">Izinto Zilondoloziwe</string>
+
+    <!-- Explore Filters & Chips -->
+    <string name="chip_all">Zonke</string>
+    <string name="chip_science_it">Isayensi / IT</string>
+    <string name="chip_commerce">EZolimo / Commerce</string>
+    <string name="chip_engineering">Ubunjineli</string>
+    <string name="chip_health_sciences">Isayensi Yezempilo</string>
+    <string name="chip_humanities_arts">ULwazi nezoLuntu</string>
+
+    <!-- Course & Bursary Fallbacks -->
+    <string name="untitled_course">Isifundo esingenagama</string>
+    <string name="untitled_bursary">Imali yofundo engenagama</string>
+    <string name="default_sa_university">IYunivesithi yaseMzantsi Afrika</string>
+    <string name="default_education_trust">Ikhwama LezeMfundo</string>
+    <string name="default_full_tuition">Iindleko Zonke ZeMfundo</string>
+    <string name="default_duration_3_years">Eminyakeni emi-3</string>
+    <string name="default_general_category">Ibanzi</string>
+
+    <!-- Course Details Screen -->
+    <string name="you_are_eligible">Uyakufaneleka</string>
+    <string name="eligible_subject_marks_sub">Kusetyenziswa izifundo zakho neemaki zangoku.</string>
+    <string name="about_course_header">Ngesono Esisifundo</string>
+    <string name="duration_label">Ubude bexesha</string>
+    <string name="field_label">Icandelo</string>
+    <string name="admission_requirements_header">Iimfuno Zokungena</string>
+    <string name="required_aps_score_label">I-APS Efunekayo</string>
+    <string name="subject_requirements_header">Iimfuno Zezifundo:</string>
+    <string name="view_app_info_btn">Bona Iinkcukacha ZeCelo</string>
+    <string name="open_aps_calc_btn">Vula Isibali se-APS</string>
+    <string name="standard_matric_pass_msg">Iimfuno zokupasa iMatriki eziqhelekileyo siyasebenza.</string>
+    <string name="status_eligible">Uyakufaneleka</string>
+    <string name="no_min_aps_threshold_msg">Aukho i-APS ephantsi ebekiweyo.</string>
+    <string name="eligible_aps_and_subjects_msg">Ufikelela kwi-APS (%1$d) neemfuno zezifundo.</string>
+    <string name="status_possibly_eligible">Mhlawumbi Uyakufaneleka</string>
+    <string name="possibly_eligible_msg">I-APS yakho ngu-%1$d. Usondele kwi-%2$d efunekayo.</string>
+    <string name="status_not_eligible">Khange Ufaneleke</string>
+    <string name="not_eligible_msg">I-APS yakho zangoku ngu-%1$d. Efunekayo ngu-%2$d.</string>
+    <string name="status_check_aps_score">Khangela Amanqaku e-APS</string>
+    <string name="check_aps_score_sub">Faka amamaki ezifundo zakho kwi-APS Calculator ukuze ukhangele ukufaneleka.</string>
+    <string name="msg_course_not_found">Iinkcukacha zesifundo khange zifumaneke</string>
+
+    <!-- Bursary Details Screen -->
+    <string name="bursary_details_title">Iinkcukacha zeMali yoFundo</string>
+    <string name="bursary_sponsor_header">UMXHasi / UMNIKI-MALI</string>
+    <string name="bursary_amount_header">IMALI EBEKIWEYO</string>
+    <string name="bursary_overview_header">ISISHWANKATHELO NEEMFUNO</string>
+    <string name="bursary_open_app_page">Vula Iphepha leCelo Esemthethweni ↗</string>
+    <string name="no_bursary_desc_msg">Khange kufakwe nkcukacha ngale mali yofundo okwangoku.</string>
+    <string name="no_app_link_msg">Khange kufumaneke khonkco lecelo</string>
+
+    <!-- Error Messages -->
+    <string name="msg_error_loading_courses">Impazamo ekulayisheni izifundo. Nceda uzame kabusha.</string>
+    <string name="msg_network_error_courses">Khange kufumaneke zifundo kwinethiwekhi</string>
+
+    <!-- Login Screen -->
+    <string name="login_title">Ukwamkelwa Okumnandi</string>
     <string name="login_subtitle">Ngena ukuze uqhubeke nohambo lwakho lwefundo.</string>
     <string name="email_hint">Idilesi ye-Imeleyi</string>
     <string name="password_hint">Ighaswedi</string>
@@ -61,10 +244,13 @@
     <string name="sign_in_google">Ngena nge-Google</string>
     <string name="sign_in_facebook">Ngena nge-Facebook</string>
     <string name="dont_have_account">Aunayo i-akhawunti? </string>
-    <string name="create_account_title">Dala I-Akhawunti</string>
-    <string name="create_account_subtitle">Qala indlela yakho eya emfundo emathileni.</string>
+
+    <!-- Sign Up Screen -->
+    <string name="signup_title">Dala I-Akhawunti</string>
+    <string name="signup_subtitle">Qala indlela yakho eya emfundo emathileni.</string>
     <string name="full_name_hint">Igama elipheleleyo</string>
     <string name="select_grade_title">Khetha Ibanga / Isimo</string>
+    <string name="create_account_button">Dala I-Akhawunti</string>
     <string name="already_have_account">Uneyi-akhawunti ekhoyo? </string>
     <string name="or_continue_with">okanye qhubeka nge</string>
     <string name="google">Google</string>
@@ -91,27 +277,28 @@
     <string name="upcoming_deadlines">📅 IMINSUKU YEEMIKHAWULO</string>
     <string name="recommended_for_you">⭐ PHAKAMISELWE WENA</string>
     <string name="calculate_aps_prompt">Bala i-APS yakho ukuze uvule izindululo zezifundo.</string>
+    <string name="find_courses_prompt">Fumana izifundo ozifanelekelayo</string>
+    <string name="matching_courses">Izifundo Ezifanelekileyo</string>
+    <string name="active_tracker">Umkhondo Osebenzayo</string>
+    <string name="no_upcoming_deadlines">Aukho imikhawulo yezicelo elandwayo okwangoku.</string>
+    <string name="not_calculated">Ayikabalwa</string>
+    <string name="not_calculated_yet">Ayikabalwa okwangoku</string>
 
-    <!-- Statuses (UI Display Labels) -->
-    <string name="status_draft">Ikhophi</string>
-    <string name="status_submitted">Kuthunyelwe</string>
-    <string name="status_under_review">Kuyaphandwa</string>
-    <string name="status_accepted">Kwamkelwe</string>
-    <string name="status_rejected">Kwaliwe</string>
-
-    <!-- Qualification Badges -->
-    <string name="you_qualify">✔ Uyakufaneleka</string>
-    <string name="points_short_format">⚠️ Ushota ngamanqaku %1$d</string>
-    <string name="qualifying_score">✔ Amanqaku Afanelekileyo</string>
-    <string name="free_to_apply">Mahala ukufaka isicelo</string>
-
-    <!-- Intro Pages -->
-    <string name="intro_title_1">Isibali se-APS Esilula</string>
-    <string name="intro_subtitle_1">Bala amanqaku akho e-NSC APS ngoko nangoko ubone izidanga ozifaneleyo.</string>
-    <string name="intro_title_2">Phanda Izifundo neemali zoFundo</string>
-    <string name="intro_subtitle_2">Fumanisa iinkqubo zemfundo ezigqwesileyo eMzantsi Afrika ucele nemali yokufunda.</string>
-    <string name="intro_title_3">Landa Izicelo Zakho</string>
-    <string name="intro_subtitle_3">Lawula zonke izicelo zakho eeyunivesithi namaxwebhu endaweni enye.</string>
+    <!-- Institutions & Details -->
+    <string name="tab_universities">Iiyunivesithi</string>
+    <string name="tab_colleges_tvet">Iikholeji ne-TVET</string>
+    <string name="tab_courses">Izifundo</string>
+    <string name="tab_bursaries">Iimali zoFundo</string>
+    <string name="min_aps_label">I-APS Ephantsi</string>
+    <string name="type_label">Uhlobo</string>
+    <string name="application_fee_header">IMALI YESICELO</string>
+    <string name="about_institution_header">NGEELIKHOLEJI ELI ZIKO</string>
+    <string name="requirements_dates_header">IIMFUNO ZOKUNGENA NEEMIKHAWULO</string>
+    <string name="closing_date_prefix">Umkhawulo: %1$s</string>
+    <string name="item_saved_notif_title">%1$s ilondoloziwe</string>
+    <string name="item_saved_notif_msg">%1$s idweliswe kuludwe lwakho olugciniweyo</string>
+    <string name="bursary_label">Imali yoFundo</string>
+    <string name="institution_label">Iziko</string>
 
     <!-- Settings & Language -->
     <string name="settings_title">Izicwangciso</string>
@@ -130,8 +317,64 @@
     <string name="image_credits">Iimvume Zezithombe</string>
     <string name="disclaimer_fees">Izimali ziyatshintsha minyaka yonke. Khangela njalo kwiwebhusayithi esemthethweni.</string>
 
+    <!-- Statuses (UI Display Labels) -->
+    <string name="status_draft">Ikhophi</string>
+    <string name="status_submitted">Kuthunyelwe</string>
+    <string name="status_under_review">Kuyaphandwa</string>
+    <string name="status_accepted">Kwamkelwe</string>
+    <string name="status_rejected">Kwaliwe</string>
+
+    <!-- Qualification Badges -->
+    <string name="you_qualify">✔ Uyakufaneleka</string>
+    <string name="points_short_format">⚠️ Ushota ngamanqaku %1$d</string>
+    <string name="qualifying_score">✔ Amanqaku Afanelekileyo</string>
+    <string name="free_to_apply">Mahala ukufaka isicelo</string>
+    <string name="fee_not_listed">Imali ayidweliswanga okwangoku</string>
+
+    <!-- Date & Course Format Strings -->
+    <string name="closes_date_format">Ivalwa ngo-%1$s</string>
+    <string name="closed_date_format">Ivaliwe ngo-%1$s</string>
+    <string name="aps_required_format">I-APS efunekayo: %1$d</string>
+    <string name="level_format">%1$d%% (Inqanaba %2$d)</string>
+    <string name="submitted_date_format">Kuthunyelwe: %1$s</string>
+    <string name="deadline_date_format">Umkhawulo: %1$s</string>
+
+    <!-- Toast & Dialog Feedback Messages -->
+    <string name="msg_fill_all_fields">Nceda ugcwalise yonke imimandla</string>
+    <string name="msg_login_success">Ukungena kuphumelele</string>
+    <string name="msg_login_failed">Ukungena kuphazamisekile: %1$s</string>
+    <string name="msg_enter_email_first">Faka imeleyi yakho kuqala</string>
+    <string name="msg_reset_email_sent">Imeleyi yokuseta kabutsha ighaswedi ithunyelwe</string>
+    <string name="msg_fb_cancelled">Ukungena nge-Facebook kurhoxisiwe</string>
+    <string name="msg_fb_failed">Ukungena nge-Facebook kuphazamisekile: %1$s</string>
+    <string name="msg_google_failed">Ukungena nge-Google kuphazamisekile: %1$s</string>
+    <string name="msg_password_length">Ighaswedi kufuneka ibe ngaphezulu kwezinhlamvu ezi-6</string>
+    <string name="msg_select_grade">Nceda ukhethe ibanga lakho</string>
+    <string name="msg_account_created">I-akhawunti idaliwe ngempumelelo</string>
+    <string name="msg_signup_failed">Ukubhalisa kuphazamisekile: %1$s</string>
+    <string name="msg_login_required">Nceda ungene ngemvume ukuze ugcine izinto</string>
+    <string name="msg_saved_success">Igciniwe kwiZinto Ezilondoloziweyo</string>
+    <string name="msg_removed_success">Ikhutshiwe kwiZinto Ezilondoloziweyo</string>
+
+    <string name="dialog_account_exists_title">I-akhawunti Ikhona</string>
+    <string name="dialog_account_exists_msg">I-akhawunti enale imeleyi sele ikhona usebenzisa enye indlela yokungena. Nceda ungene ngendlela yakho ekhoyo.</string>
+    <string name="dialog_welcome_title">Ukwamkelwa e-UniPath SA!</string>
+    <string name="dialog_select_grade_msg">Nceda ukhethe ibanga lakho lalo mzuzu ukuze unqume amava yakho:</string>
+
+    <!-- Intro Pages -->
+    <string name="intro_title_1">Isibali se-APS Esilula</string>
+    <string name="intro_subtitle_1">Bala amanqaku akho e-NSC APS ngoko nangoko ubone izidanga ozifaneleyo.</string>
+    <string name="intro_title_2">Phanda Izifundo neemali zoFundo</string>
+    <string name="intro_subtitle_2">Fumanisa iinkqubo zemfundo ezigqwesileyo eMzantsi Afrika ucele nemali yokufunda.</string>
+    <string name="intro_title_3">Landa Izicelo Zakho</string>
+    <string name="intro_subtitle_3">Lawula zonke izicelo zakho eeyunivesithi namaxwebhu endaweni enye.</string>
+    <string name="intro_badge_eligible">%1$d Zifanelekele</string>
+
     <!-- Empty States -->
     <string name="no_saved_items_msg">Aukho izinto ezilondoloziweyo okwangoku — thinta i-icon sebhukhimakhi ugcine.</string>
+    <string name="no_saved_institutions_msg">Aukho amaziko alondoloziweyo okwangoku.</string>
+    <string name="no_saved_courses_msg">Aukho izifundo ezilondoloziweyo okwangoku.</string>
+    <string name="no_saved_bursaries_msg">Aukho iimali zofundo ezilondoloziweyo okwangoku.</string>
     <string name="no_applications_msg">Aukho izicelo ezifakiweyo okwangoku</string>
     <string name="no_notifications_msg">Aukho izaziso okwangoku</string>
     <string name="no_results_msg">Aukho amamaki ezifundo afakiweyo okwangoku.</string>

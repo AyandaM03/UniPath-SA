@@ -112,7 +112,6 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    // Updates the current displayed language name in Settings
     private fun updateLanguageDisplay() {
         val currentLocales = AppCompatDelegate.getApplicationLocales()
         val currentTag = if (!currentLocales.isEmpty) currentLocales.get(0)?.language ?: "en" else "en"
@@ -125,7 +124,6 @@ class SettingsActivity : AppCompatActivity() {
         }
     }
 
-    // Displays in-app language picker dialog
     private fun showLanguageSelectionDialog() {
         val languages = arrayOf("English", "isiZulu", "isiXhosa", "Sesotho")
         val tags = arrayOf("en", "zu", "xh", "st")
@@ -141,11 +139,9 @@ class SettingsActivity : AppCompatActivity() {
                 val chosenTag = tags[which]
                 Log.d(TAG, "Selected language tag: $chosenTag")
 
-                // Apply locale instantly across the app
                 val appLocales = LocaleListCompat.forLanguageTags(chosenTag)
                 AppCompatDelegate.setApplicationLocales(appLocales)
 
-                // Save to SharedPreferences and Firestore users/{uid}.language
                 getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
                     .edit()
                     .putString(KEY_LANGUAGE, chosenTag)
@@ -158,6 +154,7 @@ class SettingsActivity : AppCompatActivity() {
                 }
 
                 dialog.dismiss()
+                recreate()
             }
             .setNegativeButton(getString(R.string.cancel), null)
             .show()
@@ -213,7 +210,7 @@ class SettingsActivity : AppCompatActivity() {
     private fun saveUserSettingsToFirestore() {
         val user = auth.currentUser
         if (user == null) {
-            Toast.makeText(this, "Not authenticated", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.msg_not_authenticated), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -221,7 +218,7 @@ class SettingsActivity : AppCompatActivity() {
         val newSchool = etHighSchool.text.toString().trim()
 
         if (newName.isEmpty()) {
-            Toast.makeText(this, "Please enter your full name", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.msg_enter_full_name), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -245,29 +242,29 @@ class SettingsActivity : AppCompatActivity() {
             .set(updateMap, SetOptions.merge())
             .addOnSuccessListener {
                 Log.d(TAG, "Saved profile changes to Firestore successfully")
-                Toast.makeText(this, "Profile settings saved!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.msg_profile_settings_saved), Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener { e ->
                 Log.e(TAG, "Failed to save profile changes to Firestore", e)
-                Toast.makeText(this, "Failed to save settings: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.msg_failed_save_settings, e.localizedMessage ?: ""), Toast.LENGTH_SHORT).show()
             }
     }
 
     private fun sendPasswordResetEmail() {
         val email = auth.currentUser?.email
         if (email.isNullOrEmpty()) {
-            Toast.makeText(this, "User email not found", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.msg_user_email_not_found), Toast.LENGTH_SHORT).show()
             return
         }
 
         auth.sendPasswordResetEmail(email)
             .addOnSuccessListener {
                 Log.d(TAG, "Password reset email sent to $email")
-                Toast.makeText(this, "Password reset email sent to $email", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.msg_reset_email_sent_to, email), Toast.LENGTH_LONG).show()
             }
             .addOnFailureListener { e ->
                 Log.e(TAG, "Error sending password reset email", e)
-                Toast.makeText(this, "Error sending email: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.msg_error_sending_email, e.localizedMessage ?: ""), Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -286,25 +283,25 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun showHelpDialog() {
         AlertDialog.Builder(this)
-            .setTitle("Help & Support")
-            .setMessage("For assistance with university applications, bursary details or technical issues, email support@unipathsa.co.za or visit www.unipathsa.co.za.")
-            .setPositiveButton("OK", null)
+            .setTitle(getString(R.string.help_support))
+            .setMessage(getString(R.string.help_dialog_msg))
+            .setPositiveButton(getString(R.string.ok), null)
             .show()
     }
 
     private fun showAboutDialog() {
         AlertDialog.Builder(this)
-            .setTitle("About UniPath SA")
-            .setMessage("UniPath SA v1.0\nYour ultimate South African higher education guidance platform.")
-            .setPositiveButton("OK", null)
+            .setTitle(getString(R.string.about_unipath))
+            .setMessage(getString(R.string.about_dialog_msg))
+            .setPositiveButton(getString(R.string.ok), null)
             .show()
     }
 
     private fun confirmLogout() {
         AlertDialog.Builder(this)
-            .setTitle("Log Out")
-            .setMessage("Are you sure you want to log out of UniPath SA?")
-            .setPositiveButton("Log Out") { _, _ ->
+            .setTitle(getString(R.string.nav_logout))
+            .setMessage(getString(R.string.logout_dialog_msg))
+            .setPositiveButton(getString(R.string.nav_logout)) { _, _ ->
                 Log.d(TAG, "User logging out")
                 try {
                     LoginManager.getInstance().logOut()
@@ -318,7 +315,7 @@ class SettingsActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton(getString(R.string.cancel), null)
             .show()
     }
 }

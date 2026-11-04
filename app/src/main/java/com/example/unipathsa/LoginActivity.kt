@@ -64,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
             firebaseAuthWithGoogle(account.idToken)
         } catch (e: ApiException) {
             Log.e(TAG, "Google sign-in failed", e)
-            Toast.makeText(this, "Google sign-in failed: ${e.message}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.msg_google_failed, e.message ?: ""), Toast.LENGTH_LONG).show()
         }
     }
 
@@ -93,12 +93,12 @@ class LoginActivity : AppCompatActivity() {
 
             override fun onCancel() {
                 Log.d(TAG, "Facebook login cancelled by user")
-                Toast.makeText(this@LoginActivity, "Facebook login cancelled", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginActivity, getString(R.string.msg_fb_cancelled), Toast.LENGTH_SHORT).show()
             }
 
             override fun onError(error: FacebookException) {
                 Log.e(TAG, "Facebook login error", error)
-                Toast.makeText(this@LoginActivity, "Facebook sign-in failed: ${error.localizedMessage}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@LoginActivity, getString(R.string.msg_fb_failed, error.localizedMessage ?: ""), Toast.LENGTH_LONG).show()
             }
         })
 
@@ -139,20 +139,20 @@ class LoginActivity : AppCompatActivity() {
             val password = etPassword.text.toString().trim()
 
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.msg_fill_all_fields), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             auth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
                     Log.d(TAG, "Email/password login successful")
-                    Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.msg_login_success), Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, HomeActivity::class.java))
                     finish()
                 }
                 .addOnFailureListener { e ->
                     Log.e(TAG, "Email/password login failed", e)
-                    Toast.makeText(this, "Login failed: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getString(R.string.msg_login_failed, e.localizedMessage ?: ""), Toast.LENGTH_LONG).show()
                 }
         }
 
@@ -173,16 +173,16 @@ class LoginActivity : AppCompatActivity() {
         tvForgotPassword.setOnClickListener {
             val email = etEmail.text.toString().trim()
             if (email.isEmpty()) {
-                Toast.makeText(this, "Enter your email first", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.msg_enter_email_first), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             auth.sendPasswordResetEmail(email)
                 .addOnSuccessListener {
-                    Toast.makeText(this, "Password reset email sent", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.msg_reset_email_sent), Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener { e ->
-                    Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getString(R.string.msg_login_failed, e.localizedMessage ?: ""), Toast.LENGTH_LONG).show()
                 }
         }
     }
@@ -213,20 +213,18 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-    // Handles user account collisions and auth errors
     private fun handleAuthError(e: Exception) {
         if (e is FirebaseAuthUserCollisionException) {
             AlertDialog.Builder(this)
-                .setTitle("Account Exists")
-                .setMessage("An account with this email already exists using a different sign-in method (e.g. Email/Password or Google). Please sign in using your existing method.")
-                .setPositiveButton("OK", null)
+                .setTitle(getString(R.string.dialog_account_exists_title))
+                .setMessage(getString(R.string.dialog_account_exists_msg))
+                .setPositiveButton(getString(R.string.ok), null)
                 .show()
         } else {
-            Toast.makeText(this, "Authentication failed: ${e.localizedMessage}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.msg_login_failed, e.localizedMessage ?: ""), Toast.LENGTH_LONG).show()
         }
     }
 
-    // On first sign-in, creates users/{uid} document and asks for learner's grade
     private fun checkFirstTimeUserProfile(user: FirebaseUser?) {
         if (user == null) {
             startActivity(Intent(this, HomeActivity::class.java))
@@ -251,10 +249,14 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-    // Prompt dialog for grade selection on social first-time sign in
     private fun promptGradeSelectionAndSaveUser(user: FirebaseUser) {
         val spinner = Spinner(this)
-        val grades = arrayOf("Grade 10", "Grade 11", "Grade 12", "Matriculant")
+        val grades = arrayOf(
+            getString(R.string.grade_10),
+            getString(R.string.grade_11),
+            getString(R.string.grade_12),
+            getString(R.string.grade_matriculant)
+        )
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, grades)
         spinner.adapter = adapter
 
@@ -264,11 +266,11 @@ class LoginActivity : AppCompatActivity() {
         }
 
         AlertDialog.Builder(this)
-            .setTitle("Welcome to UniPath SA!")
-            .setMessage("Please select your current grade to personalize your experience:")
+            .setTitle(getString(R.string.dialog_welcome_title))
+            .setMessage(getString(R.string.dialog_select_grade_msg))
             .setView(container)
             .setCancelable(false)
-            .setPositiveButton("Continue") { _, _ ->
+            .setPositiveButton(getString(R.string.continue_btn)) { _, _ ->
                 val selectedGrade = spinner.selectedItem.toString()
                 saveSocialUserToFirestore(user, selectedGrade)
             }
@@ -277,7 +279,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun saveSocialUserToFirestore(user: FirebaseUser, grade: String) {
         val userMap = hashMapOf(
-            "fullName" to (user.displayName ?: "Student"),
+            "fullName" to (user.displayName ?: getString(R.string.drawer_default_user)),
             "email" to (user.email ?: ""),
             "grade" to grade,
             "createdAt" to FieldValue.serverTimestamp()

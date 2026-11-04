@@ -6,8 +6,8 @@
     <string name="south_africa">AFRIKA BORA</string>
 
     <!-- Facebook SDK Configuration Placeholders -->
-   <!-- <string name="facebook_app_id">1234567890</string>-->
-   <!-- <string name="fb_login_protocol_scheme">fb1234567890</string>-->
+    <string name="facebook_app_id">1234567890</string>
+    <string name="fb_login_protocol_scheme">fb1234567890</string>
     <string name="facebook_client_token">abcdef1234567890</string>
 
     <!-- Navigation & Drawer -->
@@ -30,7 +30,7 @@
     <string name="drawer_default_user">Moithuti</string>
     <string name="drawer_default_grade">Mphato oa 12 / Moithuti oa Matriki</string>
 
-    <!-- General & Buttons -->
+    <!-- General Actions & Buttons -->
     <string name="get_started">Qala Hona Joale</string>
     <string name="log_in">Kena</string>
     <string name="sign_up">Ingolise</string>
@@ -42,16 +42,199 @@
     <string name="explore_all">Bala tsohle</string>
     <string name="calculate">Bala</string>
     <string name="search">Batla</string>
-    <string name="search_hint">Batla diunivesithi, dithuto&#8230;</string>
+    <string name="search_hint">Batla dithuto kapa lits\'ehetso tsa chelete&#8230;</string>
+    <string name="search_institutions_hint">Batla diunivesithi le dikholetjhe&#8230;</string>
     <string name="add_new">+ Eketsa e Ncha</string>
     <string name="add_application">+ Eketsa Kopo</string>
     <string name="add_marks">+ Eketsa Matshwao</string>
     <string name="edit_profile">Bopa Profayile</string>
     <string name="apply_now">Etsa Kopo Joale</string>
     <string name="visit_website">Etela Webosaete ea Semmuso</string>
+    <string name="recalculate">Bala hape →</string>
+    <string name="recalculate_action">Bala hape →</string>
+    <string name="calculate_aps_action">Bala APS →</string>
+    <string name="copy">Kopa 📋</string>
+    <string name="continue_btn">Tsoela pele</string>
+    <string name="btn_view_institution">Bona Mokhatlo</string>
+    <string name="btn_explore_items">Bala Lisebelisoa</string>
+    <string name="confirm_fee_action">Netefatsa tefello ho webosaete ea semmuso ↗</string>
+    <string name="undo_action">HLA KOLA</string>
+    <string name="add_btn">Eketsa</string>
+    <string name="remove_btn">Tlosa</string>
 
-    <!-- Login & Sign Up -->
-    <string name="welcome_title">Amohela Hape</string>
+    <!-- Notifications Screen -->
+    <string name="no_notifications_sub">Litaba tse mabapi le likopo tsa hao tsa diunivesithi le latsatsi tsa ho qetela di tla hlaha mona.</string>
+    <string name="msg_you_are_on_notifications">U leqepheng la Litemoso</string>
+    <string name="msg_failed_load_notifications">Ha ea khona ho lata litemoso: %1$s</string>
+    <string name="notif_time_recent">Ha joale</string>
+
+    <!-- Settings & Dialog Messages -->
+    <string name="msg_not_authenticated">Ha u a fana ka tumello</string>
+    <string name="msg_enter_full_name">Ka kopo khena lebitso la hao le tletseng</string>
+    <string name="msg_profile_settings_saved">Lisebelisoa tsa profayile di bolokiloe!</string>
+    <string name="msg_failed_save_settings">Ha ea khona ho boloka lisebelisoa: %1$s</string>
+    <string name="msg_user_email_not_found">Imeile ea moithuti ha e a fumanwa</string>
+    <string name="msg_reset_email_sent_to">Imeile ea ho etsa phatlalatso hape e rometsoe ho %1$s</string>
+    <string name="msg_error_sending_email">Phoso ha ho romeloa imeile: %1$s</string>
+    <string name="help_dialog_msg">Bakeng sa kopo ea diunivesithi, litaba tsa lits\'ehetso kapa mathata a theknoloji, romela imeile ho support@unipathsa.co.za kapa u etele www.unipathsa.co.za.</string>
+    <string name="about_dialog_msg">UniPath SA v1.0\nPhetolo ea hao e ka sehloohong ea thuto e phahameng Afrika Boroa.</string>
+    <string name="logout_dialog_msg">Na u na le bonnete ba ho tsoa ho UniPath SA?</string>
+
+    <!-- Applications Tracker & Details -->
+    <string name="stat_total">Tsohle</string>
+    <string name="stat_in_progress">E tsoelang pele</string>
+    <string name="estimated_fees_header">DITEFELLO TSOE LEKANYETSOANENG TSA LIKOPO</string>
+    <string name="your_applications_header">LIKOPO TSA HAO</string>
+    <string name="no_applications_sub">Tlanya konopo ea + ho eketsa le ho latsa likopo tsa hao tsa diunivesithi.</string>
+    <string name="dialog_add_app_title">Eketsa Mosebeletsi oa Kopo</string>
+    <string name="dialog_add_app_sub">Batla mekhatlo le dithuto kapa khena litaba tsa hao.</string>
+    <string name="hint_search_university">Univesithi / Mokhatlo (mth. Wits, UCT, UJ)&#8230;</string>
+    <string name="hint_search_course">Lebitso la Thuto (mth. Computer Science, BSc)&#8230;</string>
+    <string name="hint_closing_deadline">Letsatsi la ho Qetela (mth. 30 Sep 2025)</string>
+    <string name="hint_search_status_default">Thuso: Khena mabitso a makgutshwanyane a le Wits, UCT kapa BSc ho fumana tse tsamaellanang.</string>
+    <string name="hint_search_status_matches">Tse tsamaellanang di fumanwe. Kgetha lethathamong kapa tsoela pele ho khena.</string>
+    <string name="hint_search_status_no_match">Ha ho tse tsamaellanang tse fumanweng. U ka khena litaba tsa hao.</string>
+    <string name="msg_enter_uni_course">Ka kopo khena univesithi le thuto</string>
+    <string name="msg_app_added_tracker">Kopo e ekelitsoe mosebeletsing oa likopo!</string>
+    <string name="docs_uploaded_count_format">Litokomane %1$d/%2$d</string>
+
+    <string name="app_progress_steps_header">DIHATATO TSA HO HAMBA HOA KOPO</string>
+    <string name="step_1_submitted">1. Kopo E Rometsoe</string>
+    <string name="step_2_docs_verified">2. Litokomane Di Hlahlobilwe</string>
+    <string name="step_3_under_review">3. Kopo E Tlas\'a Tlhahlobo</string>
+    <string name="step_4_decision_made">4. Qeto E Etsilwe</string>
+    <string name="important_dates_header">MATSATSI A BALULEHILENG LE LITABA</string>
+    <string name="update_app_status_btn">Nchafatsa Boemo ba Kopo</string>
+    <string name="manage_docs_btn">Laola Litokomane</string>
+    <string name="delete_app_btn">Hlakola Kopo</string>
+    <string name="msg_app_error">Phoso ea kopo</string>
+    <string name="msg_app_not_found">Kopo ha e a fumanwa</string>
+    <string name="dialog_select_new_status">Kgetha Boemo bo Bocha</string>
+    <string name="msg_status_updated">Boemo bo nchafalitsoe ho %1$s</string>
+    <string name="dialog_delete_app_title">Hlakola Kopo</string>
+    <string name="dialog_delete_app_msg">Na u na le bonnete ba ho hlakola kopo ena? Ketso ena ha e khaohe.</string>
+
+    <!-- Apply Flow Screen -->
+    <string name="apply_guided_header">Kopo E Tataisoang</string>
+    <string name="apply_header_format">Etsa Kopo: %1$s</string>
+    <string name="apply_guidance_banner">UniPath e u meletsa ho itukisa le ho latsa. U romela kopo ea hao ho webosaete ea semmuso ea mokhatlo.</string>
+    <string name="apply_step1_header">1. KGETHA LEPAPHA / THUTO</string>
+    <string name="hint_select_search_course">Kgetha kapa batla thuto&#8230;</string>
+    <string name="apply_step2_header">2. TSOHLE TSA KOPO</string>
+    <string name="personal_details_header">Litaba tsa Hao</string>
+    <string name="subject_results_aps_header">Matshwao a Dithuto le APS</string>
+    <string name="documents_checklist_header">Lethathamo la Litokomane</string>
+    <string name="apply_step3_header">3. NETEFATSA LE HO LATSA</string>
+    <string name="switch_already_submitted">Ke se ke ntse ke rometse ho webosaete ea semmuso</string>
+    <string name="btn_export_pdf_pack">📄 Romela Sephutheloana sa Kopo (PDF)</string>
+    <string name="btn_share_docs">📎 Yabelana ka Litokomane tse Transitiweng</string>
+    <string name="btn_view_in_tracker">Bona ho Application Tracker</string>
+    <string name="msg_inst_details_not_found">Litaba tsa mokhatlo ha di a fumanwa</string>
+
+    <!-- Documents Screen -->
+    <string name="required_docs_header">LITOKOMANE TSE HLOKAHALANG</string>
+    <string name="docs_tip_banner">Transita dikhophi tse hlakileng tsa PDF kapa ditšoantšo tsa litokomane tsa hao. Diunivesithi di hloka tsena ha di hlahloba kopo.</string>
+    <string name="doc_type_id">ID / Paspoto</string>
+    <string name="doc_type_matric">Setifikeiti sa Matriki / Liphetho</string>
+    <string name="doc_type_transcript">Irekodi ea Dithuto</string>
+    <string name="doc_type_motivation">Lencwadi la Khothatso</string>
+    <string name="doc_status_uploaded">E transitiwe</string>
+    <string name="doc_status_pending">E emetse</string>
+    <string name="dialog_file_too_large_title">Iftjhefo e Kholo Haholo</string>
+    <string name="dialog_file_too_large_msg">Iftjhefo e kgethilweng e feta boholo bo tšoanetsego ba %1$d MB. Ka kopo kgetha iftjhefo e nyenyane.</string>
+    <string name="dialog_unsupported_file_title">Mofuta oa Iftjhefo o sa Tšehetsoeng</string>
+    <string name="dialog_unsupported_file_msg">Mofuta ona oa iftjhefo ha o tšehetswe. Ka kopo transita litokomane tsa PDF, JPG, PNG kapa DOC/DOCX.</string>
+    <string name="dialog_confirm_upload_title">Netefatsa Ho Transita</string>
+    <string name="dialog_confirm_upload_msg">Transita \'%1$s\' (%2$s) bakeng sa %3$s?</string>
+
+    <!-- APS Calculator Screen -->
+    <string name="aps_score_header">LINTLHA TSA HAO TSA APS</string>
+    <string name="nsc_level_guide_header">MOTSAMAO OA BOEMO BA NSC</string>
+    <string name="enter_marks_header">KENA MATSHWAO A HAO (%)</string>
+    <string name="add_another_subject_btn">+ Eketsa Thuto e Nngwe</string>
+    <string name="calculate_aps_btn">Bala APS</string>
+    <string name="subjects_entered_format">%1$d ea dithuto tse %2$d di kentswe</string>
+    <string name="aps_calc_info_toast">APS e baloa ho tsoa ho di-phesente tsa dithuto tsa NSC tseo u li kentseng (lintlha tse 1–7 e \'ngoe le e \'ngoe).</string>
+
+    <string name="dialog_add_subject_title">Eketsa Thuto</string>
+    <string name="dialog_remove_subject_title">Tlosa Thuto</string>
+    <string name="dialog_remove_subject_msg">Tlosa %1$s lethathamong la hao?</string>
+    <string name="hint_subject_name">Lebitso la Thuto (mth. Geography)</string>
+    <string name="hint_mark_pct">Phesente ea Matshwao (%)</string>
+    <string name="msg_valid_subject_pct">Kena lebitso le nepahetseng la thuto le phesente (0-100)</string>
+    <string name="msg_aps_saved">APS e baliloe hape (%1$d pts) ea bolokoa ho profayile!</string>
+
+    <!-- Default Subject Names -->
+    <string name="sub_maths">Lipalo</string>
+    <string name="sub_physics">Isaense tsa Tlhaho</string>
+    <string name="sub_english">Seahlolo sa Senyesemane Univesithi</string>
+    <string name="sub_biology">Isaense tsa Bophelo</string>
+    <string name="sub_accounting">Accounting</string>
+    <string name="sub_lo">Thuto ea Bophelo</string>
+
+    <!-- Profile Achievement Badges -->
+    <string name="badge_profile_created">Profayile E Bopiloe</string>
+    <string name="badge_aps_calculated">APS E Baliloe</string>
+    <string name="badge_subjects_added">Dithuto Di Ekelitsoe</string>
+    <string name="badge_app_tracked">Kopo E Latsiloe</string>
+    <string name="badge_docs_uploaded">Litokomane Di Transitiwe</string>
+    <string name="badge_items_saved">Lintho Di Bolokiloe</string>
+
+    <!-- Explore Filters & Chips -->
+    <string name="chip_all">Tsohle</string>
+    <string name="chip_science_it">Saense / IT</string>
+    <string name="chip_commerce">Kgwebo / Commerce</string>
+    <string name="chip_engineering">Boenjiniere</string>
+    <string name="chip_health_sciences">Isaense tsa Bophelo</string>
+    <string name="chip_humanities_arts">Botho le Bonono</string>
+
+    <!-- Course & Bursary Fallbacks -->
+    <string name="untitled_course">Thuto e se nang lebitso</string>
+    <string name="untitled_bursary">Thuso e se nang lebitso</string>
+    <string name="default_sa_university">Univesithi ea Afrika Boroa</string>
+    <string name="default_education_trust">Letlole la Thuto</string>
+    <string name="default_full_tuition">Tefello e Tletseng ea Thuto</string>
+    <string name="default_duration_3_years">Lilemo tse 3</string>
+    <string name="default_general_category">E Kgethehileng</string>
+
+    <!-- Course Details Screen -->
+    <string name="you_are_eligible">U Loketse</string>
+    <string name="eligible_subject_marks_sub">Ho ipapisitsoe le dithuto tsa hao tsa hona joale le matshwao.</string>
+    <string name="about_course_header">Mabapi le Thuto Ena</string>
+    <string name="duration_label">Nako</string>
+    <string name="field_label">Lefapha</string>
+    <string name="admission_requirements_header">Litšoanelo tsa Ho Kena</string>
+    <string name="required_aps_score_label">APS e Hlokahalang</string>
+    <string name="subject_requirements_header">Litšoanelo tsa Dithuto:</string>
+    <string name="view_app_info_btn">Bala Litaba tsa Kopo</string>
+    <string name="open_aps_calc_btn">Bula Se-Bala APS</string>
+    <string name="standard_matric_pass_msg">Litšoanelo tse tloaelehileng tsa ho feta Matriki di ea sebetsa.</string>
+    <string name="status_eligible">U Loketse</string>
+    <string name="no_min_aps_threshold_msg">Ha ho APS e bonyane e kgethilweng.</string>
+    <string name="eligible_aps_and_subjects_msg">U fihlella APS (%1$d) le litšoanelo tsa dithuto.</string>
+    <string name="status_possibly_eligible">Mohlomong U Loketse</string>
+    <string name="possibly_eligible_msg">APS ea hao ke %1$d. U haufi le tšoanelo ea %2$d.</string>
+    <string name="status_not_eligible">Ha U a Lokela</string>
+    <string name="not_eligible_msg">APS ea hao ea hona joale ke %1$d. Tšoanelo ke %2$d.</string>
+    <string name="status_check_aps_score">Bala Ntlha ea APS</string>
+    <string name="check_aps_score_sub">Eketsa matshwao a dithuto ho Se-Bala APS ho leka litšoanelo.</string>
+    <string name="msg_course_not_found">Litaba tsa thuto ha di a fumanwa</string>
+
+    <!-- Bursary Details Screen -->
+    <string name="bursary_details_title">Litaba tsa Thuso ea Chelete</string>
+    <string name="bursary_sponsor_header">MOMPULI / MOFANI</string>
+    <string name="bursary_amount_header">BOHOLO BO KOAHELWANG</string>
+    <string name="bursary_overview_header">TSOHLE LE LITŠOANELO</string>
+    <string name="bursary_open_app_page">Bula Iphepha la Semmuso la Kopo ↗</string>
+    <string name="no_bursary_desc_msg">Ha ho litaba tse fumanehang bakeng sa xusitso ena ha joale.</string>
+    <string name="no_app_link_msg">Ha ho sehokelo sa kopo se fumanehang</string>
+
+    <!-- Error Messages -->
+    <string name="msg_error_loading_courses">Phoso ha ho pheta dithuto. Ka kopo leka hape.</string>
+    <string name="msg_network_error_courses">Ha ea khona ho lata dithuto ho tsoa marang-rang</string>
+
+    <!-- Login Screen -->
+    <string name="login_title">Amohela Hape</string>
     <string name="login_subtitle">Kena ho tsoela pele le leeto la hao la thuto.</string>
     <string name="email_hint">Aterese ea Imeile</string>
     <string name="password_hint">Phatlalatso ea Sephiri</string>
@@ -61,10 +244,13 @@
     <string name="sign_in_google">Kena ka Google</string>
     <string name="sign_in_facebook">Kena ka Facebook</string>
     <string name="dont_have_account">Ha u na akhaonte? </string>
-    <string name="create_account_title">Etsa Akhaonte</string>
-    <string name="create_account_subtitle">Qala tsela ea hao ho ea thutong e phahameng.</string>
+
+    <!-- Sign Up Screen -->
+    <string name="signup_title">Etsa Akhaonte</string>
+    <string name="signup_subtitle">Qala tsela ea hao ho ea thutong e phahameng.</string>
     <string name="full_name_hint">Lebitso le Tletseng</string>
     <string name="select_grade_title">Kgetha Mphato / Boemo</string>
+    <string name="create_account_button">Etsa Akhaonte</string>
     <string name="already_have_account">U se u na le akhaonte? </string>
     <string name="or_continue_with">kapa tsoela pele ka</string>
     <string name="google">Google</string>
@@ -91,27 +277,28 @@
     <string name="upcoming_deadlines">📅 LATSATSI TSA HO QETELA</string>
     <string name="recommended_for_you">⭐ TSE KHOTSOFATSANG UENA</string>
     <string name="calculate_aps_prompt">Bala APS ea hao ho bula litlhahiso tsa dithuto.</string>
+    <string name="find_courses_prompt">Fumana dithuto tseo u li tšoanetseng</string>
+    <string name="matching_courses">Dithuto Tse Loketseng</string>
+    <string name="active_tracker">Mosebeletsi ea Etsang Mosebetsi</string>
+    <string name="no_upcoming_deadlines">Ha ho matsatsi a ho qetela a likopo a latsang ha joale.</string>
+    <string name="not_calculated">Ha e a baloa</string>
+    <string name="not_calculated_yet">Ha e a baloa ha joale</string>
 
-    <!-- Statuses (UI Display Labels) -->
-    <string name="status_draft">Mokhoa</string>
-    <string name="status_submitted">E rometsoe</string>
-    <string name="status_under_review">E tlas\'a tlhahlobo</string>
-    <string name="status_accepted">E amhetswe</string>
-    <string name="status_rejected">E haniloe</string>
-
-    <!-- Qualification Badges -->
-    <string name="you_qualify">✔ U loketse</string>
-    <string name="points_short_format">⚠️ U haelloa ke lintlha tseo e ka bang %1$d</string>
-    <string name="qualifying_score">✔ Lintlha Tse Loketseng</string>
-    <string name="free_to_apply">Mahala ho etsa kopo</string>
-
-    <!-- Intro Pages -->
-    <string name="intro_title_1">Se-Bala APS sa Hang-hang</string>
-    <string name="intro_subtitle_1">Bala ntlha ea hao ea NSC APS ka ho panya ha leihlo u bone likhato tseo u li tšoanetseng.</string>
-    <string name="intro_title_2">Bala Dithuto le Lits\'ehetso tsa Chelete</string>
-    <string name="intro_subtitle_2">Fumana mananeo a thuto e phahameng ho pholletsa le Afrika Boroa u kope le lithuso tsa lichelete.</string>
-    <string name="intro_title_3">Latsa Likopo tsa Hao</string>
-    <string name="intro_subtitle_3">Laola likopo tsohle tsa hao tsa diunivesithi le litokomane sebakeng se le seng.</string>
+    <!-- Institutions & Details -->
+    <string name="tab_universities">Diunivesithi</string>
+    <string name="tab_colleges_tvet">Dikholetjhe le TVET</string>
+    <string name="tab_courses">Dithuto</string>
+    <string name="tab_bursaries">Lits\'ehetso tsa Chelete</string>
+    <string name="min_aps_label">APS e Bonyane</string>
+    <string name="type_label">Mofuta</string>
+    <string name="application_fee_header">TEFELLO EA KOPO</string>
+    <string name="about_institution_header">MABAPI LE MOKHATLO ONA</string>
+    <string name="requirements_dates_header">LITŠOANELO TSA HO KENA LE MATSATSI A HO QETELA</string>
+    <string name="closing_date_prefix">Letsatsi la ho Qetela: %1$s</string>
+    <string name="item_saved_notif_title">%1$s e bolokiloe</string>
+    <string name="item_saved_notif_msg">%1$s e ekelitsoe lethathamong la hao le bolokiloeng</string>
+    <string name="bursary_label">Thuso ea Chelete</string>
+    <string name="institution_label">Mokhatlo</string>
 
     <!-- Settings & Language -->
     <string name="settings_title">Lisebelisoa</string>
@@ -130,8 +317,64 @@
     <string name="image_credits">Maikutlo a Litšoantšo</string>
     <string name="disclaimer_fees">Ditefello di fetoha selemo le selemo. Netefatsa ka mehla ho webosaete ea semmuso.</string>
 
+    <!-- Statuses (UI Display Labels) -->
+    <string name="status_draft">Mokhoa</string>
+    <string name="status_submitted">E rometsoe</string>
+    <string name="status_under_review">E tlas\'a tlhahlobo</string>
+    <string name="status_accepted">E amhetswe</string>
+    <string name="status_rejected">E haniloe</string>
+
+    <!-- Qualification Badges -->
+    <string name="you_qualify">✔ U loketse</string>
+    <string name="points_short_format">⚠️ U haelloa ke lintlha tseo e ka bang %1$d</string>
+    <string name="qualifying_score">✔ Lintlha Tse Loketseng</string>
+    <string name="free_to_apply">Mahala ho etsa kopo</string>
+    <string name="fee_not_listed">Tefello ha e a ngolisoa ha joale</string>
+
+    <!-- Date & Course Format Strings -->
+    <string name="closes_date_format">E koaloa ka %1$s</string>
+    <string name="closed_date_format">E koetsoe ka %1$s</string>
+    <string name="aps_required_format">APS e hlokahalang: %1$d</string>
+    <string name="level_format">%1$d%% (Boemo %2$d)</string>
+    <string name="submitted_date_format">E rometsoe: %1$s</string>
+    <string name="deadline_date_format">Letsatsi la ho qetela: %1$s</string>
+
+    <!-- Toast & Dialog Feedback Messages -->
+    <string name="msg_fill_all_fields">Ka kopo tlatsa likarolo tsohle</string>
+    <string name="msg_login_success">Ho kena ho atlehile</string>
+    <string name="msg_login_failed">Ho kena ho hlolehile: %1$s</string>
+    <string name="msg_enter_email_first">Kena imeile ea hao pele</string>
+    <string name="msg_reset_email_sent">Imeile ea ho etsa phatlalatso hape e rometsoe</string>
+    <string name="msg_fb_cancelled">Ho kena ka Facebook ho hlakotsoe</string>
+    <string name="msg_fb_failed">Ho kena ka Facebook ho hlolehile: %1$s</string>
+    <string name="msg_google_failed">Ho kena ka Google ho hlolehile: %1$s</string>
+    <string name="msg_password_length">Phatlalatso e kudu e be bonyane ditlhaku tse 6</string>
+    <string name="msg_select_grade">Ka kopo kgetha mphato oa hao</string>
+    <string name="msg_account_created">Akhaonte e bopiloe ka katleho</string>
+    <string name="msg_signup_failed">Ho ingolisa ho hlolehile: %1$s</string>
+    <string name="msg_login_required">Ka kopo kena e le hore u boloke lintho</string>
+    <string name="msg_saved_success">E bolokiloe ho Lintho Tse Bolokiloeng</string>
+    <string name="msg_removed_success">E tlositsoe ho Lintho Tse Bolokiloeng</string>
+
+    <string name="dialog_account_exists_title">Akhaonte E Teng</string>
+    <string name="dialog_account_exists_msg">Akhaonte e nang le imeile ena e se e ntse e le teng e sebelisa mokhoa o mong oa ho kena. Ka kopo kena u sebelisa mokhoa oa hao o teng.</string>
+    <string name="dialog_welcome_title">Amohela ho UniPath SA!</string>
+    <string name="dialog_select_grade_msg">Ka kopo kgetha mphato oa hao oa hona joale ho lokisa boiphihlelo ba hao:</string>
+
+    <!-- Intro Pages -->
+    <string name="intro_title_1">Se-Bala APS sa Hang-hang</string>
+    <string name="intro_subtitle_1">Bala ntlha ea hao ea NSC APS ka ho panya ha leihlo u bone likhato tseo u li tšoanetseng.</string>
+    <string name="intro_title_2">Bala Dithuto le Lits\'ehetso tsa Chelete</string>
+    <string name="intro_subtitle_2">Fumana mananeo a thuto e phahameng ho pholletsa le Afrika Boroa u kope le lithuso tsa lichelete.</string>
+    <string name="intro_title_3">Latsa Likopo tsa Hao</string>
+    <string name="intro_subtitle_3">Laola likopo tsohle tsa hao tsa diunivesithi le litokomane sebakeng se le seng.</string>
+    <string name="intro_badge_eligible">%1$d Tse Loketseng</string>
+
     <!-- Empty States -->
     <string name="no_saved_items_msg">Ha ho lintho tse bolokiloeng ha joale — tlanya setšoantšo sa bookmark ho li boloka.</string>
+    <string name="no_saved_institutions_msg">Ha ho mekhatlo e bolokiloeng ha joale.</string>
+    <string name="no_saved_courses_msg">Ha ho dithuto tse bolokiloeng ha joale.</string>
+    <string name="no_saved_bursaries_msg">Ha ho lits\'ehetso tsa chelete tse bolokiloeng ha joale.</string>
     <string name="no_applications_msg">Ha ho likopo tse ekelitsoeng ha joale</string>
     <string name="no_notifications_msg">Ha ho litemoso ha joale</string>
     <string name="no_results_msg">Ha ho matshwao a dithuto a ekelitsoeng ha joale.</string>

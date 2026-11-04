@@ -34,6 +34,12 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
+    lint {
+        error.add("HardcodedText")
+        error.add("MissingTranslation")
+        abortOnError = true
+    }
 }
 
 dependencies {

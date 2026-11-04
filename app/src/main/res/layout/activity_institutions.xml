@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="sans-serif-black"
-                android:text="Institutions"
+                android:text="@string/nav_institutions"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
@@ -86,7 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_m"
             android:layout_marginTop="@dimen/spacing_s"
-            android:hint="Search universities and colleges..."
+            android:hint="@string/search_institutions_hint"
             app:startIconDrawable="@android:drawable/ic_menu_search">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -111,7 +111,7 @@
                 android:layout_width="0dp"
                 android:layout_height="42dp"
                 android:layout_weight="1"
-                android:text="Universities"
+                android:text="@string/tab_universities"
                 android:textSize="13sp" />
 
             <com.google.android.material.button.MaterialButton
@@ -121,7 +121,7 @@
                 android:layout_height="42dp"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                android:text="Colleges &amp; TVETs"
+                android:text="@string/tab_colleges_tvet"
                 android:textSize="13sp" />
 
         </LinearLayout>

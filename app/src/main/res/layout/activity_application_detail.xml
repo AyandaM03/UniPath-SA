@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_m"
                 android:fontFamily="sans-serif-black"
-                android:text="University Name"
+                tools:text="University Name"
                 android:textColor="@color/white"
                 android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="sans-serif-medium"
-                android:text="Course Name"
+                tools:text="Course Name"
                 android:textColor="#CCFFFFFF"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -68,7 +68,7 @@
                 android:backgroundTint="@color/status_submitted_bg"
                 android:paddingHorizontal="14dp"
                 android:paddingVertical="6dp"
-                android:text="Submitted"
+                tools:text="Submitted"
                 android:textColor="@color/status_submitted_fg"
                 android:textSize="12sp"
                 android:fontFamily="sans-serif-bold"
@@ -98,7 +98,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-bold"
-                    android:text="APPLICATION PROGRESS STEPS"
+                    android:text="@string/app_progress_steps_header"
                     android:textColor="@color/primary"
                     android:textSize="12sp" />
 
@@ -122,7 +122,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/spacing_s"
                         android:fontFamily="sans-serif-bold"
-                        android:text="1. Application Submitted"
+                        android:text="@string/step_1_submitted"
                         android:textColor="@color/text_primary"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -147,7 +147,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/spacing_s"
                         android:fontFamily="sans-serif"
-                        android:text="2. Documents Verified"
+                        android:text="@string/step_2_docs_verified"
                         android:textColor="@color/text_secondary"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -172,7 +172,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/spacing_s"
                         android:fontFamily="sans-serif"
-                        android:text="3. Application Under Review"
+                        android:text="@string/step_3_under_review"
                         android:textColor="@color/text_secondary"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -197,7 +197,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/spacing_s"
                         android:fontFamily="sans-serif"
-                        android:text="4. Decision Made"
+                        android:text="@string/step_4_decision_made"
                         android:textColor="@color/text_secondary"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -225,7 +225,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-bold"
-                    android:text="IMPORTANT DATES &amp; INFO"
+                    android:text="@string/important_dates_header"
                     android:textColor="@color/primary"
                     android:textSize="12sp" />
 
@@ -234,7 +234,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_s"
-                    android:text="Submitted Date: -"
+                    tools:text="Submitted Date: -"
                     android:textColor="@color/text_primary"
                     android:textSize="13sp" />
 
@@ -243,7 +243,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Closing Deadline: -"
+                    tools:text="Closing Deadline: -"
                     android:textColor="@color/text_primary"
                     android:textSize="13sp" />
 
@@ -263,7 +263,7 @@
                 style="@style/Widget.UniPathSA.Button"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:text="Update Application Status" />
+                android:text="@string/update_app_status_btn" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnManageDocs"
@@ -271,7 +271,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:layout_marginTop="@dimen/spacing_s"
-                android:text="Manage Documents" />
+                android:text="@string/manage_docs_btn" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnDeleteApp"
@@ -279,7 +279,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:layout_marginTop="@dimen/spacing_s"
-                android:text="Delete Application"
+                android:text="@string/delete_app_btn"
                 android:textColor="@color/error" />
 
         </LinearLayout>

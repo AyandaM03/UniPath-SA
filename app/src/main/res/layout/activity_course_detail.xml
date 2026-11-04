@@ -92,7 +92,7 @@
                 android:layout_marginHorizontal="@dimen/spacing_l"
                 android:layout_marginBottom="@dimen/spacing_m"
                 android:fontFamily="sans-serif-black"
-                android:text="BSc Computer Science"
+                tools:text="BSc Computer Science"
                 android:textColor="@color/white"
                 android:textSize="28sp"
                 app:layout_constraintBottom_toTopOf="@+id/tvInstitutionTitle"
@@ -106,7 +106,7 @@
                 android:layout_marginHorizontal="@dimen/spacing_l"
                 android:layout_marginBottom="@dimen/spacing_l"
                 android:fontFamily="sans-serif-medium"
-                android:text="University of the Witwatersrand"
+                tools:text="University of the Witwatersrand"
                 android:textColor="#CCFFFFFF"
                 android:textSize="@dimen/text_body_m"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -153,7 +153,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-black"
-                        android:text="You are Eligible"
+                        android:text="@string/you_are_eligible"
                         android:textColor="@color/text_primary"
                         android:textSize="@dimen/text_body_m" />
 
@@ -161,7 +161,7 @@
                         android:id="@+id/tvMatchDetail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Based on your current subjects and marks."
+                        android:text="@string/eligible_subject_marks_sub"
                         android:textColor="@color/text_secondary"
                         android:textSize="11sp"
                         tools:ignore="SmallSp" />
@@ -172,7 +172,7 @@
                     style="@style/Widget.MaterialComponents.Button.Icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Save"
+                    android:text="@string/save"
                     app:icon="@drawable/ic_bookmark_outline" />
 
             </LinearLayout>
@@ -199,7 +199,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-black"
-                    android:text="About this Course"
+                    android:text="@string/about_course_header"
                     android:textColor="@color/primary_dark"
                     android:textSize="@dimen/text_body_m" />
 
@@ -208,7 +208,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_s"
-                    android:text="Description goes here..."
+                    tools:text="Description goes here..."
                     android:textColor="@color/text_primary"
                     android:textSize="@dimen/text_body_s" />
 
@@ -228,8 +228,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Duration" android:textSize="11sp" android:textColor="@color/text_tertiary" tools:ignore="SmallSp"/>
-                        <TextView android:id="@+id/tvDuration" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="3 Years" android:textColor="@color/text_primary" android:fontFamily="sans-serif-medium"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/duration_label" android:textSize="11sp" android:textColor="@color/text_tertiary" tools:ignore="SmallSp"/>
+                        <TextView android:id="@+id/tvDuration" android:layout_width="wrap_content" android:layout_height="wrap_content" tools:text="3 Years" android:textColor="@color/text_primary" android:fontFamily="sans-serif-medium"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -237,8 +237,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Field" android:textSize="11sp" android:textColor="@color/text_tertiary" tools:ignore="SmallSp"/>
-                        <TextView android:id="@+id/tvFieldDetail" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Science" android:textColor="@color/text_primary" android:fontFamily="sans-serif-medium"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/field_label" android:textSize="11sp" android:textColor="@color/text_tertiary" tools:ignore="SmallSp"/>
+                        <TextView android:id="@+id/tvFieldDetail" android:layout_width="wrap_content" android:layout_height="wrap_content" tools:text="Science" android:textColor="@color/text_primary" android:fontFamily="sans-serif-medium"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -266,7 +266,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-black"
-                    android:text="Admission Requirements"
+                    android:text="@string/admission_requirements_header"
                     android:textColor="@color/primary_dark"
                     android:textSize="@dimen/text_body_m" />
 
@@ -279,15 +279,15 @@
                     android:padding="@dimen/spacing_s"
                     android:orientation="horizontal"
                     android:gravity="center_vertical">
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Required APS Score" android:textColor="@color/text_primary" android:fontFamily="sans-serif-medium"/>
-                    <TextView android:id="@+id/tvApsRequirement" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="34" android:textColor="@color/primary" android:fontFamily="sans-serif-black" android:textSize="20sp"/>
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/required_aps_score_label" android:textColor="@color/text_primary" android:fontFamily="sans-serif-medium"/>
+                    <TextView android:id="@+id/tvApsRequirement" android:layout_width="wrap_content" android:layout_height="wrap_content" tools:text="34" android:textColor="@color/primary" android:fontFamily="sans-serif-black" android:textSize="20sp"/>
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_m"
-                    android:text="Subject Requirements:"
+                    android:text="@string/subject_requirements_header"
                     android:textColor="@color/text_primary"
                     android:fontFamily="sans-serif-medium" />
 
@@ -296,7 +296,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_xs"
-                    android:text="• Mathematics: 70%\n• English: 60%"
+                    tools:text="• Mathematics: 70%\n• English: 60%"
                     android:textColor="@color/text_secondary"
                     android:textSize="@dimen/text_body_s" />
 
@@ -311,7 +311,7 @@
             android:layout_height="@dimen/button_height"
             android:layout_marginHorizontal="@dimen/spacing_m"
             android:layout_marginTop="@dimen/spacing_l"
-            android:text="View Application Info"
+            android:text="@string/view_app_info_btn"
             app:layout_constraintTop_toBottomOf="@id/cvRequirements" />
 
         <com.google.android.material.button.MaterialButton
@@ -321,7 +321,7 @@
             android:layout_height="@dimen/button_height"
             android:layout_marginHorizontal="@dimen/spacing_m"
             android:layout_marginTop="@dimen/spacing_m"
-            android:text="Open APS Calculator"
+            android:text="@string/open_aps_calc_btn"
             app:layout_constraintTop_toBottomOf="@id/btnApplyInfo" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

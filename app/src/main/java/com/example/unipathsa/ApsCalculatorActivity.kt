@@ -56,7 +56,7 @@ class ApsCalculatorActivity : AppCompatActivity() {
         btnCalculateAps = findViewById(R.id.btnCalculateAps)
 
         findViewById<View>(R.id.btnInfo)?.setOnClickListener {
-            Toast.makeText(this, "APS is calculated from your entered NSC subject percentages (1–7 pts each).", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.aps_calc_info_toast), Toast.LENGTH_LONG).show()
         }
     }
 
@@ -112,12 +112,12 @@ class ApsCalculatorActivity : AppCompatActivity() {
 
     private fun loadDefaultSubjectsIfEmpty() {
         if (subjectsList.isEmpty()) {
-            subjectsList.add(SubjectInput("maths", "Mathematics", 75))
-            subjectsList.add(SubjectInput("physics", "Physical Sciences", 70))
-            subjectsList.add(SubjectInput("english", "English Home Language", 68))
-            subjectsList.add(SubjectInput("biology", "Life Sciences", 72))
-            subjectsList.add(SubjectInput("acc", "Accounting", 65))
-            subjectsList.add(SubjectInput("lo", "Life Orientation", 80))
+            subjectsList.add(SubjectInput("maths", getString(R.string.sub_maths), 75))
+            subjectsList.add(SubjectInput("physics", getString(R.string.sub_physics), 70))
+            subjectsList.add(SubjectInput("english", getString(R.string.sub_english), 68))
+            subjectsList.add(SubjectInput("biology", getString(R.string.sub_biology), 72))
+            subjectsList.add(SubjectInput("acc", getString(R.string.sub_accounting), 65))
+            subjectsList.add(SubjectInput("lo", getString(R.string.sub_lo), 80))
         }
         adapter.notifyDataSetChanged()
         calculateAndDisplayAps()
@@ -129,9 +129,9 @@ class ApsCalculatorActivity : AppCompatActivity() {
             setPadding(48, 24, 48, 16)
         }
 
-        val etName = EditText(this).apply { hint = "Subject Name (e.g. Geography)" }
+        val etName = EditText(this).apply { hint = getString(R.string.hint_subject_name) }
         val etPct = EditText(this).apply {
-            hint = "Mark Percentage (%)"
+            hint = getString(R.string.hint_mark_pct)
             inputType = android.text.InputType.TYPE_CLASS_NUMBER
         }
 
@@ -139,9 +139,9 @@ class ApsCalculatorActivity : AppCompatActivity() {
         layout.addView(etPct)
 
         AlertDialog.Builder(this)
-            .setTitle("Add Subject")
+            .setTitle(getString(R.string.dialog_add_subject_title))
             .setView(layout)
-            .setPositiveButton("Add") { _, _ ->
+            .setPositiveButton(getString(R.string.add_btn)) { _, _ ->
                 val name = etName.text.toString().trim()
                 val pct = etPct.text.toString().toIntOrNull() ?: 0
 
@@ -166,18 +166,18 @@ class ApsCalculatorActivity : AppCompatActivity() {
                         calculateAndDisplayAps()
                     }
                 } else {
-                    Toast.makeText(this, "Enter valid subject name and percentage (0-100)", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.msg_valid_subject_pct), Toast.LENGTH_SHORT).show()
                 }
             }
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton(getString(R.string.cancel), null)
             .show()
     }
 
     private fun confirmDeleteSubject(subject: SubjectInput) {
         AlertDialog.Builder(this)
-            .setTitle("Remove Subject")
-            .setMessage("Remove ${subject.name} from your list?")
-            .setPositiveButton("Remove") { _, _ ->
+            .setTitle(getString(R.string.dialog_remove_subject_title))
+            .setMessage(getString(R.string.dialog_remove_subject_msg, subject.name))
+            .setPositiveButton(getString(R.string.remove_btn)) { _, _ ->
                 val uid = auth.currentUser?.uid
                 if (uid != null) {
                     db.collection("users").document(uid).collection("subjects").document(subject.id)
@@ -193,7 +193,7 @@ class ApsCalculatorActivity : AppCompatActivity() {
                     calculateAndDisplayAps()
                 }
             }
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton(getString(R.string.cancel), null)
             .show()
     }
 
@@ -222,7 +222,7 @@ class ApsCalculatorActivity : AppCompatActivity() {
         }
 
         tvScore.text = totalPoints.toString()
-        tvSubjectsCount.text = "$count of 8 subjects entered"
+        tvSubjectsCount.text = getString(R.string.subjects_entered_format, count, 8)
         pbSubjects.progress = count
         return totalPoints
     }
@@ -245,10 +245,10 @@ class ApsCalculatorActivity : AppCompatActivity() {
             db.collection("users").document(uid)
                 .set(hashMapOf("aps" to totalAps), SetOptions.merge())
                 .addOnSuccessListener {
-                    Toast.makeText(this, "APS recalculated ($totalAps pts) & saved to profile!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.msg_aps_saved, totalAps), Toast.LENGTH_SHORT).show()
                 }
         } else {
-            Toast.makeText(this, "APS recalculated ($totalAps pts)!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.msg_aps_saved, totalAps), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -274,7 +274,7 @@ class ApsCalculatorActivity : AppCompatActivity() {
             holder.tvName.text = item.name
             holder.etMark.setText(item.mark.toString())
             val pts = markToPoints(item.mark)
-            holder.tvPoints.text = "$pts pts"
+            holder.tvPoints.text = pts.toString()
 
             holder.itemView.setOnLongClickListener {
                 onDeleteClick(item)
@@ -288,7 +288,7 @@ class ApsCalculatorActivity : AppCompatActivity() {
                     if (input != null && input in 0..100) {
                         item.mark = input
                         val newPts = markToPoints(input)
-                        holder.tvPoints.text = "$newPts pts"
+                        holder.tvPoints.text = newPts.toString()
                         onMarkChanged()
                     }
                 }

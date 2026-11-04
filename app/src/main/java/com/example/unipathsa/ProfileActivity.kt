@@ -155,7 +155,7 @@ class ProfileActivity : AppCompatActivity() {
         db.collection("users").document(user.uid).get()
             .addOnSuccessListener { doc ->
                 if (doc.exists()) {
-                    val fullName = doc.getString("fullName") ?: doc.getString("name") ?: user.displayName ?: "Learner Name"
+                    val fullName = doc.getString("fullName") ?: doc.getString("name") ?: user.displayName ?: getString(R.string.drawer_default_user)
                     val school = doc.getString("school") ?: doc.getString("highSchool") ?: "High School"
                     val grade = doc.getString("grade") ?: "Grade 12"
                     val apsScore = (doc.getLong("aps") ?: 0L).toInt()
@@ -164,7 +164,7 @@ class ProfileActivity : AppCompatActivity() {
                     tvAvatar.text = fullName.trim().take(1).uppercase()
                     tvGradeSchool.text = "$grade • $school"
 
-                    tvApsStat.text = if (apsScore > 0) apsScore.toString() else "Not calculated"
+                    tvApsStat.text = if (apsScore > 0) apsScore.toString() else getString(R.string.not_calculated)
 
                     fetchSubcollectionsAndCalculateCompletion(user.uid, fullName.isNotBlank(), school.isNotBlank(), apsScore > 0)
                 }
@@ -224,7 +224,7 @@ class ProfileActivity : AppCompatActivity() {
                                         )
 
                                         val result = prepCalculator.calculate(taskState)
-                                        tvCompletionPercent.text = "${result.percentage}% Profile Completed"
+                                        tvCompletionPercent.text = getString(R.string.profile_completed_format, result.percentage)
                                         pbCompletion.progress = result.percentage
 
                                         populateAchievementBadges(taskState)
@@ -238,12 +238,12 @@ class ProfileActivity : AppCompatActivity() {
         cgAchievements.removeAllViews()
 
         val badges = listOf(
-            Pair("Profile Created", state.isProfileSaved),
-            Pair("APS Calculated", state.hasAps),
-            Pair("Subjects Added", state.hasSubjects),
-            Pair("Application Tracked", state.hasApplications),
-            Pair("Documents Uploaded", state.hasDocuments),
-            Pair("Items Saved", state.hasSavedItems)
+            Pair(getString(R.string.badge_profile_created), state.isProfileSaved),
+            Pair(getString(R.string.badge_aps_calculated), state.hasAps),
+            Pair(getString(R.string.badge_subjects_added), state.hasSubjects),
+            Pair(getString(R.string.badge_app_tracked), state.hasApplications),
+            Pair(getString(R.string.badge_docs_uploaded), state.hasDocuments),
+            Pair(getString(R.string.badge_items_saved), state.hasSavedItems)
         )
 
         for ((title, isUnlocked) in badges) {
@@ -280,7 +280,7 @@ class ProfileActivity : AppCompatActivity() {
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val item = list[position]
             holder.tvName.text = item.name
-            holder.tvMark.text = "${item.mark}% (Level ${percentToPoints(item.mark)})"
+            holder.tvMark.text = getString(R.string.level_format, item.mark, percentToPoints(item.mark))
             holder.pbMark.max = 100
             holder.pbMark.progress = item.mark
         }

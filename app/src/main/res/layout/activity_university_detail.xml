@@ -123,7 +123,7 @@
                         android:background="@drawable/bg_badge"
                         android:gravity="center"
                         android:fontFamily="sans-serif-black"
-                        android:text="U"
+                        tools:text="U"
                         android:textColor="@color/primary"
                         android:textSize="32sp"
                         android:visibility="gone" />
@@ -140,7 +140,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="-20dp"
                 android:elevation="12dp"
-                android:text="Save"
+                android:text="@string/save"
                 app:elevation="8dp"
                 app:icon="@drawable/ic_bookmark_outline" />
 
@@ -158,7 +158,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-black"
-                    android:text="University Name"
+                    tools:text="University Name"
                     android:textColor="@color/text_primary"
                     android:textSize="22sp" />
 
@@ -174,7 +174,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-medium"
-                        android:text="Gauteng • Public University"
+                        tools:text="Gauteng • Public University"
                         android:textColor="@color/text_secondary"
                         android:textSize="13sp" />
 
@@ -187,7 +187,7 @@
                         android:backgroundTint="@color/status_accepted_bg"
                         android:paddingHorizontal="10dp"
                         android:paddingVertical="3dp"
-                        android:text="Free to apply"
+                        android:text="@string/free_to_apply"
                         android:textColor="@color/status_accepted_fg"
                         android:textSize="11sp"
                         android:fontFamily="sans-serif-bold"
@@ -228,13 +228,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-black"
-                        android:text="30+"
+                        tools:text="30+"
                         android:textColor="@color/primary"
                         android:textSize="18sp" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Min APS"
+                        android:text="@string/min_aps_label"
                         android:textColor="@color/text_secondary"
                         android:textSize="11sp"
                         tools:ignore="SmallSp" />
@@ -258,13 +258,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-black"
-                        android:text="Not calculated yet"
+                        android:text="@string/not_calculated_yet"
                         android:textColor="@color/status_accepted_fg"
                         android:textSize="14sp" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Your APS"
+                        android:text="@string/your_aps"
                         android:textColor="@color/text_secondary"
                         android:textSize="11sp"
                         tools:ignore="SmallSp" />
@@ -288,13 +288,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-black"
-                        android:text="Public"
+                        tools:text="Public"
                         android:textColor="@color/text_primary"
                         android:textSize="16sp" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Type"
+                        android:text="@string/type_label"
                         android:textColor="@color/text_secondary"
                         android:textSize="11sp"
                         tools:ignore="SmallSp" />
@@ -321,7 +321,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-bold"
-                    android:text="APPLICATION FEE"
+                    android:text="@string/application_fee_header"
                     android:textColor="@color/primary"
                     android:textSize="12sp" />
 
@@ -331,7 +331,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="Fee not listed yet"
+                    android:text="@string/fee_not_listed"
                     android:textColor="@color/text_primary"
                     android:textSize="18sp" />
 
@@ -340,7 +340,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="Online rate"
+                    tools:text="Online rate"
                     android:textColor="@color/text_secondary"
                     android:textSize="12sp"
                     android:visibility="gone" />
@@ -350,7 +350,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="Applies to: 2025 • Last checked: 15 Jan"
+                    tools:text="Applies to: 2025 • Last checked: 15 Jan"
                     android:textColor="@color/text_tertiary"
                     android:textSize="11sp"
                     android:visibility="gone"
@@ -362,7 +362,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Confirm fee on official site ↗"
+                    android:text="@string/confirm_fee_action"
                     android:textColor="@color/primary"
                     android:textSize="12sp" />
 
@@ -371,7 +371,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:fontFamily="sans-serif"
-                    android:text="Fees change each year. Always confirm on the official website."
+                    android:text="@string/disclaimer_fees"
                     android:textColor="@color/text_tertiary"
                     android:textSize="11sp"
                     tools:ignore="SmallSp" />
@@ -398,7 +398,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-bold"
-                    android:text="ABOUT THIS INSTITUTION"
+                    android:text="@string/about_institution_header"
                     android:textColor="@color/primary"
                     android:textSize="12sp" />
 
@@ -407,7 +407,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_s"
-                    android:text="Institution overview description..."
+                    tools:text="Institution overview description..."
                     android:textColor="@color/text_primary"
                     android:textSize="13sp" />
 
@@ -433,7 +433,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-bold"
-                    android:text="ENTRY REQUIREMENTS &amp; CLOSING DATES"
+                    android:text="@string/requirements_dates_header"
                     android:textColor="@color/primary"
                     android:textSize="12sp" />
 
@@ -442,7 +442,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="NSC Bachelor Pass with minimum required marks depending on faculty."
+                    tools:text="NSC Bachelor Pass with minimum required marks depending on faculty."
                     android:textColor="@color/text_primary"
                     android:textSize="13sp" />
 
@@ -451,7 +451,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Closing Date: 30 September"
+                    tools:text="Closing Date: 30 September"
                     android:textColor="@color/text_secondary"
                     android:textSize="12sp" />
 
@@ -471,7 +471,7 @@
                 style="@style/Widget.UniPathSA.Button"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:text="Visit Official Website" />
+                android:text="@string/visit_website" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnApplyNow"
@@ -479,7 +479,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:layout_marginTop="@dimen/spacing_s"
-                android:text="Apply Now / Add Application" />
+                android:text="@string/apply_now" />
 
         </LinearLayout>
 

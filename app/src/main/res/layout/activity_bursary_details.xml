@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="sans-serif-black"
-                android:text="Bursary Details"
+                android:text="@string/bursary_details_title"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
         </RelativeLayout>
@@ -62,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-bold"
-                    android:text="SPONSOR / PROVIDER"
+                    android:text="@string/bursary_sponsor_header"
                     android:textColor="@color/primary"
                     android:textSize="11sp"
                     tools:ignore="SmallSp" />
@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:fontFamily="sans-serif-medium"
-                    android:text="Department of Higher Education"
+                    tools:text="Department of Higher Education"
                     android:textColor="@color/text_secondary"
                     android:textSize="14sp" />
 
@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="NSFAS Financial Aid"
+                    tools:text="NSFAS Financial Aid"
                     android:textColor="@color/text_primary"
                     android:textSize="22sp" />
 
@@ -104,7 +104,7 @@
                         android:fontFamily="sans-serif-bold"
                         android:paddingHorizontal="12dp"
                         android:paddingVertical="6dp"
-                        android:text="Closes 31 Oct"
+                        tools:text="Closes 31 Oct"
                         android:textColor="@color/status_review_fg"
                         android:textSize="12sp" />
 
@@ -118,7 +118,7 @@
                         android:fontFamily="sans-serif-medium"
                         android:paddingHorizontal="12dp"
                         android:paddingVertical="6dp"
-                        android:text="General"
+                        tools:text="General"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp" />
 
@@ -135,7 +135,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-bold"
-                    android:text="AMOUNT COVERED"
+                    android:text="@string/bursary_amount_header"
                     android:textColor="@color/primary"
                     android:textSize="11sp"
                     tools:ignore="SmallSp" />
@@ -146,7 +146,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="Full Tuition &amp; Allowance"
+                    tools:text="Full Tuition &amp; Allowance"
                     android:textColor="@color/status_accepted_fg"
                     android:textSize="16sp" />
 
@@ -161,7 +161,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-bold"
-                    android:text="OVERVIEW &amp; ELIGIBILITY"
+                    android:text="@string/bursary_overview_header"
                     android:textColor="@color/primary"
                     android:textSize="11sp"
                     tools:ignore="SmallSp" />
@@ -173,7 +173,7 @@
                     android:layout_marginTop="4dp"
                     android:fontFamily="sans-serif"
                     android:lineSpacingExtra="4dp"
-                    android:text="Full bursary coverage details and application criteria..."
+                    tools:text="Full bursary coverage details and application criteria..."
                     android:textColor="@color/text_primary"
                     android:textSize="13sp" />
 
@@ -184,7 +184,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"
                     android:layout_marginTop="24dp"
-                    android:text="Open Official Application Page ↗" />
+                    android:text="@string/bursary_open_app_page" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

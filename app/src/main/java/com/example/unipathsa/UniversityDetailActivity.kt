@@ -81,7 +81,6 @@ class UniversityDetailActivity : AppCompatActivity() {
         setupListeners(university)
     }
 
-    // Connect XML views
     private fun bindViews() {
         ivHeroImage = findViewById(R.id.ivHeroImage)
         vBottomGradientOverlay = findViewById(R.id.vBottomGradientOverlay)
@@ -114,7 +113,6 @@ class UniversityDetailActivity : AppCompatActivity() {
         btnApplyNow = findViewById(R.id.btnApplyNow)
     }
 
-    // Populate university details and load images via Glide
     private fun displayDetails(uni: University) {
         tvName.text = uni.name
         val locationStr = buildString {
@@ -133,7 +131,12 @@ class UniversityDetailActivity : AppCompatActivity() {
         }
 
         // Application Fee Section
-        tvFeeAmountDisplay.text = uni.getFormattedFeeText()
+        val feeRawText = uni.getFormattedFeeText()
+        tvFeeAmountDisplay.text = when {
+            feeRawText == "Free to apply" -> getString(R.string.free_to_apply)
+            feeRawText == "Fee not listed yet" -> getString(R.string.fee_not_listed)
+            else -> feeRawText
+        }
 
         if (uni.applicationFeeNote.isNotBlank()) {
             tvFeeNoteDisplay.visibility = View.VISIBLE
@@ -161,7 +164,7 @@ class UniversityDetailActivity : AppCompatActivity() {
         tvFreeBadge.visibility = if (uni.freeToApply || uni.applicationFee == 0) View.VISIBLE else View.GONE
         tvLongDescription.text = if (uni.longDescription.isNotBlank()) uni.longDescription else uni.description
         tvRequirements.text = if (uni.requirements.isNotBlank()) uni.requirements else "NSC Bachelor Pass with minimum required marks depending on faculty."
-        tvImportantDates.text = if (uni.importantDates.isNotBlank()) "Closing Date: " + uni.importantDates else "Closing Date: 30 September"
+        tvImportantDates.text = getString(R.string.closing_date_prefix, if (uni.importantDates.isNotBlank()) uni.importantDates else "30 September")
 
         val initial = if (uni.name.isNotBlank()) uni.name.trim().take(1).uppercase() else "U"
         tvFallbackLogoInitial.text = initial
@@ -210,7 +213,7 @@ class UniversityDetailActivity : AppCompatActivity() {
     private fun loadUserApsScore() {
         val uid = auth.currentUser?.uid
         if (uid == null) {
-            tvUserAps.text = "Not calculated yet"
+            tvUserAps.text = getString(R.string.not_calculated_yet)
             return
         }
 
@@ -218,14 +221,14 @@ class UniversityDetailActivity : AppCompatActivity() {
             .addOnSuccessListener { doc ->
                 if (doc.exists()) {
                     val aps = (doc.getLong("aps") ?: 0L).toInt()
-                    tvUserAps.text = if (aps > 0) aps.toString() else "Not calculated yet"
+                    tvUserAps.text = if (aps > 0) aps.toString() else getString(R.string.not_calculated_yet)
                 } else {
-                    tvUserAps.text = "Not calculated yet"
+                    tvUserAps.text = getString(R.string.not_calculated_yet)
                 }
             }
             .addOnFailureListener { e ->
                 Log.e(TAG, "Failed to read user APS score", e)
-                tvUserAps.text = "Not calculated yet"
+                tvUserAps.text = getString(R.string.not_calculated_yet)
             }
     }
 
@@ -237,7 +240,7 @@ class UniversityDetailActivity : AppCompatActivity() {
     }
 
     private fun updateSaveButtonUI() {
-        btnSave.text = if (isSaved) "Saved" else "Save"
+        btnSave.text = if (isSaved) getString(R.string.saved) else getString(R.string.save)
         btnSave.setIconResource(if (isSaved) R.drawable.ic_bookmark_filled else R.drawable.ic_bookmark_outline)
     }
 

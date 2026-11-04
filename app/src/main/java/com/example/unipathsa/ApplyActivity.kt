@@ -47,7 +47,6 @@ class ApplyActivity : AppCompatActivity() {
     private lateinit var tvCourseTitle: TextView
     private lateinit var tvCourseMeta: TextView
 
-    // Application Summary Views
     private lateinit var tvPersonalSummary: TextView
     private lateinit var btnCopyPersonal: MaterialButton
     private lateinit var btnCompleteProfile: MaterialButton
@@ -69,7 +68,6 @@ class ApplyActivity : AppCompatActivity() {
     private lateinit var btnCreateTrack: MaterialButton
     private lateinit var pbExportProgress: ProgressBar
 
-    // Application Pack Tools Actions
     private lateinit var llPostActions: LinearLayout
     private lateinit var btnExportPdfPack: MaterialButton
     private lateinit var btnShareDocs: MaterialButton
@@ -84,7 +82,6 @@ class ApplyActivity : AppCompatActivity() {
     private val institutionCourses = mutableListOf<Course>()
     private var selectedCourse: Course? = null
 
-    // User Profile Snapshot Data
     private var userFullName = ""
     private var userEmail = ""
     private var userGrade = "Grade 12"
@@ -105,7 +102,7 @@ class ApplyActivity : AppCompatActivity() {
         currentUniversity = intent.getSerializableExtra("UNIVERSITY_DATA") as? University
 
         if (currentUniversity == null) {
-            Toast.makeText(this, "Institution details not found", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.msg_inst_details_not_found), Toast.LENGTH_SHORT).show()
             finish()
             return
         }
@@ -149,9 +146,9 @@ class ApplyActivity : AppCompatActivity() {
         btnOpenWeb = findViewById(R.id.btnOpenOfficialWebPage)
         btnViewTracker = findViewById(R.id.btnViewInTracker)
 
-        tvHeaderTitle.text = "Apply: ${currentUniversity?.name}"
+        tvHeaderTitle.text = getString(R.string.apply_header_format, currentUniversity?.name ?: "")
 
-        applicationFeeStr = if (currentUniversity?.freeToApply == true) "Free to Apply" else "R100"
+        applicationFeeStr = if (currentUniversity?.freeToApply == true) getString(R.string.free_to_apply) else "R100"
         tvFeeSummary.text = "Application Fee: $applicationFeeStr"
     }
 
@@ -178,15 +175,13 @@ class ApplyActivity : AppCompatActivity() {
         }
     }
 
-    // Loads complete learner profile, subjects, documents, and courses for this institution
     private fun loadLearnerSummaryAndCourses() {
         val uid = auth.currentUser?.uid ?: return
         val uniName = currentUniversity?.name ?: ""
 
-        // 1. Load User Document
         db.collection("users").document(uid).get().addOnSuccessListener { doc ->
             if (doc.exists()) {
-                userFullName = doc.getString("fullName") ?: doc.getString("name") ?: auth.currentUser?.displayName ?: "Learner Name"
+                userFullName = doc.getString("fullName") ?: doc.getString("name") ?: auth.currentUser?.displayName ?: getString(R.string.drawer_default_user)
                 userEmail = auth.currentUser?.email ?: ""
                 userGrade = doc.getString("grade") ?: "Grade 12"
                 userSchool = doc.getString("school") ?: doc.getString("highSchool") ?: ""
@@ -204,7 +199,6 @@ class ApplyActivity : AppCompatActivity() {
             }
         }
 
-        // 2. Load User Subjects
         db.collection("users").document(uid).collection("subjects").get().addOnSuccessListener { snap ->
             userSubjects.clear()
             val sb = StringBuilder("Subjects: ")
@@ -222,7 +216,6 @@ class ApplyActivity : AppCompatActivity() {
             }
         }
 
-        // 3. Load User Documents
         db.collection("users").document(uid).collection("documents").get().addOnSuccessListener { snap ->
             userDocs.clear()
             docsUploadedCount = snap?.size() ?: 0
@@ -240,7 +233,6 @@ class ApplyActivity : AppCompatActivity() {
             }
         }
 
-        // 4. Load Courses for this Institution
         db.collection("courses").get().addOnSuccessListener { snapshot ->
             institutionCourses.clear()
             val courseNames = mutableListOf<String>()
@@ -288,17 +280,17 @@ class ApplyActivity : AppCompatActivity() {
         val course = selectedCourse
         val reqAps = course?.apsRequirement ?: 0
 
-        tvApsSummary.text = "Your APS: ${if (userAps > 0) userAps else "Not calculated"} | Required: ${if (reqAps > 0) reqAps else "N/A"}"
+        tvApsSummary.text = "Your APS: ${if (userAps > 0) userAps else getString(R.string.not_calculated)} | Required: ${if (reqAps > 0) reqAps else "N/A"}"
 
         if (userAps > 0 && reqAps > 0) {
             btnCompleteAps.visibility = View.GONE
             if (userAps >= reqAps) {
-                tvApsBadge.text = "✔ You qualify"
+                tvApsBadge.text = getString(R.string.you_qualify)
                 tvApsBadge.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.status_accepted_bg))
                 tvApsBadge.setTextColor(ContextCompat.getColor(this, R.color.status_accepted_fg))
             } else {
                 val diff = reqAps - userAps
-                tvApsBadge.text = "⚠️ $diff points short"
+                tvApsBadge.text = getString(R.string.points_short_format, diff)
                 tvApsBadge.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.status_review_bg))
                 tvApsBadge.setTextColor(ContextCompat.getColor(this, R.color.status_review_fg))
             }
@@ -339,11 +331,10 @@ class ApplyActivity : AppCompatActivity() {
             }
     }
 
-    // Creates application record in users/{uid}/applications with full snapshot data
     private fun createApplicationSnapshot() {
         val uid = auth.currentUser?.uid
         if (uid == null) {
-            Toast.makeText(this, "Please log in first", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.msg_login_required), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -398,12 +389,11 @@ class ApplyActivity : AppCompatActivity() {
             }
     }
 
-    // Export PDF Application Pack using Android PdfDocument
     private fun exportPdfApplicationPack() {
         pbExportProgress.visibility = View.VISIBLE
         try {
             val pdfDocument = PdfDocument()
-            val pageInfo = PdfDocument.PageInfo.Builder(595, 842, 1).create() // A4 page size
+            val pageInfo = PdfDocument.PageInfo.Builder(595, 842, 1).create()
             val page = pdfDocument.startPage(pageInfo)
             val canvas: Canvas = page.canvas
 
@@ -412,13 +402,13 @@ class ApplyActivity : AppCompatActivity() {
             paint.textSize = 12f
 
             val titlePaint = Paint().apply {
-                color = Color.rgb(11, 31, 77) // Navy dark
+                color = Color.rgb(11, 31, 77)
                 textSize = 20f
                 isFakeBoldText = true
             }
 
             val headerPaint = Paint().apply {
-                color = Color.rgb(26, 35, 126) // Primary blue
+                color = Color.rgb(26, 35, 126)
                 textSize = 14f
                 isFakeBoldText = true
             }
@@ -504,7 +494,6 @@ class ApplyActivity : AppCompatActivity() {
         }
     }
 
-    // Shares uploaded documents via Android Share Sheet using FileProvider
     private fun confirmAndShareDocuments() {
         val hasSensitiveDoc = userDocs.any { (it["title"] ?: "").contains("ID", ignoreCase = true) || (it["title"] ?: "").contains("Passport", ignoreCase = true) }
 
@@ -514,7 +503,7 @@ class ApplyActivity : AppCompatActivity() {
                 .setMessage("The ID Document / Passport contains sensitive personal data. Do you want to include it in the shared documents pack?")
                 .setPositiveButton("Include All") { _, _ -> downloadAndShareDocs(includeSensitive = true) }
                 .setNegativeButton("Exclude ID") { _, _ -> downloadAndShareDocs(includeSensitive = false) }
-                .setNeutralButton("Cancel", null)
+                .setNeutralButton(getString(R.string.cancel), null)
                 .show()
         } else {
             downloadAndShareDocs(includeSensitive = true)

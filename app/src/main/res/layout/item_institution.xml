@@ -46,7 +46,7 @@
                     android:background="@drawable/bg_badge"
                     android:gravity="center"
                     android:fontFamily="sans-serif-black"
-                    android:text="U"
+                    tools:text="U"
                     android:textColor="@color/primary"
                     android:textSize="24sp"
                     android:visibility="gone" />
@@ -66,7 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-black"
-                    android:text="University Name"
+                    tools:text="University Name"
                     android:textColor="@color/text_primary"
                     android:textSize="@dimen/text_body_m" />
 
@@ -75,7 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="Province"
+                    tools:text="Province"
                     android:textColor="@color/text_secondary"
                     android:textSize="12sp" />
 
@@ -91,7 +91,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-medium"
-                        android:text="University"
+                        tools:text="University"
                         android:textColor="@color/primary"
                         android:textSize="12sp" />
 
@@ -104,7 +104,7 @@
                         android:backgroundTint="@color/status_accepted_bg"
                         android:paddingHorizontal="8dp"
                         android:paddingVertical="2dp"
-                        android:text="Free to apply"
+                        android:text="@string/free_to_apply"
                         android:textColor="@color/status_accepted_fg"
                         android:textSize="10sp"
                         android:fontFamily="sans-serif-bold"
@@ -133,7 +133,7 @@
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:layout_marginTop="@dimen/spacing_s"
-            android:text="View Institution" />
+            android:text="@string/btn_view_institution" />
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

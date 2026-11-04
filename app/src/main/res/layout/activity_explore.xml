@@ -116,7 +116,7 @@
                     android:layout_width="0dp"
                     android:layout_height="42dp"
                     android:layout_weight="1"
-                    android:text="Courses"
+                    android:text="@string/tab_courses"
                     android:textSize="13sp" />
 
                 <com.google.android.material.button.MaterialButton
@@ -126,7 +126,7 @@
                     android:layout_height="42dp"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
-                    android:text="Bursaries"
+                    android:text="@string/tab_bursaries"
                     android:textSize="13sp" />
 
             </LinearLayout>
@@ -152,42 +152,42 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:text="All" />
+                        android:text="@string/chip_all" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipScience"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Science / IT" />
+                        android:text="@string/chip_science_it" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipCommerce"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Commerce" />
+                        android:text="@string/chip_commerce" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipEngineering"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Engineering" />
+                        android:text="@string/chip_engineering" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipHealth"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Health Sciences" />
+                        android:text="@string/chip_health_sciences" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipArts"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Humanities &amp; Arts" />
+                        android:text="@string/chip_humanities_arts" />
 
                 </com.google.android.material.chip.ChipGroup>
             </HorizontalScrollView>

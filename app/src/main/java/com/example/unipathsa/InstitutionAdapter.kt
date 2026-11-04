@@ -48,6 +48,7 @@ class InstitutionAdapter(
     }
 
     override fun onBindViewHolder(holder: InstitutionViewHolder, position: Int) {
+        val context = holder.itemView.context
         val institution = institutions[position]
 
         holder.name.text = institution.name
@@ -59,7 +60,7 @@ class InstitutionAdapter(
         val feeText = uniObj.getFormattedFeeText()
         if (feeText != "Fee not listed yet") {
             holder.tvFreeBadge.visibility = View.VISIBLE
-            holder.tvFreeBadge.text = feeText
+            holder.tvFreeBadge.text = if (feeText == "Free to apply") context.getString(R.string.free_to_apply) else feeText
         } else {
             holder.tvFreeBadge.visibility = View.GONE
         }
@@ -77,7 +78,7 @@ class InstitutionAdapter(
             holder.tvFallbackInitial.visibility = View.GONE
             holder.image.visibility = View.VISIBLE
 
-            Glide.with(holder.itemView.context)
+            Glide.with(context)
                 .load(logoUrl)
                 .fitCenter()
                 .listener(object : RequestListener<Drawable> {
@@ -137,7 +138,7 @@ class InstitutionAdapter(
             )
 
             BookmarkHelper.toggleBookmark(
-                activity = holder.itemView.context as android.app.Activity,
+                activity = context as android.app.Activity,
                 anchorView = holder.itemView,
                 bookmarkImageView = holder.favouriteButton,
                 itemId = institution.id,

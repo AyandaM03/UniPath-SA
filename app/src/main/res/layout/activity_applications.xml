@@ -46,7 +46,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:fontFamily="sans-serif-black"
-                        android:text="Application Tracker"
+                        android:text="@string/nav_applications"
                         android:textColor="@color/white"
                         android:textSize="20sp" />
                 </RelativeLayout>
@@ -75,13 +75,13 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif-black"
-                                android:text="0"
+                                tools:text="0"
                                 android:textColor="@color/primary"
                                 android:textSize="22sp" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Total"
+                                android:text="@string/stat_total"
                                 android:textColor="@color/text_secondary"
                                 android:textSize="11sp"
                                 tools:ignore="SmallSp" />
@@ -104,13 +104,13 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif-black"
-                                android:text="0"
+                                tools:text="0"
                                 android:textColor="@color/status_accepted_fg"
                                 android:textSize="22sp" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Accepted"
+                                android:text="@string/status_accepted"
                                 android:textColor="@color/text_secondary"
                                 android:textSize="11sp"
                                 tools:ignore="SmallSp" />
@@ -133,13 +133,13 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif-black"
-                                android:text="0"
+                                tools:text="0"
                                 android:textColor="@color/status_review_fg"
                                 android:textSize="22sp" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="In Progress"
+                                android:text="@string/stat_in_progress"
                                 android:textColor="@color/text_secondary"
                                 android:textSize="11sp"
                                 tools:ignore="SmallSp" />
@@ -173,7 +173,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:fontFamily="sans-serif-bold"
-                                android:text="ESTIMATED APPLICATION FEES"
+                                android:text="@string/estimated_fees_header"
                                 android:textColor="@color/primary"
                                 android:textSize="12sp" />
 
@@ -182,7 +182,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif-black"
-                                android:text="R0"
+                                tools:text="R0"
                                 android:textColor="@color/status_accepted_fg"
                                 android:textSize="18sp" />
                         </LinearLayout>
@@ -193,7 +193,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:fontFamily="sans-serif"
-                            android:text="0 applications tracked • 0 unknown fees"
+                            tools:text="0 applications tracked • 0 unknown fees"
                             android:textColor="@color/text_secondary"
                             android:textSize="12sp" />
 
@@ -202,7 +202,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:fontFamily="sans-serif"
-                            android:text="Fees change each year. Always confirm on the official website."
+                            android:text="@string/disclaimer_fees"
                             android:textColor="@color/text_tertiary"
                             android:textSize="11sp"
                             tools:ignore="SmallSp" />
@@ -223,7 +223,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="sans-serif-black"
-                        android:text="YOUR APPLICATIONS"
+                        android:text="@string/your_applications_header"
                         android:textColor="@color/text_primary"
                         android:textSize="14sp" />
                     <com.google.android.material.button.MaterialButton
@@ -231,7 +231,7 @@
                         style="@style/Widget.MaterialComponents.Button.TextButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="+ Add New"
+                        android:text="@string/add_new"
                         android:textColor="@color/primary" />
                 </LinearLayout>
 
@@ -255,7 +255,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_s"
                         android:fontFamily="sans-serif-medium"
-                        android:text="No applications added yet"
+                        android:text="@string/no_applications_msg"
                         android:textColor="@color/text_primary"
                         android:textSize="16sp" />
                     <TextView
@@ -263,7 +263,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:gravity="center"
-                        android:text="Tap the + button to add and track your university applications."
+                        android:text="@string/no_applications_sub"
                         android:textColor="@color/text_secondary"
                         android:textSize="13sp" />
                 </LinearLayout>

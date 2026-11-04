@@ -45,7 +45,7 @@ class CourseDetailActivity : AppCompatActivity() {
 
         val course = intent.getSerializableExtra("COURSE_DATA") as? Course
         if (course == null) {
-            Toast.makeText(this, "Course data not found", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.msg_course_not_found), Toast.LENGTH_SHORT).show()
             finish()
             return
         }
@@ -105,16 +105,16 @@ class CourseDetailActivity : AppCompatActivity() {
     }
 
     private fun updateSaveButtonUI() {
-        btnSave.text = if (isSaved) "Saved" else "Save"
-        btnSave.setIconResource(if (isSaved) android.R.drawable.btn_star_big_on else android.R.drawable.btn_star_big_off)
+        btnSave.text = if (isSaved) getString(R.string.saved) else getString(R.string.save)
+        btnSave.setIconResource(if (isSaved) R.drawable.ic_bookmark_filled else R.drawable.ic_bookmark_outline)
     }
 
     private fun displayDetails(course: Course) {
         tvTitle.text = course.name
         tvInstitution.text = course.institution
         tvDescription.text = if (course.description.isNotEmpty()) course.description else "Comprehensive programme offered at ${course.institution}."
-        tvDuration.text = course.duration
-        tvField.text = if (course.field.isNotEmpty()) course.field else "General"
+        tvDuration.text = if (course.duration.isNotBlank()) course.duration else getString(R.string.default_duration_3_years)
+        tvField.text = if (course.field.isNotEmpty()) course.field else getString(R.string.default_general_category)
         tvApsReq.text = if (course.apsRequirement > 0) course.apsRequirement.toString() else "N/A"
 
         val instKey = course.institution.lowercase().trim()
@@ -151,7 +151,7 @@ class CourseDetailActivity : AppCompatActivity() {
             }
             tvSubjects.text = sb.toString().trim()
         } else {
-            tvSubjects.text = "Standard Matric pass requirements apply."
+            tvSubjects.text = getString(R.string.standard_matric_pass_msg)
         }
 
         updateMatchStatus(course)
@@ -159,8 +159,8 @@ class CourseDetailActivity : AppCompatActivity() {
 
     private fun updateMatchStatus(course: Course) {
         if (course.apsRequirement == 0) {
-            tvStatus.text = "Eligible"
-            tvDetail.text = "No minimum APS threshold specified."
+            tvStatus.text = getString(R.string.status_eligible)
+            tvDetail.text = getString(R.string.no_min_aps_threshold_msg)
             ivIcon.imageTintList = ColorStateList.valueOf(getColor(android.R.color.holo_green_dark))
             return
         }
@@ -181,23 +181,23 @@ class CourseDetailActivity : AppCompatActivity() {
 
         when {
             userAps > 0 && apsGap >= 0 && subjectsMet -> {
-                tvStatus.text = "You are Eligible"
-                tvDetail.text = "You meet the APS (${userAps}) and subject requirements."
+                tvStatus.text = getString(R.string.you_are_eligible)
+                tvDetail.text = getString(R.string.eligible_aps_and_subjects_msg, userAps)
                 ivIcon.imageTintList = ColorStateList.valueOf(getColor(android.R.color.holo_green_dark))
             }
             userAps > 0 && apsGap >= -2 && subjectsPossible -> {
-                tvStatus.text = "Possibly Eligible"
-                tvDetail.text = "Your APS is ${userAps}. You are close to the requirement of ${course.apsRequirement}."
+                tvStatus.text = getString(R.string.status_possibly_eligible)
+                tvDetail.text = getString(R.string.possibly_eligible_msg, userAps, course.apsRequirement)
                 ivIcon.imageTintList = ColorStateList.valueOf(getColor(android.R.color.holo_orange_dark))
             }
             userAps > 0 -> {
-                tvStatus.text = "Not Eligible"
-                tvDetail.text = "Your current APS is ${userAps}. Requirement is ${course.apsRequirement}."
+                tvStatus.text = getString(R.string.status_not_eligible)
+                tvDetail.text = getString(R.string.not_eligible_msg, userAps, course.apsRequirement)
                 ivIcon.imageTintList = ColorStateList.valueOf(getColor(android.R.color.holo_red_dark))
             }
             else -> {
-                tvStatus.text = "Check APS Score"
-                tvDetail.text = "Add your subject marks in the APS Calculator to check eligibility."
+                tvStatus.text = getString(R.string.status_check_aps_score)
+                tvDetail.text = getString(R.string.check_aps_score_sub)
                 ivIcon.imageTintList = ColorStateList.valueOf(getColor(android.R.color.holo_blue_dark))
             }
         }

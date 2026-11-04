@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
-        android:text="Add Application Track"
+        android:text="@string/dialog_add_app_title"
         android:textColor="@color/text_primary"
         android:textSize="18sp" />
 
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         android:fontFamily="sans-serif"
-        android:text="Search institutions and courses or type custom text."
+        android:text="@string/dialog_add_app_sub"
         android:textColor="@color/text_secondary"
         android:textSize="12sp" />
 
@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="University / Institution (e.g. Wits, UCT, UJ)..."
+        android:hint="@string/hint_search_university"
         app:startIconDrawable="@android:drawable/ic_menu_search">
 
         <AutoCompleteTextView
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:hint="Course Name (e.g. Computer Science, BSc)..."
+        android:hint="@string/hint_search_course"
         app:startIconDrawable="@android:drawable/ic_menu_edit">
 
         <AutoCompleteTextView
@@ -66,7 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:hint="Closing Deadline (e.g. 30 Sep 2025)"
+        android:hint="@string/hint_closing_deadline"
         app:startIconDrawable="@android:drawable/ic_menu_today">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -74,7 +74,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:text="30 Sep 2025"
+            tools:text="30 Sep 2025"
             android:textColor="@color/text_primary" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -84,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:fontFamily="sans-serif"
-        android:text="Tip: Type nicknames like Wits, UCT, Tuks or BSc to find matches."
+        android:text="@string/hint_search_status_default"
         android:textColor="@color/primary"
         android:textSize="11sp"
         tools:ignore="SmallSp" />

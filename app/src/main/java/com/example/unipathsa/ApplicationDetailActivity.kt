@@ -48,7 +48,7 @@ class ApplicationDetailActivity : AppCompatActivity() {
         appId = intent.getStringExtra("APP_ID")
         if (appId.isNullOrEmpty()) {
             Log.e(TAG, "No APP_ID passed to ApplicationDetailActivity")
-            Toast.makeText(this, "Application error", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.msg_app_error), Toast.LENGTH_SHORT).show()
             finish()
             return
         }
@@ -58,7 +58,6 @@ class ApplicationDetailActivity : AppCompatActivity() {
         loadApplicationDetails()
     }
 
-    // Connect views to XML
     private fun bindViews() {
         tvUni = findViewById(R.id.tvUniversityDetail)
         tvCourse = findViewById(R.id.tvCourseDetail)
@@ -78,7 +77,6 @@ class ApplicationDetailActivity : AppCompatActivity() {
         findViewById<ImageView>(R.id.btnBack).setOnClickListener { finish() }
     }
 
-    // Setup click listeners
     private fun setupListeners() {
         btnChangeStatus.setOnClickListener { showChangeStatusDialog() }
         btnManageDocs.setOnClickListener {
@@ -87,7 +85,6 @@ class ApplicationDetailActivity : AppCompatActivity() {
         btnDeleteApp.setOnClickListener { confirmDeleteApplication() }
     }
 
-    // Load application record from users/{uid}/applications/{appId}
     private fun loadApplicationDetails() {
         val uid = auth.currentUser?.uid ?: return
         val id = appId ?: return
@@ -101,7 +98,7 @@ class ApplicationDetailActivity : AppCompatActivity() {
                     Log.d(TAG, "Loaded application details for ${currentApplication?.university}")
                 } else {
                     Log.w(TAG, "Application document does not exist for ID: $id")
-                    Toast.makeText(this, "Application not found", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.msg_app_not_found), Toast.LENGTH_SHORT).show()
                     finish()
                 }
             }
@@ -111,13 +108,20 @@ class ApplicationDetailActivity : AppCompatActivity() {
             }
     }
 
-    // Display fields and configure step icons
     private fun displayDetails(app: ApplicationModel) {
         tvUni.text = app.university
         tvCourse.text = app.course
 
-        // Configure status chip
-        tvStatusChip.text = app.status
+        // Map English status stored in Firestore to localized string label for UI display
+        tvStatusChip.text = when (app.status.lowercase(Locale.ROOT)) {
+            "draft" -> getString(R.string.status_draft)
+            "submitted" -> getString(R.string.status_submitted)
+            "under review", "in review" -> getString(R.string.status_under_review)
+            "accepted" -> getString(R.string.status_accepted)
+            "rejected" -> getString(R.string.status_rejected)
+            else -> app.status
+        }
+
         when (app.status.lowercase(Locale.ROOT)) {
             "accepted" -> {
                 tvStatusChip.setTextColor(getColor(R.color.status_accepted_fg))
@@ -137,13 +141,11 @@ class ApplicationDetailActivity : AppCompatActivity() {
             }
         }
 
-        // Configure date fields
         val sdf = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
         val submittedStr = if (app.submittedAt != null) sdf.format(app.submittedAt.toDate()) else "Recent"
-        tvSubmittedAt.text = "Submitted Date: $submittedStr"
-        tvDeadline.text = "Closing Deadline: ${app.deadline.ifBlank { "N/A" }}"
+        tvSubmittedAt.text = getString(R.string.submitted_date_format, submittedStr)
+        tvDeadline.text = getString(R.string.deadline_date_format, app.deadline.ifBlank { "N/A" })
 
-        // Progress step indicators
         val activeTint = getColorStateList(R.color.primary)
         val inactiveTint = getColorStateList(R.color.outline)
         val checkIcon = android.R.drawable.checkbox_on_background
@@ -166,19 +168,24 @@ class ApplicationDetailActivity : AppCompatActivity() {
         ivStep4Icon.imageTintList = if (isDecisionMade) activeTint else inactiveTint
     }
 
-    // Dialog to update status
     private fun showChangeStatusDialog() {
-        val statuses = arrayOf("Submitted", "Under Review", "Accepted", "Rejected")
+        val rawStatuses = arrayOf("Submitted", "Under Review", "Accepted", "Rejected")
+        val displayStatuses = arrayOf(
+            getString(R.string.status_submitted),
+            getString(R.string.status_under_review),
+            getString(R.string.status_accepted),
+            getString(R.string.status_rejected)
+        )
+
         AlertDialog.Builder(this)
-            .setTitle("Select New Status")
-            .setItems(statuses) { _, which ->
-                val newStatus = statuses[which]
+            .setTitle(getString(R.string.dialog_select_new_status))
+            .setItems(displayStatuses) { _, which ->
+                val newStatus = rawStatuses[which]
                 updateStatusInFirestore(newStatus)
             }
             .show()
     }
 
-    // Updates status field in Firestore document
     private fun updateStatusInFirestore(newStatus: String) {
         val uid = auth.currentUser?.uid ?: return
         val id = appId ?: return
@@ -187,7 +194,7 @@ class ApplicationDetailActivity : AppCompatActivity() {
             .update("status", newStatus)
             .addOnSuccessListener {
                 Log.d(TAG, "Updated status to $newStatus for $id")
-                Toast.makeText(this, "Status updated to $newStatus", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.msg_status_updated, newStatus), Toast.LENGTH_SHORT).show()
                 loadApplicationDetails()
             }
             .addOnFailureListener { e ->
@@ -196,19 +203,17 @@ class ApplicationDetailActivity : AppCompatActivity() {
             }
     }
 
-    // Confirm deletion of application
     private fun confirmDeleteApplication() {
         AlertDialog.Builder(this)
-            .setTitle("Delete Application")
-            .setMessage("Are you sure you want to delete this application? This cannot be undone.")
-            .setPositiveButton("Delete") { _, _ ->
+            .setTitle(getString(R.string.dialog_delete_app_title))
+            .setMessage(getString(R.string.dialog_delete_app_msg))
+            .setPositiveButton(getString(R.string.remove_btn)) { _, _ ->
                 deleteApplicationFromFirestore()
             }
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton(getString(R.string.cancel), null)
             .show()
     }
 
-    // Delete application from Firestore
     private fun deleteApplicationFromFirestore() {
         val uid = auth.currentUser?.uid ?: return
         val id = appId ?: return

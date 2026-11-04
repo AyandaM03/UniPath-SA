@@ -56,24 +56,24 @@ class IntroActivity : AppCompatActivity() {
         val pages = listOf(
             IntroPageData(
                 imageResName = "intro_student",
-                title = "Automatic APS Calculator",
-                subtitle = "Calculate your NSC APS score instantly and see which degree programmes you qualify for.",
+                title = getString(R.string.intro_title_1),
+                subtitle = getString(R.string.intro_subtitle_1),
                 topBadge = "APS 32",
-                bottomBadge = "✔ Qualifying Score"
+                bottomBadge = getString(R.string.qualifying_score)
             ),
             IntroPageData(
                 imageResName = "intro_campus",
-                title = "Explore Courses & Bursaries",
-                subtitle = "Discover higher education programmes across South Africa and apply for bursaries.",
-                topBadge = "8 Eligible",
+                title = getString(R.string.intro_title_2),
+                subtitle = getString(R.string.intro_subtitle_2),
+                topBadge = getString(R.string.intro_badge_eligible, 8),
                 bottomBadge = "BSc Computer Science"
             ),
             IntroPageData(
                 imageResName = "intro_graduates",
-                title = "Track Your Applications",
-                subtitle = "Manage all your university applications, document uploads and progress steps in one place.",
-                topBadge = "In Progress",
-                bottomBadge = "Closes 30 Sep 2025"
+                title = getString(R.string.intro_title_3),
+                subtitle = getString(R.string.intro_subtitle_3),
+                topBadge = getString(R.string.status_under_review),
+                bottomBadge = getString(R.string.closes_date_format, "30 Sep 2025")
             )
         )
 
@@ -86,7 +86,6 @@ class IntroActivity : AppCompatActivity() {
         })
     }
 
-    // Updates dot indicator widths and opacity based on active page
     private fun updateDotIndicators(position: Int) {
         val white = getColor(R.color.white)
         val translucent = getColor(R.color.divider)

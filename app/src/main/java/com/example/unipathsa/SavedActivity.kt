@@ -8,7 +8,6 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -86,7 +85,6 @@ class SavedActivity : AppCompatActivity() {
     }
 
     private fun setupAdapters() {
-        // Reuses exact same adapters from source screens
         institutionAdapter = InstitutionAdapter(liveInstitutions) { inst ->
             val intent = Intent(this, UniversityDetailActivity::class.java)
             intent.putExtra("UNIVERSITY_DATA", inst.toUniversity())
@@ -186,7 +184,6 @@ class SavedActivity : AppCompatActivity() {
             }
     }
 
-    // Reads users/{uid}/savedItems references and fetches live documents from primary collections
     private fun loadLiveSavedItems() {
         val uid = auth.currentUser?.uid ?: return
         pbLoading.visibility = View.VISIBLE
@@ -235,7 +232,6 @@ class SavedActivity : AppCompatActivity() {
             }
     }
 
-    // Fetches live document from primary collection by ID or name fallback
     private fun fetchLiveDocument(
         type: String,
         itemId: String,
@@ -254,7 +250,6 @@ class SavedActivity : AppCompatActivity() {
                     parseAndAddLiveModel(type, liveDoc)
                     onComplete()
                 } else {
-                    // Try fallback match by title/name if ID lookup failed
                     if (fallbackTitle.isNotBlank()) {
                         db.collection(collectionName).whereEqualTo("name", fallbackTitle).get()
                             .addOnSuccessListener { matchSnap ->
@@ -312,7 +307,7 @@ class SavedActivity : AppCompatActivity() {
                 if (liveInstitutions.isEmpty()) {
                     llEmptyContainer.visibility = View.VISIBLE
                     recyclerSaved.visibility = View.GONE
-                    tvEmpty.text = "No saved institutions yet — tap the bookmark icon on any institution card to save it here."
+                    tvEmpty.text = getString(R.string.no_saved_institutions_msg)
                 } else {
                     llEmptyContainer.visibility = View.GONE
                     recyclerSaved.visibility = View.VISIBLE
@@ -324,7 +319,7 @@ class SavedActivity : AppCompatActivity() {
                 if (liveCourses.isEmpty()) {
                     llEmptyContainer.visibility = View.VISIBLE
                     recyclerSaved.visibility = View.GONE
-                    tvEmpty.text = "No saved courses yet — tap the bookmark icon on any course card to save it here."
+                    tvEmpty.text = getString(R.string.no_saved_courses_msg)
                 } else {
                     llEmptyContainer.visibility = View.GONE
                     recyclerSaved.visibility = View.VISIBLE
@@ -336,7 +331,7 @@ class SavedActivity : AppCompatActivity() {
                 if (liveBursaries.isEmpty()) {
                     llEmptyContainer.visibility = View.VISIBLE
                     recyclerSaved.visibility = View.GONE
-                    tvEmpty.text = "No saved bursaries yet — tap the bookmark icon on any bursary card to save it here."
+                    tvEmpty.text = getString(R.string.no_saved_bursaries_msg)
                 } else {
                     llEmptyContainer.visibility = View.GONE
                     recyclerSaved.visibility = View.VISIBLE

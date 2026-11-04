@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:fontFamily="sans-serif-bold"
-                    android:text="APS Calculator"
+                    android:text="@string/nav_aps_calc"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 
@@ -85,7 +85,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-bold"
                             android:letterSpacing="0.1"
-                            android:text="YOUR APS SCORE"
+                            android:text="@string/aps_score_header"
                             android:textColor="@color/primary_blue"
                             android:textSize="12sp" />
 
@@ -95,7 +95,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:fontFamily="sans-serif-black"
-                            android:text="32"
+                            tools:text="32"
                             android:textColor="@color/primary_blue"
                             android:textSize="48sp" />
 
@@ -104,7 +104,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
-                            android:text="6 of 8 subjects entered"
+                            tools:text="6 of 8 subjects entered"
                             android:textColor="@color/secondary_text"
                             android:textSize="13sp" />
 
@@ -138,7 +138,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-bold"
-                            android:text="NSC ACHIEVEMENT LEVEL GUIDE"
+                            android:text="@string/nsc_level_guide_header"
                             android:textColor="@color/primary_blue"
                             android:textSize="12sp" />
 
@@ -220,7 +220,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="sans-serif-bold"
-                    android:text="ENTER YOUR MARKS (%)"
+                    android:text="@string/enter_marks_header"
                     android:textColor="@color/dark_text"
                     android:textSize="14sp" />
 
@@ -238,7 +238,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"
                     android:layout_marginTop="12dp"
-                    android:text="+ Add Another Subject" />
+                    android:text="@string/add_another_subject_btn" />
 
                 <!-- Calculate APS Button -->
                 <com.google.android.material.button.MaterialButton
@@ -247,7 +247,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"
                     android:layout_marginTop="12dp"
-                    android:text="Calculate APS" />
+                    android:text="@string/calculate_aps_btn" />
 
             </LinearLayout>
 

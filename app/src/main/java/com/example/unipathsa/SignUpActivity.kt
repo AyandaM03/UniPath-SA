@@ -63,7 +63,7 @@ class SignUpActivity : AppCompatActivity() {
             firebaseAuthWithGoogle(account.idToken)
         } catch (e: ApiException) {
             Log.e(TAG, "Google sign-up failed", e)
-            Toast.makeText(this, "Google sign-up failed: ${e.message}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.msg_google_failed, e.message ?: ""), Toast.LENGTH_LONG).show()
         }
     }
 
@@ -90,12 +90,12 @@ class SignUpActivity : AppCompatActivity() {
 
             override fun onCancel() {
                 Log.d(TAG, "Facebook sign-up cancelled")
-                Toast.makeText(this@SignUpActivity, "Facebook sign-up cancelled", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@SignUpActivity, getString(R.string.msg_fb_cancelled), Toast.LENGTH_SHORT).show()
             }
 
             override fun onError(error: FacebookException) {
                 Log.e(TAG, "Facebook sign-up error", error)
-                Toast.makeText(this@SignUpActivity, "Facebook sign-up failed: ${error.localizedMessage}", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@SignUpActivity, getString(R.string.msg_fb_failed, error.localizedMessage ?: ""), Toast.LENGTH_LONG).show()
             }
         })
 
@@ -123,11 +123,11 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun setupGradeDropdown() {
         val grades = arrayOf(
-            "Select your grade",
-            "Grade 10",
-            "Grade 11",
-            "Grade 12",
-            "Matriculant"
+            getString(R.string.grade_prompt),
+            getString(R.string.grade_10),
+            getString(R.string.grade_11),
+            getString(R.string.grade_12),
+            getString(R.string.grade_matriculant)
         )
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, grades)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -152,17 +152,17 @@ class SignUpActivity : AppCompatActivity() {
             val grade = spinnerGrade.selectedItem.toString()
 
             if (fullName.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.msg_fill_all_fields), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (password.length < 6) {
-                Toast.makeText(this, "Password must be at least 6 characters", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.msg_password_length), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if (grade == "Select your grade") {
-                Toast.makeText(this, "Please select your grade", Toast.LENGTH_SHORT).show()
+            if (grade == getString(R.string.grade_prompt)) {
+                Toast.makeText(this, getString(R.string.msg_select_grade), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -175,7 +175,6 @@ class SignUpActivity : AppCompatActivity() {
 
                     user?.updateProfile(profileUpdates)
 
-                    // Save user document in Firestore
                     val userMap = hashMapOf(
                         "fullName" to fullName,
                         "email" to email,
@@ -186,12 +185,12 @@ class SignUpActivity : AppCompatActivity() {
                         db.collection("users").document(user.uid).set(userMap, SetOptions.merge())
                     }
 
-                    Toast.makeText(this, "Account created successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.msg_account_created), Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, HomeActivity::class.java))
                     finish()
                 }
                 .addOnFailureListener { e ->
-                    Toast.makeText(this, "Sign up failed: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getString(R.string.msg_signup_failed, e.localizedMessage ?: ""), Toast.LENGTH_LONG).show()
                 }
         }
 
@@ -240,12 +239,12 @@ class SignUpActivity : AppCompatActivity() {
     private fun handleAuthError(e: Exception) {
         if (e is FirebaseAuthUserCollisionException) {
             AlertDialog.Builder(this)
-                .setTitle("Account Exists")
-                .setMessage("An account with this email already exists using a different sign-in method. Please sign in using your existing method.")
-                .setPositiveButton("OK", null)
+                .setTitle(getString(R.string.dialog_account_exists_title))
+                .setMessage(getString(R.string.dialog_account_exists_msg))
+                .setPositiveButton(getString(R.string.ok), null)
                 .show()
         } else {
-            Toast.makeText(this, "Authentication failed: ${e.localizedMessage}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.msg_signup_failed, e.localizedMessage ?: ""), Toast.LENGTH_LONG).show()
         }
     }
 
@@ -273,7 +272,12 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun promptGradeSelectionAndSaveUser(user: FirebaseUser) {
         val spinner = Spinner(this)
-        val grades = arrayOf("Grade 10", "Grade 11", "Grade 12", "Matriculant")
+        val grades = arrayOf(
+            getString(R.string.grade_10),
+            getString(R.string.grade_11),
+            getString(R.string.grade_12),
+            getString(R.string.grade_matriculant)
+        )
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, grades)
         spinner.adapter = adapter
 
@@ -283,11 +287,11 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         AlertDialog.Builder(this)
-            .setTitle("Welcome to UniPath SA!")
-            .setMessage("Please select your current grade to personalize your experience:")
+            .setTitle(getString(R.string.dialog_welcome_title))
+            .setMessage(getString(R.string.dialog_select_grade_msg))
             .setView(container)
             .setCancelable(false)
-            .setPositiveButton("Continue") { _, _ ->
+            .setPositiveButton(getString(R.string.continue_btn)) { _, _ ->
                 val selectedGrade = spinner.selectedItem.toString()
                 saveSocialUserToFirestore(user, selectedGrade)
             }
@@ -296,7 +300,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun saveSocialUserToFirestore(user: FirebaseUser, grade: String) {
         val userMap = hashMapOf(
-            "fullName" to (user.displayName ?: "Student"),
+            "fullName" to (user.displayName ?: getString(R.string.drawer_default_user)),
             "email" to (user.email ?: ""),
             "grade" to grade,
             "createdAt" to FieldValue.serverTimestamp()

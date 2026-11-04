@@ -31,7 +31,6 @@ class ApplicationsActivity : AppCompatActivity() {
     private companion object {
         private const val TAG = "ApplicationsActivity"
 
-        // Single clearly commented fallback alias map for well-known university nicknames
         private val UNIVERSITY_NICKNAMES = mapOf(
             "wits" to "University of the Witwatersrand",
             "joburg" to "University of Johannesburg",
@@ -57,7 +56,6 @@ class ApplicationsActivity : AppCompatActivity() {
     private lateinit var tvAcceptedCount: TextView
     private lateinit var tvInProgressCount: TextView
 
-    // Estimated Fees Card Views
     private lateinit var tvEstimatedFeesTotal: TextView
     private lateinit var tvEstimatedFeesBreakdown: TextView
 
@@ -87,11 +85,9 @@ class ApplicationsActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        Log.d(TAG, "onResume: loading applications from Firestore")
         loadApplicationsFromFirestore()
     }
 
-    // Connect XML views
     private fun bindViews() {
         tvTotalCount = findViewById(R.id.tvTotalCount)
         tvAcceptedCount = findViewById(R.id.tvAcceptedCount)
@@ -105,7 +101,6 @@ class ApplicationsActivity : AppCompatActivity() {
         fabAdd = findViewById(R.id.fabAddApplication)
     }
 
-    // Setup RecyclerView
     private fun setupRecyclerView() {
         adapter = ApplicationAdapter(applicationList) { selectedApp ->
             val intent = Intent(this, ApplicationDetailActivity::class.java)
@@ -116,7 +111,6 @@ class ApplicationsActivity : AppCompatActivity() {
         rvApplications.adapter = adapter
     }
 
-    // Attach listeners
     private fun setupListeners() {
         fabAdd.setOnClickListener {
             showAddApplicationDialog()
@@ -127,7 +121,6 @@ class ApplicationsActivity : AppCompatActivity() {
         }
     }
 
-    // Preloads institutions and courses once for memory filtering & fee calculation
     private fun preloadAutocompleteData() {
         db.collection("institutions").get().addOnSuccessListener { snapshot ->
             allInstitutionsList.clear()
@@ -136,7 +129,6 @@ class ApplicationsActivity : AppCompatActivity() {
                     allInstitutionsList.add(University.fromFirestore(doc))
                 }
             }
-            Log.d(TAG, "Preloaded ${allInstitutionsList.size} institutions for fee estimation")
             calculateEstimatedFees()
         }
 
@@ -150,7 +142,6 @@ class ApplicationsActivity : AppCompatActivity() {
         }
     }
 
-    // Reads user applications from Firestore
     private fun loadApplicationsFromFirestore() {
         val uid = auth.currentUser?.uid
         if (uid == null) {
@@ -191,7 +182,6 @@ class ApplicationsActivity : AppCompatActivity() {
             }
     }
 
-    // Calculates estimated application fees based on application list and preloaded institutions
     private fun calculateEstimatedFees() {
         var totalFeeSum = 0
         var knownCount = 0
@@ -216,7 +206,7 @@ class ApplicationsActivity : AppCompatActivity() {
             }
         }
 
-        tvEstimatedFeesTotal.text = if (totalFeeSum == 0 && knownCount > 0) "Free" else "R$totalFeeSum"
+        tvEstimatedFeesTotal.text = if (totalFeeSum == 0 && knownCount > 0) getString(R.string.free_to_apply) else "R$totalFeeSum"
         tvEstimatedFeesBreakdown.text = "${applicationList.size} applications tracked • $unknownCount unknown fee${if (unknownCount == 1) "" else "s"}"
     }
 
@@ -236,11 +226,10 @@ class ApplicationsActivity : AppCompatActivity() {
         }
     }
 
-    // Shows dialog with smart autocomplete for University & Course
     private fun showAddApplicationDialog() {
         val uid = auth.currentUser?.uid
         if (uid == null) {
-            Toast.makeText(this, "Please log in to add applications", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.msg_login_required), Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -300,10 +289,10 @@ class ApplicationsActivity : AppCompatActivity() {
 
                     override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                         if (results != null && results.count > 0) {
-                            tvStatusHint.text = "Matches found. Select from list or keep typing."
+                            tvStatusHint.text = getString(R.string.hint_search_status_matches)
                             notifyDataSetChanged()
                         } else {
-                            tvStatusHint.text = "No match found. You can still type custom text."
+                            tvStatusHint.text = getString(R.string.hint_search_status_no_match)
                             notifyDataSetInvalidated()
                         }
                     }
@@ -326,13 +315,13 @@ class ApplicationsActivity : AppCompatActivity() {
 
         AlertDialog.Builder(this)
             .setView(dialogView)
-            .setPositiveButton("Add Application") { _, _ ->
+            .setPositiveButton(getString(R.string.add_application)) { _, _ ->
                 val uni = actvUni.text.toString().trim()
                 val course = actvCourse.text.toString().trim()
                 var deadline = etDeadline.text.toString().trim()
 
                 if (uni.isEmpty() || course.isEmpty()) {
-                    Toast.makeText(this, "Please enter university and course", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.msg_enter_uni_course), Toast.LENGTH_SHORT).show()
                     return@setPositiveButton
                 }
 
@@ -342,7 +331,7 @@ class ApplicationsActivity : AppCompatActivity() {
 
                 saveApplicationToFirestore(uid, uni, course, deadline, selectedCourseId)
             }
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton(getString(R.string.cancel), null)
             .show()
     }
 
@@ -369,7 +358,7 @@ class ApplicationsActivity : AppCompatActivity() {
             .add(appData)
             .addOnSuccessListener { ref ->
                 Log.d(TAG, "Application added successfully with ID: ${ref.id}")
-                Toast.makeText(this, "Application added to tracker!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.msg_app_added_tracker), Toast.LENGTH_SHORT).show()
                 loadApplicationsFromFirestore()
             }
             .addOnFailureListener { e ->
@@ -399,11 +388,21 @@ class ApplicationsActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+            val context = holder.itemView.context
             val item = list[position]
             holder.tvUniversity.text = item.university
             holder.tvCourse.text = item.course
 
-            holder.tvStatusChip.text = item.status
+            // Map English status string from Firestore to localized display label
+            holder.tvStatusChip.text = when (item.status.lowercase(Locale.ROOT)) {
+                "draft" -> context.getString(R.string.status_draft)
+                "submitted" -> context.getString(R.string.status_submitted)
+                "under review", "in review" -> context.getString(R.string.status_under_review)
+                "accepted" -> context.getString(R.string.status_accepted)
+                "rejected" -> context.getString(R.string.status_rejected)
+                else -> item.status
+            }
+
             when (item.status.lowercase(Locale.ROOT)) {
                 "accepted" -> {
                     holder.tvStatusChip.setTextColor(getColor(R.color.status_accepted_fg))
@@ -424,18 +423,18 @@ class ApplicationsActivity : AppCompatActivity() {
             }
 
             val totalDocs = if (item.docsTotal > 0) item.docsTotal else 4
-            holder.tvDocsCount.text = "Documents ${item.docsUploaded}/$totalDocs"
+            holder.tvDocsCount.text = context.getString(R.string.docs_uploaded_count_format, item.docsUploaded, totalDocs)
             holder.pbDocsProgress.max = totalDocs
             holder.pbDocsProgress.progress = item.docsUploaded
 
             val submittedStr = if (item.submittedAt != null) {
                 val sdf = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
-                "Submitted: " + sdf.format(item.submittedAt.toDate())
+                sdf.format(item.submittedAt.toDate())
             } else {
-                "Submitted: Recent"
+                "Recent"
             }
-            holder.tvSubmittedAt.text = submittedStr
-            holder.tvDeadline.text = "Deadline: ${item.deadline.ifBlank { "N/A" }}"
+            holder.tvSubmittedAt.text = context.getString(R.string.submitted_date_format, submittedStr)
+            holder.tvDeadline.text = context.getString(R.string.deadline_date_format, item.deadline.ifBlank { "N/A" })
 
             holder.itemView.setOnClickListener { onItemClick(item) }
         }

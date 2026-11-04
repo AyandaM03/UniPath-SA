@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="UniPath SA"
+                    android:text="@string/app_name"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-black"
-                android:text="Welcome back"
+                android:text="@string/login_title"
                 android:textColor="@color/white"
                 android:textSize="26sp" />
 
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:fontFamily="sans-serif"
-                android:text="Sign in to continue your education journey."
+                android:text="@string/login_subtitle"
                 android:textColor="#CCFFFFFF"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -84,7 +84,7 @@
                     style="@style/Widget.UniPathSA.TextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email Address"
+                    android:hint="@string/email_hint"
                     app:startIconDrawable="@android:drawable/ic_dialog_email">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -105,7 +105,7 @@
                         style="@style/Widget.UniPathSA.TextInputLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Password"
+                        android:hint="@string/password_hint"
                         app:startIconDrawable="@android:drawable/ic_lock_lock">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -140,7 +140,7 @@
                         android:id="@+id/cbRememberMe"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Remember me"
+                        android:text="@string/remember_me"
                         android:textColor="@color/text_secondary"
                         android:textSize="13sp" />
 
@@ -154,7 +154,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-medium"
-                        android:text="Forgot password?"
+                        android:text="@string/forgot_password"
                         android:textColor="@color/primary"
                         android:textSize="13sp" />
                 </LinearLayout>
@@ -166,7 +166,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"
                     android:layout_marginTop="@dimen/spacing_m"
-                    android:text="Log In" />
+                    android:text="@string/login_button" />
 
                 <!-- Google Sign In button -->
                 <com.google.android.material.button.MaterialButton
@@ -175,7 +175,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"
                     android:layout_marginTop="@dimen/spacing_s"
-                    android:text="Sign in with Google" />
+                    android:text="@string/sign_in_google" />
 
                 <!-- Facebook Sign In button -->
                 <com.google.android.material.button.MaterialButton
@@ -184,7 +184,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"
                     android:layout_marginTop="@dimen/spacing_s"
-                    android:text="Sign in with Facebook" />
+                    android:text="@string/sign_in_facebook" />
 
                 <!-- Sign up link -->
                 <LinearLayout
@@ -197,7 +197,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Don't have an account? "
+                        android:text="@string/dont_have_account"
                         android:textColor="@color/text_secondary"
                         android:textSize="14sp" />
 
@@ -206,7 +206,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-bold"
-                        android:text="Sign Up"
+                        android:text="@string/sign_up"
                         android:textColor="@color/primary"
                         android:textSize="14sp" />
                 </LinearLayout>

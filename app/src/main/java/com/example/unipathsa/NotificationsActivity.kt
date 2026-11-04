@@ -57,8 +57,7 @@ class NotificationsActivity : AppCompatActivity() {
 
     private fun setupListeners() {
         btnNotif.setOnClickListener {
-            // Already on Notifications screen
-            Toast.makeText(this, "You are on Notifications", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.msg_you_are_on_notifications), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -109,7 +108,7 @@ class NotificationsActivity : AppCompatActivity() {
             }
             .addOnFailureListener { e ->
                 Log.e(TAG, "Failed to load notifications from Firestore", e)
-                Toast.makeText(this, "Failed to load notifications: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.msg_failed_load_notifications, e.localizedMessage ?: ""), Toast.LENGTH_SHORT).show()
                 showEmptyState(notificationList.isEmpty())
             }
     }
@@ -165,7 +164,7 @@ class NotificationsActivity : AppCompatActivity() {
                 val sdf = SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault())
                 holder.tvNotifTime.text = sdf.format(item.createdAt.toDate())
             } else {
-                holder.tvNotifTime.text = "Recent"
+                holder.tvNotifTime.text = getString(R.string.notif_time_recent)
             }
 
             if (item.isRead) {

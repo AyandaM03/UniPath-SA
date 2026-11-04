@@ -23,20 +23,26 @@ class BursaryDetailsActivity : AppCompatActivity() {
         val description = intent.getStringExtra("description") ?: ""
 
         findViewById<TextView>(R.id.tvBursaryDetailsName).text = name
-        findViewById<TextView>(R.id.tvBursaryDetailsProvider).text = provider
-        findViewById<TextView>(R.id.tvBursaryDetailsAmount).text = amount
-        findViewById<TextView>(R.id.tvBursaryDetailsClosing).text = "Closes: $closingDate"
-        findViewById<TextView>(R.id.tvBursaryDetailsCategory).text = category
+        findViewById<TextView>(R.id.tvBursaryDetailsProvider).text = provider.ifBlank { getString(R.string.default_education_trust) }
+        findViewById<TextView>(R.id.tvBursaryDetailsAmount).text = amount.ifBlank { getString(R.string.default_full_tuition) }
+        findViewById<TextView>(R.id.tvBursaryDetailsClosing).text = getString(R.string.closes_date_format, closingDate.ifBlank { "31 Oct" })
+        findViewById<TextView>(R.id.tvBursaryDetailsCategory).text = category.ifBlank { getString(R.string.default_general_category) }
         findViewById<TextView>(R.id.tvBursaryDetailsDescription).text =
-            description.ifBlank { "No description available for this bursary yet." }
+            description.ifBlank { getString(R.string.no_bursary_desc_msg) }
 
         val btnApply = findViewById<Button>(R.id.btnBursaryApply)
         if (website.isBlank()) {
             btnApply.isEnabled = false
-            btnApply.text = "No application link available"
+            btnApply.text = getString(R.string.no_app_link_msg)
         } else {
             btnApply.setOnClickListener {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(website)))
+                try {
+                    val url = if (website.startsWith("http")) website else "https://$website"
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                } catch (e: Exception) {
+                    btnApply.isEnabled = false
+                    btnApply.text = getString(R.string.no_app_link_msg)
+                }
             }
         }
 

@@ -5,10 +5,9 @@
     <string name="south_africa">SOUTH AFRICA</string>
 
     <!-- Facebook SDK Configuration Placeholders -->
-    <string name="facebook_app_id" translatable="false">1234567890</string>
-  <!--  <string name="fb_login_protocol_scheme">fb1234567890</string>-->
-    <string name="fb_login_protocol_scheme" translatable="false">fb1234567890</string>
-    <string name="facebook_client_token" translatable="false">abcdef1234567890</string>
+    <string name="facebook_app_id">1234567890</string>
+    <string name="fb_login_protocol_scheme">fb1234567890</string>
+    <string name="facebook_client_token">abcdef1234567890</string>
 
     <!-- Navigation & Drawer -->
     <string name="nav_home">Home</string>
@@ -30,7 +29,7 @@
     <string name="drawer_default_user">Student</string>
     <string name="drawer_default_grade">Grade 12 / Matriculant</string>
 
-    <!-- General & Buttons -->
+    <!-- General Actions & Buttons -->
     <string name="get_started">Get Started</string>
     <string name="log_in">Log In</string>
     <string name="sign_up">Sign Up</string>
@@ -42,16 +41,199 @@
     <string name="explore_all">Explore all</string>
     <string name="calculate">Calculate</string>
     <string name="search">Search</string>
-    <string name="search_hint">Search universities, courses...</string>
+    <string name="search_hint">Search courses or bursaries...</string>
+    <string name="search_institutions_hint">Search universities and colleges...</string>
     <string name="add_new">+ Add New</string>
     <string name="add_application">+ Add Application</string>
     <string name="add_marks">+ Add Marks</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="apply_now">Apply Now / Add Application</string>
     <string name="visit_website">Visit Official Website</string>
+    <string name="recalculate">Recalculate →</string>
+    <string name="recalculate_action">Recalculate →</string>
+    <string name="calculate_aps_action">Calculate APS →</string>
+    <string name="copy">Copy 📋</string>
+    <string name="continue_btn">Continue</string>
+    <string name="btn_view_institution">View Institution</string>
+    <string name="btn_explore_items">Explore Items</string>
+    <string name="confirm_fee_action">Confirm fee on official site ↗</string>
+    <string name="undo_action">UNDO</string>
+    <string name="add_btn">Add</string>
+    <string name="remove_btn">Remove</string>
 
-    <!-- Login & Sign Up -->
-    <string name="welcome_title">Welcome back</string>
+    <!-- Notifications Screen -->
+    <string name="no_notifications_sub">Updates regarding your university applications and deadlines will appear here.</string>
+    <string name="msg_you_are_on_notifications">You are on Notifications</string>
+    <string name="msg_failed_load_notifications">Failed to load notifications: %1$s</string>
+    <string name="notif_time_recent">Recent</string>
+
+    <!-- Settings & Dialog Messages -->
+    <string name="msg_not_authenticated">Not authenticated</string>
+    <string name="msg_enter_full_name">Please enter your full name</string>
+    <string name="msg_profile_settings_saved">Profile settings saved!</string>
+    <string name="msg_failed_save_settings">Failed to save settings: %1$s</string>
+    <string name="msg_user_email_not_found">User email not found</string>
+    <string name="msg_reset_email_sent_to">Password reset email sent to %1$s</string>
+    <string name="msg_error_sending_email">Error sending email: %1$s</string>
+    <string name="help_dialog_msg">For assistance with university applications, bursary details or technical issues, email support@unipathsa.co.za or visit www.unipathsa.co.za.</string>
+    <string name="about_dialog_msg">UniPath SA v1.0\nYour ultimate South African higher education guidance platform.</string>
+    <string name="logout_dialog_msg">Are you sure you want to log out of UniPath SA?</string>
+
+    <!-- Applications Tracker & Details -->
+    <string name="stat_total">Total</string>
+    <string name="stat_in_progress">In Progress</string>
+    <string name="estimated_fees_header">ESTIMATED APPLICATION FEES</string>
+    <string name="your_applications_header">YOUR APPLICATIONS</string>
+    <string name="no_applications_sub">Tap the + button to add and track your university applications.</string>
+    <string name="dialog_add_app_title">Add Application Track</string>
+    <string name="dialog_add_app_sub">Search institutions and courses or type custom text.</string>
+    <string name="hint_search_university">University / Institution (e.g. Wits, UCT, UJ)...</string>
+    <string name="hint_search_course">Course Name (e.g. Computer Science, BSc)...</string>
+    <string name="hint_closing_deadline">Closing Deadline (e.g. 30 Sep 2025)</string>
+    <string name="hint_search_status_default">Tip: Type nicknames like Wits, UCT, Tuks or BSc to find matches.</string>
+    <string name="hint_search_status_matches">Matches found. Select from list or keep typing.</string>
+    <string name="hint_search_status_no_match">No match found. You can still type custom text.</string>
+    <string name="msg_enter_uni_course">Please enter university and course</string>
+    <string name="msg_app_added_tracker">Application added to tracker!</string>
+    <string name="docs_uploaded_count_format">Documents %1$d/%2$d</string>
+
+    <string name="app_progress_steps_header">APPLICATION PROGRESS STEPS</string>
+    <string name="step_1_submitted">1. Application Submitted</string>
+    <string name="step_2_docs_verified">2. Documents Verified</string>
+    <string name="step_3_under_review">3. Application Under Review</string>
+    <string name="step_4_decision_made">4. Decision Made</string>
+    <string name="important_dates_header">IMPORTANT DATES &amp; INFO</string>
+    <string name="update_app_status_btn">Update Application Status</string>
+    <string name="manage_docs_btn">Manage Documents</string>
+    <string name="delete_app_btn">Delete Application</string>
+    <string name="msg_app_error">Application error</string>
+    <string name="msg_app_not_found">Application not found</string>
+    <string name="dialog_select_new_status">Select New Status</string>
+    <string name="msg_status_updated">Status updated to %1$s</string>
+    <string name="dialog_delete_app_title">Delete Application</string>
+    <string name="dialog_delete_app_msg">Are you sure you want to delete this application? This cannot be undone.</string>
+
+    <!-- Apply Flow Screen -->
+    <string name="apply_guided_header">Guided Application</string>
+    <string name="apply_header_format">Apply: %1$s</string>
+    <string name="apply_guidance_banner">UniPath helps you prepare and track. You submit your application on the institution\'s official website.</string>
+    <string name="apply_step1_header">1. CHOOSE PROGRAMME / COURSE</string>
+    <string name="hint_select_search_course">Select or search course...</string>
+    <string name="apply_step2_header">2. APPLICATION SUMMARY</string>
+    <string name="personal_details_header">Personal Details</string>
+    <string name="subject_results_aps_header">Subject Results &amp; APS</string>
+    <string name="documents_checklist_header">Documents Checklist</string>
+    <string name="apply_step3_header">3. CONFIRM &amp; TRACK</string>
+    <string name="switch_already_submitted">I have already submitted on official website</string>
+    <string name="btn_export_pdf_pack">📄 Export Application Pack (PDF)</string>
+    <string name="btn_share_docs">📎 Share My Uploaded Documents</string>
+    <string name="btn_view_in_tracker">View in Application Tracker</string>
+    <string name="msg_inst_details_not_found">Institution details not found</string>
+
+    <!-- Documents Screen -->
+    <string name="required_docs_header">REQUIRED DOCUMENTS</string>
+    <string name="docs_tip_banner">Upload clear PDF or image copies of your documents. Universities require these for application processing.</string>
+    <string name="doc_type_id">ID Document / Passport</string>
+    <string name="doc_type_matric">Matric Certificate / Results</string>
+    <string name="doc_type_transcript">Academic Transcript / Record</string>
+    <string name="doc_type_motivation">Motivational Letter</string>
+    <string name="doc_status_uploaded">Uploaded</string>
+    <string name="doc_status_pending">Pending</string>
+    <string name="dialog_file_too_large_title">File Too Large</string>
+    <string name="dialog_file_too_large_msg">The selected file exceeds the maximum file size limit of %1$d MB. Please select a smaller file.</string>
+    <string name="dialog_unsupported_file_title">Unsupported File Type</string>
+    <string name="dialog_unsupported_file_msg">This file type is not supported. Please upload PDF, JPG, PNG, or DOC/DOCX files.</string>
+    <string name="dialog_confirm_upload_title">Confirm Upload</string>
+    <string name="dialog_confirm_upload_msg">Upload \'%1$s\' (%2$s) for %3$s?</string>
+
+    <!-- APS Calculator Screen -->
+    <string name="aps_score_header">YOUR APS SCORE</string>
+    <string name="nsc_level_guide_header">NSC ACHIEVEMENT LEVEL GUIDE</string>
+    <string name="enter_marks_header">ENTER YOUR MARKS (%)</string>
+    <string name="add_another_subject_btn">+ Add Another Subject</string>
+    <string name="calculate_aps_btn">Calculate APS</string>
+    <string name="subjects_entered_format">%1$d of %2$d subjects entered</string>
+    <string name="aps_calc_info_toast">APS is calculated from your entered NSC subject percentages (1–7 pts each).</string>
+
+    <string name="dialog_add_subject_title">Add Subject</string>
+    <string name="dialog_remove_subject_title">Remove Subject</string>
+    <string name="dialog_remove_subject_msg">Remove %1$s from your list?</string>
+    <string name="hint_subject_name">Subject Name (e.g. Geography)</string>
+    <string name="hint_mark_pct">Mark Percentage (%)</string>
+    <string name="msg_valid_subject_pct">Enter valid subject name and percentage (0-100)</string>
+    <string name="msg_aps_saved">APS recalculated (%1$d pts) &amp; saved to profile!</string>
+
+    <!-- Default Subject Names -->
+    <string name="sub_maths">Mathematics</string>
+    <string name="sub_physics">Physical Sciences</string>
+    <string name="sub_english">English Home Language</string>
+    <string name="sub_biology">Life Sciences</string>
+    <string name="sub_accounting">Accounting</string>
+    <string name="sub_lo">Life Orientation</string>
+
+    <!-- Profile Achievement Badges -->
+    <string name="badge_profile_created">Profile Created</string>
+    <string name="badge_aps_calculated">APS Calculated</string>
+    <string name="badge_subjects_added">Subjects Added</string>
+    <string name="badge_app_tracked">Application Tracked</string>
+    <string name="badge_docs_uploaded">Documents Uploaded</string>
+    <string name="badge_items_saved">Items Saved</string>
+
+    <!-- Explore Filters & Chips -->
+    <string name="chip_all">All</string>
+    <string name="chip_science_it">Science / IT</string>
+    <string name="chip_commerce">Commerce</string>
+    <string name="chip_engineering">Engineering</string>
+    <string name="chip_health_sciences">Health Sciences</string>
+    <string name="chip_humanities_arts">Humanities &amp; Arts</string>
+
+    <!-- Course & Bursary Fallbacks -->
+    <string name="untitled_course">Untitled course</string>
+    <string name="untitled_bursary">Untitled bursary</string>
+    <string name="default_sa_university">South African University</string>
+    <string name="default_education_trust">Education Trust</string>
+    <string name="default_full_tuition">Full Tuition</string>
+    <string name="default_duration_3_years">3 Years</string>
+    <string name="default_general_category">General</string>
+
+    <!-- Course Details Screen -->
+    <string name="you_are_eligible">You are Eligible</string>
+    <string name="eligible_subject_marks_sub">Based on your current subjects and marks.</string>
+    <string name="about_course_header">About this Course</string>
+    <string name="duration_label">Duration</string>
+    <string name="field_label">Field</string>
+    <string name="admission_requirements_header">Admission Requirements</string>
+    <string name="required_aps_score_label">Required APS Score</string>
+    <string name="subject_requirements_header">Subject Requirements:</string>
+    <string name="view_app_info_btn">View Application Info</string>
+    <string name="open_aps_calc_btn">Open APS Calculator</string>
+    <string name="standard_matric_pass_msg">Standard Matric pass requirements apply.</string>
+    <string name="status_eligible">Eligible</string>
+    <string name="no_min_aps_threshold_msg">No minimum APS threshold specified.</string>
+    <string name="eligible_aps_and_subjects_msg">You meet the APS (%1$d) and subject requirements.</string>
+    <string name="status_possibly_eligible">Possibly Eligible</string>
+    <string name="possibly_eligible_msg">Your APS is %1$d. You are close to the requirement of %2$d.</string>
+    <string name="status_not_eligible">Not Eligible</string>
+    <string name="not_eligible_msg">Your current APS is %1$d. Requirement is %2$d.</string>
+    <string name="status_check_aps_score">Check APS Score</string>
+    <string name="check_aps_score_sub">Add your subject marks in the APS Calculator to check eligibility.</string>
+    <string name="msg_course_not_found">Course data not found</string>
+
+    <!-- Bursary Details Screen -->
+    <string name="bursary_details_title">Bursary Details</string>
+    <string name="bursary_sponsor_header">SPONSOR / PROVIDER</string>
+    <string name="bursary_amount_header">AMOUNT COVERED</string>
+    <string name="bursary_overview_header">OVERVIEW &amp; ELIGIBILITY</string>
+    <string name="bursary_open_app_page">Open Official Application Page ↗</string>
+    <string name="no_bursary_desc_msg">No description available for this bursary yet.</string>
+    <string name="no_app_link_msg">No application link available</string>
+
+    <!-- Error Messages -->
+    <string name="msg_error_loading_courses">Error loading courses. Please try again.</string>
+    <string name="msg_network_error_courses">Could not fetch courses from network</string>
+
+    <!-- Login Screen -->
+    <string name="login_title">Welcome back</string>
     <string name="login_subtitle">Sign in to continue your education journey.</string>
     <string name="email_hint">Email Address</string>
     <string name="password_hint">Password</string>
@@ -61,10 +243,13 @@
     <string name="sign_in_google">Sign in with Google</string>
     <string name="sign_in_facebook">Sign in with Facebook</string>
     <string name="dont_have_account">Don\'t have an account? </string>
-    <string name="create_account_title">Create Account</string>
-    <string name="create_account_subtitle">Start your path to higher education.</string>
+
+    <!-- Sign Up Screen -->
+    <string name="signup_title">Create Account</string>
+    <string name="signup_subtitle">Start your path to higher education.</string>
     <string name="full_name_hint">Full Name</string>
     <string name="select_grade_title">Select Grade / Status</string>
+    <string name="create_account_button">Create Account</string>
     <string name="already_have_account">Already have an account? </string>
     <string name="or_continue_with">or continue with</string>
     <string name="google">Google</string>
@@ -91,27 +276,28 @@
     <string name="upcoming_deadlines">📅 UPCOMING DEADLINES</string>
     <string name="recommended_for_you">⭐ RECOMMENDED FOR YOU</string>
     <string name="calculate_aps_prompt">Calculate your APS to unlock course recommendations.</string>
+    <string name="find_courses_prompt">Find courses you qualify for</string>
+    <string name="matching_courses">Matching Courses</string>
+    <string name="active_tracker">Active Tracker</string>
+    <string name="no_upcoming_deadlines">No upcoming application deadlines tracked yet.</string>
+    <string name="not_calculated">Not calculated</string>
+    <string name="not_calculated_yet">Not calculated yet</string>
 
-    <!-- Statuses (UI Display Labels) -->
-    <string name="status_draft">Draft</string>
-    <string name="status_submitted">Submitted</string>
-    <string name="status_under_review">Under Review</string>
-    <string name="status_accepted">Accepted</string>
-    <string name="status_rejected">Rejected</string>
-
-    <!-- Qualification Badges -->
-    <string name="you_qualify">✔ You qualify</string>
-    <string name="points_short_format">⚠️ %1$d points short</string>
-    <string name="qualifying_score">✔ Qualifying Score</string>
-    <string name="free_to_apply">Free to apply</string>
-
-    <!-- Intro Pages -->
-    <string name="intro_title_1">Automatic APS Calculator</string>
-    <string name="intro_subtitle_1">Calculate your NSC APS score instantly and see which degree programmes you qualify for.</string>
-    <string name="intro_title_2">Explore Courses &amp; Bursaries</string>
-    <string name="intro_subtitle_2">Discover higher education programmes across South Africa and apply for bursaries.</string>
-    <string name="intro_title_3">Track Your Applications</string>
-    <string name="intro_subtitle_3">Manage all your university applications, document uploads and progress steps in one place.</string>
+    <!-- Institutions & Details -->
+    <string name="tab_universities">Universities</string>
+    <string name="tab_colleges_tvet">Colleges &amp; TVETs</string>
+    <string name="tab_courses">Courses</string>
+    <string name="tab_bursaries">Bursaries</string>
+    <string name="min_aps_label">Min APS</string>
+    <string name="type_label">Type</string>
+    <string name="application_fee_header">APPLICATION FEE</string>
+    <string name="about_institution_header">ABOUT THIS INSTITUTION</string>
+    <string name="requirements_dates_header">ENTRY REQUIREMENTS &amp; CLOSING DATES</string>
+    <string name="closing_date_prefix">Closing Date: %1$s</string>
+    <string name="item_saved_notif_title">%1$s saved</string>
+    <string name="item_saved_notif_msg">%1$s was added to your saved list</string>
+    <string name="bursary_label">Bursary</string>
+    <string name="institution_label">Institution</string>
 
     <!-- Settings & Language -->
     <string name="settings_title">Settings</string>
@@ -130,8 +316,64 @@
     <string name="image_credits">Image Credits</string>
     <string name="disclaimer_fees">Fees change each year. Always confirm on the official website.</string>
 
+    <!-- Statuses (UI Display Labels) -->
+    <string name="status_draft">Draft</string>
+    <string name="status_submitted">Submitted</string>
+    <string name="status_under_review">Under Review</string>
+    <string name="status_accepted">Accepted</string>
+    <string name="status_rejected">Rejected</string>
+
+    <!-- Qualification Badges -->
+    <string name="you_qualify">✔ You qualify</string>
+    <string name="points_short_format">⚠️ %1$d points short</string>
+    <string name="qualifying_score">✔ Qualifying Score</string>
+    <string name="free_to_apply">Free to apply</string>
+    <string name="fee_not_listed">Fee not listed yet</string>
+
+    <!-- Date & Course Format Strings -->
+    <string name="closes_date_format">Closes %1$s</string>
+    <string name="closed_date_format">Closed %1$s</string>
+    <string name="aps_required_format">APS required: %1$d</string>
+    <string name="level_format">%1$d%% (Level %2$d)</string>
+    <string name="submitted_date_format">Submitted: %1$s</string>
+    <string name="deadline_date_format">Deadline: %1$s</string>
+
+    <!-- Toast & Dialog Feedback Messages -->
+    <string name="msg_fill_all_fields">Please fill in all fields</string>
+    <string name="msg_login_success">Login successful</string>
+    <string name="msg_login_failed">Login failed: %1$s</string>
+    <string name="msg_enter_email_first">Enter your email first</string>
+    <string name="msg_reset_email_sent">Password reset email sent</string>
+    <string name="msg_fb_cancelled">Facebook sign-in cancelled</string>
+    <string name="msg_fb_failed">Facebook sign-in failed: %1$s</string>
+    <string name="msg_google_failed">Google sign-in failed: %1$s</string>
+    <string name="msg_password_length">Password must be at least 6 characters</string>
+    <string name="msg_select_grade">Please select your grade</string>
+    <string name="msg_account_created">Account created successfully</string>
+    <string name="msg_signup_failed">Sign up failed: %1$s</string>
+    <string name="msg_login_required">Please log in to save items</string>
+    <string name="msg_saved_success">Saved to Saved Items</string>
+    <string name="msg_removed_success">Removed from Saved Items</string>
+
+    <string name="dialog_account_exists_title">Account Exists</string>
+    <string name="dialog_account_exists_msg">An account with this email already exists using a different sign-in method. Please sign in using your existing method.</string>
+    <string name="dialog_welcome_title">Welcome to UniPath SA!</string>
+    <string name="dialog_select_grade_msg">Please select your current grade to personalize your experience:</string>
+
+    <!-- Intro Pages -->
+    <string name="intro_title_1">Automatic APS Calculator</string>
+    <string name="intro_subtitle_1">Calculate your NSC APS score instantly and see which degree programmes you qualify for.</string>
+    <string name="intro_title_2">Explore Courses &amp; Bursaries</string>
+    <string name="intro_subtitle_2">Discover higher education programmes across South Africa and apply for bursaries.</string>
+    <string name="intro_title_3">Track Your Applications</string>
+    <string name="intro_subtitle_3">Manage all your university applications, document uploads and progress steps in one place.</string>
+    <string name="intro_badge_eligible">%1$d Eligible</string>
+
     <!-- Empty States -->
     <string name="no_saved_items_msg">No saved items yet — tap the bookmark icon on any course or institution to save it here.</string>
+    <string name="no_saved_institutions_msg">No saved institutions yet — tap the bookmark icon on any institution card to save it here.</string>
+    <string name="no_saved_courses_msg">No saved courses yet — tap the bookmark icon on any course card to save it here.</string>
+    <string name="no_saved_bursaries_msg">No saved bursaries yet — tap the bookmark icon on any bursary card to save it here.</string>
     <string name="no_applications_msg">No applications added yet</string>
     <string name="no_notifications_msg">No notifications yet</string>
     <string name="no_results_msg">No subject results added yet.</string>

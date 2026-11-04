@@ -58,7 +58,7 @@ object BookmarkHelper {
         val auth = FirebaseAuth.getInstance()
         val uid = auth.currentUser?.uid
         if (uid == null) {
-            Snackbar.make(anchorView, "Please log in to save items", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(anchorView, activity.getString(R.string.msg_login_required), Snackbar.LENGTH_SHORT).show()
             return
         }
 
@@ -85,8 +85,8 @@ object BookmarkHelper {
                 // Delete document
                 docRef.delete().addOnSuccessListener {
                     Log.d(TAG, "Removed item $itemId from savedItems")
-                    Snackbar.make(anchorView, "Removed from Saved Items", Snackbar.LENGTH_LONG)
-                        .setAction("UNDO") {
+                    Snackbar.make(anchorView, activity.getString(R.string.msg_removed_success), Snackbar.LENGTH_LONG)
+                        .setAction(activity.getString(R.string.undo_action)) {
                             // Re-save on Undo
                             docRef.set(itemData).addOnSuccessListener {
                                 updateBookmarkIcon(bookmarkImageView, true)
@@ -123,9 +123,9 @@ object BookmarkHelper {
                         val itemName = (itemData["name"] as? String)
                             ?: (itemData["title"] as? String)
                             ?: "Item"
-                        val label = if (isBursary) "Bursary" else "Institution"
-                        val title = "$label saved"
-                        val message = "$itemName was added to your saved list"
+                        val label = if (isBursary) activity.getString(R.string.bursary_label) else activity.getString(R.string.institution_label)
+                        val title = activity.getString(R.string.item_saved_notif_title, label)
+                        val message = activity.getString(R.string.item_saved_notif_msg, itemName)
 
                         // 1. Pop-up in the phone's status bar
                         NotificationHelper.show(activity, title, message)
@@ -144,8 +144,8 @@ object BookmarkHelper {
                             }
                     }
 
-                    Snackbar.make(anchorView, "Saved to Saved Items", Snackbar.LENGTH_LONG)
-                        .setAction("UNDO") {
+                    Snackbar.make(anchorView, activity.getString(R.string.msg_saved_success), Snackbar.LENGTH_LONG)
+                        .setAction(activity.getString(R.string.undo_action)) {
                             // Delete on Undo
                             docRef.delete().addOnSuccessListener {
                                 updateBookmarkIcon(bookmarkImageView, false)

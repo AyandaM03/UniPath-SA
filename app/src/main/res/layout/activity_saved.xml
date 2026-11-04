@@ -103,7 +103,7 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="6dp"
                 android:layout_weight="1"
-                android:text="Courses"
+                android:text="@string/tab_courses"
                 android:textSize="12sp" />
 
             <com.google.android.material.button.MaterialButton
@@ -113,7 +113,7 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="6dp"
                 android:layout_weight="1"
-                android:text="Bursaries"
+                android:text="@string/tab_bursaries"
                 android:textSize="12sp" />
 
         </LinearLayout>
@@ -162,7 +162,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginTop="16dp"
-                android:text="Explore Items" />
+                android:text="@string/btn_explore_items" />
         </LinearLayout>
 
         <!-- Reused Source Adapter RecyclerView -->

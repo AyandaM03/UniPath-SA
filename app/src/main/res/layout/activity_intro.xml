@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:fontFamily="sans-serif-black"
-            android:text="UniPath SA"
+            android:text="@string/app_name"
             android:textColor="@color/white"
             android:textSize="20sp" />
     </LinearLayout>
@@ -89,7 +89,7 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/white"
         android:fontFamily="sans-serif-black"
-        android:text="Get Started"
+        android:text="@string/get_started"
         android:textColor="@color/navy_dark"
         android:textSize="16sp"
         app:cornerRadius="26dp"
@@ -109,7 +109,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Already have an account? "
+            android:text="@string/already_have_account"
             android:textColor="#CCFFFFFF"
             android:textSize="14sp" />
 
@@ -120,7 +120,7 @@
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="sans-serif-bold"
-            android:text="Log In"
+            android:text="@string/log_in"
             android:textColor="@color/white"
             android:textSize="14sp" />
     </LinearLayout>
