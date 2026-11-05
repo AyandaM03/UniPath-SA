@@ -1,6 +1,7 @@
+## 🎓 UniPath SA
+
 ><img width="1181" height="1332" alt="UniPath Logo" src="https://github.com/user-attachments/assets/ef78d0b6-3b06-4e3a-a5c9-9323b9cb0972" />
 
-🎓 UniPath SA
 
 ### Find your path. Build your future.
 
