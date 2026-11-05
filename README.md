@@ -1,4 +1,5 @@
-<img width="1080" height="1762" alt="HOME PAGE 2_UniPath SA" src="https://github.com/user-attachments/assets/302b5cf3-8da2-44a5-94bf-33cc54c580d2" /># 🎓 UniPath SA
+<img width="475" height="350" alt="ic_logo" src="https://github.com/user-attachments/assets/49b8b0bb-47b1-4c02-9ae1-582822972b98" />
+ 🎓 UniPath SA
 
 ### Find your path. Build your future.
 
