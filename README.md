@@ -1,5 +1,6 @@
-<img width="475" height="350" alt="ic_logo" src="https://github.com/user-attachments/assets/49b8b0bb-47b1-4c02-9ae1-582822972b98" />
- 🎓 UniPath SA
+><img width="1181" height="1332" alt="UniPath Logo" src="https://github.com/user-attachments/assets/ef78d0b6-3b06-4e3a-a5c9-9323b9cb0972" />
+
+🎓 UniPath SA
 
 ### Find your path. Build your future.
 
@@ -118,7 +119,6 @@ Each learner has a profile linked to their Firebase account. It shows their name
 
 <img width="1080" height="2080" alt="APS_UniPath SA" src="https://github.com/user-attachments/assets/a72bfad1-93cd-47bd-a7a4-243e5c0a30cd" />
 
-
 ---
 
 ### Explore - Courses and Bursaries
@@ -129,7 +129,10 @@ Each learner has a profile linked to their Firebase account. It shows their name
 * Tapping a card opens a details screen with a full description and a link to the official website.
 
 <img width="1080" height="2032" alt="EXPLORE COURSES AND BURSARY_UniPath SA" src="https://github.com/user-attachments/assets/4a9f54ab-b2d2-4dcd-bed2-db2c53fdb3e2" />
-
+<img width="1080" height="1744" alt="1000292891" src="https://github.com/user-attachments/assets/654ad8cd-0a45-4092-bd90-721093784fc2" />
+<img width="1080" height="1840" alt="1000292893" src="https://github.com/user-attachments/assets/b051a82d-31de-453a-bdb1-dbaf67f6c923" />
+<img width="1080" height="1457" alt="1000292895" src="https://github.com/user-attachments/assets/5387ae80-26d1-4d50-81b8-348059b1d64a" />
+<img width="1080" height="1189" alt="1000292897" src="https://github.com/user-attachments/assets/36843e8f-14f4-45db-b930-2aae142a628a" />
 
 ---
 
